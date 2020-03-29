@@ -1,8 +1,8 @@
 <?php
 
 define('ROOT', dirname(__DIR__));
-define('APP', ROOT . '/app');
 define('WEBROOT', ROOT . '/public');
+define('APP', ROOT . '/app');
 define('VUE', ROOT . '/app/vue');
 define('CONTROLLER', ROOT . '/app/controller');
 

@@ -11,7 +11,7 @@ use App\Form as FormAlias;
   <section class="wrapper">
       <h3><i class="fa fa-angle-right"></i> Visualiation de présentation </h3>
 
-    <iframe src="../../app/vue/deck.html" frameborder="0" class="deck-frame"></iframe>
+    <iframe src=<?=$pathToPresentation?> frameborder="0" class="deck-frame"></iframe>
   </section>
 </section>
 

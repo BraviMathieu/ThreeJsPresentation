@@ -32,15 +32,15 @@ $form = new Form();
         <h2 class="form-login-heading">Connexion</h2>
         <div class="login-wrap">
             <?=
-            $form->input('user', [
+            $form->input('user',[
                 'class' => 'form-control',
                 'placeholder' => 'Identifiant',
                 'autofocus' => true
-            ] );
+            ]);
             ?>
             <br>
             <?=
-            $form->input('password', [
+            $form->input('password',[
                 'type' => 'password',
                 'class' => 'form-control',
                 'placeholder' => 'Mot de passe',

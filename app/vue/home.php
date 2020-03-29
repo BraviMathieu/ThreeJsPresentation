@@ -17,17 +17,20 @@ use App\Model\Table\PresentationTable;
                     <div class="panel-body">
                         <div class="task-content">
                             <ul class="task-list">
-                                <?php foreach($tabPresentationsEnCours as $presentationEnCours){ ?>
+                                <?php foreach($tabPresentations as $presentation){ ?>
                                   <li>
                                     <div class="task-title">
-                                      <h4><?= $presentationEnCours->title ?></h4>
+                                      <h4><?= $presentation->title ?></h4>
                                       <div class="pull-right hidden-phone">
                                         <a class="btn btn-success btn-xs" title="Modifier"><i
                                             class="fa fa-pencil"></i></a>
-                                        <a class="btn btn-primary btn-xs" title="Visualiser"><i
+                                        <a class="btn btn-primary btn-xs"
+                                            href="<?="presentation_visualisation?presentation_id=$presentation->id"?>"
+                                            title="Visualiser"><i
                                             class="fa fa-eye"></i></a>
-                                        <a class="btn btn-danger btn-xs" title="Supprimer"
-                                           href="traitement-form-element.php?action=delete"><i
+                                        <a class="btn btn-danger btn-xs"
+                                            href="<?="presentation_suppression?presentation_id=$presentation->id"?>"
+                                            title="Supprimer"><i
                                             class="fa fa-trash-o "></i></a>
                                       </div>
                                     </div>

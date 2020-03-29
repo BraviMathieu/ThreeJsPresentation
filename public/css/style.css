@@ -32,6 +32,11 @@ a, a:hover, a:focus {
     height: 100%;
 }
 
+#active{
+    color: #fff;
+    background-color: #4ECDC4;
+}
+
 /* Bootstrap Modifications */
 .modal-header {
 	background: #4ECDC4;

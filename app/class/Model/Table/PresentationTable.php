@@ -17,16 +17,6 @@ class PresentationTable
         $this->db = $db;
     }
 
-    public function getEnCours(){
-        return $this->db->query(
-            "SELECT * FROM presentations 
-                WHERE user_id=?
-                AND status=?
-                ORDER BY id DESC
-                 LIMIT 5",
-            [Session::read('User.id'),1], false, "App\Model\Entity\PresentationEntity");
-    }
-
     public function getAll(){
         return $this->db->query(
             "SELECT * FROM presentations 
@@ -34,6 +24,15 @@ class PresentationTable
                 ORDER BY id DESC
                  LIMIT 5",
             [Session::read('User.id')], false, "App\Model\Entity\PresentationEntity");
+    }
+
+    public function deleteOne($presentation_id = null){
+        return $this->db->query(
+            "DELETE FROM presentations 
+                WHERE user_id=? AND id=?
+                ORDER BY id DESC
+                 LIMIT 5",
+            [Session::read('User.id'),$presentation_id], false, "App\Model\Entity\PresentationEntity");
     }
 
 }
