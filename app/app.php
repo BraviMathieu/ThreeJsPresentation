@@ -29,27 +29,22 @@ if($path != '/login'){
     include APP . '/template/inc/nav_menu.inc.php';
 }
 
-
 echo Alert::display();
 
-switch ($path){
-    case '/logout':
-        Session::destroy(); // La page logout n'aura pas d'affichage et redirigera automatiquement sur l'accueil après la destruction de la session
-        break;
-    case '/login':
-        include APP . '/vue/login.php';
-        break;
-    case '/form-edit':
-        include APP . '/vue/form-edit.php';
-        break;
-    case '/todo-list':
-        //require controller
-        include APP . '/vue/todo-list.php';
-        break;
-    default:
-        include APP . '/vue/home.php';
+if(startsWith($path,"/main_")){
+    include_once CONTROLLER . '/mainController.php';
 }
-// On pourra inclure des conditions pour afficher une page 404 en cas de page inexistante.
+elseif(startsWith($path,"/presentation_")){
+    include_once CONTROLLER . '/presentationController.php';
+}
+elseif(startsWith($path,"/login")){
+    include_once CONTROLLER . '/loginController.php';
+}
+elseif(startsWith($path,"/logout")){
+    include_once CONTROLLER . '/logoutController.php';
+}
+
+//TODO On pourra inclure des conditions pour afficher une page 404 en cas de page inexistante.
 
 if($path != '/login'){
     include APP . '/template/inc/footer.inc.php';

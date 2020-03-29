@@ -9,13 +9,13 @@ use App\Session;
             </p>
             <h5 class="centered"><?= Session::read('User.name') ?></h5>
             <li class="mt">
-                <a href="/public/">
+                <a href="/public/main_dashboard">
                     <i class="fa fa-dashboard"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
             <li class="mt">
-                <a href="/public/todo-list">
+                <a href="/public/presentation_visualisation">
                     <i class="fa fa-list"></i>
                     <span>TODO Présentation</span>
                 </a>

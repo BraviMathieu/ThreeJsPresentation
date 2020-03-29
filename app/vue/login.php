@@ -16,41 +16,39 @@ if(isset($_POST['user'], $_POST['password'])){
     }else{
         Alert::getInstance()->error("Identifiant ou mot de passe non valide");
     }
-    header('Location: /public/');
+    header('Location: /public/main_dashboard');
     exit();
 }
 
+$form = new Form();
 ?>
   <div id="login-page">
     <div class="container">
-        <?php
-        $form = new Form();
-        echo $form->open([
+        <?=
+        $form->open([
             'class' => "form-login"
         ])
         ?>
         <h2 class="form-login-heading">Connexion</h2>
         <div class="login-wrap">
-            <?php
-            echo $form->input('user', [
+            <?=
+            $form->input('user', [
                 'class' => 'form-control',
                 'placeholder' => 'Identifiant',
                 'autofocus' => true
             ] );
             ?>
             <br>
-            <?php
-            echo $form->input('password', [
+            <?=
+            $form->input('password', [
                 'type' => 'password',
                 'class' => 'form-control',
                 'placeholder' => 'Mot de passe',
             ]);
             ?>
           <br>
-            <?= $form->button('<i class="fa fa-lock"></i> Se connecter'); ?>
+            <?=$form->button('<i class="fa fa-lock"></i> Se connecter');?>
         </div>
-          <?php
-          echo $form->end();
-          ?>
+          <?=$form->end();?>
     </div>
   </div>

@@ -21,7 +21,7 @@ class PresentationTable
         return $this->db->query(
             "SELECT * FROM presentations 
                 WHERE user_id=?
-                AND statut=?
+                AND status=?
                 ORDER BY id DESC
                  LIMIT 5",
             [Session::read('User.id'),1], false, "App\Model\Entity\PresentationEntity");
