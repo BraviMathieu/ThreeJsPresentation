@@ -21,6 +21,7 @@ if($path == "/presentation_visualisation"){
 
     //TODO Vérifier si user_id = user_id connecté + si droit a la suppression de  presentation_id
 
+
     $presentationTable = new PresentationTable();
 
     //Suppression dans la BDD et du fichier
