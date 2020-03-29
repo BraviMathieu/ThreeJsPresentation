@@ -1,0 +1,28 @@
+Lancer le serveur interne de PHP :
+
+php -S localhost:8080 
+
+la page web accessible à l'adresse http://localhost:8080 
+
+--------------------------------------------------------------------------------------------
+
+=> -c pour ajouter des options de fonctionnement de php 
+
+ex : php -S localhost:8080 -c display_error=1
+
+Permet également de charger un fichier php.ini spécifique
+
+ex : php -S localhost:8080 -c php.ini 
+
+(le fihier devra se trouver dans le même dossier où on a exécuté la commande)
+
+--------------------------------------------------------------------------------------------
+
+
+=> -t pour modifier le dossier root
+
+ex : php -S localhost:8080 -t public 
+
+(les fichiers seront dans le dossier public)
+
+
