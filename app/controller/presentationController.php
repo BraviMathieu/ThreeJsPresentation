@@ -32,4 +32,8 @@ if($path == "/presentation_visualisation"){
 
     header('Location: /public/main_dashboard');
     exit;
+}elseif($path == "/presentation_creation"){
+
+    include_once VUE . '/presentation_creation.php';
+
 }
