@@ -15,7 +15,6 @@ if($path != '/login'){
         header("Location: /public/login"); // redirection si l'utilisateur n'est pas connecté
         exit();
     }
-    include APP . '/template/inc/header.php';
     include APP . '/template/inc/nav_menu.php';
 }
 
@@ -34,6 +33,9 @@ elseif(startsWith($path,"/logout")){
     include_once CONTROLLER . '/logoutController.php';
 }
 
+if($path != '/login'){
+    include APP . '/template/inc/footer.php';
+}
 //TODO On pourra inclure des conditions pour afficher une page 404 en cas de page inexistante.
 
 $content = ob_get_clean();

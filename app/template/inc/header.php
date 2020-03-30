@@ -1,3 +1,6 @@
+<?php
+//TODO Utiliser une nav admin responsive avec boostrap
+?>
 <header class="header black-bg">
     <div class="sidebar-toggle-box">
         <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
