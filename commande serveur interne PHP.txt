@@ -11,7 +11,7 @@ la page web accessible à l'adresse http://localhost:8080
 ex : php -S localhost:8080 -c display_error=1
 
 Permet également de charger un fichier php.ini spécifique
-
+localhost:8080
 ex : php -S localhost:8080 -c php.ini 
 
 (le fihier devra se trouver dans le même dossier où on a exécuté la commande)

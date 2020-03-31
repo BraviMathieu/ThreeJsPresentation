@@ -34,5 +34,13 @@ class PresentationTable
                  LIMIT 5",
             [Session::read('User.id'),$presentation_id], false, "App\Model\Entity\PresentationEntity");
     }
+    public function getByUserId($presentationId){
+        return $this->db->query(
+            "SELECT COUNT(*) as nb FROM presentations 
+                WHERE user_id=?
+                AND id=?
+                ORDER BY id DESC",
+            [Session::read('User.id'),$presentationId], false, "App\Model\Entity\PresentationEntity");
+    }
 
 }
