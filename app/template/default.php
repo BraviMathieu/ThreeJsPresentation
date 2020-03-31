@@ -9,7 +9,15 @@
     <title>Présentation ThreeJS</title>
     <link href="css/styles.css" rel="stylesheet" />
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Code mirror-->
+    <link rel="stylesheet" href="lib/codemirror/codemirror.css">
+    <link rel="stylesheet" href="https://codemirror.net/theme/eclipse.css">
+
     <script src="lib/font-awesome/js/all.min.js"></script>
+
+    <!-- Code mirror-->
+    <script src="lib/codemirror/codemirror.js"></script>
+    <script src="lib/codemirror/mode/javascript/javascript.js"></script>
   </head>
   <body class="sb-nav-fixed">
 
@@ -19,6 +27,20 @@
   <script src="lib/bootstrap/js/bootstrap.min.js"></script>
   <script src="js/scripts.js"></script>
 
+  <script type="text/javascript">
+      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+          mode: 'application/javascript',
+          theme: "eclipse",
+          lineNumbers: true,
+          gutters: ["CodeMirror-linenumbers"]
+      });
+
+      document.getElementById("ID_B0").onclick = function(event) {
+          var html = document.getElementById("code").value = editor.getValue();
+          var iframe = document.getElementById("iframe");
+          iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html);
+      };
+  </script>
 
   </body>
 </html>

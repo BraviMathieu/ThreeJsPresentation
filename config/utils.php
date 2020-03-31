@@ -15,3 +15,8 @@ function endsWith($string, $endString)
     }
     return (substr($string, -$len) === $endString);
 }
+
+function redirect($path){
+    header('Location: '.$path);
+    exit;
+}

@@ -41,14 +41,10 @@ class Alert
 
     private static function pattern($data)
     {
-        return "<div class='alert-message'>
-                <div class=\"row\">
-                    <div class=\"col-md-12\">
-                        <div class=\"alert alert-{$data['type']}\">
-                            {$data['message']}
-                        </div>
-                    </div>
-                </div>
+        return "<div class=\"col-lg-12\" style=\"padding-top: 15px;\">
+                  <div class=\"alert alert-{$data['type']}\">
+                  {$data['message']}
+                  </div>
                 </div>";
     }
 

@@ -17,30 +17,30 @@ class PresentationTable
         $this->db = $db;
     }
 
-    public function getAll(){
+    public function getAll($user_id){
         return $this->db->query(
             "SELECT * FROM presentations 
                 WHERE user_id=?
                 ORDER BY id DESC
                  LIMIT 5",
-            [Session::read('User.id')], false, "App\Model\Entity\PresentationEntity");
+            [$user_id], false, "App\Model\Entity\PresentationEntity");
     }
 
-    public function deleteOne($presentation_id = null){
+    public function deleteOne($user_id, $presentation_id){
         return $this->db->query(
             "DELETE FROM presentations 
                 WHERE user_id=? AND id=?
                 ORDER BY id DESC
                  LIMIT 5",
-            [Session::read('User.id'),$presentation_id], false, "App\Model\Entity\PresentationEntity");
+            [$user_id, $presentation_id], false, "App\Model\Entity\PresentationEntity");
     }
-    public function getByUserId($presentationId){
+    public function getByUserId($user_id, $presentation_id){
         return $this->db->query(
             "SELECT COUNT(*) as nb FROM presentations 
                 WHERE user_id=?
                 AND id=?
                 ORDER BY id DESC",
-            [Session::read('User.id'),$presentationId], false, "App\Model\Entity\PresentationEntity");
+            [$user_id, $presentation_id], true, "App\Model\Entity\PresentationEntity");
     }
 
 }
