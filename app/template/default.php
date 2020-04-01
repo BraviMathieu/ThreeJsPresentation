@@ -9,15 +9,21 @@
     <title>Présentation ThreeJS</title>
     <link href="css/styles.css" rel="stylesheet" />
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Code mirror-->
-    <link rel="stylesheet" href="lib/codemirror/codemirror.css">
-    <link rel="stylesheet" href="https://codemirror.net/theme/eclipse.css">
 
     <script src="lib/font-awesome/js/all.min.js"></script>
 
-    <!-- Code mirror-->
+    <!-- Code mirror css-->
+    <link rel="stylesheet" href="lib/codemirror/codemirror.css">
+    <link rel="stylesheet" href="lib/codemirror/addon/scroll/simplescrollbars.css">
     <script src="lib/codemirror/codemirror.js"></script>
+
+    <!-- Code mirror js-->
+    <script src="lib/codemirror/addon/scroll/simplescrollbars.js"></script>
+    <script src="lib/codemirror/mode/xml/xml.js"></script>
     <script src="lib/codemirror/mode/javascript/javascript.js"></script>
+    <script src="lib/codemirror/mode/css/css.js"></script>
+    <script src="lib/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+
   </head>
   <body class="sb-nav-fixed">
 
@@ -28,41 +34,22 @@
   <script src="js/scripts.js"></script>
 
   <script type="text/javascript">
+
+
+
       var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-          mode: 'application/javascript',
+          mode: "javascript",
           theme: "eclipse",
           lineNumbers: true,
-          gutters: ["CodeMirror-linenumbers"]
+          gutters: ["CodeMirror-linenumbers"],
+          scrollbarStyle: "simple"
       });
 
-      document.getElementById("ID_B0").onclick = function(event) {
-//         var html = document.getElementById("code").value = editor.getValue();
- //        var iframe = document.getElementById("iframe");
-   //       iframe.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
-
-          var html = document.getElementById("code").value = editor.getValue();
-          html = $.parseHTML( html);
-          $("#iframe2").append(html);
-
+        document.getElementById("ID_B0").onclick = function(event) {
           html = document.getElementById("code").value = editor.getValue();
           var iframe = document.getElementById("iframe");
           iframe.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
       };
-
-
-
-
   </script>
-
-
-
-
-  <script>
-      $(function() {
-          $.deck('.slide');
-      });
-  </script>
-
-
   </body>
 </html>
