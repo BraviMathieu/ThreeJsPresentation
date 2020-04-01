@@ -36,11 +36,33 @@
       });
 
       document.getElementById("ID_B0").onclick = function(event) {
+//         var html = document.getElementById("code").value = editor.getValue();
+ //        var iframe = document.getElementById("iframe");
+   //       iframe.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
+
           var html = document.getElementById("code").value = editor.getValue();
+          html = $.parseHTML( html);
+          $("#iframe2").append(html);
+
+          html = document.getElementById("code").value = editor.getValue();
           var iframe = document.getElementById("iframe");
-          iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html);
+          iframe.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
       };
+
+
+
+
   </script>
+
+
+
+
+  <script>
+      $(function() {
+          $.deck('.slide');
+      });
+  </script>
+
 
   </body>
 </html>

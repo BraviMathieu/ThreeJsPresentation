@@ -9,7 +9,8 @@ use App\Model\Table\PresentationTable;
             <h3><?= $presentation->title ?></h3>
             <div class="pull-right">
               <a class="btn btn-success" title="Modifier"
-                 href="">
+                 href="<?="presentation_modification?presentation_id=$presentation->id"?>"
+                title="Modifier">
                 <i class="fas fa-pen"></i></a>
               <a class="btn btn-primary"
                  href="<?="presentation_visualisation?presentation_id=$presentation->id"?>"

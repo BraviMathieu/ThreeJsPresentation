@@ -42,5 +42,35 @@ if($path == "/presentation_visualisation"){
         redirect('/public/main_dashboard');
     }
 }elseif($path == "/presentation_creation"){
+
     include_once VUE . '/presentation_creation.php';
+
+}elseif($path == "/presentation_modification"){
+
+    $presentation_id = $_GET['presentation_id'];
+    $user_id = Session::read('User.id');
+
+    //Vérification si le user a le droit a la ressource
+    $presentationTable = new PresentationTable();
+    $result = $presentationTable->getByUserId($user_id, $presentation_id);
+
+    if ($result->nb == 0){
+        Alert::getInstance()->error("Ressource non autorisée !");
+        redirect('/public/main_dashboard');
+    }else{
+        //Si envoi de fichier
+        if(isset($_POST['envoyer'])){
+            $code = $_POST['code'];
+            $pathToPresentation = $_POST['path'];
+            file_put_contents("../".$pathToPresentation, $code);
+        }
+        $presentationTable = new PresentationTable();
+        $result = $presentationTable->getByUserId($user_id, 1);
+        $pathToPresentation = "/presentation/$user_id/$presentation_id.html";
+
+        $contenuFichier = file_get_contents("../".$pathToPresentation);
+
+        include_once VUE . '/prensentation_modification.php';
+    }
+
 }

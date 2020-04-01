@@ -1,8 +1,3 @@
-<?php
-use App\Alert;
-use App\Form as FormAlias;
-
-?>
 
 <link rel="stylesheet" href="../../public/lib/deckjs/css/introduction.css">
 <div class="col-lg-12">
