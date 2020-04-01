@@ -13,7 +13,7 @@ if($path == "/presentation_visualisation"){
     $presentationTable = new PresentationTable();
     $result = $presentationTable->getByUserId($user_id, $presentation_id);
 
-    if ($result->nb == 0){
+    if($result->nb == 0){
         Alert::getInstance()->error("Ressource non autorisée !");
         redirect('/public/main_dashboard');
     }else{
@@ -30,7 +30,7 @@ if($path == "/presentation_visualisation"){
     $presentationTable = new PresentationTable();
     $result = $presentationTable->getByUserId($user_id, $presentation_id);
 
-    if ($result->nb == 0){
+    if($result->nb == 0){
         Alert::getInstance()->error("Ressource non autorisée !");
         redirect('/public/main_dashboard');
     }else{
@@ -54,23 +54,21 @@ if($path == "/presentation_visualisation"){
     $presentationTable = new PresentationTable();
     $result = $presentationTable->getByUserId($user_id, $presentation_id);
 
-    if ($result->nb == 0){
+    if($result->nb == 0){
         Alert::getInstance()->error("Ressource non autorisée !");
         redirect('/public/main_dashboard');
     }else{
+
+        $pathToPresentation = "/presentation/$user_id/$presentation_id.html";
+
         //Si envoi de fichier
         if(isset($_POST['envoyer'])){
             $code = $_POST['code'];
-            $pathToPresentation = $_POST['path'];
             file_put_contents("../".$pathToPresentation, $code);
         }
-        $presentationTable = new PresentationTable();
-        $result = $presentationTable->getByUserId($user_id, 1);
-        $pathToPresentation = "/presentation/$user_id/$presentation_id.html";
 
         $contenuFichier = file_get_contents("../".$pathToPresentation);
 
-        include_once VUE . '/prensentation_modification.php';
+        include_once VUE . '/presentation_modification.php';
     }
-
 }
