@@ -13,6 +13,9 @@ if($path == "/main_dashboard"){
 }elseif ($path == "/main_configuration"){
     $title = "Configuration";
 
+    if(isset($_POST['envoyer'])){
+        $theme = $_POST['theme'];
+    }
 
     include_once VUE . '/configuration.php';
 

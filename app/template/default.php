@@ -19,6 +19,8 @@
     <!-- Code mirror js-->
     <script src="lib/codemirror/codemirror.js"></script>
     <script src="lib/codemirror/addon/scroll/simplescrollbars.js"></script>
+    <script src="lib/codemirror/addon/selection/active-line.js"></script>
+    <script src="lib/codemirror/addon/edit/matchbrackets.js"></script>
 
     <!-- Code mirror langages-->
     <script src="lib/codemirror/mode/xml/xml.js"></script>
@@ -42,11 +44,11 @@
           scrollbarStyle: "simple"
       });
 
-        document.getElementById("ID_B0").onclick = function(event) {
+      $("#ID_B0").click(function() {
           html = document.getElementById("code").value = editor.getValue();
           var iframe = document.getElementById("iframe");
           iframe.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
-      };
+      });
   </script>
   </body>
 </html>
