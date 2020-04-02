@@ -29,8 +29,8 @@ if($path == "/presentation_visualisation"){
       Alert::getInstance()->error("Ressource non autorisée !");
       redirect('/public/main_dashboard');
   }else{
-      $pathToPresentation = "/presentation/$user_id/$titre.html";
-      include_once VUE . '/presentation/presentation_visualisation.php';
+      $pathToPresentation = "/Presentation/$user_id/$titre.html";
+      include_once VUE . '/Presentation/presentation_visualisation.php';
   }
 
 }elseif($path == "/presentation_suppression"){
@@ -54,7 +54,7 @@ if($path == "/presentation_visualisation"){
       ->where('title',$titre)
       ->delete();
 
-      unlink(APP . "/../presentation/$user_id/$titre.html");
+      unlink(APP . "/../Presentation/$user_id/$titre.html");
 
       Alert::getInstance()->success('La présentation à été supprimée.');
       redirect('/public/main_dashboard');
@@ -63,7 +63,7 @@ if($path == "/presentation_visualisation"){
 }elseif($path == "/presentation_creation"){
   $title = "Création d'une présentation";
 
-  $pathToPresentation = "/presentation/template.html";
+  $pathToPresentation = "/Presentation/template.html";
 
   //Si envoi de fichier
   if(isset($_POST['envoyer'])){
@@ -77,15 +77,15 @@ if($path == "/presentation_visualisation"){
     //Vérification si le fichier existe
     if(file_exists( "../presentation/".$user_id."/".$titre.".html")){
         Alert::getInstance()->error('La présentation éxiste déjà.');
-        redirect('/public/presentation/presentation_creation');
+        redirect('/public/Presentation/presentation_creation');
     }
 
-    $pathToNewPresentation = "/presentation/".$user_id."/".$titre.".html";
+    $pathToNewPresentation = "/Presentation/".$user_id."/".$titre.".html";
 
     $checkWrite = file_put_contents("../".$pathToNewPresentation, $code);
     if($checkWrite === false){
         Alert::getInstance()->error('Veuillez entrer un titre sans caractères spéciaux.');
-        redirect('/public/presentation/presentation_creation');
+        redirect('/public/Presentation/presentation_creation');
     }
 
     $user = Presentation::Create(['title' => $titre, 'user_id' => $user_id]);
@@ -93,7 +93,7 @@ if($path == "/presentation_visualisation"){
     redirect('/public/main_dashboard');
   }
   $contenuFichier = file_get_contents("../".$pathToPresentation);
-  include_once VUE . '/presentation/presentation_creation.php';
+  include_once VUE . '/Presentation/presentation_creation.php';
 
 }elseif($path == "/presentation_modification"){
   $title = "Modification d'une présentation";
@@ -117,7 +117,7 @@ if($path == "/presentation_visualisation"){
       Alert::getInstance()->error("Ressource non autorisée.");
       redirect('/public/main_dashboard');
   }else{
-      $pathToPresentation = "/presentation/$user_id/$titre.html";
+      $pathToPresentation = "/Presentation/$user_id/$titre.html";
 
       //Si envoi de fichier
       if(isset($_POST['envoyer'])){
@@ -125,6 +125,6 @@ if($path == "/presentation_visualisation"){
           file_put_contents("../".$pathToPresentation, $code);
       }
       $contenuFichier = file_get_contents("../".$pathToPresentation);
-      include_once VUE . '/presentation/presentation_modification.php';
+      include_once VUE . '/Presentation/presentation_modification.php';
   }
 }

@@ -38,13 +38,5 @@
 
   <script src="lib/bootstrap/js/bootstrap.min.js"></script>
   <script src="js/scripts.js"></script>
-
-  <script type="text/javascript">
-      $("#ID_B0").click(function() {
-          html = document.getElementById("code").value = editor.getValue();
-          var iframe = document.getElementById("iframe");
-          iframe.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
-      });
-  </script>
   </body>
 </html>

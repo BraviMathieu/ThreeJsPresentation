@@ -17,7 +17,7 @@
           <?=$contenuFichier?>
       </textarea>
       <input type="hidden" name="path" value="<?=$pathToPresentation?>"><br>
-      <input id="ID_B0" class="btn btn-primary" type="submit" value="Créer la présentation" name="envoyer">
+      <input class="btn btn-primary" type="submit" value="Créer la présentation" name="envoyer">
   </form>
 </div>
 <div class="col-lg-12">
