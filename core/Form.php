@@ -3,7 +3,6 @@ namespace Core;
 
 class Form
 {
-
     private function attributes(array $data):string
     {
         $attributes = '';
@@ -50,8 +49,4 @@ class Form
     {
         return '</form>';
     }
-
-
-
-
 }

@@ -2,10 +2,12 @@
 
 define('ROOT', dirname(__DIR__));
 define('WEBROOT', ROOT . '/public');
+define('CONFIG', ROOT . '/config');
 define('APP', ROOT . '/app');
-define('VUE', ROOT . '/app/vue');
-define('CONTROLLER', ROOT . '/app/controller');
+define('VUE', APP . '/vue');
+define('CONTROLLER', APP . '/controller');
 
-require_once(ROOT."/config/config.php");
-require_once(ROOT."/config/utils.php");
-require_once APP . '/app.php';
+require_once CONFIG."/config.php";
+require_once CONFIG."/utils.php";
+require_once APP."/class/Database/Bootstrap.php";
+require_once APP ."/app.php";

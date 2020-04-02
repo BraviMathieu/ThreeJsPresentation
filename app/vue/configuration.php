@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="mt-4"><i class="fa fa-angle-right"></i> <?= $title; ?></h1>
+        <h1 class="mt-4"><i class="fa fa-angle-right"></i> <?=$title?></h1>
         <link rel="stylesheet" href="../../public/lib/codemirror/codemirror.css">
         <link rel="stylesheet" href="../../public/lib/codemirror/theme/3024-day.css">
         <link rel="stylesheet" href="../../public/lib/codemirror/theme/3024-night.css">

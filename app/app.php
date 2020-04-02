@@ -1,11 +1,6 @@
 <?php
 namespace App;
 
-
-require ROOT .'/vendor/autoload.php'; // on charge l'autoloader de Composer
-
-$db = Database::getInstance();
-
 ob_start();
 
 $path = (isset($_SERVER['PATH_INFO']))?$_SERVER['PATH_INFO']:'/';
@@ -39,4 +34,4 @@ if($path != '/login'){
 //TODO On pourra inclure des conditions pour afficher une page 404 en cas de page inexistante.
 
 $content = ob_get_clean();
-include ROOT . '/app/template/default.php';
+include APP . '/template/default.php';
