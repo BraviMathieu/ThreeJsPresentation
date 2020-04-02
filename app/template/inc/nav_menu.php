@@ -25,8 +25,8 @@ use App\Session;
           <div class="sb-sidenav-menu-heading">Core</div>
           <a class="nav-link" href="/public/main_dashboard"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
             Dashboard</a>
-          <a class="nav-link" href="/public/presentation_visualisation"><div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
-            TODO Visualiser</a>
+          <a class="nav-link" href="/public/presentation_creation"><div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
+            Création de présentation</a>
           <div class="sb-sidenav-menu-heading">Interface</div>
           <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts"
           ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>

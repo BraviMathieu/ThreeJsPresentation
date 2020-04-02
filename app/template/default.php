@@ -15,10 +15,12 @@
     <!-- Code mirror css-->
     <link rel="stylesheet" href="lib/codemirror/codemirror.css">
     <link rel="stylesheet" href="lib/codemirror/addon/scroll/simplescrollbars.css">
-    <script src="lib/codemirror/codemirror.js"></script>
 
     <!-- Code mirror js-->
+    <script src="lib/codemirror/codemirror.js"></script>
     <script src="lib/codemirror/addon/scroll/simplescrollbars.js"></script>
+
+    <!-- Code mirror langages-->
     <script src="lib/codemirror/mode/xml/xml.js"></script>
     <script src="lib/codemirror/mode/javascript/javascript.js"></script>
     <script src="lib/codemirror/mode/css/css.js"></script>
@@ -34,12 +36,7 @@
   <script src="js/scripts.js"></script>
 
   <script type="text/javascript">
-
-
-
       var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-          mode: "javascript",
-          theme: "eclipse",
           lineNumbers: true,
           gutters: ["CodeMirror-linenumbers"],
           scrollbarStyle: "simple"

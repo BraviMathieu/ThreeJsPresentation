@@ -3,7 +3,7 @@ use App\Model\Table\PresentationTable;
 ?>
   <div class="col-xl-12">
     <div class="card mb-4">
-      <div class="card-header"><i class="fas fa-table mr-1"></i>Mes présentations</div>
+      <div class="card-header"><i class="fas fa-list mr-1"></i>Mes présentations</div>
         <?php foreach($tabPresentations as $presentation){?>
           <div class="card-body">
             <h3><?= $presentation->title ?></h3>

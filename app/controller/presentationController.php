@@ -43,20 +43,18 @@ if($path == "/presentation_visualisation"){
     }
 }elseif($path == "/presentation_creation"){
 
-    /*$user_id = Session::read('User.id');
-
-    //Vérification si le user a le droit a la ressource
-
+    $user_id = Session::read('User.id');
     $pathToPresentation = "/presentation/template.html";
 
     //Si envoi de fichier
     if(isset($_POST['envoyer'])){
+        /*
         $code = $_POST['code'];
         file_put_contents("../".$pathToPresentation, $code);
+        */
     }
 
-    $contenuFichier = file_get_contents("../".$pathToPresentation);*/
-
+    $contenuFichier = file_get_contents("../".$pathToPresentation);
     include_once VUE . '/presentation_creation.php';
 
 }elseif($path == "/presentation_modification"){
@@ -72,7 +70,6 @@ if($path == "/presentation_visualisation"){
         Alert::getInstance()->error("Ressource non autorisée !");
         redirect('/public/main_dashboard');
     }else{
-
         $pathToPresentation = "/presentation/$user_id/$presentation_id.html";
 
         //Si envoi de fichier
@@ -80,9 +77,7 @@ if($path == "/presentation_visualisation"){
             $code = $_POST['code'];
             file_put_contents("../".$pathToPresentation, $code);
         }
-
         $contenuFichier = file_get_contents("../".$pathToPresentation);
-
         include_once VUE . '/presentation_modification.php';
     }
 }
