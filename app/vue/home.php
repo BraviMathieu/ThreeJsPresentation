@@ -1,7 +1,8 @@
-<?php
-use App\Model\Table\PresentationTable;
-?>
-  <div class="col-xl-12">
+
+<h1 class="mt-4"><i class="fa fa-angle-right"></i> <?= $title; ?></h1>
+<div class="row">
+
+<div class="col-xl-12">
     <div class="card mb-4">
       <div class="card-header"><i class="fas fa-list mr-1"></i>Mes présentations</div>
         <?php foreach($tabPresentations as $presentation){?>

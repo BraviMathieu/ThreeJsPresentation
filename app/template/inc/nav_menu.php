@@ -10,7 +10,7 @@ use App\Session;
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-        <a class="dropdown-item" href="#">Settings</a>
+        <a class="dropdown-item" href="main_configuration">Configuration</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="logout">Se déconnecter</a>
       </div>
@@ -27,6 +27,8 @@ use App\Session;
             Dashboard</a>
           <a class="nav-link" href="/public/presentation_creation"><div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
             Création de présentation</a>
+          <a class="nav-link" href="/public/main_configuration"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>
+            Configuration</a>
           <div class="sb-sidenav-menu-heading">Interface</div>
           <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts"
           ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -63,5 +65,3 @@ use App\Session;
   <div id="layoutSidenav_content">
     <main>
       <div class="container-fluid">
-        <h1 class="mt-4">Dashboard</h1>
-        <div class="row">

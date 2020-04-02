@@ -1,25 +1,5 @@
 <?php
-
-use App\Alert;
-use App\Model\Table\UserTable;
-use App\Session;
 use Core\Form;
-
-if(isset($_POST['user'], $_POST['password'])){
-
-    $UserTable = new UserTable();
-    $user = $UserTable->getUser($_POST['user'], $_POST['password']);
-
-    if ($user){
-        Session::write('User', $user);
-        Alert::getInstance()->success('Vous êtes connecté');
-    }else{
-        Alert::getInstance()->error("Identifiant ou mot de passe non valide");
-    }
-    header('Location: /public/main_dashboard');
-    exit();
-}
-
 $form = new Form();
 ?>
 <main>

@@ -5,6 +5,7 @@ use App\Model\Table\PresentationTable;
 use App\Session;
 
 if($path == "/presentation_visualisation"){
+    $title = "Visualisation d'une présentation";
 
     $presentation_id = $_GET['presentation_id'];
     $user_id = Session::read('User.id');
@@ -42,6 +43,7 @@ if($path == "/presentation_visualisation"){
         redirect('/public/main_dashboard');
     }
 }elseif($path == "/presentation_creation"){
+    $title = "Création d'une présentation";
 
     $user_id = Session::read('User.id');
     $pathToPresentation = "/presentation/template.html";
@@ -58,6 +60,7 @@ if($path == "/presentation_visualisation"){
     include_once VUE . '/presentation_creation.php';
 
 }elseif($path == "/presentation_modification"){
+    $title = "Modification d'une présentation";
 
     $presentation_id = $_GET['presentation_id'];
     $user_id = Session::read('User.id');
