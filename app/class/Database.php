@@ -30,7 +30,8 @@ class Database
             "mysql:host={$this->host};
             dbname={$this->name}",
             $this->user,
-            $this->pass);
+            $this->pass,
+            array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
     }
 
     public function getPdo()

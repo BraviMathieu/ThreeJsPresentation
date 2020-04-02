@@ -1,5 +1,5 @@
 
-<link rel=" stylesheet" href="../../public/lib/deckjs/css/introduction.css">
+<link rel="stylesheet" href="../../public/lib/deckjs/css/introduction.css">
 
 <h1 class="mt-4"><i class="fa fa-angle-right"></i> <?= $title; ?></h1>
 <div class="row">

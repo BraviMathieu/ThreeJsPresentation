@@ -26,16 +26,6 @@ class PresentationTable
             [$user_id], false, "App\Model\Entity\PresentationEntity");
     }
 
-    public function deleteOne($user_id, $presentation_id){
-        return $this->db->query(
-            "DELETE FROM presentations 
-                WHERE user_id=? AND id=?
-                ORDER BY id DESC
-                 LIMIT 5",
-            [$user_id, $presentation_id], false, "App\Model\Entity\PresentationEntity");
-    }
-
-
     public function getByUserId($user_id, $presentation_id){
         return $this->db->query(
             "SELECT COUNT(*) as nb FROM presentations 
@@ -45,11 +35,20 @@ class PresentationTable
             [$user_id, $presentation_id], true, "App\Model\Entity\PresentationEntity");
     }
 
+    public function deleteOne($user_id, $presentation_id){
+        return $this->db->query(
+            "DELETE FROM presentations 
+                WHERE user_id=? AND id=?
+                ORDER BY id DESC
+                 LIMIT 5",
+            [$user_id, $presentation_id], false, "App\Model\Entity\PresentationEntity");
+    }
+
     public function insertPresentation($user_id,$nomPresentations){
-        $tableau = [];
-        $tableau["user_id"]= $user_id;
-        $tableau["title"] =$nomPresentations;
-        return $this->db->insert("presentations",$tableau);
+        $tabParams = [];
+        $tabParams["user_id"]= $user_id;
+        $tabParams["title"] =$nomPresentations;
+        return $this->db->insert("presentations",$tabParams);
     }
 
 }
