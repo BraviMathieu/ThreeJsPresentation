@@ -42,5 +42,11 @@ class PresentationTable
                 ORDER BY id DESC",
             [$user_id, $presentation_id], true, "App\Model\Entity\PresentationEntity");
     }
+    public function insertPresentation($user_id,$nomPresentations){
+        $tableau = [];
+        $tableau["user_id"]= $user_id;
+        $tableau["title"] =$nomPresentations;
+        return $this->db->insert("presentations",$tableau);
+    }
 
 }

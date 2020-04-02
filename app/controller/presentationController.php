@@ -46,14 +46,19 @@ if($path == "/presentation_visualisation"){
     $title = "Création d'une présentation";
 
     $user_id = Session::read('User.id');
-    $pathToPresentation = "/presentation/template.html";
 
+    $pathToPresentation="/presentation/template.html";
     //Si envoi de fichier
     if(isset($_POST['envoyer'])){
-        /*
+        $presentationTable = new PresentationTable();
+        $files1 = scandir(ROOT."/presentation/".$user_id);
+        $nbPres = count($files1)-1;
         $code = $_POST['code'];
-        file_put_contents("../".$pathToPresentation, $code);
-        */
+        $pathToNewPresentation = "/presentation/".$user_id."/".$nbPres.".html";
+        file_put_contents("../".$pathToNewPresentation, $code);
+        $nomPres ="Presentation".$nbPres;
+        $presentationTable->insertPresentation($user_id,$nomPres);
+        redirect('/public/main_dashboard');
     }
 
     $contenuFichier = file_get_contents("../".$pathToPresentation);
