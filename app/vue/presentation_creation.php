@@ -7,6 +7,10 @@
 <div class="col-lg-12">
   <form action="<?="presentation_creation"?>" method="post"
   style="padding-bottom: 20px;">
+      <div class="form-control">
+          Titre<input type="text" name="titre" id="titre" required>
+
+      </div>
       <textarea name= "code" id="code" name="code" style="height: 180px; width:700px;">
           <?=$contenuFichier?>
       </textarea>

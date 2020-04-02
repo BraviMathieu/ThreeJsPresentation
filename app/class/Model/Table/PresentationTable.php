@@ -34,6 +34,8 @@ class PresentationTable
                  LIMIT 5",
             [$user_id, $presentation_id], false, "App\Model\Entity\PresentationEntity");
     }
+
+
     public function getByUserId($user_id, $presentation_id){
         return $this->db->query(
             "SELECT COUNT(*) as nb FROM presentations 
@@ -42,6 +44,7 @@ class PresentationTable
                 ORDER BY id DESC",
             [$user_id, $presentation_id], true, "App\Model\Entity\PresentationEntity");
     }
+
     public function insertPresentation($user_id,$nomPresentations){
         $tableau = [];
         $tableau["user_id"]= $user_id;

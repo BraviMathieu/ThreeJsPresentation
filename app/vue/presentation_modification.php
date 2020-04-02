@@ -5,7 +5,7 @@
 <div class="row">
 
 <div class="col-lg-12">
-  <form action="<?="presentation_modification?presentation_id=".$presentation_id?>" method="post"
+  <form action="<?="presentation_modification?presentation_id=".$presentation_id."&title=".$titre?>" method="post"
   style="padding-bottom: 20px;">
       <textarea name= "code" id="code" name="code" style="height: 180px; width:700px;">
           <?=$contenuFichier?>

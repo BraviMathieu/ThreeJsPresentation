@@ -10,14 +10,14 @@
             <h3><?= $presentation->title ?></h3>
             <div class="pull-right">
               <a class="btn btn-success" title="Modifier"
-                 href="<?="presentation_modification?presentation_id=$presentation->id"?>"
+                 href="<?="presentation_modification?presentation_id=$presentation->id&title=$presentation->title"?>"
                 title="Modifier">
                 <i class="fas fa-pen"></i></a>
               <a class="btn btn-primary"
-                 href="<?="presentation_visualisation?presentation_id=$presentation->id"?>"
+                 href="<?="presentation_visualisation?presentation_id=$presentation->id&title=$presentation->title"?>"
                  title="Visualiser"><i class="fas fa-eye"></i></a>
               <a class="btn btn-danger"
-                 href="<?="presentation_suppression?presentation_id=$presentation->id"?>"
+                 href="<?="presentation_suppression?presentation_id=$presentation->id&title=$presentation->title"?>"
                  title="Supprimer"><i class="fas fa-trash"></i></a>
             </div>
           </div>

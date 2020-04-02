@@ -8,6 +8,7 @@ if($path == "/presentation_visualisation"){
     $title = "Visualisation d'une présentation";
 
     $presentation_id = $_GET['presentation_id'];
+    $titre= $_GET['title'];
     $user_id = Session::read('User.id');
 
     //Vérification si le user a le droit a la ressource
@@ -18,13 +19,14 @@ if($path == "/presentation_visualisation"){
         Alert::getInstance()->error("Ressource non autorisée !");
         redirect('/public/main_dashboard');
     }else{
-        $pathToPresentation = "/presentation/$user_id/$presentation_id.html";
+        $pathToPresentation = "/presentation/$user_id/$titre.html";
         include_once VUE . '/presentation_visualisation.php';
     }
 
 }elseif($path == "/presentation_suppression"){
 
     $presentation_id = $_GET['presentation_id'];
+    $titre= $_GET['title'];
     $user_id = Session::read('User.id');
 
     //Vérification si le user a le droit a la ressource
@@ -37,7 +39,7 @@ if($path == "/presentation_visualisation"){
     }else{
         //Suppression dans la BDD et du fichier
         $presentationTable->deleteOne($user_id, $presentation_id);
-        unlink(APP . "/../presentation/$user_id/$presentation_id.html");
+        unlink(APP . "/../presentation/$user_id/$titre.html");
 
         Alert::getInstance()->success('La présentation à été supprimée.');
         redirect('/public/main_dashboard');
@@ -51,13 +53,15 @@ if($path == "/presentation_visualisation"){
     //Si envoi de fichier
     if(isset($_POST['envoyer'])){
         $presentationTable = new PresentationTable();
-        $files1 = scandir(ROOT."/presentation/".$user_id);
-        $nbPres = count($files1)-1;
+        $titre=$_POST['titre'];
         $code = $_POST['code'];
-        $pathToNewPresentation = "/presentation/".$user_id."/".$nbPres.".html";
+        if(file_exists( "../presentation/".$user_id."/".$titre.".html")){
+            Alert::getInstance()->error('La présentation éxiste déjà.');
+            redirect('/public/presentation_creation');
+        }
+        $pathToNewPresentation = "/presentation/".$user_id."/".$titre.".html";
         file_put_contents("../".$pathToNewPresentation, $code);
-        $nomPres ="Presentation".$nbPres;
-        $presentationTable->insertPresentation($user_id,$nomPres);
+        $presentationTable->insertPresentation($user_id,$titre);
         redirect('/public/main_dashboard');
     }
 
@@ -68,6 +72,7 @@ if($path == "/presentation_visualisation"){
     $title = "Modification d'une présentation";
 
     $presentation_id = $_GET['presentation_id'];
+    $titre= $_GET['title'];
     $user_id = Session::read('User.id');
 
     //Vérification si le user a le droit a la ressource
@@ -78,7 +83,7 @@ if($path == "/presentation_visualisation"){
         Alert::getInstance()->error("Ressource non autorisée !");
         redirect('/public/main_dashboard');
     }else{
-        $pathToPresentation = "/presentation/$user_id/$presentation_id.html";
+        $pathToPresentation = "/presentation/$user_id/$titre.html";
 
         //Si envoi de fichier
         if(isset($_POST['envoyer'])){
