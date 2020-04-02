@@ -90,7 +90,7 @@ function findSequence(goal) {
             <div class="form-group">
               <label for="select">Choisissez un thème:</label>
               <select name="theme" class="form-control" onchange="selectTheme()" id="select">
-                <option selected>default</option>
+                <option value="default">default</option>
                 <option value="3024-day">3024-day</option>
                 <option value="3024-night">3024-night</option>
                 <option value="abcdef">abcdef</option>
@@ -159,20 +159,30 @@ function findSequence(goal) {
           <input type="submit" class="btn btn-primary" value="Enregistrer" name="envoyer">
         </form>
 
-
+        <script type="text/javascript" defer="defer">
+            // A $( document ).ready() block.
+            $( document ).ready(function() {
+                currLoc = $(location).attr('href');
+                currLoc += "#<?=$theme_editor->value?>";
+                window.location.replace(currLoc)
+            });
+        </script>
 
         <script>
-            var editor = CodeMirror.fromTextArea(document.getElementById("codetest"), {
+          var editor = CodeMirror.fromTextArea(document.getElementById("codetest"), {
                 lineNumbers: true,
                 styleActiveLine: true,
                 matchBrackets: true
             });
+
             var input = document.getElementById("select");
+
             function selectTheme() {
                 var theme = input.options[input.selectedIndex].textContent;
                 editor.setOption("theme", theme);
                 location.hash = "#" + theme;
             }
+
             var choice = (location.hash && location.hash.slice(1)) ||
                 (document.location.search &&
                     decodeURIComponent(document.location.search.slice(1)));

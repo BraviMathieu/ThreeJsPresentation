@@ -12,9 +12,12 @@
 
     <script src="lib/font-awesome/js/all.min.js"></script>
 
+    <script src="lib/jquery/jquery.min.js"></script>
+
     <!-- Code mirror css-->
     <link rel="stylesheet" href="lib/codemirror/codemirror.css">
     <link rel="stylesheet" href="lib/codemirror/addon/scroll/simplescrollbars.css">
+    <link rel="stylesheet" href="../../public/lib/codemirror/theme/<?=$theme_editor->value?>.css">
 
     <!-- Code mirror js-->
     <script src="lib/codemirror/codemirror.js"></script>
@@ -33,17 +36,10 @@
 
   <?= $content; ?>
 
-  <script src="lib/jquery/jquery.min.js"></script>
   <script src="lib/bootstrap/js/bootstrap.min.js"></script>
   <script src="js/scripts.js"></script>
 
   <script type="text/javascript">
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-          lineNumbers: true,
-          gutters: ["CodeMirror-linenumbers"],
-          scrollbarStyle: "simple"
-      });
-
       $("#ID_B0").click(function() {
           html = document.getElementById("code").value = editor.getValue();
           var iframe = document.getElementById("iframe");

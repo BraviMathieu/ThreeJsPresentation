@@ -20,7 +20,6 @@ class Form extends \Core\Form
         return $options;
     }
 
-
     /**
      * @param array $options
      * @return string

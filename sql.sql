@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  jeu. 02 avr. 2020 à 17:24
+-- Généré le :  jeu. 02 avr. 2020 à 22:02
 -- Version du serveur :  10.1.38-MariaDB
 -- Version de PHP :  7.3.2
 
@@ -25,10 +25,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `configuration`
+-- Structure de la table `configurations`
 --
 
-CREATE TABLE `configuration` (
+CREATE TABLE `configurations` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `code` varchar(255) NOT NULL,
@@ -36,11 +36,11 @@ CREATE TABLE `configuration` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `configuration`
+-- Déchargement des données de la table `configurations`
 --
 
-INSERT INTO `configuration` (`id`, `user_id`, `code`, `value`) VALUES
-(1, 1, 'EDITOR_THEME', 'dracula');
+INSERT INTO `configurations` (`id`, `user_id`, `code`, `value`) VALUES
+(1, 1, 'EDITOR_THEME', 'night');
 
 -- --------------------------------------------------------
 
@@ -59,10 +59,12 @@ CREATE TABLE `presentations` (
 --
 
 INSERT INTO `presentations` (`id`, `user_id`, `title`) VALUES
-(10, 1, '../../aaa.txt'),
-(17, 1, 'PrÃ©sentation de test aazezaeazeazezaezaezaezaeaze'),
-(18, 1, 'PrÃƒÂ©sentation de test aazezaeazeazezaezaezaezaeaze'),
-(19, 1, 'Présentation de test aazezaeazeazezaezaezaezaeazedd');
+(29, 1, 'Bonjour'),
+(30, 0, 'Working with Eloquent Without PHP'),
+(31, 0, 'Working with Eloquent Without PHP'),
+(32, 0, 'Working with Eloquent Without PHP'),
+(33, 17, 'Working with Eloquent Without PHP'),
+(34, 20, 'Working with Eloquent Without PHP');
 
 -- --------------------------------------------------------
 
@@ -71,7 +73,7 @@ INSERT INTO `presentations` (`id`, `user_id`, `title`) VALUES
 --
 
 CREATE TABLE `users` (
-  `id` tinyint(4) DEFAULT NULL,
+  `id` tinyint(4) NOT NULL,
   `name` varchar(8) DEFAULT NULL,
   `password` varchar(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -96,16 +98,19 @@ INSERT INTO `users` (`id`, `name`, `password`) VALUES
 (13, 'Olympia', 'PY'),
 (14, 'Denton', 'II'),
 (15, 'Nadine', 'AP'),
-(16, 'Ocean', 'KO');
+(16, 'Ocean', 'KO'),
+(18, 'Kshiitj ', '$2y$1'),
+(19, 'Kshiitj ', '$2y$1'),
+(20, 'Kshiitj ', '$2y$1');
 
 --
 -- Index pour les tables déchargées
 --
 
 --
--- Index pour la table `configuration`
+-- Index pour la table `configurations`
 --
-ALTER TABLE `configuration`
+ALTER TABLE `configurations`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -115,20 +120,32 @@ ALTER TABLE `presentations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT pour la table `configuration`
+-- AUTO_INCREMENT pour la table `configurations`
 --
-ALTER TABLE `configuration`
+ALTER TABLE `configurations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `presentations`
 --
 ALTER TABLE `presentations`
-  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+
+--
+-- AUTO_INCREMENT pour la table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
