@@ -53,7 +53,12 @@ if($path == "/presentation_visualisation"){
     //Si envoi de fichier
     if(isset($_POST['envoyer'])){
         $presentationTable = new PresentationTable();
-        $titre=$_POST['titre'];
+        $titre = $_POST['titre'];
+
+        //Eviter de sortir du dossier
+        $charToReplace = ['/','\\'];
+        $titre = str_replace($charToReplace,"",$titre);
+
         $code = $_POST['code'];
         if(file_exists( "../presentation/".$user_id."/".$titre.".html")){
             Alert::getInstance()->error('La présentation éxiste déjà.');
