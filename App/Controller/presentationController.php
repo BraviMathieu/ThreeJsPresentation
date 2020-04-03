@@ -114,17 +114,30 @@ if($path == "/presentation_visualisation"){
 
 
   if($presentation == null){
-      Alert::getInstance()->error("Ressource non autorisée.");
-      redirect('/public/main_dashboard');
+    Alert::getInstance()->error("Ressource non autorisée.");
+    redirect('/public/main_dashboard');
   }else{
-      $pathToPresentation = "/Presentation/$user_id/$titre.html";
+    $pathToPresentation = "/Presentation/$user_id/$titre.html";
 
-      //Si envoi de fichier
-      if(isset($_POST['envoyer'])){
-          $code = $_POST['code'];
-          file_put_contents("../".$pathToPresentation, $code);
-      }
-      $contenuFichier = file_get_contents("../".$pathToPresentation);
-      include_once VUE . '/Presentation/presentation_modification.php';
+    /*if(isset($_POST['envoyer'])){
+        $code = $_POST['code'];
+        file_put_contents("../".$pathToPresentation, $code);
+    }*/
+    $contenuFichier = file_get_contents("../".$pathToPresentation);
+    include_once VUE . '/Presentation/presentation_modification.php';
   }
+}elseif($path == "/presentation_modification_ajax"){
+
+  $presentation_id = $_GET['presentation_id'];
+  $titre = $_GET['title'];
+
+  $pathToPresentation = "/Presentation/$user_id/$titre.html";
+
+  //Si envoi de fichier
+  $code = $_POST['data'];
+  file_put_contents("../".$pathToPresentation, $code);
+
+  $contenuFichier = file_get_contents("../".$pathToPresentation);
+
+  return $contenuFichier;
 }

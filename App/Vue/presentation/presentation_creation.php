@@ -26,11 +26,11 @@
   <br><br><br>
 </div>
 
-  <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-          lineNumbers: true,
-          gutters: ["CodeMirror-linenumbers"],
-          scrollbarStyle: "simple",
-          theme : "<?=$theme_editor->value?>"
-      });
-  </script>
+<script>
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        lineNumbers: true,
+        gutters: ["CodeMirror-linenumbers"],
+        scrollbarStyle: "simple",
+        theme : "<?=$theme_editor->value?>"
+    });
+</script>

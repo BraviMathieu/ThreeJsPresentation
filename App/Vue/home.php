@@ -21,10 +21,10 @@
                  title="Supprimer"><i class="fas fa-trash"></i></a>
             </div>
           </div>
-          <hr>
-        <?php }?>
-      <div style="margin: 15px;" class="text-center">
-        <a class="btn btn-success" href="presentation_creation">Créer une nouvelle présentation</a>
-      </div>
+        <hr>
+      <?php }?>
+    <div style="margin: 15px;" class="text-center">
+      <a class="btn btn-success" href="presentation_creation">Créer une nouvelle présentation</a>
     </div>
   </div>
+</div>

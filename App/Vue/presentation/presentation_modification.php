@@ -11,20 +11,35 @@
           <?=$contenuFichier?>
       </textarea>
       <input type="hidden" name="path" value="<?=$pathToPresentation?>"><br>
-      <input id="ID_B0" class="btn btn-primary" type="submit" value="Modifier la présentation" name="envoyer">
+      <input id="sauvegarde" class="btn btn-primary" type="button" value="Modifier la présentation" name="envoyer">
   </form>
 </div>
 <div class="col-lg-12">
   <h2><i class="fa fa-angle-right"></i> Aperçu de la présentation </h2>
-  <iframe src=<?=$pathToPresentation?> frameborder="0" class="deck-frame"></iframe>
+  <iframe id="iframe" src=<?=$pathToPresentation?> frameborder="0" class="deck-frame"></iframe>
   <br><br><br>
 </div>
 
-  <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-          lineNumbers: true,
-          gutters: ["CodeMirror-linenumbers"],
-          scrollbarStyle: "simple",
-          theme : "<?=$theme_editor->value?>"
+<script>
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        lineNumbers: true,
+        gutters: ["CodeMirror-linenumbers"],
+        scrollbarStyle: "simple",
+        theme : "<?=$theme_editor->value?>"
+    });
+</script>
+
+<script>
+  $("#sauvegarde").click(function() {
+      let data = { data : editor.getValue()};
+      $.ajax({
+          type: "POST",
+          url: "<?="presentation_modification_ajax?presentation_id=".$presentation_id."&title=".$titre?>",
+          data: data,
+          success: function(retour)
+          {
+              $('#iframe').attr("src", $('#iframe').attr("src"));
+          }
       });
-  </script>
+  });
+</script>
