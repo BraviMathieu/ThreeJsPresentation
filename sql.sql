@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  jeu. 02 avr. 2020 à 22:02
+-- Généré le :  ven. 03 avr. 2020 à 09:09
 -- Version du serveur :  10.1.38-MariaDB
 -- Version de PHP :  7.3.2
 
@@ -32,7 +32,7 @@ CREATE TABLE `configurations` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `code` varchar(255) NOT NULL,
-  `value` varchar(255) NOT NULL
+  `value` varchar(255) NOT NULL DEFAULT 'default'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `configurations` (
 --
 
 INSERT INTO `configurations` (`id`, `user_id`, `code`, `value`) VALUES
-(1, 1, 'EDITOR_THEME', 'night');
+(1, 1, 'EDITOR_THEME', 'material-palenight');
 
 -- --------------------------------------------------------
 
@@ -59,12 +59,7 @@ CREATE TABLE `presentations` (
 --
 
 INSERT INTO `presentations` (`id`, `user_id`, `title`) VALUES
-(29, 1, 'Bonjour'),
-(30, 0, 'Working with Eloquent Without PHP'),
-(31, 0, 'Working with Eloquent Without PHP'),
-(32, 0, 'Working with Eloquent Without PHP'),
-(33, 17, 'Working with Eloquent Without PHP'),
-(34, 20, 'Working with Eloquent Without PHP');
+(29, 1, 'Bonjour');
 
 -- --------------------------------------------------------
 
@@ -139,7 +134,7 @@ ALTER TABLE `configurations`
 -- AUTO_INCREMENT pour la table `presentations`
 --
 ALTER TABLE `presentations`
-  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT pour la table `users`
