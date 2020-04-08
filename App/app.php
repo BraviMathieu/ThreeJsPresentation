@@ -5,7 +5,7 @@ ob_start();
 
 $path = (isset($_SERVER['PATH_INFO']))?$_SERVER['PATH_INFO']:'/';
 
-if($path != '/login'){
+if($path != '/login' && $path != '/presentation_visualisation'){
     if(!Session::read('User.id')){
         header("Location: /public/login"); // redirection si l'utilisateur n'est pas connecté
         exit();
@@ -28,7 +28,7 @@ elseif(startsWith($path,"/logout")){
     include_once CONTROLLER . '/logoutController.php';
 }
 
-if($path != '/login'){
+if($path != '/login' && $path != '/presentation_visualisation'){
     include APP . '/Template/inc/footer.php';
 }
 //TODO On pourra inclure des conditions pour afficher une page 404 en cas de page inexistante.
