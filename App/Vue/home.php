@@ -15,6 +15,7 @@
                 <i class="fas fa-pen"></i></a>
               <a class="btn btn-primary"
                  href="<?="presentation_visualisation?presentation_id=$presentation->id&title=$presentation->title"?>"
+                 target="_blank"
                  title="Visualiser"><i class="fas fa-eye"></i></a>
               <a class="btn btn-danger"
                  href="<?="presentation_suppression?presentation_id=$presentation->id&title=$presentation->title"?>"
