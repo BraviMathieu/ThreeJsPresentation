@@ -25,8 +25,30 @@ use App\Session;
           <div class="sb-sidenav-menu-heading">Core</div>
           <a class="nav-link" href="/public/main_dashboard"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
             Dashboard</a>
-          <a class="nav-link" href="/public/presentation_creation"><div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
-            Création de présentation</a>
+
+
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePrésentations" aria-expanded="false" aria-controls="collapsePrésentations"
+          ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+            Présentations
+            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
+            ></a>
+          <div class="collapse" id="collapsePrésentations" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+            <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="/public/presentation_creation"><div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
+                Création</a>
+            </nav>
+          </div>
+
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseObjets" aria-expanded="false" aria-controls="collapseObjets"
+          ><div class="sb-nav-link-icon"><i class="fas fa-cube"></i></div>
+            Objets 3D
+            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
+            ></a>
+          <div class="collapse" id="collapseObjets" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+            <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="/public/objet3d_creation"><div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
+                Création</a>
+            </nav>
+          </div>
+
           <a class="nav-link" href="/public/main_configuration"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>
             Configuration</a>
           <div class="sb-sidenav-menu-heading">Interface</div>

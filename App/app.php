@@ -27,6 +27,10 @@ elseif(startsWith($path,"/login")){
 elseif(startsWith($path,"/logout")){
     include_once CONTROLLER . '/logoutController.php';
 }
+elseif(startsWith($path,"/objet3d")){
+  include_once CONTROLLER . '/objet3dController.php';
+}
+
 
 if($path != '/login' && $path != '/presentation_visualisation'){
     include APP . '/Template/inc/footer.php';
