@@ -2,7 +2,17 @@
 <link rel="stylesheet" href="../../../public/lib/deckjs/css/introduction.css">
 
 <h1 class="mt-4"><i class="fa fa-angle-right"></i> <?=$title?></h1>
-<div class="row">
+
+<div class="col-lg-12">
+        <label for="nslide" class="col-2 col-form-label">Slide</label>
+        <input id="nslide" class="form-control" type="number" min="1">
+        <input id="ajouterslide" class="btn btn-primary" type="button" value="Accéder à cette slide" name="accéder">
+</div>
+
+<div class="col-lg-12">
+        <input id="ajouterslide" class="btn btn-primary" type="button" value="Ajouter une slide après le numéro de slide indiqué" name="ajouter">
+        <input id="enleverslide" class="btn btn-primary" type="button" value="Enlever la slide" name="enlever">
+</div>
 
 <div class="col-lg-12">
   <form action="<?="presentation_modification?presentation_id=".$presentation_id."&title=".$titre?>" method="post"
