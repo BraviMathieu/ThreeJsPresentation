@@ -38,4 +38,9 @@ if($path != '/login' && $path != '/presentation_visualisation'){
 //TODO On pourra inclure des conditions pour afficher une page 404 en cas de page inexistante.
 
 $content = ob_get_clean();
-include APP . '/Template/default.php';
+
+if($path != '/login') {
+  include APP . '/Template/default.php';
+}else{
+  include VUE . '/login.php';
+}

@@ -1,7 +1,7 @@
 
 <link rel="stylesheet" href="../../../public/lib/deckjs/css/introduction.css">
 
-<h1 class="mt-4"><i class="fa fa-angle-right"></i> <?=$title?></h1>
+<h1 class="mt-4"><i class="fa fa-angle-right titre-fa"></i> <?=$title?></h1>
 
 <div class="col-lg-12">
         <label for="nslide" class="col-2 col-form-label">Slide</label>
@@ -25,7 +25,7 @@
   </form>
 </div>
 <div class="col-lg-12">
-  <h2><i class="fa fa-angle-right"></i> Aperçu de la présentation </h2>
+  <h2><i class="fa fa-angle-right titre-fa"></i> Aperçu de la présentation </h2>
   <iframe id="iframe" src=<?=$pathToPresentation?> frameborder="0" class="deck-frame"></iframe>
   <br><br><br>
 </div>

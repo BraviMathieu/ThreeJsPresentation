@@ -2,45 +2,116 @@
 use Core\Form;
 $form = new Form();
 ?>
-<main>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-5">
-                <div class="card shadow-lg border-0 rounded-lg mt-5">
-                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Connexion</h3></div>
-                    <div class="card-body">
-                        <?=
-                        $form->open([
-                            'class' => "form-login"
-                        ])
-                        ?>
-                            <div class="form-group">
-                                <label class="small mb-1" for="user">Nom d'utilisateur</label>
-                                <?=
-                                $form->input('user',[
-                                    'class' => 'form-control',
-                                    'placeholder' => 'Identifiant',
-                                    'type'     => 'text',
-                                    'autofocus' => true
-                                ]);
-                                ?>
-                            </div>
-                            <div class="form-group">
-                                <label class="small mb-1" for="password">Mot de passe</label>
-                                <?=
-                                $form->input('password',[
-                                    'type' => 'password',
-                                    'class' => 'form-control py-4',
-                                    'placeholder' => 'Mot de passe',
-                                ]);
-                                ?>
-                            </div>
-                            <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                    <?=$form->button('Se connecter');?>
-                        <?=$form->end();?>
-                    </div>
-                </div>
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <title>Connexion / Inscription</title>
+    <link rel="stylesheet" href="../../public/css/login.css">
+  </head>
+  <body>
+  <div class="container">
+    <div class="box"></div>
+    <div class="container-forms">
+      <div class="container-info">
+        <div class="info-item">
+          <div class="table">
+            <div class="table-cell">
+              <p>
+                Vous avez un compte
+              </p>
+              <div class="btn">
+                Connexion
+              </div>
             </div>
+          </div>
         </div>
+        <div class="info-item">
+          <div class="table">
+            <div class="table-cell">
+              <p>
+                Vous n'avez pas de compte
+              </p>
+              <div class="btn">
+                S'inscrire
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-form">
+        <?=
+        $form->open([
+          'class' => "form-item log-in"
+        ])
+        ?>
+          <div class="table">
+            <div class="table-cell">
+              <?=
+              $form->input('c_user',[
+                'type' => 'text',
+                'placeholder' => 'Nom d\'utilisateur',
+                'required' => 'true',
+              ]);
+              ?>
+              <?=
+              $form->input('c_mdp',[
+                'type' => 'password',
+                'placeholder' => 'Mot de passe',
+                'required' => 'true',
+              ]);
+              ?>
+              <?=
+              $form->input('connexion',[
+                'type' => 'submit',
+                'class'=> 'btn',
+                'value'=> 'Connexion',
+              ]);
+              ?>
+            </div>
+          </div>
+        <?=$form->end();?>
+
+        <?=
+        $form->open([
+          'class' => "form-item sign-up"
+        ])
+        ?>
+          <div class="table">
+            <div class="table-cell">
+              <?=
+              $form->input('r_user',[
+                'type' => 'text',
+                'placeholder' => 'Nom d\'utilisateur',
+              ]);
+              ?>
+              <?=
+              $form->input('r_mdp',[
+                'type' => 'password',
+                'placeholder' => 'Mot de passe',
+              ]);
+              ?>
+              <?=
+              $form->input('r_mdp_bis',[
+                'type' => 'password',
+                'placeholder' => 'Confirmation du mot de passe',
+              ]);
+              ?>
+              <?=
+              $form->input('inscrire',[
+                'type' => 'submit',
+                'class'=> 'btn',
+                'value'=> 'S\'inscrire',
+              ]);
+              ?>
+            </div>
+          </div>
+          <?=$form->end();?>
+      </div>
     </div>
-</main>
+  </div>
+  <script src='../../public/lib/jquery/jquery.min.js'></script>
+  <script src="../../public/js/login.js"></script>
+  </body>
+</html>

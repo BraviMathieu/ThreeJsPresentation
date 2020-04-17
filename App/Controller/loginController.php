@@ -4,10 +4,10 @@ use App\Alert;
 use App\Session;
 
 if($path == "/login"){
-  if(isset($_POST['user'], $_POST['password'])){
+  if(isset($_POST['c_user'], $_POST['c_mdp'])){
 
-    $user = $_POST['user'];
-    $password = $_POST['password'];
+    $user = $_POST['c_user'];
+    $password = $_POST['c_mdp'];
 
     $user = User::where('name',$user)
       ->where('password',$password)
