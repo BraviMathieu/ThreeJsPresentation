@@ -5,9 +5,6 @@ use App\Session;
   .bg-vert{
     background-color: #6f2232 !important;
   }
-  .titre-fa{
-    color: #c3073f;
-  }
 </style>
 
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-vert">

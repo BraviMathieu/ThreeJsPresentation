@@ -88,7 +88,7 @@ if($path == "/presentation_visualisation"){
         redirect('/public/Presentation/presentation_creation');
     }
 
-    $user = Presentation::Create(['title' => $titre, 'user_id' => $user_id]);
+    Presentation::Create(['title' => $titre, 'user_id' => $user_id]);
     Alert::getInstance()->success('Présentation créée.');
     redirect('/public/main_dashboard');
   }
@@ -106,12 +106,6 @@ if($path == "/presentation_visualisation"){
     ->where('id',$presentation_id)
     ->where('title',$titre)
     ->first();
-
-  //Récupération du theme
-  $theme_editor = Configuration::where('code',"EDITOR_THEME")
-    ->where('user_id',$user_id)
-    ->first();
-
 
   if($presentation == null){
     Alert::getInstance()->error("Ressource non autorisée.");

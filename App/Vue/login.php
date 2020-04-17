@@ -2,15 +2,6 @@
 use Core\Form;
 $form = new Form();
 ?>
-
-<!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="UTF-8">
-    <title>Connexion / Inscription</title>
-    <link rel="stylesheet" href="../../public/css/login.css">
-  </head>
-  <body>
   <div class="container">
     <div class="box"></div>
     <div class="container-forms">
@@ -84,18 +75,21 @@ $form = new Form();
               $form->input('r_user',[
                 'type' => 'text',
                 'placeholder' => 'Nom d\'utilisateur',
+                'required' => 'true',
               ]);
               ?>
               <?=
               $form->input('r_mdp',[
                 'type' => 'password',
                 'placeholder' => 'Mot de passe',
+                'required' => 'true',
               ]);
               ?>
               <?=
               $form->input('r_mdp_bis',[
                 'type' => 'password',
                 'placeholder' => 'Confirmation du mot de passe',
+                'required' => 'true',
               ]);
               ?>
               <?=
@@ -111,7 +105,3 @@ $form = new Form();
       </div>
     </div>
   </div>
-  <script src='../../public/lib/jquery/jquery.min.js'></script>
-  <script src="../../public/js/login.js"></script>
-  </body>
-</html>
