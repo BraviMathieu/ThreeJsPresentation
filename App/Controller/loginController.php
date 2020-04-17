@@ -24,3 +24,7 @@ if($path == "/login"){
   }
   include_once VUE . '/login.php';
 }
+elseif($path == "/loginnew"){
+
+  include_once VUE . '/loginnew.php';
+}

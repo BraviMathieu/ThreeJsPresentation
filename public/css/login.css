@@ -1,3 +1,4 @@
+
 body {
   position: absolute;
   left: 0;
@@ -24,6 +25,7 @@ body {
   transition: all 0.5s;
 }
 
+
 .container {
   position: relative;
   width: 600px;
@@ -37,6 +39,7 @@ body {
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
 }
+
 .container .box {
   position: absolute;
   left: 0;
@@ -246,4 +249,55 @@ body {
   right: 20px;
   z-index: 3;
   fill: #fff;
+}
+
+
+
+@media only screen and (max-width: 613px){
+  .container {
+    width: 368px;
+    top: 25%;
+  }
+  .container.log-in .container-form {
+    top: 290px;
+    left: 30px;
+  }
+
+  .container .container-forms .container-info .info-item{
+    width: 100%;
+  }
+
+  .container .container-forms .container-info .info-item .table-cell{
+    padding-right: 0px;
+  }
+
+  .container .container-forms .container-info .info-item:nth-child(2) .table-cell{
+    padding-left: 0px;
+  }
+
+  .container .container-forms {
+    background-color: #950740;
+  }
+}
+
+
+@media only screen and (min-width: 613px) and (max-width: 767px){
+  .container {
+    width: 600px;
+    top: 25%;
+  }
+
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px){
+  .container {
+    width: 780px;
+  }
+}
+
+@media only screen and (min-width: 992px){
+  .container {
+    width: 1000px;
+  }
+
 }
