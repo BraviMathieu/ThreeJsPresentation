@@ -10,7 +10,7 @@
         }
     },
     "require": {
-        "illuminate/database": "^7.4"
+        "illuminate/database": "^7.5"
     },
     "require-dev": {
         "symfony/var-dumper": "^5.0"

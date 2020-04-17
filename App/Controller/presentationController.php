@@ -163,4 +163,28 @@ if($path == "/presentation_visualisation"){
     unlink(APP . "/../Presentation/$user_id/$titre.html");
     return true;
   }
+}elseif($path == "/presentation_modification_ajout"){
+    $presentation_id = $_GET['presentation_id'];
+    $titre = $_GET['title'];
+
+    // Nom du fichier à ouvrir
+    $fichier = file("..\..\Presentation\\" + $presentation_id + "\\" + $titre);
+    // Nombre total de ligne du fichier
+    $total = count($fichier);
+
+    for($i = 0; $i < $total; $i++) {
+        // On affiche ligne par ligne le contenu du fichier
+        // avec la fonction nl2br pour ajouter les sauts de lignes
+        echo nl2br($fichier[$i]);
+    }
+
+    // OU en ayant les numéros de ligne et l'ajout des sauts de lignes
+
+    // Affiche toute les lignes du tableau
+    // avec les numéros de ligne
+    foreach ($fichier as $line_num => $line) {
+        echo "Ligne #<b>{$line_num}</b> : " . htmlspecialchars($line) .
+            "<br />\n";
+    }
+
 }
