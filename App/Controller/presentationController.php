@@ -140,4 +140,27 @@ if($path == "/presentation_visualisation"){
   $contenuFichier = file_get_contents("../".$pathToPresentation);
 
   return $contenuFichier;
+
+}elseif($path == "/presentation_suppression_ajax"){
+
+  $presentation_id = intval($_POST['presentation_id']);
+
+  //Vérification si le user a le droit a la ressource
+  $presentation = Presentation::where('user_id',$user_id)
+    ->where('id',$presentation_id)
+    ->first();
+
+  if($presentation == null){
+    return false;
+  }else{
+    //Suppression dans la BDD et du fichier
+    Presentation::where('user_id',$user_id)
+      ->where('id',$presentation_id)
+      ->delete();
+
+    $titre = $presentation->title;
+
+    unlink(APP . "/../Presentation/$user_id/$titre.html");
+    return true;
+  }
 }
