@@ -163,4 +163,9 @@ if($path == "/presentation_visualisation"){
     unlink(APP . "/../Presentation/$user_id/$titre.html");
     return true;
   }
+}elseif($path == "/presentation_modification_ajout"){
+    $presentation_id = $_GET['presentation_id'];
+    $titre = $_GET['title'];
+
+    $fichier = file("VotreFichier.txt");
 }
