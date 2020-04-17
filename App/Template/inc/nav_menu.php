@@ -25,8 +25,6 @@ use App\Session;
           <div class="sb-sidenav-menu-heading">Core</div>
           <a class="nav-link" href="/public/main_dashboard"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
             Dashboard</a>
-
-
           <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePrésentations" aria-expanded="false" aria-controls="collapsePrésentations"
           ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
             Présentations
