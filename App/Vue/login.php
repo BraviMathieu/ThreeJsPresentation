@@ -2,7 +2,9 @@
 use Core\Form;
 $form = new Form();
 ?>
+
   <div class="container">
+    <main role="main">
     <div class="box"></div>
     <div class="container-forms">
       <div class="container-info">
@@ -111,4 +113,5 @@ $form = new Form();
           <?=$form->end();?>
       </div>
     </div>
+    </main>
   </div>
