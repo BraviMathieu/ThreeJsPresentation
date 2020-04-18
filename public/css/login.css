@@ -33,6 +33,7 @@ body {
   height: 320px;
   background-color: #950740;
   top: 50%;
+  border-radius: 10px;
   margin-top: -160px;
   -moz-transition: all 0.5s;
   -o-transition: all 0.5s;
@@ -142,6 +143,7 @@ body {
   top: -30px;
   width: 305px;
   height: 380px;
+  border-radius: 10px;
   background-color: #fff;
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
   -moz-transition: all 0.5s;

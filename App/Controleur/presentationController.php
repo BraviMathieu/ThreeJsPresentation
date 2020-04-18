@@ -3,21 +3,17 @@
 use App\Alert;
 use App\Session;
 
-
 $user_id = Session::read('User.id');
 
-//Récupération du theme
 $theme_editor = Configuration::where('code',"EDITOR_THEME")
   ->where('user_id',$user_id)
   ->first();
-
 
 if($path == "/presentation_visualisation"){
   $title = "Visualisation d'une présentation";
 
   $presentation_id = $_GET['presentation_id'];
   $titre = $_GET['title'];
-
 
   //Vérification si le user a le droit a la ressource
   $presentation = Presentation::where('user_id',$user_id)
@@ -33,33 +29,6 @@ if($path == "/presentation_visualisation"){
       include_once VUE . '/Presentation/presentation_visualisation.php';
   }
 
-}elseif($path == "/presentation_suppression"){
-
-  $presentation_id = $_GET['presentation_id'];
-  $titre = $_GET['title'];
-
-  //Vérification si le user a le droit a la ressource
-  $presentation = Presentation::where('user_id',$user_id)
-    ->where('id',$presentation_id)
-    ->where('title',$titre)
-    ->first();
-
-  if($presentation == null){
-      Alert::getInstance()->error("Ressource non autorisée.");
-      redirect('/public/main_dashboard');
-  }else{
-    //Suppression dans la BDD et du fichier
-    $presentation = Presentation::where('user_id',$user_id)
-      ->where('id',$presentation_id)
-      ->where('title',$titre)
-      ->delete();
-
-      unlink(APP . "/../Presentation/$user_id/$titre.html");
-
-      Alert::getInstance()->success('La présentation à été supprimée.');
-      redirect('/public/main_dashboard');
-  }
-
 }elseif($path == "/presentation_creation"){
   $title = "Création d'une présentation";
 
@@ -67,9 +36,10 @@ if($path == "/presentation_visualisation"){
 
   //Si envoi de fichier
   if(isset($_POST['envoyer'])){
-    $code = $_POST['code'];
 
+    $code = $_POST['code'];
     $titre = $_POST['titre'];
+
     //Eviter de sortir du dossier
     $charToReplace = ['/','\\'];
     $titre = str_replace($charToReplace,"",$titre);
@@ -112,14 +82,10 @@ if($path == "/presentation_visualisation"){
     redirect('/public/main_dashboard');
   }else{
     $pathToPresentation = "/Presentation/$user_id/$titre.html";
-
-    /*if(isset($_POST['envoyer'])){
-        $code = $_POST['code'];
-        file_put_contents("../".$pathToPresentation, $code);
-    }*/
     $contenuFichier = file_get_contents("../".$pathToPresentation);
     include_once VUE . '/Presentation/presentation_modification.php';
   }
+
 }elseif($path == "/presentation_modification_ajax"){
 
   $presentation_id = $_GET['presentation_id'];

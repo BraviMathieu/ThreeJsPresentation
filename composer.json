@@ -1,11 +1,10 @@
 {
     "autoload": {
         "classmap": [
-            "app/class/Classes"
+            "app/Classe/"
         ],
         "psr-4": {
-            "App\\": "App/class/",
-            "Classes\\": "App/class/Classes",
+            "App\\": "App/Classe/",
             "Core\\": "Core/"
         }
     },
