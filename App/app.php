@@ -42,5 +42,5 @@ $content = ob_get_clean();
 if($path != '/login') {
   include_once APP . '/Template/default.php';
 }else{
-  include_once APP . '/Template/inc/default_login.php';
+  include_once APP . '/Template/default_login.php';
 }

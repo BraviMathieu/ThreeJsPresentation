@@ -25,7 +25,7 @@ $form = new Form();
                 Vous n'avez pas de compte
               </p>
               <div class="btn">
-                S'inscrire
+                Inscription
               </div>
             </div>
           </div>
@@ -39,17 +39,19 @@ $form = new Form();
         ?>
           <div class="table">
             <div class="table-cell">
+              <label for="c_user">Nom d'utilisateur <abbr title="(obligatoire)">*</abbr></label>
               <?=
               $form->input('c_user',[
+                'id' => 'c_user',
                 'type' => 'text',
-                'placeholder' => 'Nom d\'utilisateur',
                 'required' => 'true',
               ]);
               ?>
+              <label for="c_mdp">Mot de passe <abbr title="(obligatoire)">*</abbr></label>
               <?=
               $form->input('c_mdp',[
+                'id' => 'c_mdp',
                 'type' => 'password',
-                'placeholder' => 'Mot de passe',
                 'required' => 'true',
               ]);
               ?>
@@ -58,6 +60,7 @@ $form = new Form();
                 'type' => 'submit',
                 'class'=> 'btn',
                 'value'=> 'Connexion',
+                'aria-label' => 'Bouton de connexion',
               ]);
               ?>
             </div>
@@ -71,32 +74,36 @@ $form = new Form();
         ?>
           <div class="table">
             <div class="table-cell">
+              <label for="r_user">Nom d'utilisateur <abbr title="(obligatoire)">*</abbr></label>
               <?=
               $form->input('r_user',[
+                'id' => 'r_user',
                 'type' => 'text',
-                'placeholder' => 'Nom d\'utilisateur',
                 'required' => 'true',
               ]);
               ?>
+              <label for="r_mdp">Mot de passe <abbr title="(obligatoire)">*</abbr></label>
               <?=
               $form->input('r_mdp',[
+                'id' => 'r_mdp',
                 'type' => 'password',
-                'placeholder' => 'Mot de passe',
                 'required' => 'true',
               ]);
               ?>
+              <label for="r_mdp_bis">Confirmation du mot de passe <abbr title="(obligatoire)">*</abbr></label>
               <?=
               $form->input('r_mdp_bis',[
+                'id' => 'r_mdp_bis',
                 'type' => 'password',
-                'placeholder' => 'Confirmation du mot de passe',
                 'required' => 'true',
               ]);
               ?>
               <?=
-              $form->input('inscrire',[
+              $form->input('inscription',[
                 'type' => 'submit',
                 'class'=> 'btn',
-                'value'=> 'S\'inscrire',
+                'value'=> 'Inscription',
+                'aria-label' => 'Bouton d\'inscription',
               ]);
               ?>
             </div>
