@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  ven. 03 avr. 2020 à 09:09
+-- Généré le :  mar. 05 mai 2020 à 09:31
 -- Version du serveur :  10.1.38-MariaDB
 -- Version de PHP :  7.3.2
 
@@ -40,7 +40,7 @@ CREATE TABLE `configurations` (
 --
 
 INSERT INTO `configurations` (`id`, `user_id`, `code`, `value`) VALUES
-(1, 1, 'EDITOR_THEME', 'material-palenight');
+(1, 1, 'EDITOR_THEME', 'gruvbox-dark');
 
 -- --------------------------------------------------------
 
@@ -70,7 +70,7 @@ INSERT INTO `presentations` (`id`, `user_id`, `title`) VALUES
 CREATE TABLE `users` (
   `id` tinyint(4) NOT NULL,
   `name` varchar(8) DEFAULT NULL,
-  `password` varchar(5) DEFAULT NULL
+  `password` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -78,25 +78,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `password`) VALUES
-(1, 'admin', 'admin'),
-(2, 'Bertha', 'RZ'),
-(3, 'Scott', 'XL'),
-(4, 'Patrick', 'BB'),
-(5, 'Odysseus', 'JG'),
-(6, 'Erin', 'OM'),
-(7, 'Palmer', 'IP'),
-(8, 'TaShya', 'FH'),
-(9, 'Noelani', 'TG'),
-(10, 'Eric', 'RE'),
-(11, 'Maggy', 'DN'),
-(12, 'Mohammad', 'YL'),
-(13, 'Olympia', 'PY'),
-(14, 'Denton', 'II'),
-(15, 'Nadine', 'AP'),
-(16, 'Ocean', 'KO'),
-(18, 'Kshiitj ', '$2y$1'),
-(19, 'Kshiitj ', '$2y$1'),
-(20, 'Kshiitj ', '$2y$1');
+(1, 'admin', '$argon2id$v=19$m=1024,t=2,p=2$dDFJdW9QaWhRQThxZC9MWQ$ZBDvF1eoD4eIE2QChJTHH63yKEAb/GRYNUFNoTaAOuY'),
+(34, 'ww', '$argon2id$v=19$m=1024,t=2,p=2$WFBaelh3b1kuQ3kxNFI5Qw$r11G/zTGzg8SLJxRV1+XnTOd06S8rtj4QKi6y8F+Om0'),
+(36, 'admina', '$argon2id$v=19$m=1024,t=2,p=2$L2lzQWtydnBYNVVsYnVadA$BO9U9KrxPW58TaMyoWBNK6B05KzLAFAeDffKG8Bp0zA'),
+(38, 'admine', '$argon2id$v=19$m=1024,t=2,p=2$TWEzYXd3a3pld1QxU1REZg$M8a9CV5VQDP1FsKtVZ1l5elwWykqNr9PnP2gJ1Uu1Lw'),
+(39, 'adminq', '$argon2id$v=19$m=1024,t=2,p=2$WjdNN3haU3E2ekNmeHNseg$oxRwihu8VtvLTmJKT9DCbjJH60J4155V372WfDs/AwI');
 
 --
 -- Index pour les tables déchargées
@@ -118,7 +104,8 @@ ALTER TABLE `presentations`
 -- Index pour la table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -134,13 +121,13 @@ ALTER TABLE `configurations`
 -- AUTO_INCREMENT pour la table `presentations`
 --
 ALTER TABLE `presentations`
-  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
