@@ -41,6 +41,7 @@ $form = new Form();
         ?>
           <div class="table">
             <div class="table-cell">
+              <div class="float-input">
               <label for="c_user">Nom d'utilisateur <abbr title="(obligatoire)">*</abbr></label>
               <?=
               $form->input('c_user',[
@@ -49,6 +50,7 @@ $form = new Form();
                 'required' => 'true',
               ]);
               ?>
+              </div>
               <label for="c_mdp">Mot de passe <abbr title="(obligatoire)">*</abbr></label>
               <?=
               $form->input('c_mdp',[
