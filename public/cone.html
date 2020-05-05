@@ -1,0 +1,41 @@
+<html>
+<head>
+  <title>My first three.js app</title>
+  <style>
+    body { margin: 0; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+<script src="lib/threejs/three.js"></script>
+<script>
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera( 1000, window.innerWidth/window.innerHeight, 0.3, 1000 );
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    document.body.appendChild( renderer.domElement );
+
+    var geometry = new THREE.ConeGeometry(1);
+    var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+    var cone = new THREE.Mesh( geometry, material );
+    cone.rotation.x +=3;
+    cone.rotation.y +=3;
+    scene.add( cone );
+
+    var edges = new THREE.EdgesHelper( cone, 0x0000ff);
+    edges.material.linewidth = 3;
+    edges.rotation.x += 3;
+    edges.rotation.y += 3;
+    scene.add(edges);
+
+    camera.position.z = 5;
+
+    var animate = function () {
+        requestAnimationFrame( animate );
+        renderer.render( scene, camera );
+    };
+
+    animate();
+</script>
+</body>
+</html>

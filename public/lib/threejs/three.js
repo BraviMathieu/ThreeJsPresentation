@@ -13783,8 +13783,8 @@
     } );
 
     /**
-     * Camera for rendering cube maps
-     *	- renders scene into axis-aligned cube
+     * Camera for rendering sphere maps
+     *	- renders scene into axis-aligned sphere
      *
      * @author alteredq / http://alteredqualia.com/
      */
@@ -21357,7 +21357,7 @@
 
                     if ( _canvas === undefined ) { _canvas = createCanvas( width, height ); }
 
-                    // cube textures can't reuse the same canvas
+                    // sphere textures can't reuse the same canvas
 
                     var canvas = needsNewCanvas ? createCanvas( width, height ) : _canvas;
 
@@ -21785,7 +21785,7 @@
 
                 if ( textureNeedsGenerateMipmaps( texture, supportsMips ) ) {
 
-                    // We assume images for cube map have the same size.
+                    // We assume images for sphere map have the same size.
                     generateMipmap( 34067, texture, image.width, image.height );
 
                 }
@@ -22210,7 +22210,7 @@
         function setupDepthTexture( framebuffer, renderTarget ) {
 
             var isCube = ( renderTarget && renderTarget.isWebGLCubeRenderTarget );
-            if ( isCube ) { throw new Error( 'Depth Texture with cube render targets is not supported' ); }
+            if ( isCube ) { throw new Error( 'Depth Texture with sphere render targets is not supported' ); }
 
             _gl.bindFramebuffer( 36160, framebuffer );
 
@@ -22522,7 +22522,7 @@
 
                 if ( warnedTextureCube === false ) {
 
-                    console.warn( "THREE.WebGLTextures.safeSetTextureCube: don't use cube render targets as textures. Use their .texture property instead." );
+                    console.warn( "THREE.WebGLTextures.safeSetTextureCube: don't use sphere render targets as textures. Use their .texture property instead." );
                     warnedTextureCube = true;
 
                 }
@@ -22538,7 +22538,7 @@
 
                 // CompressedTexture can have Array in image :/
 
-                // this function alone should take care of cube textures
+                // this function alone should take care of sphere textures
                 setTextureCube( texture, slot );
 
             } else {
@@ -27939,7 +27939,7 @@
         this.image = { width: width, height: height };
         this.mipmaps = mipmaps;
 
-        // no flipping for cube textures
+        // no flipping for sphere textures
         // (also flipping doesn't work for compressed textures )
 
         this.flipY = false;
@@ -38767,7 +38767,7 @@
         this._viewportCount = 6;
 
         this._viewports = [
-            // These viewports map a cube-map onto a 2D texture with the
+            // These viewports map a sphere-map onto a 2D texture with the
             // following orientation:
             //
             //  xzXZ
@@ -46692,7 +46692,7 @@
         addLine( 'n3', 'f3', colorFrustum );
         addLine( 'n4', 'f4', colorFrustum );
 
-        // cone
+        // pyramid
 
         addLine( 'p', 'n1', colorCone );
         addLine( 'p', 'n2', colorCone );
@@ -47321,7 +47321,7 @@
 
         /**
          * Generates a PMREM from an cubemap texture, which can be either LDR
-         * (RGBFormat) or HDR (RGBEFormat). The ideal input cube size is 256 x 256,
+         * (RGBFormat) or HDR (RGBEFormat). The ideal input sphere size is 256 x 256,
          * as this matches best with the 256 x 256 cubemap output.
          */
         fromCubemap: function ( cubemap ) {
@@ -47643,7 +47643,7 @@
 
     /**
      * This is a two-pass Gaussian blur for a cubemap. Normally this is done
-     * vertically and horizontally, but this breaks down on a cube. Here we apply
+     * vertically and horizontally, but this breaks down on a sphere. Here we apply
      * the blur latitudinally (around the poles), and then longitudinally (towards
      * the poles) to approximate the orthogonally-separable blur. It is least
      * accurate at the poles, but still does a decent job.

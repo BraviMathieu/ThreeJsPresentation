@@ -1,0 +1,67 @@
+<html>
+<head>
+  <title>My first three.js app</title>
+  <style>
+    body { margin: 0; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+<script src="lib/threejs/three.js"></script>
+<script>
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera( 1000, window.innerWidth/window.innerHeight, 0.3, 1000 );
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    document.body.appendChild( renderer.domElement );
+
+    var geometry = new THREE.BufferGeometry().setFromPoints([
+      // front
+      new THREE.Vector3(-1, 1, 1),
+      new THREE.Vector3(0, -1, 0),
+      new THREE.Vector3(1, 1, 1),
+      // left
+      new THREE.Vector3(-1, 1, -1),
+      new THREE.Vector3(0, -1, 0),
+      new THREE.Vector3(-1, 1, 1),
+      // right
+      new THREE.Vector3(1, 1, 1),
+      new THREE.Vector3(0, -1, 0),
+      new THREE.Vector3(1, 1, -1),
+      // rear
+      new THREE.Vector3(1, 1, -1),
+      new THREE.Vector3(0, -1, 0),
+      new THREE.Vector3(-1, 1, -1),
+
+      // top
+      new THREE.Vector3(-1, 1, -1),
+      new THREE.Vector3(-1, 1, 1),
+      new THREE.Vector3(1, 1, -1),
+
+      new THREE.Vector3(1, 1, -1),
+      new THREE.Vector3(-1, 1, 1),
+      new THREE.Vector3(1, 1, 1),
+    ]);
+    var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+    var pyramid = new THREE.Mesh( geometry, material );
+    pyramid.rotation.x +=0.50;
+    pyramid.rotation.y +=0.50;
+    scene.add( pyramid );
+
+    var edges = new THREE.EdgesHelper( pyramid, 0x0000ff);
+    edges.material.linewidth = 3;
+    edges.rotation.x += 0.50;
+    edges.rotation.y += 0.50;
+    scene.add(edges);
+
+    camera.position.z = 5;
+
+    var animate = function () {
+        requestAnimationFrame( animate );
+        renderer.render( scene, camera );
+    };
+
+    animate();
+</script>
+</body>
+</html>
