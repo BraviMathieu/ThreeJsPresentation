@@ -39,8 +39,10 @@ if($path != '/login' && $path != '/presentation_visualisation' && $path != '/pre
 
 $content = ob_get_clean();
 
-if($path != '/login') {
+if($path == '/presentation_creation_new'){
+  include_once APP . '/Template/default_presentation.php';
+}elseif($path != '/login') {
   include_once APP . '/Template/default.php';
-}elseif($path != '/presentation_creation_new'){
+}else{
   include_once APP . '/Template/default_login.php';
 }
