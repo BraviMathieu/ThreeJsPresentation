@@ -65,6 +65,11 @@ if($path == "/presentation_visualisation"){
   $contenuFichier = file_get_contents("../".$pathToPresentation);
   include_once VUE . '/Presentation/presentation_creation.php';
 
+}elseif($path == "/presentation_creation_new"){
+
+  $title = "Création d'une présentation";
+  include_once VUE . '/Presentation/presentation_creation_new.php';
+
 }elseif($path == "/presentation_modification"){
   $title = "Modification d'une présentation";
 
