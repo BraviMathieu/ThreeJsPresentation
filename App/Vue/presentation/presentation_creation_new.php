@@ -68,7 +68,7 @@
         window.dlSupported = 'download' in document.createElement('a');
         window.hasFlash = swfobject.hasFlashPlayerVersion(9);
         if (!dlSupported && window.hasFlash) {
-            appendScript('preview_export/download_assist/downloadify.min.js');
+            appendScript('../../../public/lib/presentation/preview_export/download_assist/downloadify.min.js');
         }
     }
 </script>
