@@ -8550,7 +8550,7 @@ and (max-device-width : 1024px)  {
 	font-weight: normal;
 }
 
-/*.surface::before, .surface::after {
+/*.strut-surface::before, .strut-surface::after {
   display: block;
   position: absolute;
   background-size: cover;
@@ -8562,7 +8562,7 @@ and (max-device-width : 1024px)  {
   filter: grayscale(0.3) brightness(0.3);
 }
 
-.surface::after {
+.strut-surface::after {
   z-index: 1;
   top: 0;
   left: 0;
@@ -8570,7 +8570,7 @@ and (max-device-width : 1024px)  {
   height: 100%;
 }*/
 
-.surface, .innerBg {
+.strut-surface, .innerBg {
 	background-size: cover;
 	background-position: center;
   	background-repeat: no-repeat;

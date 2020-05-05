@@ -24,7 +24,7 @@
 <![endif]-->
 
 <?= $content; ?>
-<script data-main="../../public/lib/presentation/scripts/amd-app" src="../../public/lib/presentation/scripts/libs/require.js"></script>
+<script data-main="../../public/lib/presentation/scripts/amd-app.js" src="../../public/lib/presentation/scripts/libs/require.js"></script>
 <div id="modals">
 </div>
 </body>
