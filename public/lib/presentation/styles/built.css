@@ -617,7 +617,7 @@ line-height: normal;
 	top: 56px;
 	bottom: 0px;
 	padding-bottom: 45px;
-	background-image: url('img/linen-gray.png');
+	background-color: #aeaeae;
 	z-index:2;
 }
 
@@ -640,7 +640,7 @@ line-height: normal;
 
 .slideWell {
 	overflow: auto;
-	border-right: 1px solid black;
+	border-right: 1px solid #aeaeae;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
@@ -1178,6 +1178,7 @@ body {
 }
 .header .divider-vertical {
 	height: 54px;
+    opacity: 0;
 }
 
 .header .navbar-inner {
