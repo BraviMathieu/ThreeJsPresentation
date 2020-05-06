@@ -13,7 +13,9 @@
   <link href="../../public/lib/presentation/css/matrices.css" rel="stylesheet">
   <link href="../../public/lib/presentation/css/progressbar.css" rel="stylesheet">
   <link href="../../public/lib/presentation/css/sliderskin.css" rel="stylesheet">
-  <link href="../../public/lib/presentation/css/colorpicker.css" rel="stylesheet">
+
+  <link href="../../public/lib/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+
   <link href="../../public/lib/presentation/css/freetrans.css" rel="stylesheet">
   <link href="../../public/lib/presentation/css/codemirror.css" rel="stylesheet">
 
@@ -27,12 +29,10 @@
   <link href="../../public/lib/presentation/css/custom.css" rel="stylesheet">
 
   <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
+  <script src="../../public/lib/jquery/jquery.min.js"></script>
+  <script src="../../public/lib/popper/popper.min.js"></script>
 
 
-  <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
-  <!--[if lt IE 9]>
-  <script src="js/html5shiv.js"></script>
-  <![endif]-->
 </head>
 <body>
 
@@ -42,12 +42,11 @@
 
 <!-- Load JS here for greater good =============================-->
 
-<script src="../../public/lib/jquery/jquery.min.js"></script>
 <script src="../../public/lib/jquery-ui/js/jquery-ui.min.js"></script>
 <script src="../../public/lib/bootstrap/js/bootstrap.min.js"></script>
 
 <script src="../../public/lib/presentation/js/bootstrap-tooltip.js"></script>
-<script src="../../public/lib/presentation/js/bootstrap-colorpicker.js"></script>
+<script src="../../public/lib/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 
 <script src="../../public/lib/presentation/js/jquery.dropkick-1.0.0.js"></script>
 <script src="../../public/lib/presentation/js/jquery.placeholder.js"></script>
