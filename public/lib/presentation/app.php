@@ -131,116 +131,151 @@
 <div class="placeholder"></div>
 </div>
 
-
-<!-- Add the image modal -->
-        <div class="modal hide fade modalwindow" id="imagemodal">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3>Ajouter une image</h3>
-              </div>
-              <div class="modal-body">
-                <p>Coller l'URL de l'image </p>
-                <input type="text" id="imageinput" class="image-input"> </input>
-                <p> La prévisualisation va apparaitreen dessous.</p>
-                <img id="previewimg"></img>
-              </div>
-              <div class="modal-footer">
-                <a href="#" class="btn">Close</a>
-                <a href="#" class="btn btn-primary" id="appendimagebtn"> <i class="icon-plus"></i> &nbsp; Add</a>
-              </div>
+    <!-- Ajouter Image Modal -->
+    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ajouter une image</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Coller l'URL de l'image </p>
+            <input type="text" id="imageinput" class="image-input">
+            <p> La prévisualisation va apparaitreen dessous.</p>
+            <img id="previewimg">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            <button type="button" class="btn btn-primary" id="createpresentation"> <i class="icon-plus"></i>&nbsp;Sauvegarder</button>
+          </div>
         </div>
-        <!-- Prévisualisation Modal -->
+      </div>
+    </div>
 
-        <div class="modal hide fade modalwindow" id="previewmodal" style="width:400px">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3>Génération de la prévisualisation</h3>
-              </div>
-              <div class="modal-body">
-                <p id="previewmessage"> Veuillez attendre pendant que nous générons la prévisualisation... </p>
-                <div id="progressmeter" class="meter blue">
+    <!-- Prévisualisation Modal -->
+    <div class="modal fade" id="previewmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Génération de la prévisualisation</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="previewmessage"> Veuillez attendre pendant que nous générons la prévisualisation... </p>
+            <div id="progressmeter" class="meter blue">
                     <span style="width: 100%"><span>
-                </div>
-              </div>
-                <div class="modal-footer">
-               <a href="#" class="btn disabled" id="openpreviewbtn">Ouvrir la prévisualisation</a>
-              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            <button type="button" class="btn disabled" id="openpreviewbtn"> Ouvrir la prévisualisatio</button>
+          </div>
         </div>
-        <!-- Nouvelle présentation Modal -->
-          <div class="modal hide fade modalwindow" id="newpresentationmodal">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3 id="newpresoheader">Nouvelle présentation</h3>
-              </div>
-              <div class="modal-body">
-                <p>Titre</p>
-                <input type="text" id="titreinput" class="image-input" value="Nouvelle présentation">
-                <p>Description</p>
-                <textarea id="descriptioninput" class="descriptioninput"> Exemple de description de présentation </textarea>
-              </div>
-              <div class="modal-footer">
-                <a href="#" class="btn btn-primary" id="createpresentation"> <i class="icon-plus"></i>&nbsp;Sauvegarder</a>
-              </div>
-        </div>
-        <!-- Fin Nouvelle présentation modal-->
+      </div>
+    </div>
 
-         <!-- Sauvegarder présentation Modal -->
-          <div class="modal hide fade modalwindow" id="savedpresentationsmodal">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3>Mes Présentations</h3>
-              </div>
-              <div class="modal-body" id="savedpresentations" style="overflow:scroll;">
-              
-              </div>
-              <div class="modal-footer">
-                <a href="#" class="btn">Close</a>
-              </div>
+    <!-- Nouvelle présentation Modal -->
+    <div class="modal fade" id="newpresentationmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Nouvelle présentation</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Titre</p>
+            <input type="text" id="titreinput" class="image-input" value="Nouvelle présentation">
+            <p>Description</p>
+            <textarea id="descriptioninput" class="descriptioninput"> Exemple de description de présentation </textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            <button type="button" class="btn btn-primary" id="createpresentation"> <i class="icon-plus"></i>&nbsp;Sauvegarder</button>
+          </div>
         </div>
+      </div>
+    </div>
 
-          <!-- Code Exporter Modal -->
-          <div class="modal hide fade modalwindow" id="exportcodemodal">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3>Exporter le code</h3>
-              </div>
-              <div class="modal-body" id="exportcode" >
-                <pre  style="height:300px; overflow:scroll;">
-                  <code class="html" id="exportedcode" >
-                  </code>
-                </pre>
-              </div>
-              <div class="modal-footer">
-                <a href="#" class="btn">Close</a>
-              </div>
+    <!-- Mes présentations Modal -->
+    <div class="modal fade" id="savedpresentationsmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Mes Présentations</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="savedpresentations" style="overflow:scroll;">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
         </div>
-        <!-- End of new preso modal-->
+      </div>
+    </div>
 
-          <!-- Selectionner une police Modal -->
-          <div class="modal hide fade modalwindow" id="styleselectionmodal">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3>Selectionner une police</h3>
-              </div>
-              <div class="modal-body" id="styleselections" style="overflow:scroll;">
-                  <div class="stylethumbnail" data-style="lato" style="width: 100px">
-                      <h3 class="styleh3 style1">Lato</h3>
-                  </div>
-                  <div class="stylethumbnail" data-style="sketch" style="width: 130px">
-                      <h3 class="styleh3 style1 sketch">Sketch</h3>
-                  </div>
-                     <div class="stylethumbnail" data-style="montserrat" style="width: 200px">
-                      <h3 class="styleh3 style1 montserrat">Montserrat</h3>
-                  </div>
-                     <div class="stylethumbnail" data-style="quicksand" style="width: 200px">
-                      <h3 class="styleh3 style1 quicksand">Quicksand</h3>
-                  </div>
-                     <div class="stylethumbnail" data-style="miltonian" style="width: 200px">
-                      <h3 class="styleh3 style1 miltonian">Miltonian</h3>
-                  </div>
-              </div>
-              <div class="modal-footer">
-                <a href="#" class="btn btn-primary" id="applystylebtn">&nbsp;Appliquer</a>
-              </div>
+    <!-- Exporter Code Modal -->
+    <div class="modal fade" id="exportcodemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Exporter le code</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="exportcode">
+            <pre style="height:300px; overflow:scroll;">
+                <code class="html" id="exportedcode" >
+                </code>
+            </pre>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
         </div>
-<!--<a href="#" class="btn small" id="cp4" data-color-format="hex" data-color="rgb(255, 255, 255)">Change background color</a>-->
+      </div>
+    </div>
+
+    <!-- Selectionner une police Modal -->
+    <div class="modal fade" id="styleselectionmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Selectionner une police</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="styleselections" style="overflow:scroll;">
+            <div class="stylethumbnail" data-style="lato" style="width: 100px">
+              <h3 class="styleh3 style1">Lato</h3>
+            </div>
+            <div class="stylethumbnail" data-style="sketch" style="width: 130px">
+              <h3 class="styleh3 style1 sketch">Sketch</h3>
+            </div>
+            <div class="stylethumbnail" data-style="montserrat" style="width: 200px">
+              <h3 class="styleh3 style1 montserrat">Montserrat</h3>
+            </div>
+            <div class="stylethumbnail" data-style="quicksand" style="width: 200px">
+              <h3 class="styleh3 style1 quicksand">Quicksand</h3>
+            </div>
+            <div class="stylethumbnail" data-style="miltonian" style="width: 200px">
+              <h3 class="styleh3 style1 miltonian">Miltonian</h3>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            <button type="button" class="btn btn-primary" id="applystylebtn">&nbsp;Appliquer</button>
+          </div>
+        </div>
+      </div>
+    </div>
