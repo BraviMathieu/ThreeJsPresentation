@@ -7,13 +7,11 @@
 
     <!-- Loading Bootstrap -->
     <link href="../../public/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="icon" type="image/ico" href="images/favicon.ico" />
-    <!-- Loading Flat UI -->
-
     <link href="../../public/lib/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
-
     <link href="../../public/lib/presentation/css/freetrans.css" rel="stylesheet">
-    <link href="../../public/lib/presentation/css/codemirror.css" rel="stylesheet">
+    <link href="../../public/lib/codemirror/codemirror.css" rel="stylesheet">
     <link href="../../public/lib/presentation/css/matrices.css" rel="stylesheet">
 
     <!-- webfonts -->
