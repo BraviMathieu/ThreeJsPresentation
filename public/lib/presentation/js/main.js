@@ -643,12 +643,32 @@ Impressionist.prototype =
 	},
 	addImpressSlideItem : function ( el )
 	{
-		console.log("adding the new item....")
-		item = text_snippet;
+		console.log("adding the new item....");
+
+		let typeText = $(".pulldownmenu").text();
+
+		switch (typeText) {
+			case 'Titre 1':
+				item = text_snippet_h1;
+				break;
+			case 'Titre 2':
+				item = text_snippet_h2;
+				break;
+			case 'Titre 3':
+				item = text_snippet_h3;
+				break;
+			case 'Paragraphe':
+				item = text_snippet_p;
+				break;
+			default:
+				item = text_snippet;
+				break;
+		}
+
 		item = item.split("slidelement_id").join("slidelement_"+me.generateUID());
 		$(el).append( item );
 		me.enableDrag();
-		me.generateScaledSlide( me.selectedSlide );
+		me.generateScaledSlide(me.selectedSlide);
 	},
 	generateScaledSlide : function( el )
 	{
@@ -973,6 +993,11 @@ Impressionist.prototype =
 			console.log("open image modal...");
 			$("#imagemodal").modal("show");
 		})
+		$("#addobjectbtn").on("click", function( e )
+		{
+			console.log("open image modal...");
+			$("#objectselectionmodal").modal("show");
+		})
 		$("#imageinput").on("blur keyup", function(e)
 		{
 			image = $(this).val();
@@ -1021,6 +1046,19 @@ Impressionist.prototype =
 			me.applyStyle();
 			$("#styleselectionmodal").modal("hide");
 		})
+
+		$(".objectthumbnail").on("click", function(e )
+		{
+			$(".objectthumbnail").css("border-bottom", "1px dotted #DDD");
+			$(this).css("border-bottom", "2px solid #1ABC9C")
+			me.theme = $(this).attr("data-style");
+		})
+		$("#applyobjectbtn").on("click", function( e )
+		{
+			me.applyStyle();
+			$("#objectselectionmodal").modal("hide");
+		})
+
 
 
 		
