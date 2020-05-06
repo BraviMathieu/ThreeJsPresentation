@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Loading Bootstrap -->
-  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+  <link href="../../public/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link rel="icon" type="image/ico" href="images/favicon.ico" />
   <!-- Loading Flat UI -->
   <link href="../../public/lib/presentation/css/flat-ui.css" rel="stylesheet">
@@ -43,15 +43,19 @@
 
 <!-- Load JS here for greater good =============================-->
 
-<script src="../../public/lib/presentation/js/jquery-1.8.2.min.js"></script>
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+<script src="../../public/lib/jquery/jquery.min.js"></script>
+<script src="../../public/lib/jquery-ui/js/jquery-ui.min.js"></script>
+<script src="../../public/lib/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="../../public/lib/presentation/js/bootstrap-tooltip.js"></script>
+<script src="../../public/lib/presentation/js/bootstrap-colorpicker.js"></script>
+
+<script src="../../public/lib/presentation/js/jquery.dropkick-1.0.0.js"></script>
+<script src="../../public/lib/presentation/js/jquery.placeholder.js"></script>
+
 <script src="../../public/lib/presentation/js/matrix.js"></script>
 <script src="../../public/lib/presentation/js/knob.js"></script>
-<script src="../../public/lib/presentation/js/jquery.dropkick-1.0.0.js"></script>
-<script src="../../public/lib/presentation/js/bootstrap-tooltip.js"></script>
-<script src="../../public/lib/presentation/js/bootstrap.min.js"></script>
-<script src="../../public/lib/presentation/js/bootstrap-colorpicker.js"></script>
-<script src="../../public/lib/presentation/js/jquery.placeholder.js"></script>
+
 <script src="../../public/lib/presentation/js/transform2d.js"></script>
 <script src="../../public/lib/presentation/js/keymaster.js"></script>
 <script src="../../public/lib/presentation/js/templates/newpresotemplate.js"></script>
