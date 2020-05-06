@@ -54,8 +54,6 @@
     <div class="palette palette-clouds maingreyarea">
       <!-- main footer shows slide thumbnails-->
 
-       
-        
         <!-- *************************-->
         <div class="btn-toolbar dockedtoolbar" >
                 <div class="btn-group" style="margin:0 auto">
@@ -74,7 +72,6 @@
                         <li class=""><a class="dropdownitem" data-dk-dropdown-value="slidelementh2">Titre 2</a></li>
                         <li class=""><a class="dropdownitem" data-dk-dropdown-value="slidelementh3">Titre 3</a></li>
                         <li class=""><a class="dropdownitem" data-dk-dropdown-value="P">Paragraphe</a></li>
-                        <li class=""><a class="dropdownitem" data-dk-dropdown-value="Pre">Pre</a></li>
                       </ul></div></div>
                   <a id="colorpickerbtn" class="btn btn-info" href="#"  data-toggle="modal" data-target="#colorpickerModal"><i class="fas fa-tint"></i></a>
                   <a class="btn btn-info toolbarblockleft" id="addtextbtn"  href="#"><i class="fas fa-font"></i></a>

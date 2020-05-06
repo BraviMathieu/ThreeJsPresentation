@@ -643,12 +643,32 @@ Impressionist.prototype =
 	},
 	addImpressSlideItem : function ( el )
 	{
-		console.log("adding the new item....")
-		item = text_snippet;
+		console.log("adding the new item....");
+
+		let typeText = $(".pulldownmenu").text();
+
+		switch (typeText) {
+			case 'Titre 1':
+				item = text_snippet_h1;
+				break;
+			case 'Titre 2':
+				item = text_snippet_h2;
+				break;
+			case 'Titre 3':
+				item = text_snippet_h3;
+				break;
+			case 'Paragraphe':
+				item = text_snippet_p;
+				break;
+			default:
+				item = text_snippet;
+				break;
+		}
+
 		item = item.split("slidelement_id").join("slidelement_"+me.generateUID());
 		$(el).append( item );
 		me.enableDrag();
-		me.generateScaledSlide( me.selectedSlide );
+		me.generateScaledSlide(me.selectedSlide);
 	},
 	generateScaledSlide : function( el )
 	{
