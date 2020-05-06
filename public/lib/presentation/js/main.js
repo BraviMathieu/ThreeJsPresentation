@@ -20,7 +20,6 @@ Impressionist = function()
 	this.mypresentations = [];
 	this.mode = "create";
 	this.theme = "montserrat";
-	this.loggedinstate = false;
 
 	this.dropdownopen = false;
 
