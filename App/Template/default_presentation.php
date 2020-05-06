@@ -14,6 +14,7 @@
 
     <link href="../../public/lib/presentation/css/freetrans.css" rel="stylesheet">
     <link href="../../public/lib/presentation/css/codemirror.css" rel="stylesheet">
+    <link href="../../public/lib/presentation/css/matrices.css" rel="stylesheet">
 
     <!-- webfonts -->
 
