@@ -5,7 +5,7 @@
                 <div class = "slidethumbholder">
                  
                 </div>
-                <a class="btn btn-primary btn-large" href="#" id="addslidebtn"><i class="icon-plus"></i>&nbsp;Ajouter une slide</a>
+                <a class="btn btn-primary btn-large" href="#" id="addslidebtn"><i class="fas fa-plus"></i>&nbsp;Ajouter une slide</a>
             </div>
       </div>
     <div class="settingsbox">
@@ -59,12 +59,12 @@
         <!-- *************************-->
         <div class="btn-toolbar dockedtoolbar" >
                 <div class="btn-group" style="margin:0 auto">
-                  <a class="btn btn-info menubtn" href="#" id="makebold"><i class="icon-bold"></i></a>
-                  <a class="btn btn-info menubtn" href="#" id="makeitalic"><i class="icon-italic"></i></a>
-                  <a class="btn btn-info menubtn" href="#" id="makeunderline"><i class="icon-underline"></i></a>
-                  <a class="btn btn-info menubtn toolbarblockleft" href="#" id="makealignleft"><i class="icon-align-left"></i></a>
-                  <a class="btn btn-info menubtn" href="#"><i class="icon-align-center" id="makealigncenter"></i></a>
-                  <a class="btn btn-info menubtn" href="#"><i class="icon-align-right" id="makealignright"></i></a>
+                  <a class="btn btn-info menubtn" href="#" id="makebold"><i class="fas fa-bold"></i></a>
+                  <a class="btn btn-info menubtn" href="#" id="makeitalic"><i class="fas fa-italic"></i></a>
+                  <a class="btn btn-info menubtn" href="#" id="makeunderline"><i class="fas fa-underline"></i></a>
+                  <a class="btn btn-info menubtn toolbarblockleft" href="#" id="makealignleft"><i class="fas fa-align-left"></i></a>
+                  <a class="btn btn-info menubtn" href="#"><i class="fas fa-align-center"></i></a>
+                  <a class="btn btn-info menubtn" href="#"><i class="fas fa-align-right"></i></a>
                   <div class="dk_container dk_container_custom span3 dk_shown dk_theme_info dropdownlist" id="dk_container_herolist" tabindex="1"><a class="dk_toggle dk_toggle_custom toolbarblockboth">
                     <span class="dk_label pulldownmenu">Titre 1</span>
                     <span class="select-icon select-icon-custom"></span></a>
@@ -76,16 +76,17 @@
                         <li class=""><a class="dropdownitem" data-dk-dropdown-value="P">Paragraphe</a></li>
                         <li class=""><a class="dropdownitem" data-dk-dropdown-value="Pre">Pre</a></li>
                       </ul></div></div>
-                  <a id="colorpickerbtn" class="btn btn-info" href="#"  data-color-format="hex" data-color="rgb(255, 255, 255)"><i class="icon-tint"></i></a>
-                  <a class="btn btn-info toolbarblockleft" id="addtextbtn"  href="#"><i class="icon-font"></i></a>
-                  <a class="btn btn-info" id="addimagebtn" href="#"><i class="icon-picture"></i></a>
+                  <a id="colorpickerbtn" class="btn btn-info" href="#"  data-color-format="hex" data-color="rgb(255, 255, 255)"><i class="fas fa-tint"></i></a>
+                  <a class="btn btn-info toolbarblockleft" id="addtextbtn"  href="#"><i class="fas fa-font"></i></a>
+                  <a class="btn btn-info" id="addimagebtn" href="#"><i class="fas fa-images"></i></i></a>
+                  <a class="btn btn-info" id="addobject"    href="#"><i class="fas fa-cube"></i></a>
                  
                  <!-- <a class="btn btn-primary toolbarblockboth" href="#"><i class="fui-eye-16"></i>&nbsp;Preview</a>
                   <a class="btn btn-warning" href="#"><i class="icon-ok-sign"></i>&nbsp;Save</a>-->
 
                 </div>
               </div>
-              <div class="presentationmeta"><p id="presentationmetatitle" style="margin:0 auto; text-transform:none; font-size:130%; color:white"> </p> <a href="#" style="position:absolute; right:5px; top:3px" id="editpresonamebtn" class="btn btn-small btn-inline btn-primary"><i class="icon-edit"></i></a></div>
+              <div class="presentationmeta"><p id="presentationmetatitle" style="margin:0 auto; text-transform:none; font-size:130%; color:white"> </p> <a href="#" style="position:absolute; right:5px; top:3px" id="editpresonamebtn" class="btn btn-small btn-inline btn-primary"><i class="fas fa-edit"></i></a></div>
               <!--<a href="#" id="dude" class="btn btn-large btn-danger" data-trigger="click" data-toggle="popover" title="" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A Title">Click to toggle popover</a>-->
               <!--<a href="#" class="btn" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="" data-original-title="Popover on top">Popover on top</a>-->
         <div class="slideviewportcontainer">
