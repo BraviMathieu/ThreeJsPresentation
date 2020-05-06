@@ -119,7 +119,7 @@ use App\Session;
                       <!--<span class="scale label label-important"><i class="icon-resize-horizontal"></i></span>-->
                       <span class="skewx label label-disabled" id="spanskewx"><i class="fas fa-arrows-alt-h"></i></span>
                       <span class="skewy label label-disabled" id="spanskewy"><i class="fas fa-arrows-alt-v"></i></span>
-                      <span class="deleteicon label label-important" id="spandelete"><i class="fui-cross-16"></i></span>
+                      <span class="deleteicon label label-important" id="spandelete"><i class="fas fa-trash-alt"></i></span>
 
              <!-- <span class="move">move</span>-->
                  </span>
