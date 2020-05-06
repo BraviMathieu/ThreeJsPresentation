@@ -986,6 +986,11 @@ Impressionist.prototype =
 			console.log("open image modal...");
 			$("#imagemodal").modal("show");
 		})
+		$("#addobjectbtn").on("click", function( e )
+		{
+			console.log("open image modal...");
+			$("#objectselectionmodal").modal("show");
+		})
 		$("#imageinput").on("blur keyup", function(e)
 		{
 			image = $(this).val();
@@ -1034,6 +1039,19 @@ Impressionist.prototype =
 			me.applyStyle();
 			$("#styleselectionmodal").modal("hide");
 		})
+
+		$(".objectthumbnail").on("click", function(e )
+		{
+			$(".objectthumbnail").css("border-bottom", "1px dotted #DDD");
+			$(this).css("border-bottom", "2px solid #1ABC9C")
+			me.theme = $(this).attr("data-style");
+		})
+		$("#applyobjectbtn").on("click", function( e )
+		{
+			me.applyStyle();
+			$("#objectselectionmodal").modal("hide");
+		})
+
 
 
 		

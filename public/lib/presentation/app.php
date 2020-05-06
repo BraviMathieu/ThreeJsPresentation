@@ -79,7 +79,7 @@
                   <a id="colorpickerbtn" class="btn btn-info" href="#"  data-color-format="hex" data-color="rgb(255, 255, 255)"><i class="fas fa-tint"></i></a>
                   <a class="btn btn-info toolbarblockleft" id="addtextbtn"  href="#"><i class="fas fa-font"></i></a>
                   <a class="btn btn-info" id="addimagebtn" href="#"><i class="fas fa-images"></i></i></a>
-                  <a class="btn btn-info" id="addobject"    href="#"><i class="fas fa-cube"></i></a>
+                  <a class="btn btn-info" id="addobjectbtn"    href="#"><i class="fas fa-cube"></i></a>
                  
                  <!-- <a class="btn btn-primary toolbarblockboth" href="#"><i class="fui-eye-16"></i>&nbsp;Preview</a>
                   <a class="btn btn-warning" href="#"><i class="icon-ok-sign"></i>&nbsp;Save</a>-->
@@ -149,7 +149,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-            <button type="button" class="btn btn-primary" id="createpresentation"> <i class="icon-plus"></i>&nbsp;Sauvegarder</button>
+            <button type="button" class="btn btn-primary" id="createpresentation"> <i class="fas fa-plus"></i>&nbsp;Sauvegarder</button>
           </div>
         </div>
       </div>
@@ -278,4 +278,39 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Selectionner une police Modal -->
+    <div class="modal fade" id="objectselectionmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Selectionner un objet 3D</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="styleselections" style="overflow:scroll;">
+                    <div class="objectthumbnail"  style="width: 130px">
+                    <img src="lib/presentation/images/Cube.PNG" style="width: 130px">
+                    </div>
+                    <div class="objectthumbnail"  style="width: 130px">
+                        <img  src="lib/presentation/images/Cone.PNG" style="width: 130px">
+                    </div>
+                    <div class="objectthumbnail"  style="width: 130px">
+                        <img  src="lib/presentation/images/Sphere.PNG" style="width: 130px">
+                    </div>
+                    <div class="objectthumbnail"  style="width: 130px">
+                        <img  src="lib/presentation/images/Pyramid.PNG" style="width: 130px">
+                    </div>
+                    <div class="objectthumbnail"  style="width: 130px">
+                        <img  src="lib/presentation/images/Rectangle.PNG" style="width: 130px">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary" id="applyobjectbtn">&nbsp;Ajouter</button>
+                </div>
+            </div>
+        </div>
     </div>
