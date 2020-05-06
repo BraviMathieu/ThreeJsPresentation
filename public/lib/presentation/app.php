@@ -95,10 +95,10 @@
                 
               </div>
                 <span id="play">
-                    <span class="rotate label label-disabled" id="spanrotate"><i class="icon-rotate-left"></i></span>
+                    <span class="rotate label label-disabled" id="spanrotate"><i class="fas fa-sync-alt"></i></span>
                     <!--<span class="scale label label-important"><i class="icon-resize-horizontal"></i></span>-->
-                    <span class="skewx label label-disabled" id="spanskewx"><i class="icon-resize-horizontal"></i></span>
-                    <span class="skewy label label-disabled" id="spanskewy"><i class="icon-resize-vertical"></i></span>
+                    <span class="skewx label label-disabled" id="spanskewx"><i class="fas fa-arrows-alt-h"></i></span>
+                    <span class="skewy label label-disabled" id="spanskewy"><i class="fas fa-arrows-alt-v"></i></span>
                     <span class="deleteicon label label-important" id="spandelete"><i class="fui-cross-16"></i></span>
 
            <!-- <span class="move">move</span>-->
