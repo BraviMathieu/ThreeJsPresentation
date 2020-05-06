@@ -68,7 +68,7 @@ Impressionist.prototype =
 	{
 
 			me.positionOrchestrationPanel()
-			me.setupColorpickerPopup();
+			me.setupColorpicker();
 			me.setupMenuItemEvents();
 			me.enableSort();
 			me.setupPopover();
@@ -530,31 +530,18 @@ Impressionist.prototype =
 		console.log("size", size)
 		return size;
 	},
-	setupColorpickerPopup : function()
+	setupColorpicker : function()
 	{
-		$("#colorpickerbtn").popover("hide")
-		$("#colorpickerbtn").on("click", function(e)
-		{
-			console.log("Inside click");
-			e.stopPropagation();
-			if(me.colorpickeropen)
-			{
-				$("#colorpickerbtn").colorpicker("hide");
-				me.colorpickeropen = false;
+		$('#cp15').colorpicker().on('colorpickerChange', function (e) {
+			var io = e.colorpicker.element.find('.color-io');
+			if (e.value === io.val() || !e.color || !e.color.isValid()) {
+				// do not replace the input value if the color is invalid or equals
+				return;
 			}
-			else
-			{
-				$("#colorpickerbtn").colorpicker("show").on("changeColor", function( e )
-				{
-					console.log("color", e.color.toHex(), $(this))
-					me.colorSelectedElement( e.color.toHex());
-					//$(this).colorpicker("hide");
-
-				});
-				me.colorpickeropen = true;
-			}
-			
-		})
+			io.val(e.color.string());
+			let couleur = $("#cp15").val();
+			me.colorSelectedElement(couleur);
+			});
 	},
 	positionOrchestrationPanel : function()
 	{

@@ -76,7 +76,7 @@
                         <li class=""><a class="dropdownitem" data-dk-dropdown-value="P">Paragraphe</a></li>
                         <li class=""><a class="dropdownitem" data-dk-dropdown-value="Pre">Pre</a></li>
                       </ul></div></div>
-                  <a id="colorpickerbtn" class="btn btn-info" href="#"  data-color-format="hex" data-color="rgb(255, 255, 255)"><i class="fas fa-tint"></i></a>
+                  <a id="colorpickerbtn" class="btn btn-info" href="#"  data-toggle="modal" data-target="#colorpickerModal"><i class="fas fa-tint"></i></a>
                   <a class="btn btn-info toolbarblockleft" id="addtextbtn"  href="#"><i class="fas fa-font"></i></a>
                   <a class="btn btn-info" id="addimagebtn" href="#"><i class="fas fa-images"></i></i></a>
                   <a class="btn btn-info" id="addobject"    href="#"><i class="fas fa-cube"></i></a>
@@ -275,6 +275,24 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
             <button type="button" class="btn btn-primary" id="applystylebtn">&nbsp;Appliquer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="colorpickerModal" tabindex="-1" role="dialog"
+         aria-labelledby="colorpickerModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Choisir une couleur</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input id="cp15" type="text" class="form-control input-lg" value="hex(#FFFFFF)"/>
           </div>
         </div>
       </div>
