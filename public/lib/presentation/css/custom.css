@@ -78,7 +78,7 @@ body
 	position: absolute;
 	left: 0px;
 	right : 0px;
-	top:0px;
+	top:58px;
 	bottom: 0px;
 	background-color: #FFF;
 	overflow: hidden;
@@ -136,8 +136,8 @@ body
 {
 	position: fixed;
 	width : 180px;
-	left :230px;
-	top: 0px;
+	left :225px;
+	top: 56px;
 	bottom : 0px;
 	text-transform: none !important;
 	padding :0 !important;
@@ -281,8 +281,8 @@ body
 #addslidebtn
 {
 	position: fixed;
-	left: 240px;
-	top:5px;
+	left: 233px;
+	top: 60px;
 }
 .viewtogglebtn
 {

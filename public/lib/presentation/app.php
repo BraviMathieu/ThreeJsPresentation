@@ -1,62 +1,77 @@
-
-    <div id="impressionistviewport">
-      <div class ="mainfooter palette-night">
-            <div class = "slidethumbholdercontainer">
-                <div class = "slidethumbholder">
-                 
+<div id="impressionistviewport">
+<?php
+use App\Session;
+?>
+<style>
+    .bg-rouge{
+        background-color: #6f2232 !important;
+    }
+</style>
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-rouge">
+        <a class="navbar-brand" href="#">Presentation ThreeJs</a>
+        <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"></div>
+        <!-- Navbar-->
+        <ul class="navbar-nav ml-auto ml-md-0">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="main_configuration">Configuration</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="logout">Se déconnecter</a>
                 </div>
-                <a class="btn btn-primary btn-large" href="#" id="addslidebtn"><i class="fas fa-plus"></i>&nbsp;Ajouter une slide</a>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Core</div>
+                        <a class="nav-link" id="newpresopanel"><div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
+                          Nouvelle présentation</a>
+                      <a class="nav-link" id="newstylepanel" ><div class="sb-nav-link-icon"><i class="fas fa-pencil-alt"></i></div>
+                        Selectionner une police</a>
+                      <a class="nav-link" id="neworchestratepanel" ><div class="sb-nav-link-icon"><i class="fas fa-th"></i></div>
+                        Panorama</a>
+                      <a class="nav-link" id="exportpresopanel"><div class="sb-nav-link-icon"><i class="fas fa-cloud"></i></div>
+                        Exporter présentation</a>
+                      <a class="nav-link" id="openpresentationsbtn"><div class="sb-nav-link-icon"><i class="fas fa-save"></i></div>
+                        Mes Présentations</a>
+
+                      <div class="sb-sidenav-menu-heading">Présentation</div>
+
+                      <a class="nav-link" id="exportcontentbtn" ><div class="sb-nav-link-icon"><i class="fas fa-eye"></i></div>
+                        Voir</a>
+                      <a class="nav-link" id="savepresentationbtn" ><div class="sb-nav-link-icon"><i class="fas fa-save"></i></div>
+                        Sauvegarder</a>
+
+
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Connecté en tant que :</div>
+                    <?= Session::read('User.name') ?>
+                </div>
+            </nav>
+        </div>
+
+    <div class ="mainfooter palette-night">
+        <div class = "slidethumbholdercontainer">
+            <div class = "slidethumbholder">
+
             </div>
-      </div>
-    <div class="settingsbox">
-
-
-    </div>
-    <div class="palette palette-night-dark sidebar">
-       <dl class="palette palette-info logoholder">
-      </dl>
-      <dl class="palette palette-night-dark sidebarmenuitem">
-                
-                <dd><a id="newpresopanel" class="menuItemBtn">Nouvelle présentation<i class="fui-plus-24" style="float:right"></i></a></dd>
-      </dl>
-      <dl class="palette palette-night-dark sidebarmenuitem">
-                
-                <dd><a id="newstylepanel">Selectionner une police<i class="icon-pencil" style="float:right"></i></a></dd>
-      </dl>
-       <dl class="palette palette-night-dark sidebarmenuitem viewtogglebtn">
-                
-                <dd><a id="neworchestratepanel">Panorama<i id="viewtoggleicon" class="icon-th-large" style="float:right"></i></a></dd>
-      </dl>
-      <dl class="palette palette-night-dark sidebarmenuitem">
-                
-                <dd><a id="exportpresopanel">Exporter présentation<i class="icon-cloud-download" style="float:right"></i></a></dd>
-      </dl>
-      <!--<dl class="palette palette-night-dark sidebarmenuitem">
-                
-                <dd><a id="settingspanel">Settings<i class="icon-wrench" style="float:right"></i></a></dd>
-      </dl>-->
-       <dl class="palette palette-night-dark sidebarmenuitem">
-                
-                <dd><a id="openpresentationsbtn">Mes Présentations<i class="icon-save" style="float:right"></i></a></dd>
-      </dl>
-        <div class="sidebarfooter">
-           <a href="#" id="exportcontentbtn" class="btn btn-large btn-inline btn-primary previewbtn"><i class="fui-eye-16"></i>&nbsp;Voir</a>
-          <a href="#" id="savepresentationbtn" class="btn btn-large btn-inline btn-info previewbtn"><i class="icon-ok-sign"></i>&nbsp;Save</a>
+            <a class="btn btn-large bg-rouge text-white" href="#" id="addslidebtn"><i class="fas fa-plus"></i>&nbsp;Ajouter une slide</a>
         </div>
     </div>
-   
+</div>
 
-   
 
     <div class="maskedcontainer">
 
     <div class="mainviewport">
     <div class="palette palette-clouds maingreyarea">
       <!-- main footer shows slide thumbnails-->
-
-       
-        
-        <!-- *************************-->
         <div class="btn-toolbar dockedtoolbar" >
                 <div class="btn-group" style="margin:0 auto">
                   <a class="btn btn-info menubtn" href="#" id="makebold"><i class="fas fa-bold"></i></a>
@@ -74,36 +89,30 @@
                         <li class=""><a class="dropdownitem" data-dk-dropdown-value="slidelementh2">Titre 2</a></li>
                         <li class=""><a class="dropdownitem" data-dk-dropdown-value="slidelementh3">Titre 3</a></li>
                         <li class=""><a class="dropdownitem" data-dk-dropdown-value="P">Paragraphe</a></li>
-                        <li class=""><a class="dropdownitem" data-dk-dropdown-value="Pre">Pre</a></li>
                       </ul></div></div>
                   <a id="colorpickerbtn" class="btn btn-info" href="#"  data-toggle="modal" data-target="#colorpickerModal"><i class="fas fa-tint"></i></a>
                   <a class="btn btn-info toolbarblockleft" id="addtextbtn"  href="#"><i class="fas fa-font"></i></a>
                   <a class="btn btn-info" id="addimagebtn" href="#"><i class="fas fa-images"></i></i></a>
                   <a class="btn btn-info" id="addobjectbtn"    href="#"><i class="fas fa-cube"></i></a>
                  
-                 <!-- <a class="btn btn-primary toolbarblockboth" href="#"><i class="fui-eye-16"></i>&nbsp;Preview</a>
-                  <a class="btn btn-warning" href="#"><i class="icon-ok-sign"></i>&nbsp;Save</a>-->
-
                 </div>
               </div>
-              <div class="presentationmeta"><p id="presentationmetatitle" style="margin:0 auto; text-transform:none; font-size:130%; color:white"> </p> <a href="#" style="position:absolute; right:5px; top:3px" id="editpresonamebtn" class="btn btn-small btn-inline btn-primary"><i class="fas fa-edit"></i></a></div>
-              <!--<a href="#" id="dude" class="btn btn-large btn-danger" data-trigger="click" data-toggle="popover" title="" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A Title">Click to toggle popover</a>-->
-              <!--<a href="#" class="btn" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="" data-original-title="Popover on top">Popover on top</a>-->
-        <div class="slideviewportcontainer">
-            <div class="slideviewport">
-               <div class="impress-slide-container">
-                
-              </div>
-                <span id="play">
-                    <span class="rotate label label-disabled" id="spanrotate"><i class="fas fa-sync-alt"></i></span>
-                    <!--<span class="scale label label-important"><i class="icon-resize-horizontal"></i></span>-->
-                    <span class="skewx label label-disabled" id="spanskewx"><i class="fas fa-arrows-alt-h"></i></span>
-                    <span class="skewy label label-disabled" id="spanskewy"><i class="fas fa-arrows-alt-v"></i></span>
-                    <span class="deleteicon label label-important" id="spandelete"><i class="fui-cross-16"></i></span>
 
-           <!-- <span class="move">move</span>-->
-               </span>
-          </div>
+              <div class="slideviewportcontainer">
+                <div class="slideviewport">
+                  <div class="impress-slide-container">
+
+                  </div>
+                  <span id="play">
+                      <span class="rotate label label-disabled" id="spanrotate"><i class="fas fa-sync-alt"></i></span>
+                      <!--<span class="scale label label-important"><i class="icon-resize-horizontal"></i></span>-->
+                      <span class="skewx label label-disabled" id="spanskewx"><i class="fas fa-arrows-alt-h"></i></span>
+                      <span class="skewy label label-disabled" id="spanskewy"><i class="fas fa-arrows-alt-v"></i></span>
+                      <span class="deleteicon label label-important" id="spandelete"><i class="fui-cross-16"></i></span>
+
+             <!-- <span class="move">move</span>-->
+                 </span>
+              </div>
         </div>
     </div>
     <div class="palette palette-clouds orchgreyarea">
