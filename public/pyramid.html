@@ -10,7 +10,7 @@
 <script src="lib/threejs/three.js"></script>
 <script>
     var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera( 1000, window.innerWidth/window.innerHeight, 0.3, 1000 );
+    var camera = new THREE.PerspectiveCamera( 32, window.innerWidth/window.innerHeight, 0.3, 1000 );
     var renderer = new THREE.WebGLRenderer( {alpha: true});
     renderer.setSize( window.innerWidth, window.innerHeight );
     document.body.appendChild( renderer.domElement );
@@ -44,14 +44,14 @@
     ]);
     var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
     var pyramid = new THREE.Mesh( geometry, material );
-    pyramid.rotation.x +=0.50;
-    pyramid.rotation.y +=0.50;
+    pyramid.rotation.x +=2.8;
+    pyramid.rotation.y +=2.8;
     scene.add( pyramid );
 
     var edges = new THREE.EdgesHelper( pyramid, 0x0000ff);
     edges.material.linewidth = 3;
-    edges.rotation.x += 0.50;
-    edges.rotation.y += 0.50;
+    edges.rotation.x += 2.8;
+    edges.rotation.y += 2.8;
     scene.add(edges);
 
     camera.position.z = 5;

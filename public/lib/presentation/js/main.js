@@ -682,7 +682,6 @@ Impressionist.prototype =
 		{
 			//error.
 		}
-		console.log("aideeee", id);
 		//console.log("element id", id);
 		//$("clonethumb_"+id).remove();
 		newel.attr("id", "clonethumb_"+id);
@@ -995,7 +994,7 @@ Impressionist.prototype =
 		})
 		$("#addobjectbtn").on("click", function( e )
 		{
-			console.log("open image modal...");
+			console.log("open object modal...");
 			$("#objectselectionmodal").modal("show");
 		})
 		$("#imageinput").on("blur keyup", function(e)
@@ -1051,12 +1050,13 @@ Impressionist.prototype =
 		{
 			$(".objectthumbnail").css("border-bottom", "1px dotted #DDD");
 			$(this).css("border-bottom", "2px solid #1ABC9C")
-			me.theme = $(this).attr("data-style");
+			objet =  $(this).attr('data-nom');
 		})
 		$("#applyobjectbtn").on("click", function( e )
 		{
-			//me.applyStyle();
-			//$("#objectselectionmodal").modal("hide");
+            console.log("append object to stage");
+            me.addObjectToSlide(objet);
+            $("#objectselectionmodal").modal("hide");
 		})
 
 
@@ -1367,6 +1367,20 @@ Impressionist.prototype =
 		me.selectedSlide.append( $(img) );
 		me.enableDrag();
 	},
+    addObjectToSlide : function(obj)
+    {
+        console.log("adding object", obj);
+        var iframe =$('<iframe>', {
+            src: obj+'.html',
+            id:  'slidelement'+me.generateUID(),
+            class: 'slidelement',
+            frameborder: 5,
+            scrolling: 'no',
+			css: 'width: 200px; height: 200px;'
+        }).appendTo('.accordion');
+        me.selectedSlide.append($(iframe));
+        me.enableDrag();
+    },
 	removeSlide : function(el)
 	{
 		el.remove();
