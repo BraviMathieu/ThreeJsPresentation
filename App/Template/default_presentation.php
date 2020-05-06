@@ -31,7 +31,7 @@
 
 
 </head>
-<body class="sb-nav-fixed">
+<body class="sb-nav-fixed" style="overflow: hidden">
 <div id="layoutSidenav_content">
     <main>
 

@@ -7,9 +7,8 @@ use App\Session;
         background-color: #6f2232 !important;
     }
 </style>
-
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-vert">
-        <a class="navbar-brand" href="#">Presentation ThreeJs</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button><!-- Navbar Search-->
+        <a class="navbar-brand" href="#">Presentation ThreeJs</a>
         <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"></div>
         <!-- Navbar-->
         <ul class="navbar-nav ml-auto ml-md-0">
@@ -29,62 +28,17 @@ use App\Session;
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Core</div>
-                        <a class="nav-link" href="/public/main_dashboard"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Dashboard</a>
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePrésentations" aria-expanded="false" aria-controls="collapsePrésentations"
-                        ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Présentations
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
-                            ></a>
-                        <div class="collapse" id="collapsePrésentations" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="/public/presentation_creation"><div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
-                                    Création</a>
-                            </nav>
-                        </div>
-                        <div class="collapse" id="collapsePrésentations" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="/public/presentation_creation_new"><div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
-                                    Création new</a>
-                            </nav>
-                        </div>
+                        <a class="nav-link" id="newpresopanel"><div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
+                          Nouvelle présentation</a>
+                      <a class="nav-link" id="newstylepanel" ><div class="sb-nav-link-icon"><i class="fas fa-pencil-alt"></i></div>
+                        Selectionner une police</a>
+                      <a class="nav-link" id="neworchestratepanel" ><div class="sb-nav-link-icon"><i class="fas fa-th"></i></div>
+                        Panorama</a>
+                      <a class="nav-link" id="exportpresopanel"><div class="sb-nav-link-icon"><i class="fas fa-cloud"></i></div>
+                        Exporter présentation</a>
+                      <a class="nav-link" id="openpresentationsbtn"><div class="sb-nav-link-icon"><i class="fas fa-save"></i></div>
+                        Mes Présentations</a>
 
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseObjets" aria-expanded="false" aria-controls="collapseObjets"
-                        ><div class="sb-nav-link-icon"><i class="fas fa-cube"></i></div>
-                            Objets 3D
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
-                            ></a>
-                        <div class="collapse" id="collapseObjets" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="/public/objet3d_creation"><div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
-                                    Création</a>
-                            </nav>
-                        </div>
-
-                        <a class="nav-link" href="/public/main_configuration"><div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>
-                            Configuration</a>
-                        <div class="sb-sidenav-menu-heading">Interface</div>
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts"
-                        ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Layouts
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
-                            ></a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="layout-static.html">Static Navigation</a></nav>
-                        </div>
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages"
-                        ><div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Pages
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
-                            ></a>
-                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth"
-                                >Authentication
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
-                                    ></a>
-                                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="login.html">Login</a><a class="nav-link" href="register.html">Register</a><a class="nav-link" href="password.html">Forgot Password</a></nav>
-                                </div>
-                            </nav>
-                        </div>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
@@ -105,15 +59,11 @@ use App\Session;
 </div>
 
 
-
-
     <div class="maskedcontainer">
 
     <div class="mainviewport">
     <div class="palette palette-clouds maingreyarea">
       <!-- main footer shows slide thumbnails-->
-
-        <!-- *************************-->
         <div class="btn-toolbar dockedtoolbar" >
                 <div class="btn-group" style="margin:0 auto">
                   <a class="btn btn-info menubtn" href="#" id="makebold"><i class="fas fa-bold"></i></a>
@@ -137,15 +87,10 @@ use App\Session;
                   <a class="btn btn-info" id="addimagebtn" href="#"><i class="fas fa-images"></i></i></a>
                   <a class="btn btn-info" id="addobjectbtn"    href="#"><i class="fas fa-cube"></i></a>
                  
-                 <!-- <a class="btn btn-primary toolbarblockboth" href="#"><i class="fui-eye-16"></i>&nbsp;Preview</a>
-                  <a class="btn btn-warning" href="#"><i class="icon-ok-sign"></i>&nbsp;Save</a>-->
-
                 </div>
               </div>
               <div class="presentationmeta"><p id="presentationmetatitle" style="margin:0 auto; text-transform:none; font-size:130%; color:white"> </p> <a href="#" style="position:absolute; right:5px; top:3px" id="editpresonamebtn" class="btn btn-small btn-inline btn-primary"><i class="fas fa-edit"></i></a></div>
-              <!--<a href="#" id="dude" class="btn btn-large btn-danger" data-trigger="click" data-toggle="popover" title="" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A Title">Click to toggle popover</a>-->
-              <!--<a href="#" class="btn" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="" data-original-title="Popover on top">Popover on top</a>-->
-        <div class="slideviewportcontainer">
+              <div class="slideviewportcontainer">
             <div class="slideviewport">
                <div class="impress-slide-container">
                 
