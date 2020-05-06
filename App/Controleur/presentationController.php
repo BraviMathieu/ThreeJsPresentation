@@ -68,7 +68,7 @@ if($path == "/presentation_visualisation"){
 }elseif($path == "/presentation_creation_new"){
 
   $title = "Création d'une présentation";
-  include_once VUE . '/Presentation/presentation_creation_new.php';
+  include_once WEBROOT . '/lib/presentation/app.php';
 
 }elseif($path == "/presentation_modification"){
   $title = "Modification d'une présentation";

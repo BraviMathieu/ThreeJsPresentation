@@ -1,41 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <title>Création de présentation</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Loading Bootstrap -->
-     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
-     <link rel="icon" type="image/ico" href="images/favicon.ico" />
-    <!-- Loading Flat UI -->
-    <link href="css/flat-ui.css" rel="stylesheet">
-    <link href="css/matrices.css" rel="stylesheet">
-    <link href="css/progressbar.css" rel="stylesheet">
-    <link href="css/sliderskin.css" rel="stylesheet">
-    <link href="css/colorpicker.css" rel="stylesheet">
-    <link href="css/freetrans.css" rel="stylesheet">
-    <link href="css/codemirror.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
-
-    <!-- webfonts -->
-
-    <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Miltonian' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Cabin+Sketch' rel='stylesheet' type='text/css'>
-
-     <link href="css/custom.css" rel="stylesheet">
-   
-    <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
-
-
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
-    <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-    <![endif]-->
-  </head>
-  <body>
     <div id="impressionistviewport">
       <div class ="mainfooter palette-night">
             <div class = "slidethumbholdercontainer">
@@ -280,34 +243,3 @@
               </div>
         </div>
 <!--<a href="#" class="btn small" id="cp4" data-color-format="hex" data-color="rgb(255, 255, 255)">Change background color</a>-->
-
-    <!-- Load JS here for greater good =============================-->
-   
-    <script src="js/jquery-1.8.2.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
-    <script src="js/matrix.js"></script>
-    <script src="js/knob.js"></script>
-    <script src="js/jquery.dropkick-1.0.0.js"></script>
-    <script src="js/bootstrap-tooltip.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-colorpicker.js"></script>
-    <script src="js/jquery.placeholder.js"></script>
-    <script src="js/transform2d.js"></script>
-    <script src="js/keymaster.js"></script>
-    <script src="js/templates/newpresotemplate.js"></script>
-    <script src="js/matrices.js"></script>
-    <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
-
-    <!-- code formatting -->
-
-
-
-    <script src="js/main.js"></script>
-    <script src ="js/startup.js"></script>
-    <!--[if lt IE 8]>
-      <script src="js/icon-font-ie7.js"></script>
-      <script src="js/icon-font-ie7-24.js"></script>
-    <![endif]-->
-
-  </body>
-</html>
