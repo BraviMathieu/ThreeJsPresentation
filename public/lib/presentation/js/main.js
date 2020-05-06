@@ -1035,8 +1035,8 @@ Impressionist.prototype =
 		})
 		$("#applyobjectbtn").on("click", function( e )
 		{
-			me.applyStyle();
-			$("#objectselectionmodal").modal("hide");
+			//me.applyStyle();
+			//$("#objectselectionmodal").modal("hide");
 		})
 
 
