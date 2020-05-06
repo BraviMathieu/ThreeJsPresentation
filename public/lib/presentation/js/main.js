@@ -1,6 +1,4 @@
-/**
-* Client id - 813346482484.apps.googleusercontent.com
-*/ 
+
 Impressionist = function()
 {
 
@@ -66,8 +64,7 @@ Impressionist.prototype =
 	},
 	continueInit : function()
 	{
-
-			me.positionOrchestrationPanel()
+			me.positionOrchestrationPanel();
 			me.setupColorpicker();
 			me.setupMenuItemEvents();
 			me.enableSort();
@@ -549,7 +546,6 @@ Impressionist.prototype =
 		ht = $(".mainfooter").height();
 		orchestrationareapos = ypos + ht;
 		console.log("ypos", ypos)
-		//$(".orchgreyarea").css("top", orchestrationareapos+"px" );
 	},
 	addSettingsPanel : function( type )
 	{
@@ -562,20 +558,11 @@ Impressionist.prototype =
 	{
 		$("#colorpickerbtn").colorpicker("hide");
 		$(".slidelement").draggable({disabled : false})
-		//console.log("in globel ",e.target);
-		//$(".dropdownpopup").css("display", "none");
 		$("#play").css("display", "none");
 		me.generateScaledSlide(me.selectedSlide);
 		me.selectedforedit = false;
 		me.colorpickeropen = false;
 		me.resetMenuControlValues();
-		//me.clearElementSelections()
-	},
-	clearElementSelections : function()
-	{
-		$(".slidelement").removeClass("elementhover")
-		$(".slidelement").removeClass("elementselected")
-		//me.selectedElement = "";;
 	},
 	colorSelectedElement : function( color )
 	{
@@ -583,7 +570,6 @@ Impressionist.prototype =
 		{
 			me.selectedElement.css("color", color);
 		}
-		
 	},
 	addSlide : function()
 	{
@@ -618,7 +604,7 @@ Impressionist.prototype =
 			$("#slidethumb_"+id).addClass("currentselection");
 			me.hideTransformControl();
 			me.switchView("right");
-		})
+		});
 		//me.orchestrationcoords.push({left:"0px", top:"0px"});
 		me.lastslideleftpos += 200;
 		me.assignSlideNumbers();
@@ -633,9 +619,8 @@ Impressionist.prototype =
 		islide = islide.split("__slidenumber__").join("_"+id);
 		islide = islide.split("slidelement_id").join("slidelement_"+me.generateUID());
 		$(".impress-slide-container").append( islide );
-		$("#impress_slide_"+id).addClass("impress-slide-element")
+		$("#impress_slide_"+id).addClass("impress-slide-element");
 		me.removeAllStyles($("#impress_slide_"+id));
-		//$("#impress_slide_"+id).addClass(me.theme);
 		me.applyStyle();
 		me.selectSlide("#impress_slide_"+id);
 		me.enableDrag();
@@ -644,8 +629,7 @@ Impressionist.prototype =
 	addImpressSlideItem : function ( el )
 	{
 		console.log("adding the new item....");
-
-		let typeText = $(".pulldownmenu").text();
+		let typeText = $("#dropdownMenu1").val();
 
 		switch (typeText) {
 			case 'Titre 1':
@@ -687,7 +671,7 @@ Impressionist.prototype =
 		newel.attr("id", "clonethumb_"+id);
 		newel.attr("data-clone", true);
 		newel.css("-webkit-transform", "scale(0.18, 0.18)");
-		newel.removeClass("impress-slide-element")
+		newel.removeClass("impress-slide-element");
 		//newel.css("border", "1px solid #999");
 		newel.css("left", "-110px");
 		newel.css("top", "-75px");
@@ -695,7 +679,6 @@ Impressionist.prototype =
 		//console.log("children", children)
 		for(var i=0; i<children.length; i++)
 		{
-			
 			child = children[i];
 			if($(child).attr("data-clone") == "true")
 			{
@@ -703,16 +686,10 @@ Impressionist.prototype =
 			}
 		}
 
-
 		$("#slidethumb_"+id).append( newel );
-		//$(".orchestrationviewport").append( orchel );
-		//$(".impress-slide").append( newel );
-		
-
 	},
 	selectSlide : function( id )
 	{
-
 		children = $(".impress-slide-container").children();
 		//console.log("I am in selection", children)
 		for(var i=0; i< children.length; i++)
@@ -761,7 +738,6 @@ Impressionist.prototype =
 		{
 			$(".settingsbox").animate({"left": "230px", "opacity":1}, {duration: 300, easing: "linear" });
 			me.menuopen = true;
-
 		}
 	},
 	assembleOrchestrationTiles : function()
@@ -786,8 +762,6 @@ Impressionist.prototype =
 			clone.css("position", "absolute");
 			clone.css("transform", clone.attr("data-transform-string"));
 			console.log("Pre check: ", clone.attr("data-left"));
-
-
 
 			clone.find(".deletebtn").remove();
 			clone.draggable().on("mouseup", function()
@@ -848,18 +822,15 @@ Impressionist.prototype =
 			$("#viewtoggleicon").addClass("fui-cross-24");
 			me.currentview = "orchestration"
 			me.assembleOrchestrationTiles();
-			
 		}
 		else
 		{
-			//me.animatePanel( ".mainviewport", "0px" );
 			$(".maingreyarea").css("display", "block");
 			$(".orchgreyarea").css("display", "none");
 			$("#viewtoggleicon").removeClass("fui-cross-24");
 			$("#viewtoggleicon").addClass("icon-th-large")
-			me.currentview = "mainarea"
+			me.currentview = "mainarea";
 			me.persistOrchestrationCoordinates();
-
 		}
 	},
 	persistOrchestrationCoordinates : function()
@@ -879,25 +850,20 @@ Impressionist.prototype =
 	{
 		if(me.currentview == "mainarea")
 		{
-			me.switchView( "left")
+			me.switchView( "left");
 		}
 		else
 		{
-			me.switchView( "right")
+			me.switchView( "right");
 		}
-	},
-	animatePanel : function( panel, amount )
-	{
-		$(".maskedcontainer").animate({"top": amount, "opacity":1}, {duration: 300, easing: "linear" })
 	},
 	changeTextFormat : function( classname )
 	{
 		if(me.selectedforedit)
 		{
-			me.removeTextFormatting()
+			me.removeTextFormatting();
 			me.selectedElement.addClass( classname );
 		}
-		
 	},
 	removeTextFormatting : function()
 	{
@@ -907,39 +873,36 @@ Impressionist.prototype =
 	openCodeExportWindow : function()
 	{
 		me.generateExportMarkup();
-		//hljs.tabReplace = '    '; // 4 spaces
 		$('pre code').each(function(i, e) {hljs.highlightBlock(e)});
-		//me.autoFormat();
 		$("#exportcodemodal").modal("show");
 	},
 	attachListeners : function()
 	{
-		$("html").on("click", me.manageGlobalClick)
+		$("html").on("click", me.manageGlobalClick);
 		$(".settingsCancelBtn").on("click", me.onSettingsCancelClicked);
-		$(".menuItemBtn").on("click", me.onMenuItemClicked)
+		$(".menuItemBtn").on("click", me.onMenuItemClicked);
 		$(".viewtogglebtn").on("click", me.onViewToggled);
-		$(".slidelement").on("click", me.triggetElementEdit)
-		$(".slidelement").on("mouseup", me.createEditor)
+		$(".slidelement").on("click", me.triggetElementEdit);
+		$(".slidelement").on("mouseup", me.createEditor);
 		$("#newstylepanel").on("click", me.openStyleSelector);
-		$("#exportpresopanel").on("click", me.openCodeExportWindow)
-		$("#editpresonamebtn").on("click", function( e )
+		$("#exportpresopanel").on("click", me.openCodeExportWindow);
+		$("#editpresonamebtn").on("click", function(e)
 		{
 			$("#newpresentationmodal").modal("show");
 			$("#newpresoheader").html("Enregistrer la présentation sous...");
 			me.mode = "save";
-		})
+		});
 		$(".previewpresobtn").on("click", function( e )
 		{
 			console.log("data parent id", $(this).attr("data-id"));
 			me.fetchAndPreview( $(this).attr("data-id") )
-		})
+		});
 		$(".openpresobtn").on("click", function( e )
 		{
 			console.log("Edit presentation");
 			me.mode = "save";
 			me.openPresentationForEdit( $(this).attr("data-id") );
-			
-		})
+		});
 		$("#createpresentation").on("click", function( e )
 		{
 			console.log("Mode", me.mode);
@@ -949,24 +912,22 @@ Impressionist.prototype =
 			}
 			else
 			{
-				console.log("saving now")
+				console.log("saving now");
 				me.savePresentation();
 			}
 			
-			
-		})
-		$("#savepresentationbtn").on("click", function( e )
+		});
+		$("#savepresentationbtn").on("click", function(e)
 		{
 			if(me.currentPresentation)
 			{
 				console.log("Has access to current presentation");
-				$("#titleinput").val( me.currentPresentation.title)
+				$("#titleinput").val( me.currentPresentation.title);
 				$("textarea#descriptioninput").val( me.currentPresentation.description);
 			}
-			//$("#newpresentationmodal").modal("show");
 			me.mode = "save";
 			me.savePresentation();
-		})
+		});
 		$("#openpreviewbtn").on("click", function(e)
 		{
 			window.open("http://harish.io/impressionist/viewer.php", "_blank");
@@ -974,79 +935,78 @@ Impressionist.prototype =
 		});
 		$(".dropdownitem").on("click", function( e )
 		{
-				console.log("Dd value: " , $(e.target).attr("data-dk-dropdown-value"))
-				me.changeTextFormat( $(e.target).attr("data-dk-dropdown-value")  )
+				console.log("Dd value: " , $(e.target).attr("data-dk-dropdown-value"));
+				me.changeTextFormat($(e.target).attr("data-dk-dropdown-value"));
 				$(".dropdownpopup").css("display", "block");
 				$(".pulldownmenu").html($(e.target).html());
-			//$(".dropdownpopup").css("display", "none");
 				me.dropdownopen = true;
 				me.hideTransformControl();	
-		})
+		});
 		$("#addtextbtn").on("click", function ( e )
 		{
-			console.log("add btn clicked...")
+			console.log("add btn clicked...");
 			me.addImpressSlideItem( me.selectedSlide );
-		})
+		});
 		$("#addimagebtn").on("click", function( e )
 		{
 			console.log("open image modal...");
 			$("#imagemodal").modal("show");
-		})
+		});
 		$("#addobjectbtn").on("click", function( e )
 		{
 			console.log("open object modal...");
 			$("#objectselectionmodal").modal("show");
-		})
+		});
 		$("#imageinput").on("blur keyup", function(e)
 		{
 			image = $(this).val();
 			$("#previewimg").attr("src", image);
-		})
+		});
 		$("#addslidebtn").on("click", function( e )
 		{
 			me.addSlide();
 		});
-		$("#appendimagebtn").on("click", function( e )
+		$("#appendimagebtn").on("click", function(e)
 		{
 			console.log("append image to stage");
 			image = $("#previewimg").attr("src");
 			me.addImageToSlide( image );
 			$("#imagemodal").modal("hide");
-		})
-		$("#openpresentationsbtn").on("click", function( e )
+		});
+		$("#openpresentationsbtn").on("click", function(e)
 		{
-			$(".previewpresobtn").on("click", function( e )
+			$(".previewpresobtn").on("click", function(e)
 			{
 				console.log("data parent id", $(this).attr("data-id"));
-				me.fetchAndPreview( $(this).attr("data-id") )
-			})
-			$(".openpresobtn").on("click", function( e )
+				me.fetchAndPreview($(this).attr("data-id"))
+			});
+			$(".openpresobtn").on("click", function(e)
 			{
 				console.log("Edit presentation");
 				me.mode = "save";
-				me.openPresentationForEdit( $(this).attr("data-id") );
-			})
+				me.openPresentationForEdit($(this).attr("data-id"));
+			});
 			$("#savedpresentationsmodal").modal("show");
-		})
-		$("#exportcontentbtn").on("click", function( e )
+		});
+		$("#exportcontentbtn").on("click", function(e)
 		{
 			me.generateExportMarkup( true );
 
 		
 		});
-		$(".stylethumbnail").on("click", function(e )
+		$(".stylethumbnail").on("click", function(e)
 		{
 			$(".stylethumbnail").css("border-bottom", "1px dotted #DDD");
-			$(this).css("border-bottom", "2px solid #1ABC9C")
+			$(this).css("border-bottom", "2px solid #6f2232");
 			me.theme = $(this).attr("data-style");
-		})
-		$("#applystylebtn").on("click", function( e )
+		});
+		$("#applystylebtn").on("click", function(e)
 		{
 			me.applyStyle();
 			$("#styleselectionmodal").modal("hide");
-		})
+		});
 
-		$(".objectthumbnail").on("click", function(e )
+		$(".objectthumbnail").on("click", function(e)
 		{
 			$(".objectthumbnail").css("border-bottom", "1px dotted #DDD");
 			$(this).css("border-bottom", "2px solid #1ABC9C")
@@ -1058,18 +1018,15 @@ Impressionist.prototype =
             me.addObjectToSlide(objet);
             $("#objectselectionmodal").modal("hide");
 		})
-
-
-
 		
 	},
 	applyStyle : function()
 	{
-		$(".slidelement").each( function( i, object)
+		$(".slidelement").each( function(i, object)
 			{
 				if($(this).hasClass("slidelementh1"))
 				{
-					console.log("Only change headings.")
+					console.log("Only change headings.");
 					me.removeAllStyles( $(this));
 					$(this).addClass(me.theme);
 				}
@@ -1120,7 +1077,7 @@ Impressionist.prototype =
 				t = child.attr("data-top").split("px")[0];
 
 				coords = me.calculateSlideCoordinates(l,t);
-				el = $("#impress_slide_"+id)
+				el = $("#impress_slide_"+id);
 				el.attr("data-x", coords.x - 500);
 				el.attr("data-y", coords.y);
 				el.attr("data-rotate", child.attr("data-rotate"));
@@ -1137,15 +1094,13 @@ Impressionist.prototype =
 				console.log("Physically adding sizing information");
 				$(this).css("width", "1024px");
 				$(this).css("height", "768px");
-				
-
-			})
+			});
 
 			if(isPreview)
 			{
-				me.generatePreview( outputcontainer.html().toString() );
+				me.generatePreview(outputcontainer.html().toString());
 			}
-			$("#exportedcode").text( outputcontainer.html().toString() );
+			$("#exportedcode").text(outputcontainer.html().toString());
 	},
 	createNewPresentation : function()
 	{
@@ -1156,7 +1111,7 @@ Impressionist.prototype =
 	},
 	openPresentationForEdit : function( id )
 	{
-		console.log("id", id)
+		console.log("id", id);
 		for(var i=0; i<me.mypresentations.length; i++)
 		{
 			presentation = me.mypresentations[i];
@@ -1164,23 +1119,22 @@ Impressionist.prototype =
 			{
 				$(".impress-slide-container").html(presentation.contents);
 				$(".slidethumbholder").html(presentation.thumbcontents);
-				$(".slidethumbholder").each( function(i, object )
+				$(".slidethumbholder").each( function(i, object)
 				{
 					$(this).css("opacity", 1);
 				});
 
-				me.selectedSlide = $(".impress-slide-container").find(".impress-slide-element")
+				me.selectedSlide = $(".impress-slide-container").find(".impress-slide-element");
 				me.currentPresentation = presentation;
 				$("#presentationmetatitle").html(me.currentPresentation.title);
-				console.log("rendered")
+				console.log("rendered");
 			}
 
 			$("#savedpresentationsmodal").modal("hide");
-
 		}
 		$(".slidemask").on("click", function( e )
 		{
-				console.log("repopulated zone")
+				console.log("repopulated zone");
 				e.stopPropagation();
 				id = (e.target.id).split("_")[1];
 				console.log("slidemask", id);
@@ -1190,18 +1144,18 @@ Impressionist.prototype =
 				me.hideTransformControl();
 				me.switchView("right");
 		});
-		$(".deletebtn").on("click", function ( e )
+		$(".deletebtn").on("click", function (e)
 		{
 			p = $("#"+ $(this).attr("data-parent"));
 			slideid = $(this).attr("data-parent").split("_")[1];
 			console.log("parent", p, slideid);
-			p.animate({opacity:0}, 200, function( e )
+			p.animate({opacity:0}, 200, function(e)
 			{
 				$(this).remove();
 				$("#impress_slide_"+slideid).remove();
 				me.assignSlideNumbers();
 			})
-		})
+		});
 		me.enableDrag();
 	},
 	fetchAndPreview : function( id )
@@ -1219,7 +1173,7 @@ Impressionist.prototype =
 					$(this).css("width", "1024px");
 					$(this).css("height", "768px");
 					$(this).addClass("step");
-				})
+				});
 				me.generatePreview( $(".placeholder").html().toString());
 				$("#savedpresentationsmodal").modal("hide");
 				break;
@@ -1228,7 +1182,7 @@ Impressionist.prototype =
 	},
 	savePresentation : function()
 	{
-			$("#savepresentationbtn").text("Saving...")
+			$("#savepresentationbtn").html('<div class="sb-nav-link-icon"><i class=\"fas fa-save\"></i></div>Sauvegarde en cours...');
 			item = me.getItem(me.saveKey);
 			if(item)
 			{
@@ -1239,9 +1193,7 @@ Impressionist.prototype =
 					{
 						arr = me.removeReference( arr );
 					}
-					
 				}
-				
 			}
 			else
 			{
@@ -1257,7 +1209,6 @@ Impressionist.prototype =
 				{
 					tempid = Math.round(Math.random() * 201020)
 				}
-				
 			}
 			else
 			{
@@ -1281,27 +1232,27 @@ Impressionist.prototype =
 			presentations.reverse();
 			me.renderPresentations( presentations );
 
-			$(".previewpresobtn").on("click", function( e )
+			$(".previewpresobtn").on("click", function(e)
 			{
 				console.log("data parent id", $(this).attr("data-id"));
 				me.fetchAndPreview( $(this).attr("data-id") )
-			})
-			$(".openpresobtn").on("click", function( e )
+			});
+			$(".openpresobtn").on("click", function(e)
 			{
 				console.log("Edit presentation");
 				me.mode = "save";
 				me.openPresentationForEdit( $(this).attr("data-id") );
-			})
+			});
 			$("#newpresentationmodal").modal("hide");
 			setTimeout(me.resetSaveButtonText, 1000)
 	},
 	resetSaveButtonText : function()
 	{
-		$("#savepresentationbtn").html('<i class="icon-ok-sign"></i>&nbsp;Save')
+		$("#savepresentationbtn").html('<div class="sb-nav-link-icon"><i class=\"fas fa-check-circle\"></i></div>Sauvegarde réussie!');
+		setTimeout(function(){ $("#savepresentationbtn").html('<div class="sb-nav-link-icon"><i class=\"fas fa-save\"></i></div>Sauvegarder'); }, 1000);
 	},
 	removeReference : function( arr )
 	{
-		
 		for(var i=0; i<arr.length; i++ )
 		{
 			if(arr[i].id == me.currentPresentation.id)
@@ -1310,7 +1261,6 @@ Impressionist.prototype =
 				break;
 			}
 		}
-
 		return arr;
 	},
 	getSavedPresentations : function()
@@ -1329,7 +1279,7 @@ Impressionist.prototype =
 		$("#openpreviewbtn").addClass("disabled");
 		$("#openpreviewbtn").removeClass("btn-primary");
 		$("#progressmeter").css("display", "block");
-		$("#previewmessage").html("Please wait while we generate the preview.")
+		$("#previewmessage").html("Veuillez patienter durant la génération de la prévisualisation.");
 		$.ajax({
 			type: 'POST',
 			 url: "http://harish.io/impressionist/generatePreview.php",
@@ -1341,7 +1291,7 @@ Impressionist.prototype =
 			 	$("#openpreviewbtn").removeClass("disabled");
 			 	$("#openpreviewbtn").addClass("btn-primary");
 			 	$("#progressmeter").css("display", "none");
-			 	$("#previewmessage").html("Slide preview successfully generated.");
+			 	$("#previewmessage").html("Prévisualisation du diaporama généré avec succès.");
 
 			 }
 		});
@@ -1358,13 +1308,13 @@ Impressionist.prototype =
 	{
 		console.log("adding image", src);
 		var img = new Image();
-		$(img).attr("id", "slidelement_"+me.generateUID())
+		$(img).attr("id", "slidelement_"+me.generateUID());
 		$(img).css("left", "200px");
 		$(img).css("top", "200px");
 		$(img).addClass("slidelement");
 		$(img).attr("src", src);
 		console.log("selectedslide", me.selectedSlide);
-		me.selectedSlide.append( $(img) );
+		me.selectedSlide.append($(img));
 		me.enableDrag();
 	},
     addObjectToSlide : function(obj)
@@ -1404,7 +1354,6 @@ Impressionist.prototype =
 	{
 		console.log("clicked")
 		me.animateSettingsPanel( "left" )
-
 	},
 	onMenuItemClicked : function( e )
 	{
@@ -1435,7 +1384,6 @@ Impressionist.prototype =
 		{
 			localStorage.setItem(key, value);
 		}
-
 	},
     getItem : function(key)
 	{
@@ -1452,4 +1400,4 @@ Impressionist.prototype =
 			return false;
 		}
 	}
-}
+};

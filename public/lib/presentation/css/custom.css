@@ -69,7 +69,7 @@ body
 	right: 0px;
 	top:0px;
 	bottom: 0px;
-	background-color: #FFF;
+	background-color: #ecf0f1;
 	min-width: 750px;
 
 }
@@ -142,6 +142,7 @@ body
 	text-transform: none !important;
 	padding :0 !important;
 	z-index: 10;
+	background-color: #34495e
 }
 .previewbtn
 {
@@ -174,9 +175,7 @@ body
 }
 .slideviewport
 {
-	position: absolute;
-	left: 5px;
-	top: 10px;
+	margin: auto;
 	width: 930px;
 	height : 530px;
 	background-color: #FFF;
@@ -498,7 +497,7 @@ body
 }
 .currentselection
 {
-	border-bottom: 4px solid #1ABC9C;
+	border-bottom: 4px solid #6f2232;
 }
 .stylebg
 {

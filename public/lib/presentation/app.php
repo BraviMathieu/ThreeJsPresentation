@@ -66,37 +66,47 @@ use App\Session;
     </div>
 </div>
 
-
     <div class="maskedcontainer">
 
     <div class="mainviewport">
     <div class="palette palette-clouds maingreyarea">
-      <!-- main footer shows slide thumbnails-->
-        <div class="btn-toolbar dockedtoolbar" >
-                <div class="btn-group" style="margin:0 auto">
-                  <a class="btn btn-info menubtn" href="#" id="makebold"><i class="fas fa-bold"></i></a>
-                  <a class="btn btn-info menubtn" href="#" id="makeitalic"><i class="fas fa-italic"></i></a>
-                  <a class="btn btn-info menubtn" href="#" id="makeunderline"><i class="fas fa-underline"></i></a>
-                  <a class="btn btn-info menubtn toolbarblockleft" href="#" id="makealignleft"><i class="fas fa-align-left"></i></a>
-                  <a class="btn btn-info menubtn" href="#"><i class="fas fa-align-center"></i></a>
-                  <a class="btn btn-info menubtn" href="#"><i class="fas fa-align-right"></i></a>
-                  <div class="dk_container dk_container_custom span3 dk_shown dk_theme_info dropdownlist" id="dk_container_herolist" tabindex="1"><a class="dk_toggle dk_toggle_custom toolbarblockboth">
-                    <span class="dk_label pulldownmenu">Titre 1</span>
-                    <span class="select-icon select-icon-custom"></span></a>
-                    <div class="dk_options dropdownpopup" style="top: 38px;">
-                    <ul class="dk_options_inner">
-                        <li class=""><a class="dropdownitem" data-dk-dropdown-value="slidelementh1">Titre 1</a></li>
-                        <li class=""><a class="dropdownitem" data-dk-dropdown-value="slidelementh2">Titre 2</a></li>
-                        <li class=""><a class="dropdownitem" data-dk-dropdown-value="slidelementh3">Titre 3</a></li>
-                        <li class=""><a class="dropdownitem" data-dk-dropdown-value="P">Paragraphe</a></li>
-                      </ul></div></div>
-                  <a id="colorpickerbtn" class="btn btn-info" href="#"  data-toggle="modal" data-target="#colorpickerModal"><i class="fas fa-tint"></i></a>
-                  <a class="btn btn-info toolbarblockleft" id="addtextbtn"  href="#"><i class="fas fa-font"></i></a>
-                  <a class="btn btn-info" id="addimagebtn" href="#"><i class="fas fa-images"></i></i></a>
-                  <a class="btn btn-info" id="addobjectbtn"    href="#"><i class="fas fa-cube"></i></a>
-                 
+
+      <div class="row" style="margin:5px;">
+        <div class="col-lg-12 text-center">
+            <div role="toolbar" aria-label="Toolbar avec des buttons">
+              <div class="btn-group mr-2" role="group" aria-label="First group">
+                <button type="button" id="makebold" class="btn btn-secondary"><i class="fas fa-bold"></i></button>
+                <button type="button" id="makeitalic" class="btn btn-secondary"><i class="fas fa-italic"></i></button>
+                <button type="button" id="makeunderline" class="btn btn-secondary"><i class="fas fa-underline"></i></button>
+              </div>
+              <div class="btn-group mr-2" role="group" aria-label="Deuxieme groupe">
+                <button type="button" id="makealignleft" class="btn btn-secondary"><i class="fas fa-align-left"></i></button>
+                <button type="button" id="makealigncenter" class="btn btn-secondary"><i class="fas fa-align-center"></i></button>
+                <button type="button" id="makealignright" class="btn btn-secondary"><i class="fas fa-align-right"></i></button>
+              </div>
+              <div class="btn-group" role="group" aria-label="Troisieme groupe">
+
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  Titre 1
+                  <span class="caret"></span>
+                </button>
+                <div class="dropdown-menu" id="typetitre" aria-labelledby="btnGroupDrop1">
+                  <li><a data-dk-dropdown-value="slidelementh1">Titre 1</a></li>
+                  <li><a data-dk-dropdown-value="slidelementh2">Titre 2</a></li>
+                  <li><a data-dk-dropdown-value="slidelementh3">Titre 3</a></li>
+                  <li><a data-dk-dropdown-value="P">Paragraphe</a></li>
                 </div>
               </div>
+              <div class="btn-group" role="group" aria-label="Quatrieme groupe">
+                <button type="button" id="colorpickerbtn" data-toggle="modal" data-target="#colorpickerModal" class="btn btn-secondary"><i class="fas fa-tint"></i></button>
+                <button type="button" id="addtextbtn" class="btn btn-secondary"><i class="fas fa-font"></i></button>
+                <button type="button" id="addimagebtn" class="btn btn-secondary"><i class="fas fa-images"></i></button>
+                <button type="button" id="addobjectbtn" class="btn btn-secondary"><i class="fas fa-cube"></i></button>
+              </div>
+            </div>
+        </div>
+      </div>
+      <!-- main footer shows slide thumbnails-->
 
               <div class="slideviewportcontainer">
                 <div class="slideviewport">
@@ -108,7 +118,7 @@ use App\Session;
                       <!--<span class="scale label label-important"><i class="icon-resize-horizontal"></i></span>-->
                       <span class="skewx label label-disabled" id="spanskewx"><i class="fas fa-arrows-alt-h"></i></span>
                       <span class="skewy label label-disabled" id="spanskewy"><i class="fas fa-arrows-alt-v"></i></span>
-                      <span class="deleteicon label label-important" id="spandelete"><i class="fui-cross-16"></i></span>
+                      <span class="deleteicon label label-important" id="spandelete"><i class="fas fa-trash-alt"></i></span>
 
              <!-- <span class="move">move</span>-->
                  </span>
@@ -153,12 +163,12 @@ use App\Session;
           <div class="modal-body">
             <p>Coller l'URL de l'image </p>
             <input type="text" id="imageinput" class="image-input">
-            <p> La prévisualisation va apparaitreen dessous.</p>
+            <p> La prévisualisation va apparaitre en dessous.</p>
             <img id="previewimg">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-            <button type="button" class="btn btn-primary" id="createpresentation"> <i class="fas fa-plus"></i>&nbsp;Sauvegarder</button>
+            <button type="button" class="btn bg-rouge text-white" id="createpresentation">&nbsp;Sauvegarder</button>
           </div>
         </div>
       </div>
@@ -182,7 +192,7 @@ use App\Session;
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-            <button type="button" class="btn disabled" id="openpreviewbtn"> Ouvrir la prévisualisatio</button>
+            <button type="button" class="btn disabled" id="openpreviewbtn"> Ouvrir la prévisualisation</button>
           </div>
         </div>
       </div>
@@ -206,7 +216,7 @@ use App\Session;
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-            <button type="button" class="btn btn-primary" id="createpresentation"> <i class="icon-plus"></i>&nbsp;Sauvegarder</button>
+            <button type="button" class="btn bg-rouge text-white" id="createpresentation"> <i class="icon-plus"></i>&nbsp;Sauvegarder</button>
           </div>
         </div>
       </div>
@@ -336,8 +346,20 @@ use App\Session;
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                    <button type="button" class="btn btn-primary" id="applyobjectbtn">&nbsp;Ajouter</button>
+                    <button type="button" class="btn bg-rouge text-white" id="applyobjectbtn"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
                 </div>
             </div>
         </div>
     </div>
+
+<script>
+    $(document).ready(function() {
+        $(function(){
+
+            $("#typetitre li a").click(function(){
+                $("#dropdownMenu1:first-child").text($(this).text());
+                $("#dropdownMenu1:first-child").val($(this).text());
+            });
+        });
+    });
+</script>

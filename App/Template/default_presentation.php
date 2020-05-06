@@ -7,13 +7,12 @@
 
     <!-- Loading Bootstrap -->
     <link href="../../public/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="icon" type="image/ico" href="images/favicon.ico" />
-    <!-- Loading Flat UI -->
-    <link href="../../public/lib/presentation/css/flat-ui.css" rel="stylesheet">
-    <link href="../../public/lib/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
 
+    <link rel="icon" type="image/ico" href="images/favicon.ico" />
+    <link href="../../public/lib/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
     <link href="../../public/lib/presentation/css/freetrans.css" rel="stylesheet">
-    <link href="../../public/lib/presentation/css/codemirror.css" rel="stylesheet">
+    <link href="../../public/lib/codemirror/codemirror.css" rel="stylesheet">
+    <link href="../../public/lib/presentation/css/matrices.css" rel="stylesheet">
 
     <!-- webfonts -->
 
@@ -65,10 +64,6 @@
 
     <script src="../../public/lib/presentation/js/main.js"></script>
     <script src ="../../public/lib/presentation/js/startup.js"></script>
-    <!--[if lt IE 8]>
-    <script src="../../public/lib/presentation/js/icon-font-ie7.js"></script>
-    <script src="../../public/lib/presentation/js/icon-font-ie7-24.js"></script>
-    <![endif]-->
     </main>
 </div>
 </body>

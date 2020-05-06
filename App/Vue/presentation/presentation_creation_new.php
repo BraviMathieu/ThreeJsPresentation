@@ -17,9 +17,7 @@
           <div class="thumbnail">
             <img class="preview" height"268"="" src="" width="360">
           </div>
-          <div class="progress active progress-striped dispNone">
-            <div class="bar"></div>
-          </div>
+          
         </li>
       </ul>
     </div>
@@ -63,9 +61,7 @@
           <div class="thumbnail">
             <video class="preview" height"268"="" width="360"></video>
           </div>
-          <div class="progress active progress-striped dispNone">
-            <div class="bar"></div>
-          </div>
+          
         </li>
       </ul>
     </div>
@@ -87,9 +83,6 @@
         <li class="span4">
           <div class="thumbnail">
             <iframe class="preview" height"268"="" width="360"></iframe>
-          </div>
-          <div class="progress active progress-striped dispNone">
-            <div class="bar"></div>
           </div>
         </li>
       </ul>
