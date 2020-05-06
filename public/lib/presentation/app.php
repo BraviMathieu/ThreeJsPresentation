@@ -3,11 +3,11 @@
 use App\Session;
 ?>
 <style>
-    .bg-vert{
+    .bg-rouge{
         background-color: #6f2232 !important;
     }
 </style>
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-vert">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-rouge">
         <a class="navbar-brand" href="#">Presentation ThreeJs</a>
         <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"></div>
         <!-- Navbar-->
@@ -39,6 +39,14 @@ use App\Session;
                       <a class="nav-link" id="openpresentationsbtn"><div class="sb-nav-link-icon"><i class="fas fa-save"></i></div>
                         Mes Présentations</a>
 
+                      <div class="sb-sidenav-menu-heading">Présentation</div>
+
+                      <a class="nav-link" id="exportcontentbtn" ><div class="sb-nav-link-icon"><i class="fas fa-eye"></i></div>
+                        Voir</a>
+                      <a class="nav-link" id="savepresentationbtn" ><div class="sb-nav-link-icon"><i class="fas fa-save"></i></div>
+                        Sauvegarder</a>
+
+
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
@@ -53,7 +61,7 @@ use App\Session;
             <div class = "slidethumbholder">
 
             </div>
-            <a class="btn btn-primary btn-large" href="#" id="addslidebtn"><i class="fas fa-plus"></i>&nbsp;Ajouter une slide</a>
+            <a class="btn btn-large bg-rouge text-white" href="#" id="addslidebtn"><i class="fas fa-plus"></i>&nbsp;Ajouter une slide</a>
         </div>
     </div>
 </div>
@@ -89,22 +97,22 @@ use App\Session;
                  
                 </div>
               </div>
-              <div class="presentationmeta"><p id="presentationmetatitle" style="margin:0 auto; text-transform:none; font-size:130%; color:white"> </p> <a href="#" style="position:absolute; right:5px; top:3px" id="editpresonamebtn" class="btn btn-small btn-inline btn-primary"><i class="fas fa-edit"></i></a></div>
-              <div class="slideviewportcontainer">
-            <div class="slideviewport">
-               <div class="impress-slide-container">
-                
-              </div>
-                <span id="play">
-                    <span class="rotate label label-disabled" id="spanrotate"><i class="fas fa-sync-alt"></i></span>
-                    <!--<span class="scale label label-important"><i class="icon-resize-horizontal"></i></span>-->
-                    <span class="skewx label label-disabled" id="spanskewx"><i class="fas fa-arrows-alt-h"></i></span>
-                    <span class="skewy label label-disabled" id="spanskewy"><i class="fas fa-arrows-alt-v"></i></span>
-                    <span class="deleteicon label label-important" id="spandelete"><i class="fui-cross-16"></i></span>
 
-           <!-- <span class="move">move</span>-->
-               </span>
-          </div>
+              <div class="slideviewportcontainer">
+                <div class="slideviewport">
+                  <div class="impress-slide-container">
+
+                  </div>
+                  <span id="play">
+                      <span class="rotate label label-disabled" id="spanrotate"><i class="fas fa-sync-alt"></i></span>
+                      <!--<span class="scale label label-important"><i class="icon-resize-horizontal"></i></span>-->
+                      <span class="skewx label label-disabled" id="spanskewx"><i class="fas fa-arrows-alt-h"></i></span>
+                      <span class="skewy label label-disabled" id="spanskewy"><i class="fas fa-arrows-alt-v"></i></span>
+                      <span class="deleteicon label label-important" id="spandelete"><i class="fui-cross-16"></i></span>
+
+             <!-- <span class="move">move</span>-->
+                 </span>
+              </div>
         </div>
     </div>
     <div class="palette palette-clouds orchgreyarea">
