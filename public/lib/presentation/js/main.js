@@ -645,7 +645,7 @@ Impressionist.prototype =
 	{
 		console.log("adding the new item....");
 
-		let typeText = $(".pulldownmenu").text();
+		let typeText = $("#dropdownMenu1").val();
 
 		switch (typeText) {
 			case 'Titre 1':

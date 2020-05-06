@@ -9,7 +9,7 @@
     <link href="../../public/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" type="image/ico" href="images/favicon.ico" />
     <!-- Loading Flat UI -->
-    <link href="../../public/lib/presentation/css/flat-ui.css" rel="stylesheet">
+
     <link href="../../public/lib/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
 
     <link href="../../public/lib/presentation/css/freetrans.css" rel="stylesheet">
