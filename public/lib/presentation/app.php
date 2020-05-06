@@ -328,19 +328,19 @@ use App\Session;
                     </button>
                 </div>
                 <div class="modal-body" id="styleselections" style="overflow:scroll;">
-                    <div class="objectthumbnail"  style="width: 130px">
-                    <img src="lib/presentation/images/Cube.PNG" style="width: 130px">
+                    <div class="objectthumbnail"  style="width: 130px" data-nom="cube">
+                    <img src="lib/presentation/images/Cube.PNG" style="width: 130px" >
                     </div>
-                    <div class="objectthumbnail"  style="width: 130px">
-                        <img  src="lib/presentation/images/Cone.PNG" style="width: 130px">
+                    <div class="objectthumbnail"  style="width: 130px" data-nom="cone">
+                        <img  id="cube" src="lib/presentation/images/Cone.PNG" style="width: 130px" >
                     </div>
-                    <div class="objectthumbnail"  style="width: 130px">
-                        <img  src="lib/presentation/images/Sphere.PNG" style="width: 130px">
+                    <div class="objectthumbnail"  style="width: 130px" data-nom="sphere">
+                        <img  id="" src="lib/presentation/images/Sphere.PNG" style="width: 130px">
                     </div>
-                    <div class="objectthumbnail"  style="width: 130px">
+                    <div class="objectthumbnail"  style="width: 130px" data-nom="pyramid">
                         <img  src="lib/presentation/images/Pyramid.PNG" style="width: 130px">
                     </div>
-                    <div class="objectthumbnail"  style="width: 130px">
+                    <div class="objectthumbnail"  style="width: 130px" data-nom="rectangle">
                         <img  src="lib/presentation/images/Rectangle.PNG" style="width: 130px">
                     </div>
                 </div>

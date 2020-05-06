@@ -28,7 +28,7 @@ var text_snippet_p = '<div class="slidelement slidelementh1" id="slidelement_id"
  								'<p style="font-size: 120%" contentEditable="true">__presodescription__</p>'+
  								'</div>'+
  								'<div class="presothumb idle" >'+
-         							'<a href="#"  data-id="__presoid__" class="btn btn-inline btn-info openpresobtn" style="position:absolute; right: 10px; top: 10px"><i class="fui-eye-16"></i></a>' +
- 									'<a href="#"  data-id="__presoid__" class="btn btn-inline btn-danger deletepresobtn" style="position:absolute; right: 60px; top: 10px"><i class="icon-trash"></i></a></br>'+
+         							'<a href="#"  data-id="__presoid__" class="btn btn-inline btn-info openpresobtn" style="position:absolute; right: 10px; top: 10px"><i class="fas fa-eye"></i></i></a>' +
+ 									'<a href="#"  data-id="__presoid__" class="btn btn-inline btn-danger deletepresobtn" style="position:absolute; right: 60px; top: 10px"><i class="fas fa-trash"></i></a></br>'+
  								'</div>' +
  							'</div>';
