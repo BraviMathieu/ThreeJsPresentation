@@ -153,7 +153,7 @@ use App\Session;
           <div class="modal-body">
             <p>Coller l'URL de l'image </p>
             <input type="text" id="imageinput" class="image-input">
-            <p> La prévisualisation va apparaitreen dessous.</p>
+            <p> La prévisualisation va apparaitre en dessous.</p>
             <img id="previewimg">
           </div>
           <div class="modal-footer">
@@ -182,7 +182,7 @@ use App\Session;
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-            <button type="button" class="btn disabled" id="openpreviewbtn"> Ouvrir la prévisualisatio</button>
+            <button type="button" class="btn disabled" id="openpreviewbtn"> Ouvrir la prévisualisation</button>
           </div>
         </div>
       </div>

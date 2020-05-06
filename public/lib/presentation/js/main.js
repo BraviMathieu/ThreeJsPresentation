@@ -1228,7 +1228,7 @@ Impressionist.prototype =
 	},
 	savePresentation : function()
 	{
-			$("#savepresentationbtn").text("Saving...")
+			$("#savepresentationbtn").html('<div class="sb-nav-link-icon"><i class=\"fas fa-save\"></i></div>Sauvegarde en cours...');
 			item = me.getItem(me.saveKey);
 			if(item)
 			{
@@ -1297,7 +1297,9 @@ Impressionist.prototype =
 	},
 	resetSaveButtonText : function()
 	{
-		$("#savepresentationbtn").html('<i class="icon-ok-sign"></i>&nbsp;Save')
+		$("#savepresentationbtn").html('<div class="sb-nav-link-icon"><i class=\"fas fa-check-circle\"></i></div>Sauvegarde réussie!');
+		setTimeout(function(){ $("#savepresentationbtn").html('<div class="sb-nav-link-icon"><i class=\"fas fa-save\"></i></div>Sauvegarder'); }, 1000);;
+
 	},
 	removeReference : function( arr )
 	{
@@ -1329,7 +1331,7 @@ Impressionist.prototype =
 		$("#openpreviewbtn").addClass("disabled");
 		$("#openpreviewbtn").removeClass("btn-primary");
 		$("#progressmeter").css("display", "block");
-		$("#previewmessage").html("Please wait while we generate the preview.")
+		$("#previewmessage").html("Veuillez patienter durant la génération de la prévisualisation.")
 		$.ajax({
 			type: 'POST',
 			 url: "http://harish.io/impressionist/generatePreview.php",
@@ -1341,7 +1343,7 @@ Impressionist.prototype =
 			 	$("#openpreviewbtn").removeClass("disabled");
 			 	$("#openpreviewbtn").addClass("btn-primary");
 			 	$("#progressmeter").css("display", "none");
-			 	$("#previewmessage").html("Slide preview successfully generated.");
+			 	$("#previewmessage").html("Prévisualisation du diaporama généré avec succès.");
 
 			 }
 		});
