@@ -112,7 +112,7 @@ Impressionist.prototype =
 	renderPresentations : function ( presentations )
 	{	
 		me.mypresentations = presentations;
-		$("#savedpresentations").html("<h3 style='display:inline-block; color:#2980B9; font-size:120%'> You don't have any saved presentations. </h3>");
+		$("#savedpresentations").html("<h3 style='display:inline-block; color:#2980B9; font-size:120%'> Vous n'avez aucune présentations sauvegardées. </h3>");
 		if(presentations.length > 0)
 		{
 			$("#savedpresentations").html("");

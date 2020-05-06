@@ -98,7 +98,7 @@
 				if (value !='' && skipTag != true) { 
                     $('<span>').addClass('tag').append(
                         $('<span>').text(value).append('&nbsp;&nbsp;'),
-                        $('<a class="tagsinput-remove-link fui-cross-16">', {
+                        $('<a class="tagsinput-remove-link fas fa-times">', {
                             href  : '#',
                             title : 'Remove tag',
                             text  : ''
