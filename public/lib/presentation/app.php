@@ -66,7 +66,6 @@ use App\Session;
     </div>
 </div>
 
-
     <div class="maskedcontainer">
 
     <div class="mainviewport">
@@ -217,7 +216,7 @@ use App\Session;
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-            <button type="button" class="btn btn-primary" id="createpresentation"> <i class="icon-plus"></i>&nbsp;Sauvegarder</button>
+            <button type="button" class="btn bg-rouge text-white" id="createpresentation"> <i class="icon-plus"></i>&nbsp;Sauvegarder</button>
           </div>
         </div>
       </div>

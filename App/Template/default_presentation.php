@@ -64,10 +64,6 @@
 
     <script src="../../public/lib/presentation/js/main.js"></script>
     <script src ="../../public/lib/presentation/js/startup.js"></script>
-    <!--[if lt IE 8]>
-    <script src="../../public/lib/presentation/js/icon-font-ie7.js"></script>
-    <script src="../../public/lib/presentation/js/icon-font-ie7-24.js"></script>
-    <![endif]-->
     </main>
 </div>
 </body>
