@@ -61,7 +61,7 @@ use App\Session;
             <div class = "slidethumbholder">
 
             </div>
-            <a class="btn btn-large bg-rouge text-white" href="#" id="addslidebtn"><i class="fas fa-plus"></i>&nbsp;Ajouter une slide</a>
+            <a class="btn btn-large bg-primary text-white" href="#" id="addslidebtn" style=""><i class="fas fa-plus"></i>&nbsp;Ajouter une slide</a>
         </div>
     </div>
 </div>
@@ -218,7 +218,7 @@ use App\Session;
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-            <button type="button" class="btn bg-rouge text-white" id="createpresentation"> <i class="fas fa-save"></i>&nbsp;Sauvegarder</button>
+            <button type="button" class="btn bg-primary text-white" id="createpresentation"> <i class="fas fa-save"></i>&nbsp;Sauvegarder</button>
           </div>
         </div>
       </div>

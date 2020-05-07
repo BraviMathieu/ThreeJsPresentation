@@ -281,14 +281,10 @@ body
 {
 	position: fixed;
 	left: 233px;
-	top: 60px;
+	top: 65px;
 }
 .viewtogglebtn
 {
-	/*display: inline-block;
-	margin-left: 10px;
-	margin-top: 5px;
-	text-transform: none;*/
 }
 .slidethumb
 {
