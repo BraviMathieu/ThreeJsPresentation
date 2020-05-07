@@ -91,9 +91,9 @@ use App\Session;
                   <span class="caret"></span>
                 </button>
                 <div class="dropdown-menu" id="typetitre" aria-labelledby="btnGroupDrop1">
-                  <li><a data-dk-dropdown-value="slidelementh1">Titre 1</a></li>
-                  <li><a data-dk-dropdown-value="slidelementh2">Titre 2</a></li>
-                  <li><a data-dk-dropdown-value="slidelementh3">Titre 3</a></li>
+                  <li><a data-dk-dropdown-value="slidelementh1"><h1>Titre 1</h1></a></li>
+                  <li><a data-dk-dropdown-value="slidelementh2"><h2>Titre 2</h2></a></li>
+                  <li><a data-dk-dropdown-value="slidelementh3"><h3>Titre 3</h3></a></li>
                   <li><a data-dk-dropdown-value="P">Paragraphe</a></li>
                 </div>
               </div>
