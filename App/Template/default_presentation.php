@@ -13,6 +13,8 @@
     <link href="../../public/lib/presentation/css/freetrans.css" rel="stylesheet">
     <link href="../../public/lib/codemirror/codemirror.css" rel="stylesheet">
     <link rel="stylesheet" href="subj.css">
+    <link href="../../public/lib/presentation/css/matrices.css" rel="stylesheet">
+
 
     <!-- webfonts -->
 
@@ -54,6 +56,7 @@
     <script src="../../public/lib/presentation/js/transform2d.js"></script>
     <script src="../../public/lib/presentation/js/keymaster.js"></script>
     <script src="../../public/lib/presentation/js/templates/newpresotemplate.js"></script>
+    <script src="../../public/lib/presentation/js/matrices.js"></script>
     <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
     <script src="lib/font-awesome/js/all.min.js"></script>
 
