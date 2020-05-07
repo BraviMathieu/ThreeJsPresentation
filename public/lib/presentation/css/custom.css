@@ -412,15 +412,12 @@ body
 }
 .transformcontrolsholder
 {
-	position: absolute;
-	left: 10px;
-	top: 0px;
-	width : 800px;
 	height : 50px;
 	background-color: #ECF0F1;
 	z-index: 20;
 	padding-left: 20px;
 	text-transform: none;
+	margin-right: 25px;
 }
 #skewxlabel
 {
@@ -477,7 +474,7 @@ body
 	width : 930px;
 	height: 570px;
 	border : 1px dashed #CCC;
-	margin-top: 40px;
+	margin: auto;
 	overflow: scroll;
 	position: relative;
 }

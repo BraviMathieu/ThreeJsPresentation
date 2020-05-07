@@ -9,7 +9,7 @@ function impressionist()
    impressionist = new Impressionist();
    impressionist.initialize();
    impressionist.addSettingsPanel( " ");
-   setTimeout(showViewport, 1000);
+   showViewport();
 }
 function showViewport()
 {

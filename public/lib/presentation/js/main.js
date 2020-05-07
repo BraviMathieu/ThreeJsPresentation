@@ -647,7 +647,6 @@ Impressionist.prototype =
 	},
 	manageGlobalClick : function(e)
 	{
-		$("#colorpickerbtn").colorpicker("hide");
 		$(".slidelement").draggable({disabled : false});
 		$("#play").css("display", "none");
 		me.generateScaledSlide(me.selectedSlide);
@@ -970,8 +969,8 @@ Impressionist.prototype =
 	{
 		$("html").on("click", me.manageGlobalClick);
 		$(".settingsCancelBtn").on("click", me.onSettingsCancelClicked);
-		$(".menuItemBtn").on("click", me.onMenuItemClicked);
-		$(".viewtogglebtn").on("click", me.onViewToggled);
+		$("#newpresopanel").on("click", me.onMenuItemClicked);
+		$("#neworchestratepanel").on("click", me.onViewToggled);
 		$(".slidelement").on("click", me.triggetElementEdit);
 		$(".slidelement").on("mouseup", me.createEditor);
 		$("#newstylepanel").on("click", me.openStyleSelector);
@@ -1438,7 +1437,7 @@ Impressionist.prototype =
 	removelisteners : function()
 	{
 		$(".settingsCancelBtn").off();
-		$(".viewtogglebtn").off();
+		$("#neworchestratepanel").off();
 	},
 	onSettingsCancelClicked : function(e)
 	{
