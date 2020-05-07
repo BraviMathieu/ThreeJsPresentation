@@ -12,7 +12,9 @@
     <link href="../../public/lib/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
     <link href="../../public/lib/presentation/css/freetrans.css" rel="stylesheet">
     <link href="../../public/lib/codemirror/codemirror.css" rel="stylesheet">
+    <link rel="stylesheet" href="subj.css">
     <link href="../../public/lib/presentation/css/matrices.css" rel="stylesheet">
+
 
     <!-- webfonts -->
 
@@ -22,6 +24,7 @@
     <link href='http://fonts.googleapis.com/css?family=Cabin+Sketch' rel='stylesheet' type='text/css'>
 
     <link href="../../public/lib/presentation/css/custom.css" rel="stylesheet">
+
     <link href="../../public/css/styles.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
@@ -42,13 +45,13 @@
     <script src="../../public/lib/jquery-ui/js/jquery-ui.min.js"></script>
     <script src="../../public/lib/bootstrap/js/bootstrap.min.js"></script>
 
-    <script src="../../public/lib/presentation/js/bootstrap-tooltip.js"></script>
     <script src="../../public/lib/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 
     <script src="../../public/lib/presentation/js/jquery.placeholder.js"></script>
 
     <script src="../../public/lib/presentation/js/matrix.js"></script>
     <script src="../../public/lib/presentation/js/knob.js"></script>
+    <script type="text/javascript" src="subj.js"></script>
 
     <script src="../../public/lib/presentation/js/transform2d.js"></script>
     <script src="../../public/lib/presentation/js/keymaster.js"></script>
@@ -56,9 +59,6 @@
     <script src="../../public/lib/presentation/js/matrices.js"></script>
     <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
     <script src="lib/font-awesome/js/all.min.js"></script>
-
-    <!-- code formatting -->
-
 
 
     <script src="../../public/lib/presentation/js/main.js"></script>

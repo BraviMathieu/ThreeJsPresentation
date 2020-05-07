@@ -7,7 +7,7 @@ var newpresotemplate = '<div id="newpreso">'+
 var slidethumb = '<div id="slidethumb_^UID^" class="slidethumb thumbelement">'+
 					 '<div class="thumbnailholder"></div>'+
 					 '<canvas class="slidemask" id="slidethumb_^UID^" style="z-index:1000; width:100%; height:100%; background-color:#FFF; opacity:0.1; left:0px; top:0px; position:absolute"></canvas>'+
-					'<a id="deletebtn" data-parent="slidethumb_^UID^" style="z-index:1001;" class="btn btn-info btn-small deletebtn"><i class="fas fa-times"></i></a>'+
+					'<a id="deletebtn" data-parent="slidethumb_^UID^" style="z-index:1001;" class="btn btn-danger btn-small deletebtn text-white"><i class="fas fa-trash-alt"></i></a>'+
 				 '</div>';
 var impress_slide = '<div class="impress-slide" id="impress_slide__slidenumber__">'+
 						'<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h2" style="width:auto; height:60px; position:absolute; left:295px; top:50px; whitespace:no-wrap;" contentEditable="true"> Titre d\'exemple</div>'+
@@ -28,7 +28,7 @@ var text_snippet_p = '<div class="slidelement slidelementh1" id="slidelement_id"
  								'<p style="font-size: 120%" contentEditable="true">__presodescription__</p>'+
  								'</div>'+
  								'<div class="presothumb idle" >'+
-         							'<a href="#"  data-id="__presoid__" class="btn btn-inline btn-info openpresobtn" style="position:absolute; right: 10px; top: 10px"><i class="fas fa-eye"></i></i></a>' +
- 									'<a href="#"  data-id="__presoid__" class="btn btn-inline btn-danger deletepresobtn" style="position:absolute; right: 60px; top: 10px"><i class="fas fa-trash"></i></a></br>'+
+         							'<a href="#"  data-id="__presoid__" class="btn btn-inline btn-primary openpresobtn" style="position:absolute; right: 10px; top: 10px"><i class="fas fa-eye"></i></i></a>' +
+ 									'<a href="#"  data-id="__presoid__" class="btn btn-inline btn-danger deletepresobtn" style="position:absolute; right: 60px; top: 10px"><i class="fas fa-trash-alt"></i></a></br>'+
  								'</div>' +
  							'</div>';

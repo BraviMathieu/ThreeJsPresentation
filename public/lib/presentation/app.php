@@ -32,7 +32,7 @@ use App\Session;
                           Nouvelle présentation</a>
                       <a class="nav-link" id="newstylepanel" ><div class="sb-nav-link-icon"><i class="fas fa-pencil-alt"></i></div>
                         Selectionner une police</a>
-                      <a class="nav-link" id="neworchestratepanel" ><div class="sb-nav-link-icon"><i class="fas fa-th"></i></div>
+                      <a class="nav-link" id="neworchestratepanel" ><div class="sb-nav-link-icon"><i id="viewtoggleicon" class="fas fa-th"></i></div>
                         Panorama</a>
                         <a class="nav-link" id="importobject" ><div class="sb-nav-link-icon"><i class="fas fa-file-download"></i></div>
                             importer des objet 3D</a>
@@ -63,7 +63,7 @@ use App\Session;
             <div class = "slidethumbholder">
 
             </div>
-            <a class="btn btn-large bg-rouge text-white" href="#" id="addslidebtn"><i class="fas fa-plus"></i>&nbsp;Ajouter une slide</a>
+            <a class="btn btn-large bg-primary text-white" href="#" id="addslidebtn" style=""><i class="fas fa-plus"></i>&nbsp;Ajouter une slide</a>
         </div>
     </div>
 </div>
@@ -109,37 +109,39 @@ use App\Session;
         </div>
       </div>
       <!-- main footer shows slide thumbnails-->
-
+      <div class="presentationmeta">
+        <p id="presentationmetatitle" class="titrepresentation" style="margin:0 auto; text-transform:none; font-size:160%; color:white; text-align: center"> </p> <a style="position:absolute; right:5px; top:3px" id="editpresonamebtn" class="btn btn-small btn-inline btn-success text-white"><i class="fas fa-edit"></i></a>
+      </div>
               <div class="slideviewportcontainer">
                 <div class="slideviewport">
                   <div class="impress-slide-container">
 
                   </div>
-                  <span id="play">
-                      <span class="rotate label label-disabled" id="spanrotate"><i class="fas fa-sync-alt"></i></span>
-                      <!--<span class="scale label label-important"><i class="icon-resize-horizontal"></i></span>-->
-                      <span class="skewx label label-disabled" id="spanskewx"><i class="fas fa-arrows-alt-h"></i></span>
-                      <span class="skewy label label-disabled" id="spanskewy"><i class="fas fa-arrows-alt-v"></i></span>
-                      <span class="deleteicon label label-important" id="spandelete"><i class="fas fa-trash-alt"></i></span>
+                  <span id="play" style="margin-left: 300px; margin-top: -5px;">
+                      <span class="deleteicon label label-important btn btn-danger" id="spandelete"><i class="fas fa-trash-alt"></i></span>
 
              <!-- <span class="move">move</span>-->
                  </span>
               </div>
         </div>
     </div>
-    <div class="palette palette-clouds orchgreyarea">
-       <div class="transformcontrolsholder">
-          <h3 class="transformlabel">Rotation Z</h3>
-          <input class="knob" id="rotationknob" data-width="40" data-min="-360" data-max="360" data-fgColor="#1ABC9C" data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
-          <h3 class="transformlabel">Rotation X</h3>
-          <input class="knob" id="skewxknob" data-width="40" data-min="-360" data-max="360" data-fgColor="#1ABC9C" data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
-          <h3 class="transformlabel">Rotation Y</h3>
-          <input class="knob" id="skewyknob" data-width="40" data-min="-360" data-max="360" data-fgColor="#1ABC9C" data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
-          <h3 class="transformlabel">Scale</h3>
-          <input type="range" id="scalerange" class="ranges" min="1" max="6" value="1" />
-          <h3 class="transformlabel">Depth</h3>
-          <input type="range" id="depthrange" class="ranges" min="-3000" max="5000" value="1" />
-     </div>
+      <div class="palette palette-clouds orchgreyarea">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <div class="transformcontrolsholder">
+            <h3 class="transformlabel">Rotation Z</h3>
+            <input class="knob" id="rotationknob" data-width="50" data-min="-360" data-max="360" data-fgColor="#6f2232 " data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
+            <h3 class="transformlabel">Rotation X</h3>
+            <input class="knob" id="skewxknob" data-width="50" data-min="-360" data-max="360" data-fgColor="#6f2232 " data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
+            <h3 class="transformlabel">Rotation Y</h3>
+            <input class="knob" id="skewyknob" data-width="50" data-min="-360" data-max="360" data-fgColor="#6f2232 " data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
+            <h3 class="transformlabel">Échelle</h3>
+            <input type="range" id="scalerange" class="ranges" min="1" max="6" value="1" />
+            <h3 class="transformlabel">Profondeur</h3>
+            <input type="range" id="depthrange" class="ranges" min="-3000" max="5000" value="1" />
+          </div>
+        </div>
+      </div>
       <div class="orchestrationviewport">
 
       </div>
@@ -164,13 +166,13 @@ use App\Session;
           </div>
           <div class="modal-body">
             <p>Coller l'URL de l'image </p>
-            <input type="text" id="imageinput" class="image-input">
+            <input type="text" id="imageinput" class="form-control">
             <p> La prévisualisation va apparaitre en dessous.</p>
             <img id="previewimg">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-            <button type="button" class="btn bg-rouge text-white" id="createpresentation">&nbsp;Sauvegarder</button>
+            <button type="button" class="btn bg-rouge text-white" id="appendimagebtn"><i class="fas fa-plus"></i>&nbsp;Ajouter l'image</button>
           </div>
         </div>
       </div>
@@ -205,20 +207,20 @@ use App\Session;
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Nouvelle présentation</h5>
+            <h5 class="modal-title" id="newpresoheader">Nouvelle présentation</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
             <p>Titre</p>
-            <input type="text" id="titreinput" class="image-input" value="Nouvelle présentation">
+            <input type="text" id="titleinput" class="form-control" value="Nouvelle présentation" maxlength="60">
             <p>Description</p>
-            <textarea id="descriptioninput" class="descriptioninput"> Exemple de description de présentation </textarea>
+            <textarea id="descriptioninput" class="form-control">Exemple de description de présentation</textarea>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-            <button type="button" class="btn bg-rouge text-white" id="createpresentation"> <i class="icon-plus"></i>&nbsp;Sauvegarder</button>
+            <button type="button" class="btn bg-primary text-white" id="createpresentation"> <i class="fas fa-save"></i>&nbsp;Sauvegarder</button>
           </div>
         </div>
       </div>
@@ -382,7 +384,6 @@ use App\Session;
 <script>
     $(document).ready(function() {
         $(function(){
-
             $("#typetitre li a").click(function(){
                 $("#dropdownMenu1:first-child").text($(this).text());
                 $("#dropdownMenu1:first-child").val($(this).text());
