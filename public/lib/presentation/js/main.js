@@ -1108,6 +1108,15 @@ Impressionist.prototype =
             me.addObjectToSlide(objet);
             $("#objectselectionmodal").modal("hide");
 		})
+
+		$("#importobject").on("click", function(e)
+		{
+			console.log("open import objet modal...");
+			$("#importobjetmodal").modal("show");
+		});
+		$("#objinput").on("blur keyup", function(e)
+		{
+		});
 		
 	},
 	applyStyle : function()

@@ -34,6 +34,8 @@ use App\Session;
                         Selectionner une police</a>
                       <a class="nav-link" id="neworchestratepanel" ><div class="sb-nav-link-icon"><i class="fas fa-th"></i></div>
                         Panorama</a>
+                        <a class="nav-link" id="importobject" ><div class="sb-nav-link-icon"><i class="fas fa-file-download"></i></div>
+                            importer des objet 3D</a>
                       <a class="nav-link" id="exportpresopanel"><div class="sb-nav-link-icon"><i class="fas fa-cloud"></i></div>
                         Exporter présentation</a>
                       <a class="nav-link" id="openpresentationsbtn"><div class="sb-nav-link-icon"><i class="fas fa-save"></i></div>
@@ -351,6 +353,31 @@ use App\Session;
             </div>
         </div>
     </div>
+
+<!-- importer objet Modal -->
+<div class="modal fade" id="importobjetmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ajouter un ou plusieurs objet 3D</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>importer un fichier obj </p>
+                <input type="file" accept=".obj" multiple  id="objinput" >
+                <p> La prévisualisation va apparaitre en dessous.</p>
+                <img id="previewimg">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn bg-rouge text-white" id="createpresentation">&nbsp;importer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
     $(document).ready(function() {
