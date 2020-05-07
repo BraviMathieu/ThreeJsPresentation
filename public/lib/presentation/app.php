@@ -93,9 +93,9 @@ use App\Session;
                   <span class="caret"></span>
                 </button>
                 <div class="dropdown-menu" id="typetitre" aria-labelledby="btnGroupDrop1">
-                  <li><a data-dk-dropdown-value="slidelementh1">Titre 1</a></li>
-                  <li><a data-dk-dropdown-value="slidelementh2">Titre 2</a></li>
-                  <li><a data-dk-dropdown-value="slidelementh3">Titre 3</a></li>
+                  <li><a data-dk-dropdown-value="slidelementh1"><h1>Titre 1</h1></a></li>
+                  <li><a data-dk-dropdown-value="slidelementh2"><h2>Titre 2</h2></a></li>
+                  <li><a data-dk-dropdown-value="slidelementh3"><h3>Titre 3</h3></a></li>
                   <li><a data-dk-dropdown-value="P">Paragraphe</a></li>
                 </div>
               </div>
@@ -118,6 +118,10 @@ use App\Session;
 
                   </div>
                   <span id="play" style="margin-left: 300px; margin-top: -5px;">
+                      <span class="rotate label label-disabled btn btn-primary" id="spanrotate"><i class="fas fa-sync-alt"></i></span>
+                      <!--<span class="scale label label-important"><i class="icon-resize-horizontal"></i></span>-->
+                      <span class="skewx label label-disabled btn btn-primary" id="spanskewx"><i class="fas fa-arrows-alt-h"></i></span>
+                      <span class="skewy label label-disabled btn btn-primary" id="spanskewy"><i class="fas fa-arrows-alt-v"></i></span>
                       <span class="deleteicon label label-important btn btn-danger" id="spandelete"><i class="fas fa-trash-alt"></i></span>
 
              <!-- <span class="move">move</span>-->
