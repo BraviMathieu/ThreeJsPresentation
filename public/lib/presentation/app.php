@@ -107,7 +107,9 @@ use App\Session;
         </div>
       </div>
       <!-- main footer shows slide thumbnails-->
-
+      <div class="presentationmeta">
+        <p id="presentationmetatitle" class="titrepresentation" style="margin:0 auto; text-transform:none; font-size:130%; color:white"> </p> <a style="position:absolute; right:5px; top:3px" id="editpresonamebtn" class="btn btn-small btn-inline btn-success text-white"><i class="fas fa-edit"></i></a>
+      </div>
               <div class="slideviewportcontainer">
                 <div class="slideviewport">
                   <div class="impress-slide-container">
@@ -126,11 +128,11 @@ use App\Session;
         <div class="col-lg-12 text-center">
           <div class="transformcontrolsholder">
             <h3 class="transformlabel">Rotation Z</h3>
-            <input class="knob" id="rotationknob" data-width="40" data-min="-360" data-max="360" data-fgColor="#1ABC9C" data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
+            <input class="knob" id="rotationknob" data-width="50" data-min="-360" data-max="360" data-fgColor="#6f2232 " data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
             <h3 class="transformlabel">Rotation X</h3>
-            <input class="knob" id="skewxknob" data-width="40" data-min="-360" data-max="360" data-fgColor="#1ABC9C" data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
+            <input class="knob" id="skewxknob" data-width="50" data-min="-360" data-max="360" data-fgColor="#6f2232 " data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
             <h3 class="transformlabel">Rotation Y</h3>
-            <input class="knob" id="skewyknob" data-width="40" data-min="-360" data-max="360" data-fgColor="#1ABC9C" data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
+            <input class="knob" id="skewyknob" data-width="50" data-min="-360" data-max="360" data-fgColor="#6f2232 " data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
             <h3 class="transformlabel">Échelle</h3>
             <input type="range" id="scalerange" class="ranges" min="1" max="6" value="1" />
             <h3 class="transformlabel">Profondeur</h3>
@@ -138,7 +140,6 @@ use App\Session;
           </div>
         </div>
       </div>
-
       <div class="orchestrationviewport">
 
       </div>
@@ -204,20 +205,20 @@ use App\Session;
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Nouvelle présentation</h5>
+            <h5 class="modal-title" id="newpresoheader">Nouvelle présentation</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
             <p>Titre</p>
-            <input type="text" id="titreinput" class="form-control" value="Nouvelle présentation">
+            <input type="text" id="titleinput" class="form-control" value="Nouvelle présentation">
             <p>Description</p>
             <textarea id="descriptioninput" class="form-control"> Exemple de description de présentation </textarea>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-            <button type="button" class="btn bg-rouge text-white" id="createpresentation"> <i class="icon-plus"></i>&nbsp;Sauvegarder</button>
+            <button type="button" class="btn bg-rouge text-white" id="createpresentation"> <i class="fas fa-save"></i>&nbsp;Sauvegarder</button>
           </div>
         </div>
       </div>

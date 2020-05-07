@@ -81,15 +81,11 @@ Impressionist.prototype =
 		if(!presentation)
 		{
 			savedpresos = JSON.parse(me.getItem(me.saveKey));
-			console.log("savedpresos", savedpresos);
+
 			if(savedpresos && savedpresos.length > 0)
-			{
 				$("#savedpresentationsmodal").modal("show");
-			}
 			else
-			{
 				me.openNewPresentationWindow();
-			}
 		}
 		else
 		{
@@ -107,7 +103,7 @@ Impressionist.prototype =
 	renderPresentations : function ( presentations )
 	{	
 		me.mypresentations = presentations;
-		$("#savedpresentations").html("<h3 style='display:inline-block; color:#2980B9; font-size:120%'> Vous n'avez aucune présentations sauvegardées. </h3>");
+		$("#savedpresentations").html("<h3 style='display:inline-block; color:#2980B9; font-size:120%'> Vous n'avez aucune présentation sauvegardées. </h3>");
 		if(presentations.length > 0)
 		{
 			$("#savedpresentations").html("");
@@ -128,15 +124,11 @@ Impressionist.prototype =
 		}).on("mouseout", function(e)
 		{
 			$(this).find(".presothumb").addClass("idle");
-		})
-		$(".deletepresobtn").on("click", function(e)
+		});
+		$(".deletepresobtn").on("click", function()
 		{
-			msg = confirm("Are you sure? You will lose your deck forever.");
-			if(msg == true)
+			if(confirm("Êtes-vous sûr de vouloir supprimer cette présentation ?"))
 				me.deleteSavedPresentation( $(this).attr("data-id") );
-			else
-				console.log("do nothing");
-			
 		})
 		//$("#savedpresentationsmodal").modal("show");
 	},
@@ -603,14 +595,14 @@ Impressionist.prototype =
 		orchestrationareapos = ypos + ht;
 		console.log("ypos", ypos)
 	},
-	addSettingsPanel : function(type)
+	addSettingsPanel : function()
 	{
 		$(".settingsbox").html(newpresotemplate);
 		//this.addSlide();
 		this.removelisteners();
 		this.attachListeners();
 	},
-	manageGlobalClick : function(e)
+	manageGlobalClick : function()
 	{
 		$(".slidelement").draggable({disabled : false});
 		$("#play").css("display", "none");
@@ -742,7 +734,7 @@ Impressionist.prototype =
 
 		$("#slidethumb_"+id).append( newel );
 	},
-	selectSlide : function( id )
+	selectSlide : function(id)
 	{
 		children = $(".impress-slide-container").children();
 		//console.log("I am in selection", children)
@@ -805,17 +797,14 @@ Impressionist.prototype =
 
 		for(var i=0 ; i<children.length; i++)
 		{
-			console.log("looping children")
 			child = children[i];
 			clone = $(child).clone();
 			clone.removeClass("slidethumb");
 			clone.addClass("orchthumb");
-			console.log("clone", clone);
 			clone.attr("id", "orchestrationelement_"+$(child).attr("id").split("_")[1]);
 			clone.css("opacity", 1);
 			clone.css("position", "absolute");
 			clone.css("transform", clone.attr("data-transform-string"));
-			console.log("Pre check: ", clone.attr("data-left"));
 
 			clone.find(".deletebtn").remove();
 			clone.draggable().on("mouseup", function()
@@ -846,7 +835,7 @@ Impressionist.prototype =
 				$("#skewyknob").val(roty || 0).trigger("change");
 				$("#scalerange").val( scale || 1 );
 				$("#depthrange").val( depth || 1000 );
-			})
+			});
 			$(".orchestrationviewport").append(clone);
 			orchestrationElements.push( clone );
 
@@ -869,7 +858,6 @@ Impressionist.prototype =
 	{
 		if(direction == "left")
 		{
-			//me.animatePanel( ".mainviewport", "-730px" )
 			$(".maingreyarea").css("display", "none");
 			$(".orchgreyarea").css("display", "block");
 			$("#viewtoggleicon").removeClass("icon-th-large");
@@ -900,7 +888,7 @@ Impressionist.prototype =
 			me.orchestrationcoords.push( {left: l, top: t});
 		}
 	},
-	onViewToggled : function (e)
+	onViewToggled : function ()
 	{
 		if(me.currentview == "mainarea")
 		{
@@ -946,18 +934,18 @@ Impressionist.prototype =
 			$("#newpresoheader").html("Enregistrer la présentation sous...");
 			me.mode = "save";
 		});
-		$(".previewpresobtn").on("click", function(e)
+		$(".previewpresobtn").on("click", function()
 		{
 			console.log("data parent id", $(this).attr("data-id"));
 			me.fetchAndPreview($(this).attr("data-id"))
 		});
-		$(".openpresobtn").on("click", function(e)
+		$(".openpresobtn").on("click", function()
 		{
 			console.log("Edit presentation");
 			me.mode = "save";
-			me.openPresentationForEdit( $(this).attr("data-id") );
+			me.openPresentationForEdit($(this).attr("data-id"));
 		});
-		$("#createpresentation").on("click", function(e)
+		$("#createpresentation").on("click", function()
 		{
 			console.log("Mode", me.mode);
 			if(me.mode == "create")
@@ -966,16 +954,14 @@ Impressionist.prototype =
 			}
 			else
 			{
-				console.log("saving now");
 				me.savePresentation();
 			}
 			
 		});
-		$("#savepresentationbtn").on("click", function(e)
+		$("#savepresentationbtn").on("click", function()
 		{
 			if(me.currentPresentation)
 			{
-				console.log("Has access to current presentation");
 				$("#titleinput").val( me.currentPresentation.title);
 				$("textarea#descriptioninput").val( me.currentPresentation.description);
 			}
@@ -996,45 +982,45 @@ Impressionist.prototype =
 				me.dropdownopen = true;
 				me.hideTransformControl();	
 		});
-		$("#addtextbtn").on("click", function (e)
+		$("#addtextbtn").on("click", function ()
 		{
 			console.log("add btn clicked...");
 			me.addImpressSlideItem( me.selectedSlide );
 		});
-		$("#addimagebtn").on("click", function(e)
+		$("#addimagebtn").on("click", function()
 		{
 			console.log("open image modal...");
 			$("#imagemodal").modal("show");
 		});
-		$("#addobjectbtn").on("click", function(e)
+		$("#addobjectbtn").on("click", function()
 		{
 			console.log("open object modal...");
 			$("#objectselectionmodal").modal("show");
 		});
-		$("#imageinput").on("blur keyup", function(e)
+		$("#imageinput").on("blur keyup", function()
 		{
 			image = $(this).val();
 			$("#previewimg").attr("src", image);
 		});
-		$("#addslidebtn").on("click", function(e)
+		$("#addslidebtn").on("click", function()
 		{
 			me.addSlide();
 		});
-		$("#appendimagebtn").on("click", function(e)
+		$("#appendimagebtn").on("click", function()
 		{
 			console.log("append image to stage");
 			image = $("#previewimg").attr("src");
 			me.addImageToSlide( image );
 			$("#imagemodal").modal("hide");
 		});
-		$("#openpresentationsbtn").on("click", function(e)
+		$("#openpresentationsbtn").on("click", function()
 		{
-			$(".previewpresobtn").on("click", function(e)
+			$(".previewpresobtn").on("click", function()
 			{
 				console.log("data parent id", $(this).attr("data-id"));
 				me.fetchAndPreview($(this).attr("data-id"))
 			});
-			$(".openpresobtn").on("click", function(e)
+			$(".openpresobtn").on("click", function()
 			{
 				console.log("Edit presentation");
 				me.mode = "save";
@@ -1042,31 +1028,31 @@ Impressionist.prototype =
 			});
 			$("#savedpresentationsmodal").modal("show");
 		});
-		$("#exportcontentbtn").on("click", function(e)
+		$("#exportcontentbtn").on("click", function()
 		{
 			me.generateExportMarkup( true );
 
 		
 		});
-		$(".stylethumbnail").on("click", function(e)
+		$(".stylethumbnail").on("click", function()
 		{
 			$(".stylethumbnail").css("border-bottom", "1px dotted #DDD");
 			$(this).css("border-bottom", "2px solid #6f2232");
 			me.theme = $(this).attr("data-style");
 		});
-		$("#applystylebtn").on("click", function(e)
+		$("#applystylebtn").on("click", function()
 		{
 			me.applyStyle();
 			$("#styleselectionmodal").modal("hide");
 		});
 
-		$(".objectthumbnail").on("click", function(e)
+		$(".objectthumbnail").on("click", function()
 		{
 			$(".objectthumbnail").css("border-bottom", "1px dotted #DDD");
-			$(this).css("border-bottom", "2px solid #1ABC9C")
+			$(this).css("border-bottom", "2px solid #1ABC9C");
 			objet =  $(this).attr('data-nom');
 		})
-		$("#applyobjectbtn").on("click", function(e)
+		$("#applyobjectbtn").on("click", function()
 		{
             console.log("append object to stage");
             me.addObjectToSlide(objet);
@@ -1086,7 +1072,7 @@ Impressionist.prototype =
 				}
 			})
 	},
-	removeAllStyles : function( el )
+	removeAllStyles : function(el)
 	{
 		el.removeClass("quicksand");
 		el.removeClass("montserrat");
@@ -1097,7 +1083,7 @@ Impressionist.prototype =
 	{
 		$("#styleselectionmodal").modal("show");
 	},
-	deleteSavedPresentation : function( id )
+	deleteSavedPresentation : function(id)
 	{
 		presentations = JSON.parse(me.getItem(me.saveKey));
 		for(var i=0; i< presentations.length; i++)
@@ -1120,7 +1106,7 @@ Impressionist.prototype =
 			localStorage.removeItem(me.lastSaved);
 		}
 	},
-	generateExportMarkup : function( isPreview )
+	generateExportMarkup : function(isPreview)
 	{
 		var children = $(".slidethumbholder").children();
 			for(var i=0; i<children.length; i++)
@@ -1151,9 +1137,8 @@ Impressionist.prototype =
 			});
 
 			if(isPreview)
-			{
 				me.generatePreview(outputcontainer.html().toString());
-			}
+			
 			$("#exportedcode").text(outputcontainer.html().toString());
 	},
 	createNewPresentation : function()
@@ -1163,7 +1148,7 @@ Impressionist.prototype =
 		me.addSlide();
 		me.savePresentation();
 	},
-	openPresentationForEdit : function( id )
+	openPresentationForEdit : function(id)
 	{
 		console.log("id", id);
 		for(var i=0; i<me.mypresentations.length; i++)
@@ -1212,7 +1197,7 @@ Impressionist.prototype =
 		});
 		me.enableDrag();
 	},
-	fetchAndPreview : function( id )
+	fetchAndPreview : function(id)
 	{
 		for(var i=0; i<me.mypresentations.length; i++)
 		{
@@ -1228,7 +1213,7 @@ Impressionist.prototype =
 					$(this).css("height", "768px");
 					$(this).addClass("step");
 				});
-				me.generatePreview( $(".placeholder").html().toString());
+				me.generatePreview($(".placeholder").html().toString());
 				$("#savedpresentationsmodal").modal("hide");
 				break;
 			}
@@ -1401,13 +1386,12 @@ Impressionist.prototype =
 	},
 	onSettingsCancelClicked : function(e)
 	{
-		console.log("clicked")
 		me.animateSettingsPanel( "left" )
 	},
 	onMenuItemClicked : function(e)
 	{
 		$("#newpresentationmodal").modal("show");
-		$("#newpresoheader").html("Create New Presentation");
+		$("#newpresoheader").html("Créer une nouvelle présentation");
 		me.mode = "create";
 	},
 	saveItem : function(key, value)
