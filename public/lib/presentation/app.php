@@ -113,12 +113,8 @@ use App\Session;
                   <div class="impress-slide-container">
 
                   </div>
-                  <span id="play">
-                      <span class="rotate label label-disabled" id="spanrotate"><i class="fas fa-sync-alt"></i></span>
-                      <!--<span class="scale label label-important"><i class="icon-resize-horizontal"></i></span>-->
-                      <span class="skewx label label-disabled" id="spanskewx"><i class="fas fa-arrows-alt-h"></i></span>
-                      <span class="skewy label label-disabled" id="spanskewy"><i class="fas fa-arrows-alt-v"></i></span>
-                      <span class="deleteicon label label-important" id="spandelete"><i class="fas fa-trash-alt"></i></span>
+                  <span id="play" style="margin-top: 5px">
+                      <span class="deleteicon label label-important btn btn-danger" id="spandelete"><i class="fas fa-trash-alt"></i>  Supprimer l'élément</span>
 
              <!-- <span class="move">move</span>-->
                  </span>
