@@ -932,6 +932,8 @@ Impressionist.prototype =
 		{
 			$("#newpresentationmodal").modal("show");
 			$("#newpresoheader").html("Enregistrer la présentation sous...");
+			$("#titleinput").val( me.currentPresentation.title);
+			$("textarea#descriptioninput").val( me.currentPresentation.description);
 			me.mode = "save";
 		});
 		$(".previewpresobtn").on("click", function()
@@ -1257,7 +1259,7 @@ Impressionist.prototype =
 			var o = {
 							id : tempid,
 							title: $("#titleinput").val(), 
-							description: $("textarea#descriptioninput").text(),
+							description: $("textarea#descriptioninput").val(),
 							contents : $(".impress-slide-container").html().toString(),
 							thumbcontents : $(".slidethumbholder").html().toString(),
 							theme : me.theme
@@ -1392,6 +1394,8 @@ Impressionist.prototype =
 	{
 		$("#newpresentationmodal").modal("show");
 		$("#newpresoheader").html("Créer une nouvelle présentation");
+		$("#titleinput").val("Nouvelle présentation");
+		$("textarea#descriptioninput").val("Exemple de description de présentation");
 		me.mode = "create";
 	},
 	saveItem : function(key, value)

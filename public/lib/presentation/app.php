@@ -108,7 +108,7 @@ use App\Session;
       </div>
       <!-- main footer shows slide thumbnails-->
       <div class="presentationmeta">
-        <p id="presentationmetatitle" class="titrepresentation" style="margin:0 auto; text-transform:none; font-size:130%; color:white"> </p> <a style="position:absolute; right:5px; top:3px" id="editpresonamebtn" class="btn btn-small btn-inline btn-success text-white"><i class="fas fa-edit"></i></a>
+        <p id="presentationmetatitle" class="titrepresentation" style="margin:0 auto; text-transform:none; font-size:160%; color:white; text-align: center"> </p> <a style="position:absolute; right:5px; top:3px" id="editpresonamebtn" class="btn btn-small btn-inline btn-success text-white"><i class="fas fa-edit"></i></a>
       </div>
               <div class="slideviewportcontainer">
                 <div class="slideviewport">
@@ -212,9 +212,9 @@ use App\Session;
           </div>
           <div class="modal-body">
             <p>Titre</p>
-            <input type="text" id="titleinput" class="form-control" value="Nouvelle présentation">
+            <input type="text" id="titleinput" class="form-control" value="Nouvelle présentation" maxlength="60">
             <p>Description</p>
-            <textarea id="descriptioninput" class="form-control"> Exemple de description de présentation </textarea>
+            <textarea id="descriptioninput" class="form-control">Exemple de description de présentation</textarea>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
