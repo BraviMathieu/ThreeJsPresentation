@@ -1,5 +1,5 @@
 
-Impressionist = function()
+Presentation = function()
 {
 
 	this.slidecounter = 0;
@@ -50,7 +50,7 @@ Impressionist = function()
 	this.wymin = 0;
 
 }
-Impressionist.prototype =
+Presentation.prototype =
 {
 	initialize  : function()
 	{
@@ -598,7 +598,6 @@ Impressionist.prototype =
 	addSettingsPanel : function()
 	{
 		$(".settingsbox").html(newpresotemplate);
-		//this.addSlide();
 		this.removelisteners();
 		this.attachListeners();
 	},

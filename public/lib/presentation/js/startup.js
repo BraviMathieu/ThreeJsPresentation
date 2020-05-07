@@ -1,14 +1,14 @@
 
 $(document).ready( function (e)
 {
-  impressionist();
+  presentation();
 });
 
-function impressionist()
+function presentation()
 {
-   impressionist = new Impressionist();
-   impressionist.initialize();
-   impressionist.addSettingsPanel( " ");
+   let presentation = new Presentation();
+   presentation.initialize();
+   presentation.addSettingsPanel();
    showViewport();
 }
 function showViewport()

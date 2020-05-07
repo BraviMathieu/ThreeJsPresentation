@@ -46,7 +46,6 @@ use App\Session;
                       <a class="nav-link" id="savepresentationbtn" ><div class="sb-nav-link-icon"><i class="fas fa-save"></i></div>
                         Sauvegarder</a>
 
-
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
