@@ -413,11 +413,9 @@ Impressionist.prototype =
 		}
 		str = s + " rotate("+value+"deg)";
 		me.selectedOrchElement.css("transform", str);
-		console.log("css", me.selectedOrchElement.css("transform"));
 		me.selectedOrchElement.attr("data-rotate", value);
 
 		id = me.selectedOrchElement.attr("id").split("_")[1];
-		console.log("Updating slidethumb", $("#slidethumb_"+id));
 
 		$("#slidethumb_"+id).attr("data-rotate-x", rotx);
 		$("#slidethumb_"+id).attr("data-rotate-y", roty);
@@ -427,28 +425,19 @@ Impressionist.prototype =
 	},
 	rotateElementX : function(value)
 	{
-		rot = me.selectedOrchElement.attr("data-rotate");
 		roty = me.selectedOrchElement.attr("data-rotate-y");
 		s = "";
-		if(rot != undefined)
-		{
-			console.log("rotated already", rot);
-			s += "rotate("+rot+"deg)";
-		}
 		if(roty != undefined)
 		{
 			s += "rotateY("+roty+"deg)";
 		}
 		str = s + " rotateX("+value+"deg)";
-		console.log("Transform string before writing", str);
 		me.selectedOrchElement.css("transform", str);
 		me.selectedOrchElement.attr("data-rotate", value);
-		console.log("css", me.selectedOrchElement.css("transform"));
 		me.selectedOrchElement.attr("data-rotate-x", value);
 
 		id = me.selectedOrchElement.attr("id").split("_")[1];
 
-		console.log("Updating slidethumb", $("#slidethumb_"+id));
 		$("#slidethumb_"+id).attr("data-rotate-x", value);
 		$("#slidethumb_"+id).attr("data-rotate-y", roty);
 		$("#slidethumb_"+id).attr("data-rotate", rot);
@@ -456,27 +445,18 @@ Impressionist.prototype =
 	},
 	rotateElementY : function(value)
 	{
-		rot = me.selectedOrchElement.attr("data-rotate");
 		rotx = me.selectedOrchElement.attr("data-rotate-x");
 		s = "";
-		if(rot != undefined)
-		{
-			console.log("rotated already", rot);
-			s += "rotate("+rot+"deg)";
-		}
 		if(rotx != undefined)
 		{
 			s += "rotateX("+rotx+"deg)";
 		}
 		str = s + " rotateY("+value+"deg)";
-		console.log("Transform string before writing y", str);
 		me.selectedOrchElement.css("transform", str);
 		me.selectedOrchElement.attr("data-rotate", value);
-		console.log("css", me.selectedOrchElement.css("transform"));
 		me.selectedOrchElement.attr("data-rotate-y", value);
 
 		id = me.selectedOrchElement.attr("id").split("_")[1];
-		console.log("Updating slidethumb", $("#slidethumb_"+id));
 
 		$("#slidethumb_"+id).attr("data-rotate-x", rotx);
 		$("#slidethumb_"+id).attr("data-rotate-y", value);
@@ -602,21 +582,6 @@ Impressionist.prototype =
 	selectElement : function(el)
 	{
 		me.selectedElement = el;
-	},
-	calculateFontSize : function(type)
-	{
-		size = "";
-		switch(type)
-		{
-			case "h3" :
-				size = "4.5px";
-				break;
-			case "h2" :
-				size = "5.5px";
-				break;
-		}
-		console.log("size", size);
-		return size;
 	},
 	setupColorpicker : function()
 	{
@@ -1420,11 +1385,6 @@ Impressionist.prototype =
         me.selectedSlide.append($(iframe));
         me.enableDrag();
     },
-	removeSlide : function(el)
-	{
-		el.remove();
-		clearInterval(me.deleteslideinterval);
-	},
 	createEditor : function(e)
 	{
 		editor = $(e.target).clone();
@@ -1449,23 +1409,6 @@ Impressionist.prototype =
 		$("#newpresentationmodal").modal("show");
 		$("#newpresoheader").html("Create New Presentation");
 		me.mode = "create";
-	},
-	calculateThumbnailCoords : function(wx, 
-										wy, 
-										vxmax, 
-										vxmin, 
-										vymax, 
-										vymin, 
-										wxmax, 
-										wxmin, 
-										wymax, 
-										wymin
-										)
-	{
-		var vx = Math.round(((vxmax - vxmin)/(wxmax - wxmin) )*(wx - wxmin) + vxmin);
-		var vy = Math.round(((vymax - vymin)/(wymax - wymin) )*(wy - wymin) + vymin);
-		var object = {x:vx, y:vy};
-		return object;
 	},
 	saveItem : function(key, value)
 	{

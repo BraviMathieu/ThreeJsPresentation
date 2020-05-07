@@ -356,11 +356,9 @@ use App\Session;
             </div>
         </div>
     </div>
-
 <script>
     $(document).ready(function() {
         $(function(){
-
             $("#typetitre li a").click(function(){
                 $("#dropdownMenu1:first-child").text($(this).text());
                 $("#dropdownMenu1:first-child").val($(this).text());
