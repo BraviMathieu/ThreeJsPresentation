@@ -113,8 +113,8 @@ use App\Session;
                   <div class="impress-slide-container">
 
                   </div>
-                  <span id="play" style="margin-top: 5px">
-                      <span class="deleteicon label label-important btn btn-danger" id="spandelete"><i class="fas fa-trash-alt"></i>  Supprimer l'élément</span>
+                  <span id="play" style="margin-left: 300px; margin-top: -5px;">
+                      <span class="deleteicon label label-important btn btn-danger" id="spandelete"><i class="fas fa-trash-alt"></i></span>
 
              <!-- <span class="move">move</span>-->
                  </span>
