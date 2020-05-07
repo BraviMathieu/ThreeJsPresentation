@@ -14,7 +14,7 @@ Impressionist = function()
 	this.selectedOrchElement;
 	this.lastslideleftpos = 0;
 	this.saveKey = "impressionist_decks";
-	this.lastSaved = "impressionist_lastsaved"
+	this.lastSaved = "impressionist_lastsaved";
 	this.currentPresentation;
 	this.mypresentations = [];
 	this.mode = "create";
@@ -28,6 +28,10 @@ Impressionist = function()
 	this.isBold = false;
 	this.isItalic = false;
 	this.isUnderlined = false;
+
+	this.isAlignedLeft = false;
+	this.isAlignedCenter = false;
+	this.isAlignedRight = false;
 
 	 this.vxmax = 6000;
 	//Viewport x min
@@ -76,8 +80,8 @@ Impressionist.prototype =
 		console.log("lastsaved", presentation);
 		if(!presentation)
 		{
-			savedpresos = JSON.parse(me.getItem(me.saveKey))
-			console.log("savedpresos", savedpresos)
+			savedpresos = JSON.parse(me.getItem(me.saveKey));
+			console.log("savedpresos", savedpresos);
 			if(savedpresos && savedpresos.length > 0)
 			{
 				$("#savedpresentationsmodal").modal("show");
@@ -110,11 +114,11 @@ Impressionist.prototype =
 		}
 		for(var i=0; i<presentations.length; i++)
 		{
-			presentation = presentations[i]
+			presentation = presentations[i];
 			templ = saved_presentations;
-			templ = templ.split("__presotitle__").join(presentation.title)
-			templ = templ.split("__presodescription__").join(presentation.description)
-			templ = templ.split("__presoid__").join(presentation.id)
+			templ = templ.split("__presotitle__").join(presentation.title);
+			templ = templ.split("__presodescription__").join(presentation.description);
+			templ = templ.split("__presoid__").join(presentation.id);
 			$("#savedpresentations").append(templ);
 		}
 		$(".savedpresos").on("mouseover", function(e)
@@ -127,15 +131,11 @@ Impressionist.prototype =
 		})
 		$(".deletepresobtn").on("click", function(e)
 		{
-			msg = confirm("Are you sure? You will lose your deck forever.")
+			msg = confirm("Are you sure? You will lose your deck forever.");
 			if(msg == true)
-			{
 				me.deleteSavedPresentation( $(this).attr("data-id") );
-			}
 			else
-			{
 				console.log("do nothing");
-			}
 			
 		})
 		//$("#savedpresentationsmodal").modal("show");
@@ -198,8 +198,8 @@ Impressionist.prototype =
 			{
 				me.selectedElement.css("fontWeight", "normal");
 				me.selectedElement.attr("data-isbold", false);
-				me.isBold = false;
 				$(this).removeClass("active");
+				me.isBold = false;
 			}
 		});
 		$("#makeitalic").on("click", function(e)
@@ -217,8 +217,8 @@ Impressionist.prototype =
 			{
 				me.selectedElement.css("fontStyle", "normal");
 				me.selectedElement.attr("data-isitalic", false);
-				me.isItalic = false;
 				$(this).removeClass("active");
+				me.isItalic = false;
 			}
 		});
 		$("#makeunderline").on("click", function(e)
@@ -236,10 +236,104 @@ Impressionist.prototype =
 			{
 				me.selectedElement.css("text-decoration", "none");
 				me.selectedElement.attr("data-isunderline", false);
-				me.isUnderlined = false;
 				$(this).removeClass("active");
+				me.isUnderlined = false;
 			}
 		});
+		$("#makealignleft").on("click", function(e)
+		{
+			e.stopPropagation();
+			$(this).removeClass("active");
+			if(!me.isAlignedLeft && me.selectedElement)
+			{
+				me.selectedElement.css("text-align", "left");
+				me.selectedElement.attr("data-isalignleft", true);
+				me.selectedElement.attr("data-isaligncenter", false);
+				me.selectedElement.attr("data-isalignright", false);
+				$(this).addClass("active");
+				$("#makealigncenter").removeClass("active");
+				$("#makealignright").removeClass("active");
+				me.isAlignedLeft = true;
+				me.isAlignedCenter = false;
+				me.isAlignedRight = false;
+			}
+			else if(me.isAlignedLeft && me.selectedElement)
+			{
+				me.selectedElement.css("text-align", "left");
+				me.selectedElement.attr("data-isalignleft", false);
+				me.selectedElement.attr("data-isaligncenter", false);
+				me.selectedElement.attr("data-isalignright", false);
+				$(this).removeClass("active");
+				$("#makealigncenter").removeClass("active");
+				$("#makealignright").removeClass("active");
+				me.isAlignedLeft = false;
+				me.isAlignedCenter = false;
+				me.isAlignedRight = false;
+			}
+		});
+		$("#makealigncenter").on("click", function(e)
+		{
+			e.stopPropagation();
+			$(this).removeClass("active");
+			if(!me.isAlignedCenter && me.selectedElement)
+			{
+				me.selectedElement.css("text-align", "center");
+				me.selectedElement.attr("data-isalignleft", false);
+				me.selectedElement.attr("data-isaligncenter", true);
+				me.selectedElement.attr("data-isalignright", false);
+				$("#makealignleft").removeClass("active");
+				$(this).addClass("active");
+				$("#makealignright").removeClass("active");
+				me.isAlignedLeft = false;
+				me.isAlignedCenter = true;
+				me.isAlignedRight = false;
+			}
+			else if(me.isAlignedCenter && me.selectedElement)
+			{
+				me.selectedElement.css("text-align", "left");
+				me.selectedElement.attr("data-isalignleft", false);
+				me.selectedElement.attr("data-isaligncenter", false);
+				me.selectedElement.attr("data-isalignright", false);
+				$("#makealignleft").removeClass("active");
+				$(this).removeClass("active");
+				$("#makealignright").removeClass("active");
+				me.isAlignedLeft = false;
+				me.isAlignedCenter = false;
+				me.isAlignedRight = false;
+			}
+		});
+		$("#makealignright").on("click", function(e)
+		{
+			e.stopPropagation();
+			$(this).removeClass("active");
+			if(!me.isAlignedRight && me.selectedElement)
+			{
+				me.selectedElement.css("text-align", "right");
+				me.selectedElement.attr("data-isalignleft", false);
+				me.selectedElement.attr("data-isaligncenter", false);
+				me.selectedElement.attr("data-isalignright", true);
+				$("#makealignleft").removeClass("active");
+				$("#makealigncenter").removeClass("active");
+				$(this).addClass("active");
+				me.isAlignedLeft = false;
+				me.isAlignedCenter = false;
+				me.isAlignedRight = true;
+			}
+			else if(me.isAlignedRight && me.selectedElement)
+			{
+				me.selectedElement.css("text-align", "left");
+				me.selectedElement.attr("data-isalignleft", false);
+				me.selectedElement.attr("data-isaligncenter", false);
+				me.selectedElement.attr("data-isalignright", false);
+				$("#makealignleft").removeClass("active");
+				$("#makealigncenter").removeClass("active");
+				$(this).removeClass("active");
+				me.isAlignedLeft = false;
+				me.isAlignedCenter = false;
+				me.isAlignedRight = false;
+			}
+		});
+
 	},
 	enableSort : function()
 	{
@@ -360,7 +454,7 @@ Impressionist.prototype =
 		$("#slidethumb_"+id).attr("data-rotate", rot);
 		$("#slidethumb_"+id).attr("data-transform-string", str);
 	},
-	rotateElementY : function( value )
+	rotateElementY : function(value)
 	{
 		rot = me.selectedOrchElement.attr("data-rotate");
 		rotx = me.selectedOrchElement.attr("data-rotate-x");
@@ -420,7 +514,6 @@ Impressionist.prototype =
 			me.setMenuControlValues($(this));
 			me.positionTransformControl()
 			
-			
 		}).on("mousedown mouseover", function(e)
 		{
 			$(this).addClass("movecursor")
@@ -429,7 +522,6 @@ Impressionist.prototype =
 			console.log("mouse upping", me.selectedSlide );
 			me.generateScaledSlide( me.selectedSlide );
 		})
-		
 		
 	},
 	positionTransformControl : function()
@@ -448,37 +540,50 @@ Impressionist.prototype =
 			$("#play").css("display", "none");
 		})
 	},
-	setMenuControlValues : function( el )
+	setMenuControlValues : function(el)
 	{
-		var isbold = el.attr("data-isbold");
-		var isitalic = el.attr("data-isitalic");
-		var isunderline = el.attr("data-isunderline");
+		var isbold 					= ( el.attr("data-isbold") == "true");
+		var isitalic 				= ( el.attr("data-isitalic")  == "true");
+		var isunderline 		= ( el.attr("data-isunderline")  == "true");
+		var isalignleft 		= ( el.attr("data-isalignleft")  == "true");
+		var isaligncenter 	= ( el.attr("data-isaligncenter")  == "true");
+		var isalignright 		= ( el.attr("data-isalignright")  == "true");
+
 		if(isbold)
-		{
-			$("#makebold").addClass("active")
-		}
+			$("#makebold").addClass("active");
 		else
-		{
-			$("#makebold").removeClass("active")
-		}
+			$("#makebold").removeClass("active");
+
 
 		if(isitalic)
-		{
-			$("#makeitalic").addClass("active")
-		}
+			$("#makeitalic").addClass("active");
 		else
-		{
-			$("#makeitalic").removeClass("active")
-		}
+			$("#makeitalic").removeClass("active");
+
 
 		if(isunderline)
-		{
-			$("#makeunderline").addClass("active")
-		}
+			$("#makeunderline").addClass("active");
 		else
-		{
-			$("#makeunderline").removeClass("active")
-		}
+			$("#makeunderline").removeClass("active");
+
+
+		if(isalignleft)
+			$("#makealignleft").addClass("active");
+		else
+			$("#makealignleft").removeClass("active");
+
+
+		if(isaligncenter)
+			$("#makealigncenter").addClass("active");
+		else
+			$("#makealigncenter").removeClass("active");
+
+
+		if(isalignright)
+			$("#makealignright").addClass("active");
+		else
+			$("#makealignright").removeClass("active");
+
 	},
 	resetMenuControlValues : function()
 	{
@@ -515,9 +620,9 @@ Impressionist.prototype =
 	},
 	setupColorpicker : function()
 	{
-		$('#cp15').colorpicker().on('colorpickerChange', function (e) {
+		$('#cp15').colorpicker().on('colorpickerChange', function (e){
 			var io = e.colorpicker.element.find('.color-io');
-			if (e.value === io.val() || !e.color || !e.color.isValid()) {
+			if (e.value === io.val() || !e.color || !e.color.isValid()){
 				// do not replace the input value if the color is invalid or equals
 				return;
 			}
