@@ -32,7 +32,7 @@ use App\Session;
                           Nouvelle présentation</a>
                       <a class="nav-link" id="newstylepanel" ><div class="sb-nav-link-icon"><i class="fas fa-pencil-alt"></i></div>
                         Selectionner une police</a>
-                      <a class="nav-link" id="neworchestratepanel" ><div class="sb-nav-link-icon"><i class="fas fa-th"></i></div>
+                      <a class="nav-link" id="neworchestratepanel" ><div class="sb-nav-link-icon"><i id="viewtoggleicon" class="fas fa-th"></i></div>
                         Panorama</a>
                       <a class="nav-link" id="exportpresopanel"><div class="sb-nav-link-icon"><i class="fas fa-cloud"></i></div>
                         Exporter présentation</a>
@@ -125,19 +125,24 @@ use App\Session;
               </div>
         </div>
     </div>
-    <div class="palette palette-clouds orchgreyarea">
-       <div class="transformcontrolsholder">
-          <h3 class="transformlabel">Rotation Z</h3>
-          <input class="knob" id="rotationknob" data-width="40" data-min="-360" data-max="360" data-fgColor="#1ABC9C" data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
-          <h3 class="transformlabel">Rotation X</h3>
-          <input class="knob" id="skewxknob" data-width="40" data-min="-360" data-max="360" data-fgColor="#1ABC9C" data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
-          <h3 class="transformlabel">Rotation Y</h3>
-          <input class="knob" id="skewyknob" data-width="40" data-min="-360" data-max="360" data-fgColor="#1ABC9C" data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
-          <h3 class="transformlabel">Scale</h3>
-          <input type="range" id="scalerange" class="ranges" min="1" max="6" value="1" />
-          <h3 class="transformlabel">Depth</h3>
-          <input type="range" id="depthrange" class="ranges" min="-3000" max="5000" value="1" />
-     </div>
+      <div class="palette palette-clouds orchgreyarea">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <div class="transformcontrolsholder">
+            <h3 class="transformlabel">Rotation Z</h3>
+            <input class="knob" id="rotationknob" data-width="40" data-min="-360" data-max="360" data-fgColor="#1ABC9C" data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
+            <h3 class="transformlabel">Rotation X</h3>
+            <input class="knob" id="skewxknob" data-width="40" data-min="-360" data-max="360" data-fgColor="#1ABC9C" data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
+            <h3 class="transformlabel">Rotation Y</h3>
+            <input class="knob" id="skewyknob" data-width="40" data-min="-360" data-max="360" data-fgColor="#1ABC9C" data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
+            <h3 class="transformlabel">Échelle</h3>
+            <input type="range" id="scalerange" class="ranges" min="1" max="6" value="1" />
+            <h3 class="transformlabel">Profondeur</h3>
+            <input type="range" id="depthrange" class="ranges" min="-3000" max="5000" value="1" />
+          </div>
+        </div>
+      </div>
+
       <div class="orchestrationviewport">
 
       </div>
@@ -162,7 +167,7 @@ use App\Session;
           </div>
           <div class="modal-body">
             <p>Coller l'URL de l'image </p>
-            <input type="text" id="imageinput" class="image-input">
+            <input type="text" id="imageinput" class="form-control">
             <p> La prévisualisation va apparaitre en dessous.</p>
             <img id="previewimg">
           </div>
@@ -210,9 +215,9 @@ use App\Session;
           </div>
           <div class="modal-body">
             <p>Titre</p>
-            <input type="text" id="titreinput" class="image-input" value="Nouvelle présentation">
+            <input type="text" id="titreinput" class="form-control" value="Nouvelle présentation">
             <p>Description</p>
-            <textarea id="descriptioninput" class="descriptioninput"> Exemple de description de présentation </textarea>
+            <textarea id="descriptioninput" class="form-control"> Exemple de description de présentation </textarea>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
