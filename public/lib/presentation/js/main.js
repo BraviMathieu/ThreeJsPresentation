@@ -6,7 +6,6 @@ Impressionist = function()
 
 	this.menuopen = false;
 	this.currentview = "mainarea";
-	this.colorpickeropen = false;
 	this.selectedElement;
 	this.clonedElement;
 	this.selectedSlide;
@@ -15,12 +14,11 @@ Impressionist = function()
 	this.selectedOrchElement;
 	this.lastslideleftpos = 0;
 	this.saveKey = "impressionist_decks";
-	this.lastSaved = "impressionist_lastsaved"
+	this.lastSaved = "impressionist_lastsaved";
 	this.currentPresentation;
 	this.mypresentations = [];
 	this.mode = "create";
 	this.theme = "montserrat";
-	this.loggedinstate = false;
 
 	this.dropdownopen = false;
 
@@ -30,6 +28,10 @@ Impressionist = function()
 	this.isBold = false;
 	this.isItalic = false;
 	this.isUnderlined = false;
+
+	this.isAlignedLeft = false;
+	this.isAlignedCenter = false;
+	this.isAlignedRight = false;
 
 	 this.vxmax = 6000;
 	//Viewport x min
@@ -47,10 +49,6 @@ Impressionist = function()
 	//Window y min
 	this.wymin = 0;
 
- 	this.slidewxmax = 960;
- 	this.slidewxmin = 0;
- 	this.slidewymax = 630;
- 	this.slidewymin = 0;
 }
 Impressionist.prototype =
 {
@@ -58,8 +56,6 @@ Impressionist.prototype =
 	{
 		me = this;
 		me.continueInit();
-
-		
 		//me.openNewPresentationWindow();
 	},
 	continueInit : function()
@@ -84,8 +80,8 @@ Impressionist.prototype =
 		console.log("lastsaved", presentation);
 		if(!presentation)
 		{
-			savedpresos = JSON.parse(me.getItem(me.saveKey))
-			console.log("savedpresos", savedpresos)
+			savedpresos = JSON.parse(me.getItem(me.saveKey));
+			console.log("savedpresos", savedpresos);
 			if(savedpresos && savedpresos.length > 0)
 			{
 				$("#savedpresentationsmodal").modal("show");
@@ -94,7 +90,6 @@ Impressionist.prototype =
 			{
 				me.openNewPresentationWindow();
 			}
-			
 		}
 		else
 		{
@@ -103,7 +98,6 @@ Impressionist.prototype =
 			me.theme = presentation.theme;
 			me.openPresentationForEdit( me.currentPresentation.id );
 			me.applyStyle();
-
 		}
 	},
 	openNewPresentationWindow : function()
@@ -113,39 +107,35 @@ Impressionist.prototype =
 	renderPresentations : function ( presentations )
 	{	
 		me.mypresentations = presentations;
-		$("#savedpresentations").html("<h3 style='display:inline-block; color:#2980B9; font-size:120%'> You don't have any saved presentations. </h3>");
+		$("#savedpresentations").html("<h3 style='display:inline-block; color:#2980B9; font-size:120%'> Vous n'avez aucune présentations sauvegardées. </h3>");
 		if(presentations.length > 0)
 		{
 			$("#savedpresentations").html("");
 		}
 		for(var i=0; i<presentations.length; i++)
 		{
-			presentation = presentations[i]
+			presentation = presentations[i];
 			templ = saved_presentations;
-			templ = templ.split("__presotitle__").join(presentation.title)
-			templ = templ.split("__presodescription__").join(presentation.description)
-			templ = templ.split("__presoid__").join(presentation.id)
+			templ = templ.split("__presotitle__").join(presentation.title);
+			templ = templ.split("__presodescription__").join(presentation.description);
+			templ = templ.split("__presoid__").join(presentation.id);
 			$("#savedpresentations").append(templ);
 		}
-		$(".savedpresos").on("mouseover", function( e )
+		$(".savedpresos").on("mouseover", function(e)
 		{
 			$(this).find(".presothumb").removeClass("idle");
 
-		}).on("mouseout", function( e )
+		}).on("mouseout", function(e)
 		{
 			$(this).find(".presothumb").addClass("idle");
 		})
-		$(".deletepresobtn").on("click", function( e )
+		$(".deletepresobtn").on("click", function(e)
 		{
-			msg = confirm("Are you sure? You will lose your deck forever.")
+			msg = confirm("Are you sure? You will lose your deck forever.");
 			if(msg == true)
-			{
 				me.deleteSavedPresentation( $(this).attr("data-id") );
-			}
 			else
-			{
 				console.log("do nothing");
-			}
 			
 		})
 		//$("#savedpresentationsmodal").modal("show");
@@ -177,8 +167,8 @@ Impressionist.prototype =
 		{
 			clone = me.selectedElement.clone();
 			clone.attr("id", "slideelement_"+me.generateUID());
-			clone.css("left", me.selectedElement.position().left + 20+"px")
-			clone.css("top", me.selectedElement.position().top + 20+"px")
+			clone.css("left", me.selectedElement.position().left + 20+"px");
+			clone.css("top", me.selectedElement.position().top + 20+"px");
 			me.clonedElement = clone;
 		}
 		else
@@ -188,68 +178,162 @@ Impressionist.prototype =
 	},
 	appendClonedElement : function()
 	{
-		console.log(me.clonedElement, "clonedelement")
+		console.log(me.clonedElement, "clonedelement");
 		me.selectedSlide.append(me.clonedElement);
 		me.enableDrag();
 	},
 	setupMenuItemEvents : function()
 	{
-		$("#makebold").on("click", function( e )
+		$("#makebold").on("click", function(e)
 		{
-			e.stopPropagation()
+			e.stopPropagation();
 			if(!me.isBold && me.selectedElement)
 			{
-				me.selectedElement.css("fontWeight", "bold")
+				me.selectedElement.css("fontWeight", "bold");
 				me.selectedElement.attr("data-isbold", true);
 				$(this).addClass("active");
 				me.isBold = true;
 			}
 			else if(me.isBold && me.selectedElement)
 			{
-				me.selectedElement.css("fontWeight", "normal")
+				me.selectedElement.css("fontWeight", "normal");
 				me.selectedElement.attr("data-isbold", false);
-				me.isBold = false;
 				$(this).removeClass("active");
+				me.isBold = false;
 			}
 		});
-		$("#makeitalic").on("click", function( e )
+		$("#makeitalic").on("click", function(e)
 		{
-			e.stopPropagation()
+			e.stopPropagation();
 			$(this).removeClass("active");
 			if(!me.isItalic && me.selectedElement)
 			{
-				me.selectedElement.css("fontStyle", "italic")
+				me.selectedElement.css("fontStyle", "italic");
 				me.selectedElement.attr("data-isitalic", true);
 				$(this).addClass("active");
 				me.isItalic = true;
 			}
 			else if(me.isItalic && me.selectedElement)
 			{
-				me.selectedElement.css("fontStyle", "normal")
+				me.selectedElement.css("fontStyle", "normal");
 				me.selectedElement.attr("data-isitalic", false);
-				me.isItalic = false;
 				$(this).removeClass("active");
+				me.isItalic = false;
 			}
 		});
-		$("#makeunderline").on("click", function( e )
+		$("#makeunderline").on("click", function(e)
 		{
-			e.stopPropagation()
+			e.stopPropagation();
 			$(this).removeClass("active");
 			if(!me.isUnderlined && me.selectedElement)
 			{
-				me.selectedElement.css("text-decoration", "underline")
+				me.selectedElement.css("text-decoration", "underline");
 				me.selectedElement.attr("data-isunderline", true);
 				$(this).addClass("active");
 				me.isUnderlined = true;
 			}
 			else if(me.isUnderlined && me.selectedElement)
 			{
-				me.selectedElement.css("text-decoration", "none")
+				me.selectedElement.css("text-decoration", "none");
 				me.selectedElement.attr("data-isunderline", false);
-				me.isUnderlined = false;
 				$(this).removeClass("active");
+				me.isUnderlined = false;
 			}
 		});
+		$("#makealignleft").on("click", function(e)
+		{
+			e.stopPropagation();
+			$(this).removeClass("active");
+			if(!me.isAlignedLeft && me.selectedElement)
+			{
+				me.selectedElement.css("text-align", "left");
+				me.selectedElement.attr("data-isalignleft", true);
+				me.selectedElement.attr("data-isaligncenter", false);
+				me.selectedElement.attr("data-isalignright", false);
+				$(this).addClass("active");
+				$("#makealigncenter").removeClass("active");
+				$("#makealignright").removeClass("active");
+				me.isAlignedLeft = true;
+				me.isAlignedCenter = false;
+				me.isAlignedRight = false;
+			}
+			else if(me.isAlignedLeft && me.selectedElement)
+			{
+				me.selectedElement.css("text-align", "left");
+				me.selectedElement.attr("data-isalignleft", false);
+				me.selectedElement.attr("data-isaligncenter", false);
+				me.selectedElement.attr("data-isalignright", false);
+				$(this).removeClass("active");
+				$("#makealigncenter").removeClass("active");
+				$("#makealignright").removeClass("active");
+				me.isAlignedLeft = false;
+				me.isAlignedCenter = false;
+				me.isAlignedRight = false;
+			}
+		});
+		$("#makealigncenter").on("click", function(e)
+		{
+			e.stopPropagation();
+			$(this).removeClass("active");
+			if(!me.isAlignedCenter && me.selectedElement)
+			{
+				me.selectedElement.css("text-align", "center");
+				me.selectedElement.attr("data-isalignleft", false);
+				me.selectedElement.attr("data-isaligncenter", true);
+				me.selectedElement.attr("data-isalignright", false);
+				$("#makealignleft").removeClass("active");
+				$(this).addClass("active");
+				$("#makealignright").removeClass("active");
+				me.isAlignedLeft = false;
+				me.isAlignedCenter = true;
+				me.isAlignedRight = false;
+			}
+			else if(me.isAlignedCenter && me.selectedElement)
+			{
+				me.selectedElement.css("text-align", "left");
+				me.selectedElement.attr("data-isalignleft", false);
+				me.selectedElement.attr("data-isaligncenter", false);
+				me.selectedElement.attr("data-isalignright", false);
+				$("#makealignleft").removeClass("active");
+				$(this).removeClass("active");
+				$("#makealignright").removeClass("active");
+				me.isAlignedLeft = false;
+				me.isAlignedCenter = false;
+				me.isAlignedRight = false;
+			}
+		});
+		$("#makealignright").on("click", function(e)
+		{
+			e.stopPropagation();
+			$(this).removeClass("active");
+			if(!me.isAlignedRight && me.selectedElement)
+			{
+				me.selectedElement.css("text-align", "right");
+				me.selectedElement.attr("data-isalignleft", false);
+				me.selectedElement.attr("data-isaligncenter", false);
+				me.selectedElement.attr("data-isalignright", true);
+				$("#makealignleft").removeClass("active");
+				$("#makealigncenter").removeClass("active");
+				$(this).addClass("active");
+				me.isAlignedLeft = false;
+				me.isAlignedCenter = false;
+				me.isAlignedRight = true;
+			}
+			else if(me.isAlignedRight && me.selectedElement)
+			{
+				me.selectedElement.css("text-align", "left");
+				me.selectedElement.attr("data-isalignleft", false);
+				me.selectedElement.attr("data-isaligncenter", false);
+				me.selectedElement.attr("data-isalignright", false);
+				$("#makealignleft").removeClass("active");
+				$("#makealigncenter").removeClass("active");
+				$(this).removeClass("active");
+				me.isAlignedLeft = false;
+				me.isAlignedCenter = false;
+				me.isAlignedRight = false;
+			}
+		});
+
 	},
 	enableSort : function()
 	{
@@ -260,10 +344,6 @@ Impressionist.prototype =
 				me.reArrangeImpressSlides();
 			}} );
 		//$(".slidethumbholder").disableSelection();
-	},
-	displaySelectedSlide : function( id )
-	{
-		
 	},
 	reArrangeImpressSlides : function()
 	{
@@ -287,27 +367,27 @@ Impressionist.prototype =
 	},
 	setupDials : function()
 	{
-		$("#rotationknob").knob({change : function( v )
+		$("#rotationknob").knob({change : function(v)
 		{
 			//me.rotateElement( v );
-			me.rotateElement( v )
+			me.rotateElement(v);
 		}});
-		$("#skewxknob").knob({change : function( v )
+		$("#skewxknob").knob({change : function(v)
 		{
-			me.rotateElementX( v );
+			me.rotateElementX(v);
 		}});
-		$("#skewyknob").knob({change : function( v )
+		$("#skewyknob").knob({change : function(v)
 		{
-			me.rotateElementY( v );
+			me.rotateElementY(v);
 		}});
-		$("#scalerange").on("change", function( e )
+		$("#scalerange").on("change", function(e)
 		{
 			console.log("moving scale", $(this).val());
 			me.selectedOrchElement.attr("data-scale", $(this).val());
 			id = me.selectedOrchElement.attr("id").split("_")[1];
 			$("#slidethumb_"+id).attr("data-scale", $(this).val());
 		});
-		$("#depthrange").on("change", function( e )
+		$("#depthrange").on("change", function(e)
 		{
 			me.selectedOrchElement.attr("data-z", $(this).val());
 			id = me.selectedOrchElement.attr("id").split("_")[1];
@@ -316,13 +396,13 @@ Impressionist.prototype =
 		$(".transformlabel").css("vertical-align", "top")
 
 	},
-	rotateElement : function( value )
+	rotateElement : function(value)
 	{
 		//me.selectedOrchElement.css("transform-origin", "0 0");
 		
 		rotx = me.selectedOrchElement.attr("data-rotate-x");
-		roty = me.selectedOrchElement.attr("data-rotate-y")
-		s = ""
+		roty = me.selectedOrchElement.attr("data-rotate-y");
+		s = "";
 		if(rotx != undefined)
 		{
 			s += "rotateX("+rotx+"deg)";
@@ -331,10 +411,10 @@ Impressionist.prototype =
 		{
 			s += "rotateY("+roty+"deg)";
 		}
-		str = s + " rotate("+value+"deg)"
+		str = s + " rotate("+value+"deg)";
 		me.selectedOrchElement.css("transform", str);
 		console.log("css", me.selectedOrchElement.css("transform"));
-		me.selectedOrchElement.attr("data-rotate", value)
+		me.selectedOrchElement.attr("data-rotate", value);
 
 		id = me.selectedOrchElement.attr("id").split("_")[1];
 		console.log("Updating slidethumb", $("#slidethumb_"+id));
@@ -343,28 +423,28 @@ Impressionist.prototype =
 		$("#slidethumb_"+id).attr("data-rotate-y", roty);
 		$("#slidethumb_"+id).attr("data-rotate", value);
 
-		$("#slidethumb_"+id).attr("data-transform-string", str)
+		$("#slidethumb_"+id).attr("data-transform-string", str);
 	},
-	rotateElementX : function( value )
+	rotateElementX : function(value)
 	{
 		rot = me.selectedOrchElement.attr("data-rotate");
-		roty = me.selectedOrchElement.attr("data-rotate-y")
-		s = ""
+		roty = me.selectedOrchElement.attr("data-rotate-y");
+		s = "";
 		if(rot != undefined)
 		{
-			console.log("rotated already", rot)
+			console.log("rotated already", rot);
 			s += "rotate("+rot+"deg)";
 		}
 		if(roty != undefined)
 		{
 			s += "rotateY("+roty+"deg)";
 		}
-		str = s + " rotateX("+value+"deg)"
+		str = s + " rotateX("+value+"deg)";
 		console.log("Transform string before writing", str);
 		me.selectedOrchElement.css("transform", str);
 		me.selectedOrchElement.attr("data-rotate", value);
 		console.log("css", me.selectedOrchElement.css("transform"));
-		me.selectedOrchElement.attr("data-rotate-x", value)
+		me.selectedOrchElement.attr("data-rotate-x", value);
 
 		id = me.selectedOrchElement.attr("id").split("_")[1];
 
@@ -372,28 +452,28 @@ Impressionist.prototype =
 		$("#slidethumb_"+id).attr("data-rotate-x", value);
 		$("#slidethumb_"+id).attr("data-rotate-y", roty);
 		$("#slidethumb_"+id).attr("data-rotate", rot);
-		$("#slidethumb_"+id).attr("data-transform-string", str)
+		$("#slidethumb_"+id).attr("data-transform-string", str);
 	},
-	rotateElementY : function( value )
+	rotateElementY : function(value)
 	{
 		rot = me.selectedOrchElement.attr("data-rotate");
-		rotx = me.selectedOrchElement.attr("data-rotate-x")
-		s = ""
+		rotx = me.selectedOrchElement.attr("data-rotate-x");
+		s = "";
 		if(rot != undefined)
 		{
-			console.log("rotated already", rot)
+			console.log("rotated already", rot);
 			s += "rotate("+rot+"deg)";
 		}
 		if(rotx != undefined)
 		{
 			s += "rotateX("+rotx+"deg)";
 		}
-		str = s + " rotateY("+value+"deg)"
+		str = s + " rotateY("+value+"deg)";
 		console.log("Transform string before writing y", str);
 		me.selectedOrchElement.css("transform", str);
 		me.selectedOrchElement.attr("data-rotate", value);
 		console.log("css", me.selectedOrchElement.css("transform"));
-		me.selectedOrchElement.attr("data-rotate-y", value)
+		me.selectedOrchElement.attr("data-rotate-y", value);
 
 		id = me.selectedOrchElement.attr("id").split("_")[1];
 		console.log("Updating slidethumb", $("#slidethumb_"+id));
@@ -401,7 +481,7 @@ Impressionist.prototype =
 		$("#slidethumb_"+id).attr("data-rotate-x", rotx);
 		$("#slidethumb_"+id).attr("data-rotate-y", value);
 		$("#slidethumb_"+id).attr("data-rotate", rot);
-		$("#slidethumb_"+id).attr("data-transform-string", str)
+		$("#slidethumb_"+id).attr("data-transform-string", str);
 	},
 	setupPopover : function()
 	{
@@ -411,42 +491,40 @@ Impressionist.prototype =
 	{
 
 		//$(".slidelement").drags();
-		$(".slidelement").draggable().on("dblclick", function( e )
+		$(".slidelement").draggable().on("dblclick", function(e)
 		{
 			e.stopPropagation();
-			$(this).draggable({disabled : false})
+			$(this).draggable({disabled : false});
 			//$(this).attr("contentEditable", true);
 			$("#play").css("display", "none");
 			$(this).removeClass("movecursor");
 			
 
-		}).on("click", function ( e )
+		}).on("click", function (e)
 		{
-			console.log("click firing....")
+			console.log("click firing....");
 			e.stopPropagation();
-			$(this).draggable({disabled : true})
+			$(this).draggable({disabled : true});
 			//$(this).attr("contentEditable", true);
 			$(".slidelement").removeClass("elementselected");
 			//$(this).addClass("elementselected")
 			me.selectElement( $(this));
 			me.selectedforedit = true;
-			me.setTransformValues( $(this) );
-			me.setMenuControlValues ( $(this) );
+			me.setTransformValues($(this));
+			me.setMenuControlValues($(this));
 			me.positionTransformControl()
 			
-			
-		}).on("mousedown mouseover", function( e )
+		}).on("mousedown mouseover", function(e)
 		{
 			$(this).addClass("movecursor")
-		}).on("mouseup", function( e )
+		}).on("mouseup", function(e)
 		{
 			console.log("mouse upping", me.selectedSlide );
 			me.generateScaledSlide( me.selectedSlide );
 		})
 		
-		
 	},
-	positionTransformControl : function( )
+	positionTransformControl : function()
 	{
 		_transform = me.selectedElement.css("-webkit-transform");
 		$("#play").css("-webkit-transform", _transform);
@@ -462,43 +540,56 @@ Impressionist.prototype =
 			$("#play").css("display", "none");
 		})
 	},
-	setMenuControlValues : function( el )
+	setMenuControlValues : function(el)
 	{
-		var isbold = el.attr("data-isbold");
-		var isitalic = el.attr("data-isitalic");
-		var isunderline = el.attr("data-isunderline");
+		var isbold 					= ( el.attr("data-isbold") == "true");
+		var isitalic 				= ( el.attr("data-isitalic")  == "true");
+		var isunderline 		= ( el.attr("data-isunderline")  == "true");
+		var isalignleft 		= ( el.attr("data-isalignleft")  == "true");
+		var isaligncenter 	= ( el.attr("data-isaligncenter")  == "true");
+		var isalignright 		= ( el.attr("data-isalignright")  == "true");
+
 		if(isbold)
-		{
-			$("#makebold").addClass("active")
-		}
+			$("#makebold").addClass("active");
 		else
-		{
-			$("#makebold").removeClass("active")
-		}
+			$("#makebold").removeClass("active");
+
 
 		if(isitalic)
-		{
-			$("#makeitalic").addClass("active")
-		}
+			$("#makeitalic").addClass("active");
 		else
-		{
-			$("#makeitalic").removeClass("active")
-		}
+			$("#makeitalic").removeClass("active");
+
 
 		if(isunderline)
-		{
-			$("#makeunderline").addClass("active")
-		}
+			$("#makeunderline").addClass("active");
 		else
-		{
-			$("#makeunderline").removeClass("active")
-		}
+			$("#makeunderline").removeClass("active");
+
+
+		if(isalignleft)
+			$("#makealignleft").addClass("active");
+		else
+			$("#makealignleft").removeClass("active");
+
+
+		if(isaligncenter)
+			$("#makealigncenter").addClass("active");
+		else
+			$("#makealigncenter").removeClass("active");
+
+
+		if(isalignright)
+			$("#makealignright").addClass("active");
+		else
+			$("#makealignright").removeClass("active");
+
 	},
 	resetMenuControlValues : function()
 	{
 		$(".menubtn").removeClass("active");
 	},
-	setTransformValues : function( el )
+	setTransformValues : function(el)
 	{
 		/*rotation = el.attr("data-rotate");
 		skewx = el.attr("data-skewx");
@@ -508,14 +599,14 @@ Impressionist.prototype =
 		$("#skewyknob").val( skewy || 0)
 		*/
 	},
-	selectElement : function( el )
+	selectElement : function(el)
 	{
 		me.selectedElement = el;
 	},
-	calculateFontSize : function( type )
+	calculateFontSize : function(type)
 	{
 		size = "";
-		switch( type )
+		switch(type)
 		{
 			case "h3" :
 				size = "4.5px";
@@ -524,14 +615,14 @@ Impressionist.prototype =
 				size = "5.5px";
 				break;
 		}
-		console.log("size", size)
+		console.log("size", size);
 		return size;
 	},
 	setupColorpicker : function()
 	{
-		$('#cp15').colorpicker().on('colorpickerChange', function (e) {
+		$('#cp15').colorpicker().on('colorpickerChange', function (e){
 			var io = e.colorpicker.element.find('.color-io');
-			if (e.value === io.val() || !e.color || !e.color.isValid()) {
+			if (e.value === io.val() || !e.color || !e.color.isValid()){
 				// do not replace the input value if the color is invalid or equals
 				return;
 			}
@@ -547,7 +638,7 @@ Impressionist.prototype =
 		orchestrationareapos = ypos + ht;
 		console.log("ypos", ypos)
 	},
-	addSettingsPanel : function( type )
+	addSettingsPanel : function(type)
 	{
 		$(".settingsbox").html(newpresotemplate);
 		//this.addSlide();
@@ -557,14 +648,13 @@ Impressionist.prototype =
 	manageGlobalClick : function(e)
 	{
 		$("#colorpickerbtn").colorpicker("hide");
-		$(".slidelement").draggable({disabled : false})
+		$(".slidelement").draggable({disabled : false});
 		$("#play").css("display", "none");
 		me.generateScaledSlide(me.selectedSlide);
 		me.selectedforedit = false;
-		me.colorpickeropen = false;
 		me.resetMenuControlValues();
 	},
-	colorSelectedElement : function( color )
+	colorSelectedElement : function(color)
 	{
 		if(me.selectedElement)
 		{
@@ -574,27 +664,27 @@ Impressionist.prototype =
 	addSlide : function()
 	{
 		thumb = slidethumb;
-		uid = me.generateUID()
-		thumb = thumb.split("slidethumb_^UID^").join("slidethumb_"+uid)
+		uid = me.generateUID();
+		thumb = thumb.split("slidethumb_^UID^").join("slidethumb_"+uid);
 		$(".slidethumbholder").append( thumb );
 		$("#slidethumb_"+uid).animate({opacity:1}, 200);
 
 
 		$("#slidethumb_"+uid).attr("data-left", me.lastslideleftpos+"px");
 		$("#slidethumb_"+uid).attr("data-top", "0px");
-		$(".deletebtn").on("click", function ( e )
+		$(".deletebtn").on("click", function (e)
 		{
 			p = $("#"+ $(this).attr("data-parent"));
 			slideid = $(this).attr("data-parent").split("_")[1];
 			console.log("parent", p, slideid);
-			p.animate({opacity:0}, 200, function( e )
+			p.animate({opacity:0}, 200, function(e)
 			{
 				$(this).remove();
 				$("#impress_slide_"+slideid).remove();
 				me.assignSlideNumbers();
 			})
 		})
-		$(".slidemask").on("click", function( e )
+		$(".slidemask").on("click", function(e)
 		{
 			e.stopPropagation();
 			id = (e.target.id).split("_")[1];
@@ -613,7 +703,7 @@ Impressionist.prototype =
 		$("#presentationmetatitle").html($("#titleinput").val());
 
 	},
-	addImpressSlide : function( id )
+	addImpressSlide : function(id)
 	{
 		islide = impress_slide;
 		islide = islide.split("__slidenumber__").join("_"+id);
@@ -626,12 +716,12 @@ Impressionist.prototype =
 		me.enableDrag();
 		me.generateScaledSlide("#impress_slide_"+id);
 	},
-	addImpressSlideItem : function ( el )
+	addImpressSlideItem : function (el)
 	{
 		console.log("adding the new item....");
 		let typeText = $("#dropdownMenu1").val();
 
-		switch (typeText) {
+		switch (typeText){
 			case 'Titre 1':
 				item = text_snippet_h1;
 				break;
@@ -650,11 +740,11 @@ Impressionist.prototype =
 		}
 
 		item = item.split("slidelement_id").join("slidelement_"+me.generateUID());
-		$(el).append( item );
+		$(el).append(item);
 		me.enableDrag();
 		me.generateScaledSlide(me.selectedSlide);
 	},
-	generateScaledSlide : function( el )
+	generateScaledSlide : function(el)
 	{
 		tempel = el;
 		newel = $(el).clone();
@@ -662,7 +752,7 @@ Impressionist.prototype =
 		{
 			id = newel.attr("id").split("_")[2];
 		}
-		catch( e )
+		catch(e)
 		{
 			//error.
 		}
@@ -699,13 +789,13 @@ Impressionist.prototype =
 			if(childid == id)
 			{
 				//console.log("found", childid);
-				$(childid).css("z-index", 1)
+				$(childid).css("z-index", 1);
 				me.selectedSlide = $(childid);
 			}
 			else
 			{
 				console.log("did not find", childid);
-				$(childid).css("z-index", -200 + (-(Math.round(Math.random()*1000))))
+				$(childid).css("z-index", -200 + (-(Math.round(Math.random()*1000))));
 			}
 		}
 	},
@@ -727,11 +817,11 @@ Impressionist.prototype =
 	{
 		return Math.round(Math.random()*10000);
 	},
-	animateSettingsPanel : function ( direction )
+	animateSettingsPanel : function (direction)
 	{
 		if(direction == "left")
 		{
-			$(".settingsbox").animate({"left": "-500px", "opacity": 0}, { duration: 300, easing: "linear" })
+			$(".settingsbox").animate({"left": "-500px", "opacity": 0}, { duration: 300, easing: "linear" });
 			me.menuopen = false;
 		}
 		if(direction == "right")
@@ -798,15 +888,15 @@ Impressionist.prototype =
 
 			l+= 200;
 		}
-		me.repositionOrchestrationElements( orchestrationElements );
+		me.repositionOrchestrationElements(orchestrationElements);
 	},
 	repositionOrchestrationElements : function( arr )
 	{
 		var children = $(".slidethumbholder").children();
-		console.log("Current slide count", children.length, "Orchestration el count", arr.length)
+		console.log("Current slide count", children.length, "Orchestration el count", arr.length);
 		for(var i=0 ; i < arr.length; i++)
 		{
-			console.log("Props", $(children[i]).attr("data-left"), $(children[i]).attr("data-top"))
+			console.log("Props", $(children[i]).attr("data-left"), $(children[i]).attr("data-top"));
 			arr[i].css("left", $(children[i]).attr("data-left"));
 			arr[i].css("top", $(children[i]).attr("data-top"));
 		}
@@ -818,9 +908,9 @@ Impressionist.prototype =
 			//me.animatePanel( ".mainviewport", "-730px" )
 			$(".maingreyarea").css("display", "none");
 			$(".orchgreyarea").css("display", "block");
-			$("#viewtoggleicon").removeClass("icon-th-large")
+			$("#viewtoggleicon").removeClass("icon-th-large");
 			$("#viewtoggleicon").addClass("fui-cross-24");
-			me.currentview = "orchestration"
+			me.currentview = "orchestration";
 			me.assembleOrchestrationTiles();
 		}
 		else
@@ -828,7 +918,7 @@ Impressionist.prototype =
 			$(".maingreyarea").css("display", "block");
 			$(".orchgreyarea").css("display", "none");
 			$("#viewtoggleicon").removeClass("fui-cross-24");
-			$("#viewtoggleicon").addClass("icon-th-large")
+			$("#viewtoggleicon").addClass("icon-th-large");
 			me.currentview = "mainarea";
 			me.persistOrchestrationCoordinates();
 		}
@@ -846,7 +936,7 @@ Impressionist.prototype =
 			me.orchestrationcoords.push( {left: l, top: t});
 		}
 	},
-	onViewToggled : function ( e )
+	onViewToggled : function (e)
 	{
 		if(me.currentview == "mainarea")
 		{
@@ -857,12 +947,12 @@ Impressionist.prototype =
 			me.switchView( "right");
 		}
 	},
-	changeTextFormat : function( classname )
+	changeTextFormat : function(classname)
 	{
 		if(me.selectedforedit)
 		{
 			me.removeTextFormatting();
-			me.selectedElement.addClass( classname );
+			me.selectedElement.addClass(classname);
 		}
 	},
 	removeTextFormatting : function()
@@ -892,18 +982,18 @@ Impressionist.prototype =
 			$("#newpresoheader").html("Enregistrer la présentation sous...");
 			me.mode = "save";
 		});
-		$(".previewpresobtn").on("click", function( e )
+		$(".previewpresobtn").on("click", function(e)
 		{
 			console.log("data parent id", $(this).attr("data-id"));
-			me.fetchAndPreview( $(this).attr("data-id") )
+			me.fetchAndPreview($(this).attr("data-id"))
 		});
-		$(".openpresobtn").on("click", function( e )
+		$(".openpresobtn").on("click", function(e)
 		{
 			console.log("Edit presentation");
 			me.mode = "save";
 			me.openPresentationForEdit( $(this).attr("data-id") );
 		});
-		$("#createpresentation").on("click", function( e )
+		$("#createpresentation").on("click", function(e)
 		{
 			console.log("Mode", me.mode);
 			if(me.mode == "create")
@@ -933,7 +1023,7 @@ Impressionist.prototype =
 			window.open("http://harish.io/impressionist/viewer.php", "_blank");
 			$("#previewmodal").modal("hide");
 		});
-		$(".dropdownitem").on("click", function( e )
+		$(".dropdownitem").on("click", function(e)
 		{
 				console.log("Dd value: " , $(e.target).attr("data-dk-dropdown-value"));
 				me.changeTextFormat($(e.target).attr("data-dk-dropdown-value"));
@@ -942,17 +1032,17 @@ Impressionist.prototype =
 				me.dropdownopen = true;
 				me.hideTransformControl();	
 		});
-		$("#addtextbtn").on("click", function ( e )
+		$("#addtextbtn").on("click", function (e)
 		{
 			console.log("add btn clicked...");
 			me.addImpressSlideItem( me.selectedSlide );
 		});
-		$("#addimagebtn").on("click", function( e )
+		$("#addimagebtn").on("click", function(e)
 		{
 			console.log("open image modal...");
 			$("#imagemodal").modal("show");
 		});
-		$("#addobjectbtn").on("click", function( e )
+		$("#addobjectbtn").on("click", function(e)
 		{
 			console.log("open object modal...");
 			$("#objectselectionmodal").modal("show");
@@ -962,7 +1052,7 @@ Impressionist.prototype =
 			image = $(this).val();
 			$("#previewimg").attr("src", image);
 		});
-		$("#addslidebtn").on("click", function( e )
+		$("#addslidebtn").on("click", function(e)
 		{
 			me.addSlide();
 		});
@@ -1012,7 +1102,7 @@ Impressionist.prototype =
 			$(this).css("border-bottom", "2px solid #1ABC9C")
 			objet =  $(this).attr('data-nom');
 		})
-		$("#applyobjectbtn").on("click", function( e )
+		$("#applyobjectbtn").on("click", function(e)
 		{
             console.log("append object to stage");
             me.addObjectToSlide(objet);
@@ -1089,7 +1179,7 @@ Impressionist.prototype =
 			}
 			outputcontainer = $(".impress-slide-container").clone();
 			console.log("output", $(".impress-slide-container").html().toString());
-			outputcontainer.find(".impress-slide").each( function(i, object )
+			outputcontainer.find(".impress-slide").each( function(i, object)
 			{
 				console.log("Physically adding sizing information");
 				$(this).css("width", "1024px");
@@ -1132,7 +1222,7 @@ Impressionist.prototype =
 
 			$("#savedpresentationsmodal").modal("hide");
 		}
-		$(".slidemask").on("click", function( e )
+		$(".slidemask").on("click", function(e)
 		{
 				console.log("repopulated zone");
 				e.stopPropagation();
@@ -1167,7 +1257,7 @@ Impressionist.prototype =
 			{
 				console.log("content", presentation.contents);
 				$(".placeholder").html( presentation.contents);
-				$(".placeholder").find(".impress-slide").each( function(i, object )
+				$(".placeholder").find(".impress-slide").each( function(i, object)
 				{
 					console.log("Physically adding sizing information, again");
 					$(this).css("width", "1024px");
@@ -1336,12 +1426,12 @@ Impressionist.prototype =
 		el.remove();
 		clearInterval(me.deleteslideinterval);
 	},
-	createEditor : function( e )
+	createEditor : function(e)
 	{
 		editor = $(e.target).clone();
 		editor.attr("contentEditable", "true");
 	},
-	triggetElementEdit : function( e )
+	triggetElementEdit : function(e)
 	{
 		$(e.target).attr("contentEditable", true);
 	},
@@ -1350,12 +1440,12 @@ Impressionist.prototype =
 		$(".settingsCancelBtn").off();
 		$(".viewtogglebtn").off();
 	},
-	onSettingsCancelClicked : function( e )
+	onSettingsCancelClicked : function(e)
 	{
 		console.log("clicked")
 		me.animateSettingsPanel( "left" )
 	},
-	onMenuItemClicked : function( e )
+	onMenuItemClicked : function(e)
 	{
 		$("#newpresentationmodal").modal("show");
 		$("#newpresoheader").html("Create New Presentation");

@@ -7,7 +7,7 @@ var newpresotemplate = '<div id="newpreso">'+
 var slidethumb = '<div id="slidethumb_^UID^" class="slidethumb thumbelement">'+
 					 '<div class="thumbnailholder"></div>'+
 					 '<canvas class="slidemask" id="slidethumb_^UID^" style="z-index:1000; width:100%; height:100%; background-color:#FFF; opacity:0.1; left:0px; top:0px; position:absolute"></canvas>'+
-					'<a id="deletebtn" data-parent="slidethumb_^UID^" style="z-index:1001;" class="btn btn-info btn-small deletebtn"><i class="fui-cross-16"></i></a>'+
+					'<a id="deletebtn" data-parent="slidethumb_^UID^" style="z-index:1001;" class="btn btn-info btn-small deletebtn"><i class="fas fa-times"></i></a>'+
 				 '</div>';
 var impress_slide = '<div class="impress-slide" id="impress_slide__slidenumber__">'+
 						'<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h2" style="width:auto; height:60px; position:absolute; left:295px; top:50px; whitespace:no-wrap;" contentEditable="true"> Titre d\'exemple</div>'+

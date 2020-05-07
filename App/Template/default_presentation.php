@@ -45,7 +45,6 @@
     <script src="../../public/lib/presentation/js/bootstrap-tooltip.js"></script>
     <script src="../../public/lib/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 
-    <script src="../../public/lib/presentation/js/jquery.dropkick-1.0.0.js"></script>
     <script src="../../public/lib/presentation/js/jquery.placeholder.js"></script>
 
     <script src="../../public/lib/presentation/js/matrix.js"></script>
