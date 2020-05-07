@@ -647,7 +647,6 @@ Impressionist.prototype =
 	},
 	manageGlobalClick : function(e)
 	{
-		$("#colorpickerbtn").colorpicker("hide");
 		$(".slidelement").draggable({disabled : false});
 		$("#play").css("display", "none");
 		me.generateScaledSlide(me.selectedSlide);

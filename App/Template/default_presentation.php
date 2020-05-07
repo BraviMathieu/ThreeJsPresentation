@@ -42,7 +42,6 @@
     <script src="../../public/lib/jquery-ui/js/jquery-ui.min.js"></script>
     <script src="../../public/lib/bootstrap/js/bootstrap.min.js"></script>
 
-    <script src="../../public/lib/presentation/js/bootstrap-tooltip.js"></script>
     <script src="../../public/lib/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 
     <script src="../../public/lib/presentation/js/jquery.placeholder.js"></script>
@@ -56,9 +55,6 @@
     <script src="../../public/lib/presentation/js/matrices.js"></script>
     <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
     <script src="lib/font-awesome/js/all.min.js"></script>
-
-    <!-- code formatting -->
-
 
 
     <script src="../../public/lib/presentation/js/main.js"></script>
