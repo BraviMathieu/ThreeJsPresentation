@@ -8,6 +8,7 @@
 </head>
 <body>
 <script src="lib/threejs/three.js"></script>
+<script src="lib/threejs/OrbitControls.js"></script>
 <script>
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera( 25, window.innerWidth/window.innerHeight, 0.3, 1000 );
@@ -18,20 +19,19 @@
     var geometry = new THREE.SphereGeometry();
     var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
     var sphere = new THREE.Mesh( geometry, material );
-    sphere.rotation.x +=0.50;
-    sphere.rotation.y +=0.50;
     scene.add( sphere );
 
     var edges = new THREE.EdgesHelper( sphere, 0x0000ff);
     edges.material.linewidth = 3;
-    edges.rotation.x += 0.50;
-    edges.rotation.y += 0.50;
     scene.add(edges);
 
     camera.position.z = 5;
     renderer.setClearColor(0x000000 , 0);
 
+    controls = new THREE.OrbitControls (camera, renderer.domElement);
+
     var animate = function () {
+        controls.update();
         requestAnimationFrame( animate );
         renderer.render( scene, camera );
     };
