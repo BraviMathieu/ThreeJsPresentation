@@ -929,9 +929,11 @@ Presentation.prototype =
 		});
 		$("#video-input").on("blur keyup", function()
 		{
-			let video = $(this).val();
-			video = video.replace("watch?v=","embed/");
-			$("#preview-video").attr("src", video);
+			if($("#video-input").val().includes("www.youtube.com/watch?v=")){
+				let video = $(this).val();
+				video = video.replace("watch?v=","embed/");
+				$("#preview-video").attr("src", video);
+			}
 		});
 		$("#add-slide-btn").on("click", function()
 		{
