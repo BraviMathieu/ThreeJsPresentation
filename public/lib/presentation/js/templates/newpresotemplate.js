@@ -10,8 +10,8 @@ var slidethumb = '<div id="slidethumb_^UID^" class="slidethumb thumbelement">'+
 					'<a id="deletebtn" data-parent="slidethumb_^UID^" style="z-index:1001;" class="btn btn-danger btn-small deletebtn text-white"><i class="fas fa-trash-alt"></i></a>'+
 				 '</div>';
 var impress_slide = '<div class="impress-slide" id="impress_slide__slidenumber__">'+
-						'<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h2" style="width:auto; height:60px; position:absolute; left:295px; top:50px; whitespace:no-wrap;" contentEditable="true"> Titre d\'exemple</div>'+
-                    	'<div class="slidelement slidelementh3" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h3" style="position:absolute; width:auto; height:40px; left:330px; top:120px; whitespace:no-wrap;"> Paragraphe d\'exemple </div>'
+						'<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h2" style="width:auto; height:60px; position:absolute; left:202px; top:50px; whitespace:no-wrap;" contentEditable="true"> Titre d\'exemple</div>'+
+                    	'<div class="slidelement slidelementh3" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h3" style="position:absolute; width:auto; height:40px; left:268px; top:120px; whitespace:no-wrap;"> Paragraphe d\'exemple </div>'
                 	'</div>';
 var text_snippet = '<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h2" style="width:auto; height:60px; position:absolute; left:300px; top:50px; whitespace:no-wrap;" contentEditable="true"> Titre d\'exemple </div>';
 
