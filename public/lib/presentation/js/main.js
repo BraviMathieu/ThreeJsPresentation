@@ -74,7 +74,7 @@ Presentation.prototype =
 			savedpresos = JSON.parse(me.getItem(me.saveKey));
 
 			if(savedpresos && savedpresos.length > 0)
-				$("#savedpresentationsmodal").modal("show");
+				$("#saved-presentations-modal").modal("show");
 			else
 				me.openNewPresentationWindow();
 		}
@@ -89,14 +89,14 @@ Presentation.prototype =
 	},
 	openNewPresentationWindow : function()
 	{
-		$("#newpresentationmodal").modal();
+		$("#new-presentation-modal").modal();
 	},
 	renderPresentations : function (presentations)
 	{
 		me.mypresentations = presentations;
-		$("#savedpresentations").html("<h3 style='display:inline-block; color:#2980B9; font-size:120%'> Vous n'avez aucune présentation sauvegardées. </h3>");
+		$("#saved-presentations").html("<h3 style='display:inline-block; color:#2980B9; font-size:120%'> Vous n'avez aucune présentation sauvegardées. </h3>");
 		if(presentations.length > 0)
-			$("#savedpresentations").html("");
+			$("#saved-presentations").html("");
 
 		let templ;
 		for(var i=0; i<presentations.length; i++)
@@ -106,7 +106,7 @@ Presentation.prototype =
 			templ = templ.split("__presotitle__").join(presentation.title);
 			templ = templ.split("__presodescription__").join(presentation.description);
 			templ = templ.split("__presoid__").join(presentation.id);
-			$("#savedpresentations").append(templ);
+			$("#saved-presentations").append(templ);
 		}
 		$(".savedpresos").on("mouseover", function()
 		{
@@ -601,7 +601,7 @@ Presentation.prototype =
 		me.assignSlideNumbers();
 		me.addImpressSlide(uid);
 		me.switchView("right");
-		$("#presentation-metatitle").html($("#titleinput").val());
+		$("#presentation-metatitle").html($("#title-input").val());
 
 	},
 	addImpressSlide : function(id)
@@ -845,25 +845,25 @@ Presentation.prototype =
 	{
 		me.generateExportMarkup();
 		$('pre code').each(function(i, e) {hljs.highlightBlock(e)});
-		$("#exportcodemodal").modal("show");
+		$("#export-code-modal").modal("show");
 	},
 	attachListeners : function()
 	{
 		let slideElement = $(".slidelement");
 		$("html").on("click", me.manageGlobalClick);
 		$(".settingsCancelBtn").on("click", me.onSettingsCancelClicked);
-		$("#newpresopanel").on("click", me.onMenuItemClicked);
-		$("#neworchestratepanel").on("click", me.onViewToggled);
+		$("#new-preso-panel").on("click", me.onMenuItemClicked);
+		$("#new-panorama-panel").on("click", me.onViewToggled);
 		slideElement.on("click", me.triggerElementEdit);
 		slideElement.on("mouseup", me.createEditor);
-		$("#newstylepanel").on("click", me.openStyleSelector);
-		$("#exportpresopanel").on("click", me.openCodeExportWindow);
+		$("#new-style-panel").on("click", me.openStyleSelector);
+		$("#export-preso-panel").on("click", me.openCodeExportWindow);
 		$("#edit-preso-name-btn").on("click", function(e)
 		{
-			$("#newpresentationmodal").modal("show");
+			$("#new-presentation-modal").modal("show");
 			$("#newpresoheader").html("Enregistrer la présentation sous...");
-			$("#titleinput").val(me.currentPresentation.title);
-			$("#descriptioninput").val(me.currentPresentation.description);
+			$("#title-input").val(me.currentPresentation.title);
+			$("#description-input").val(me.currentPresentation.description);
 			me.mode = "save";
 		});
 		$(".previewpresobtn").on("click", function()
@@ -883,19 +883,19 @@ Presentation.prototype =
 			else
 				me.savePresentation();
 		});
-		$("#save-presentation-btn").on("click", function()
+		$("#save-presentation-panel").on("click", function()
 		{
 			if(me.currentPresentation)
 			{
-				$("#titleinput").val(me.currentPresentation.title);
-				$("textarea#descriptioninput").val(me.currentPresentation.description);
+				$("#title-input").val(me.currentPresentation.title);
+				$("textarea#description-input").val(me.currentPresentation.description);
 			}
 			me.mode = "save";
 			me.savePresentation();
 		});
-		$("#openpreviewbtn").on("click", function(e)
+		$("#open-preview-btn").on("click", function(e)
 		{
-			$("#previewmodal").modal("hide");
+			$("#preview-modal").modal("hide");
 		});
 		$(".dropdownitem").on("click", function(e)
 		{
@@ -905,51 +905,67 @@ Presentation.prototype =
 			me.dropdownopen = true;
 			me.hideTransformControl();
 		});
+		$("#colorpicker-btn").on("click", function ()
+		{
+			$("#colorpicker-modal").modal("show");
+		});
 		$("#add-text-btn").on("click", function ()
 		{
 			me.addImpressSlideItem(me.selectedSlide);
 		});
 		$("#add-image-btn").on("click", function()
 		{
-			$("#imagemodal").modal("show");
+			$("#image-modal").modal("show");
 		});
 		$("#add-video-btn").on("click", function()
 		{
-			$("#videomodal").modal("show");
+			$("#video-modal").modal("show");
+		});
+		$("#add-tableau-btn").on("click", function()
+		{
+			$("#tableau-modal").modal("show");
 		});
 		$("#add-object-btn").on("click", function()
 		{
-			$("#objectselectionmodal").modal("show");
+			$("#objet-selection-modal").modal("show");
 		});
-		$("#imageinput").on("blur keyup", function()
+		$("#image-input").on("blur keyup", function()
 		{
 			let image = $(this).val();
-			$("#previewimg").attr("src", image);
+			$("#preview-image").attr("src", image);
 		});
-		$("#videoinput").on("blur keyup", function()
+		$("#video-input").on("blur keyup", function()
 		{
 			let video = $(this).val();
 			video = video.replace("watch?v=","embed/");
-			$("#previewvideo").attr("src", video);
+			$("#preview-video").attr("src", video);
 		});
 		$("#add-slide-btn").on("click", function()
 		{
 			me.addSlide();
 		});
-		$("#appendimagebtn").on("click", function()
+		$("#append-image-btn").on("click", function()
 		{
-			let image = $("#previewimg").attr("src");
+			let image = $("#preview-image").attr("src");
 			me.addImageToSlide(image);
-			$("#imagemodal").modal("hide");
+			$("#image-modal").modal("hide");
 		});
-		$("#appendvideobtn").on("click", function()
+		$("#append-video-btn").on("click", function()
 		{
-			let video = $("#previewvideo").attr("src");
+			let video = $("#preview-video").attr("src");
 			video = video.replace("watch?v=","embed/");
 			me.addVideoToSlide(video);
-			$("#videomodal").modal("hide");
+			$("#video-modal").modal("hide");
 		});
-		$("#openpresentationsbtn").on("click", function()
+		$("#append-tableau-btn").on("click", function()
+		{
+			let nbLignes = $("#tableau-lignes-input").val();
+			let nbColonnes = $("#tableau-colonnes-input").val();
+
+			me.addTableauToSlide(nbLignes,nbColonnes);
+			$("#tableau-modal").modal("hide");
+		});
+		$("#open-presentations-panel").on("click", function()
 		{
 			$(".previewpresobtn").on("click", function()
 			{
@@ -962,43 +978,41 @@ Presentation.prototype =
 				me.mode = "save";
 				me.openPresentationForEdit($(this).attr("data-id"));
 			});
-			$("#savedpresentationsmodal").modal("show");
+			$("#saved-presentations-modal").modal("show");
 		});
-		$("#exportcontentbtn").on("click", function()
+		$("#export-content-panel").on("click", function()
 		{
 			me.generateExportMarkup(true);
-
-
 		});
-		$(".stylethumbnail").on("click", function()
+		$(".style-thumbnail").on("click", function()
 		{
-			$(".stylethumbnail").css("border-bottom", "1px dotted #DDD");
+			$(".style-thumbnail").css("border-bottom", "1px dotted #DDD");
 			$(this).css("border-bottom", "2px solid #6f2232");
 			me.theme = $(this).attr("data-style");
 		});
-		$("#applystylebtn").on("click", function()
+		$("#apply-style-btn").on("click", function()
 		{
 			me.applyStyle();
-			$("#styleselectionmodal").modal("hide");
+			$("#police-selection-modal").modal("hide");
 		});
 
-		$(".objectthumbnail").on("click", function()
+		$(".objet-thumbnail").on("click", function()
 		{
-			$(".objectthumbnail").css("border-bottom", "1px dotted #DDD");
+			$(".objet-thumbnail").css("border-bottom", "1px dotted #DDD");
 			$(this).css("border-bottom", "2px solid #1ABC9C");
 			objet = $(this).attr('data-nom');
 		});
 
-		$("#applyobjectbtn").on("click", function()
+		$("#append-object-btn").on("click", function()
 		{
 			console.log("append object to stage");
 			me.addObjectToSlide(objet);
-			$("#objectselectionmodal").modal("hide");
+			$("#objet-selection-modal").modal("hide");
 		});
 
-		$("#importobject").on("click", function()
+		$("#import-objet-panel").on("click", function()
 		{
-			$("#importobjetmodal").modal("show");
+			$("#import-objet-modal").modal("show");
 		});
 	},
 	applyStyle : function()
@@ -1021,7 +1035,7 @@ Presentation.prototype =
 	},
 	openStyleSelector : function()
 	{
-		$("#styleselectionmodal").modal("show");
+		$("#police-selection-modal").modal("show");
 	},
 	deleteSavedPresentation : function(id)
 	{
@@ -1077,7 +1091,7 @@ Presentation.prototype =
 			if(isPreview)
 				me.generatePreview(outputcontainer.html().toString());
 			
-			$("#exportedcode").text(outputcontainer.html().toString());
+			$("#exported-code").text(outputcontainer.html().toString());
 	},
 	createNewPresentation : function()
 	{
@@ -1106,7 +1120,7 @@ Presentation.prototype =
 				console.log("rendered");
 			}
 
-			$("#savedpresentationsmodal").modal("hide");
+			$("#saved-presentations-modal").modal("hide");
 		}
 		$(".slidemask").on("click", function(e)
 		{
@@ -1151,14 +1165,14 @@ Presentation.prototype =
 					$(this).addClass("step");
 				});
 				me.generatePreview($(".placeholder").html().toString());
-				$("#savedpresentationsmodal").modal("hide");
+				$("#saved-presentations-modal").modal("hide");
 				break;
 			}
 		}
 	},
 	savePresentation : function()
 	{
-			$("#save-presentation-btn").html('<div class="sb-nav-link-icon"><i class=\"fas fa-save\"></i></div>Sauvegarde en cours...');
+			$("#save-presentation-panel").html('<div class="sb-nav-link-icon"><i class=\"fas fa-save\"></i></div>Sauvegarde en cours...');
 			let item = me.getItem(me.saveKey);
 			if(item)
 			{
@@ -1184,8 +1198,8 @@ Presentation.prototype =
 
 			let o = {
 				id : tempid,
-				title: $("#titleinput").val(),
-				description: $("textarea#descriptioninput").val(),
+				title: $("#title-input").val(),
+				description: $("textarea#description-input").val(),
 				contents : $(".impress-slide-container").html().toString(),
 				thumbcontents : $(".slide-thumb-holder").html().toString(),
 				theme : me.theme
@@ -1209,13 +1223,13 @@ Presentation.prototype =
 				me.mode = "save";
 				me.openPresentationForEdit($(this).attr("data-id"));
 			});
-			$("#newpresentationmodal").modal("hide");
+			$("#new-presentation-modal").modal("hide");
 			setTimeout(me.resetSaveButtonText, 1000)
 	},
 	resetSaveButtonText : function()
 	{
-		$("#save-presentation-btn").html('<div class="sb-nav-link-icon"><i class=\"fas fa-check-circle\"></i></div>Sauvegarde réussie!');
-		setTimeout(function(){ $("#save-presentation-btn").html('<div class="sb-nav-link-icon"><i class=\"fas fa-save\"></i></div>Sauvegarder'); }, 1000);
+		$("#save-presentation-panel").html('<div class="sb-nav-link-icon"><i class=\"fas fa-check-circle\"></i></div>Sauvegarde réussie!');
+		setTimeout(function(){ $("#save-presentation-panel").html('<div class="sb-nav-link-icon"><i class=\"fas fa-save\"></i></div>Sauvegarder'); }, 1000);
 	},
 	removeReference : function(arr)
 	{
@@ -1241,9 +1255,9 @@ Presentation.prototype =
 	},
 	generatePreview : function (str)
 	{
-		let openPreview = $("#openpreviewbtn");
+		let openPreview = $("#open-preview-btn");
 
-		$("#previewmodal").modal("show");
+		$("#preview-modal").modal("show");
 		openPreview.addClass("disabled");
 		openPreview.removeClass("btn-primary");
 		$("#progressmeter").css("display", "block");
@@ -1303,6 +1317,12 @@ Presentation.prototype =
 		me.selectedSlide.append($(video));
 		me.enableDrag();
 	},
+	addTableauToSlide : function(lignes, colonnes)
+	{
+		let item = tableau_template;
+		me.selectedSlide.append($(item));
+		me.enableDrag();
+	},
 	addObjectToSlide : function(obj)
 	{
 		let iframe = $('<iframe>', {
@@ -1330,7 +1350,7 @@ Presentation.prototype =
 	removeListeners : function()
 	{
 		$(".settingsCancelBtn").off();
-		$("#neworchestratepanel").off();
+		$("#new-panorama-panel").off();
 	},
 	onSettingsCancelClicked : function()
 	{
@@ -1338,10 +1358,10 @@ Presentation.prototype =
 	},
 	onMenuItemClicked : function()
 	{
-		$("#newpresentationmodal").modal("show");
-		$("#newpresoheader").html("Créer une nouvelle présentation");
-		$("#titleinput").val("Nouvelle présentation");
-		$("textarea#descriptioninput").val("Exemple de description de présentation");
+		$("#new-presentation-modal").modal("show");
+		$("#new-preso-header").html("Créer une nouvelle présentation");
+		$("#title-input").val("Nouvelle présentation");
+		$("textarea#description-input").val("Exemple de description de présentation");
 		me.mode = "create";
 	},
 	saveItem : function(key, value)

@@ -27,22 +27,22 @@ use App\Session;
         <div class="sb-sidenav-menu">
           <div class="nav">
             <div class="sb-sidenav-menu-heading">Core</div>
-            <a class="nav-link" id="newpresopanel"><div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
+            <a class="nav-link" id="new-preso-panel"><div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
             Nouvelle présentation</a>
-            <a class="nav-link" id="newstylepanel" ><div class="sb-nav-link-icon"><i class="fas fa-pencil-alt"></i></div>
+            <a class="nav-link" id="new-style-panel"><div class="sb-nav-link-icon"><i class="fas fa-pencil-alt"></i></div>
             Selectionner une police</a>
-            <a class="nav-link" id="neworchestratepanel" ><div class="sb-nav-link-icon"><i id="viewtoggleicon" class="fas fa-th"></i></div>
+            <a class="nav-link" id="new-panorama-panel"><div class="sb-nav-link-icon"><i id="viewtoggleicon" class="fas fa-th"></i></div>
             Panorama</a>
-            <a class="nav-link" id="importobject" ><div class="sb-nav-link-icon"><i class="fas fa-file-download"></i></div>
+            <a class="nav-link" id="import-objet-panel"><div class="sb-nav-link-icon"><i class="fas fa-file-download"></i></div>
             Importer des objets 3D</a>
-            <a class="nav-link" id="exportpresopanel"><div class="sb-nav-link-icon"><i class="fas fa-cloud"></i></div>
+            <a class="nav-link" id="export-preso-panel"><div class="sb-nav-link-icon"><i class="fas fa-cloud"></i></div>
             Exporter présentation</a>
-            <a class="nav-link" id="openpresentationsbtn"><div class="sb-nav-link-icon"><i class="fas fa-save"></i></div>
+            <a class="nav-link" id="open-presentations-panel"><div class="sb-nav-link-icon"><i class="fas fa-save"></i></div>
             Mes Présentations</a>
             <div class="sb-sidenav-menu-heading">Présentation</div>
-            <a class="nav-link" id="exportcontentbtn" ><div class="sb-nav-link-icon"><i class="fas fa-eye"></i></div>
+            <a class="nav-link" id="export-content-panel"><div class="sb-nav-link-icon"><i class="fas fa-eye"></i></div>
             Voir</a>
-            <a class="nav-link" id="save-presentation-btn" ><div class="sb-nav-link-icon"><i class="fas fa-save"></i></div>
+            <a class="nav-link" id="save-presentation-panel" ><div class="sb-nav-link-icon"><i class="fas fa-save"></i></div>
             Sauvegarder</a>
           </div>
         </div>
@@ -88,10 +88,11 @@ use App\Session;
                 </div>
               </div>
               <div class="btn-group">
-                <button type="button" id="colorpickerbtn" data-toggle="modal" data-target="#colorpickerModal" class="btn btn-secondary"><i class="fas fa-tint"></i></button>
+                <button type="button" id="colorpicker-btn" class="btn btn-secondary"><i class="fas fa-tint"></i></button>
                 <button type="button" id="add-text-btn"   class="btn btn-secondary"><i class="fas fa-font"></i></button>
                 <button type="button" id="add-image-btn"  class="btn btn-secondary"><i class="fas fa-images"></i></button>
                 <button type="button" id="add-video-btn"  class="btn btn-secondary"><i class="fas fa-video"></i></button>
+                <button type="button" id="add-tableau-btn"class="btn btn-secondary"><i class="fas fa-table"></i></button>
                 <button type="button" id="add-object-btn" class="btn btn-secondary"><i class="fas fa-cube"></i></button>
               </div>
             </div>
@@ -140,48 +141,72 @@ use App\Session;
 <div class="placeholder"></div>
 
 <!-- Ajouter Image Modal -->
-<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="image-modal" tabindex="-1">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ajouter une image</h5>
+        <h5 class="modal-title">Ajouter une image</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <p>Coller l'URL de l'image </p>
-        <input type="text" id="imageinput" class="form-control">
+        <input type="text" id="image-input" class="form-control">
         <p> La prévisualisation va apparaitre en dessous.</p>
-        <img id="previewimg">
+        <img id="preview-image">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn btn-primary" id="appendimagebtn"><i class="fas fa-plus"></i>&nbsp;Ajouter l'image</button>
+        <button type="button" class="btn btn-primary" id="append-image-btn"><i class="fas fa-plus"></i>&nbsp;Ajouter l'image</button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- Ajouter Video Modal -->
-<div class="modal fade" id="videomodal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="video-modal" tabindex="-1">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ajouter une vidéo</h5>
+        <h5 class="modal-title">Ajouter une vidéo</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <p>Coller l'URL de la vidéo </p>
-        <input type="text" id="videoinput" class="form-control">
+        <input type="text" id="video-input" class="form-control">
         <p> La prévisualisation va apparaitre en dessous.</p>
-        <iframe id="previewvideo" width="465" height="315" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+        <iframe id="preview-video" width="465" height="315" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn btn-primary text-white" id="appendvideobtn"><i class="fas fa-plus"></i>&nbsp;Ajouter la vidéo</button>
+        <button type="button" class="btn btn-primary text-white" id="append-video-btn"><i class="fas fa-plus"></i>&nbsp;Ajouter la vidéo</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ajouter tableau Modal -->
+<div class="modal fade" id="tableau-modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Ajouter un tableau</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Nombre de lignes</p>
+        <input type="number" id="tableau-lignes-input" class="form-control">
+        <p>Nombre de colonnes</p>
+        <input type="number" id="tableau-colonnes-input" class="form-control">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-primary text-white" id="append-tableau-btn"><i class="fas fa-plus"></i>&nbsp;Ajouter le tableau</button>
       </div>
     </div>
   </div>
@@ -189,17 +214,17 @@ use App\Session;
 
 
 <!-- Selectionner Objet 3D Modal -->
-<div class="modal fade" id="objectselectionmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="objet-selection-modal" tabindex="-1">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Selectionner un objet 3D</h5>
+        <h5 class="modal-title">Selectionner un objet 3D</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" id="styleselections" style="overflow:scroll;">
-        <div class="objectthumbnail" style="width: 130px" data-nom="cube">
+      <div class="modal-body" style="overflow:scroll;">
+        <div class="objet-thumbnail" style="width: 130px" data-nom="cube">
           <img src="lib/presentation/images/Cube.PNG" style="width: 130px" >
         </div>
         <div class="objectthumbnail" style="width: 130px" data-nom="cone">
@@ -217,18 +242,18 @@ use App\Session;
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn btn-primary" id="applyobjectbtn"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
+        <button type="button" class="btn btn-primary" id="append-object-btn"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- Importer Objet 3D Modal -->
-<div class="modal fade" id="importobjetmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="import-objet-modal" tabindex="-1">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ajouter un ou plusieurs objet 3D</h5>
+        <h5 class="modal-title">Ajouter un ou plusieurs objet 3D</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -249,11 +274,11 @@ use App\Session;
 
 
 <!-- Prévisualisation Modal -->
-<div class="modal fade" id="previewmodal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="preview-modal" tabindex="-1">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Génération de la prévisualisation</h5>
+        <h5 class="modal-title">Génération de la prévisualisation</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -266,27 +291,27 @@ use App\Session;
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn disabled" id="openpreviewbtn"> Ouvrir la prévisualisation</button>
+        <button type="button" class="btn disabled" id="open-preview-btn"> Ouvrir la prévisualisation</button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- Nouvelle présentation Modal -->
-<div class="modal fade" id="newpresentationmodal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="new-presentation-modal" tabindex="-1">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="newpresoheader">Nouvelle présentation</h5>
+        <h5 class="modal-title" id="new-preso-header">Nouvelle présentation</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <p>Titre</p>
-        <input type="text" id="titleinput" class="form-control" value="Nouvelle présentation" maxlength="60">
+        <input type="text" id="title-input" class="form-control" value="Nouvelle présentation" maxlength="60">
         <p>Description</p>
-        <textarea id="descriptioninput" class="form-control">Exemple de description de présentation</textarea>
+        <textarea id="description-input" class="form-control">Exemple de description de présentation</textarea>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -297,16 +322,16 @@ use App\Session;
 </div>
 
 <!-- Mes présentations Modal -->
-<div class="modal fade" id="savedpresentationsmodal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="saved-presentations-modal" tabindex="-1">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Mes Présentations</h5>
+        <h5 class="modal-title">Mes Présentations</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" id="savedpresentations" style="overflow:scroll;">
+      <div class="modal-body" id="saved-presentations" style="overflow:scroll;">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -316,18 +341,18 @@ use App\Session;
 </div>
 
 <!-- Exporter Code Modal -->
-<div class="modal fade" id="exportcodemodal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="export-code-modal" tabindex="-1">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Exporter le code</h5>
+        <h5 class="modal-title">Exporter le code</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" id="exportcode">
+      <div class="modal-body" id="export-code">
         <pre style="height:300px; overflow:scroll;">
-            <code class="html" id="exportedcode" >
+            <code class="html" id="exported-code" >
             </code>
         </pre>
       </div>
@@ -339,47 +364,46 @@ use App\Session;
 </div>
 
 <!-- Selectionner une police Modal -->
-<div class="modal fade" id="styleselectionmodal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="police-selection-modal" tabindex="-1">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Selectionner une police</h5>
+        <h5 class="modal-title">Selectionner une police</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body" id="styleselections" style="overflow:scroll;">
-        <div class="stylethumbnail" data-style="lato" style="width: 100px">
+        <div class="style-thumbnail" data-style="lato" style="width: 100px">
           <h3 class="styleh3 style1">Lato</h3>
         </div>
-        <div class="stylethumbnail" data-style="sketch" style="width: 130px">
+        <div class="style-thumbnail" data-style="sketch" style="width: 130px">
           <h3 class="styleh3 style1 sketch">Sketch</h3>
         </div>
-        <div class="stylethumbnail" data-style="montserrat" style="width: 200px">
+        <div class="style-thumbnail" data-style="montserrat" style="width: 200px">
           <h3 class="styleh3 style1 montserrat">Montserrat</h3>
         </div>
-        <div class="stylethumbnail" data-style="quicksand" style="width: 200px">
+        <div class="style-thumbnail" data-style="quicksand" style="width: 200px">
           <h3 class="styleh3 style1 quicksand">Quicksand</h3>
         </div>
-        <div class="stylethumbnail" data-style="miltonian" style="width: 200px">
+        <div class="style-thumbnail" data-style="miltonian" style="width: 200px">
           <h3 class="styleh3 style1 miltonian">Miltonian</h3>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn btn-primary" id="applystylebtn">&nbsp;Appliquer</button>
+        <button type="button" class="btn btn-primary" id="apply-style-btn">&nbsp;Appliquer</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ColorpickerModal -->
-<div class="modal fade" id="colorpickerModal" tabindex="-1" role="dialog"
-     aria-labelledby="colorpickerModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<!-- Colorpicker Modal -->
+<div class="modal fade" id="colorpicker-modal" tabindex="-1">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Choisir une couleur</h5>
+        <h5 class="modal-title">Choisir une couleur</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
