@@ -71,7 +71,7 @@ Presentation.prototype =
 		console.log("lastsaved", presentation);
 		if(!presentation)
 		{
-			savedpresos = JSON.parse(me.getItem(me.saveKey));
+			let savedpresos = JSON.parse(me.getItem(me.saveKey));
 
 			if(savedpresos && savedpresos.length > 0)
 				$("#saved-presentations-modal").modal("show");
@@ -108,14 +108,6 @@ Presentation.prototype =
 			templ = templ.split("__presoid__").join(presentation.id);
 			$("#saved-presentations").append(templ);
 		}
-		$(".savedpresos").on("mouseover", function()
-		{
-			$(this).find(".presothumb").removeClass("idle");
-
-		}).on("mouseout", function()
-		{
-			$(this).find(".presothumb").addClass("idle");
-		});
 		$(".deletepresobtn").on("click", function()
 		{
 			if(confirm("Êtes-vous sûr de vouloir supprimer cette présentation ?"))
@@ -959,11 +951,49 @@ Presentation.prototype =
 		});
 		$("#append-tableau-btn").on("click", function()
 		{
-			let nbLignes = $("#tableau-lignes-input").val();
-			let nbColonnes = $("#tableau-colonnes-input").val();
+			let contenuTableau = $(".tableau-previsualisation");
 
-			me.addTableauToSlide(nbLignes,nbColonnes);
+			me.addTableauToSlide(contenuTableau);
 			$("#tableau-modal").modal("hide");
+		});
+		$("#tableau-ajout-ligne").on("click", function()
+		{
+			let tableau = $(".tableau-previsualisation").get(0);
+			let ligne = tableau.insertRow(tableau.rows.length);
+			let i;
+
+			for (i = 0; i < tableau.rows[0].cells.length; i++) {
+				me.creerCase(ligne.insertCell(i));
+			}
+		});
+
+		$("#tableau-ajout-colonne").on("click", function()
+		{
+			let tableau = $(".tableau-previsualisation").get(0);
+			let i;
+
+			for (i = 0; i < tableau.rows.length; i++) {
+				me.creerCase(tableau.rows[i].insertCell(tableau.rows[i].cells.length));
+			}
+		});
+
+		$("#tableau-suppression-ligne").on("click", function()
+		{
+			let tableau = $(".tableau-previsualisation").get(0);
+			let derniereLigne = tableau.rows.length - 1;
+
+			tableau.deleteRow(derniereLigne);
+		});
+
+		$("#tableau-suppression-colonne").on("click", function()
+		{
+			let tableau = $(".tableau-previsualisation").get(0);
+			let derniereColonne = tableau.rows[0].cells.length - 1;
+			let i = tableau.rows[0].cells.length - 1;
+
+			for (i = 0; i < tableau.rows.length; i++) {
+				tableau.rows[i].deleteCell(derniereColonne);
+			}
 		});
 		$("#open-presentations-panel").on("click", function()
 		{
@@ -1317,12 +1347,21 @@ Presentation.prototype =
 		me.selectedSlide.append($(video));
 		me.enableDrag();
 	},
-	addTableauToSlide : function(lignes, colonnes)
+	addTableauToSlide : function(contenuTableau)
 	{
-		let item = tableau_template;
-		me.selectedSlide.append($(item));
+		contenuTableau.addClass("slidelement");
+		contenuTableau.removeClass("table-responsive");
+		contenuTableau.attr("id", 'slidelement'+me.generateUID());
+
+		me.selectedSlide.append($(contenuTableau));
 		me.enableDrag();
 	},
+	creerCase : function(cell) {
+	let  txt = document.createTextNode("Case");
+
+	cell.appendChild(txt);
+	cell.setAttribute('contenteditable', "true");
+},
 	addObjectToSlide : function(obj)
 	{
 		let iframe = $('<iframe>', {

@@ -514,7 +514,7 @@ body
 .savedpresos
 {
 	width: 100%;
-	height : 150px;
+	height : 100px;
 	border-bottom:  1px dotted #DDD;
 }
 .presothumb
@@ -551,10 +551,6 @@ body
 	background-color: #BDC3C7;
 	position: relative;
 	margin: auto;
-}
-.idle
-{
-	display: none;
 }
 .active
 {
@@ -692,4 +688,10 @@ body
 .titre-presentation{
 	width: 100% !important;
 	margin-left: 10px !important;
+}
+
+#tableau-body>tr:first-child {
+	color:#fff;
+	background-color:#343a40;
+	border-color:#454d55;
 }

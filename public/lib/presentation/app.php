@@ -199,10 +199,31 @@ use App\Session;
         </button>
       </div>
       <div class="modal-body">
-        <p>Nombre de lignes</p>
-        <input type="number" id="tableau-lignes-input" class="form-control">
-        <p>Nombre de colonnes</p>
-        <input type="number" id="tableau-colonnes-input" class="form-control">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <button id="tableau-ajout-ligne" type="button" class="btn btn-outline-primary"><i class="fas fa-plus"></i>&nbsp;Une ligne</button>
+            <button id="tableau-ajout-colonne" type="button" class="btn btn-outline-primary"><i class="fas fa-plus"></i>&nbsp;Une colonne</button>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <button id="tableau-suppression-ligne" type="button" class="btn btn-outline-danger"><i class="fas fa-minus"></i>&nbsp;Derniere ligne</button>
+            <button id="tableau-suppression-colonne" type="button" class="btn btn-outline-danger"><i class="fas fa-minus"></i>&nbsp;Derniere colonne</button>
+          </div>
+        </div>
+
+        <table class="table table-responsive tableau-previsualisation" align="center">
+          <tbody id="tableau-body">
+            <tr>
+              <td contenteditable="true">Case</td>
+            </tr>
+            <tr>
+              <td contenteditable="true">Case</td>
+            </tr>
+          </tbody>
+        </table>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
