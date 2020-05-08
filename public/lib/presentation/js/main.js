@@ -26,7 +26,7 @@ Presentation = function()
 	this.isAlignedCenter = false;
 	this.isAlignedRight = false;
 
-	 this.vxmax = 6000;
+	this.vxmax = 6000;
 	//Viewport x min
 	this.vxmin = -6000;
 	//Viewport y max
@@ -159,7 +159,7 @@ Presentation.prototype =
 	},
 	setupMenuItemEvents : function()
 	{
-		$("#makebold").on("click", function(e)
+		$("#make-bold").on("click", function(e)
 		{
 			e.stopPropagation();
 			if(!me.isBold && me.selectedElement)
@@ -177,7 +177,7 @@ Presentation.prototype =
 				me.isBold = false;
 			}
 		});
-		$("#makeitalic").on("click", function(e)
+		$("#make-italic").on("click", function(e)
 		{
 			e.stopPropagation();
 			$(this).removeClass("active");
@@ -196,7 +196,7 @@ Presentation.prototype =
 				me.isItalic = false;
 			}
 		});
-		$("#makeunderline").on("click", function(e)
+		$("#make-underline").on("click", function(e)
 		{
 			e.stopPropagation();
 			$(this).removeClass("active");
@@ -215,7 +215,7 @@ Presentation.prototype =
 				me.isUnderlined = false;
 			}
 		});
-		$("#makealignleft").on("click", function(e)
+		$("#make-align-left").on("click", function(e)
 		{
 			e.stopPropagation();
 			$(this).removeClass("active");
@@ -226,8 +226,8 @@ Presentation.prototype =
 				me.selectedElement.attr("data-isaligncenter", false);
 				me.selectedElement.attr("data-isalignright", false);
 				$(this).addClass("active");
-				$("#makealigncenter").removeClass("active");
-				$("#makealignright").removeClass("active");
+				$("#make-align-center").removeClass("active");
+				$("#make-align-right").removeClass("active");
 				me.isAlignedLeft = true;
 				me.isAlignedCenter = false;
 				me.isAlignedRight = false;
@@ -239,14 +239,14 @@ Presentation.prototype =
 				me.selectedElement.attr("data-isaligncenter", false);
 				me.selectedElement.attr("data-isalignright", false);
 				$(this).removeClass("active");
-				$("#makealigncenter").removeClass("active");
-				$("#makealignright").removeClass("active");
+				$("#make-align-center").removeClass("active");
+				$("#make-align-right").removeClass("active");
 				me.isAlignedLeft = false;
 				me.isAlignedCenter = false;
 				me.isAlignedRight = false;
 			}
 		});
-		$("#makealigncenter").on("click", function(e)
+		$("#make-align-center").on("click", function(e)
 		{
 			e.stopPropagation();
 			$(this).removeClass("active");
@@ -256,9 +256,9 @@ Presentation.prototype =
 				me.selectedElement.attr("data-isalignleft", false);
 				me.selectedElement.attr("data-isaligncenter", true);
 				me.selectedElement.attr("data-isalignright", false);
-				$("#makealignleft").removeClass("active");
+				$("#make-align-left").removeClass("active");
 				$(this).addClass("active");
-				$("#makealignright").removeClass("active");
+				$("#make-align-right").removeClass("active");
 				me.isAlignedLeft = false;
 				me.isAlignedCenter = true;
 				me.isAlignedRight = false;
@@ -269,15 +269,15 @@ Presentation.prototype =
 				me.selectedElement.attr("data-isalignleft", false);
 				me.selectedElement.attr("data-isaligncenter", false);
 				me.selectedElement.attr("data-isalignright", false);
-				$("#makealignleft").removeClass("active");
+				$("#make-align-left").removeClass("active");
 				$(this).removeClass("active");
-				$("#makealignright").removeClass("active");
+				$("#make-align-right").removeClass("active");
 				me.isAlignedLeft = false;
 				me.isAlignedCenter = false;
 				me.isAlignedRight = false;
 			}
 		});
-		$("#makealignright").on("click", function(e)
+		$("#make-align-right").on("click", function(e)
 		{
 			e.stopPropagation();
 			$(this).removeClass("active");
@@ -287,8 +287,8 @@ Presentation.prototype =
 				me.selectedElement.attr("data-isalignleft", false);
 				me.selectedElement.attr("data-isaligncenter", false);
 				me.selectedElement.attr("data-isalignright", true);
-				$("#makealignleft").removeClass("active");
-				$("#makealigncenter").removeClass("active");
+				$("#make-align-left").removeClass("active");
+				$("#make-align-center").removeClass("active");
 				$(this).addClass("active");
 				me.isAlignedLeft = false;
 				me.isAlignedCenter = false;
@@ -300,8 +300,8 @@ Presentation.prototype =
 				me.selectedElement.attr("data-isalignleft", false);
 				me.selectedElement.attr("data-isaligncenter", false);
 				me.selectedElement.attr("data-isalignright", false);
-				$("#makealignleft").removeClass("active");
-				$("#makealigncenter").removeClass("active");
+				$("#make-align-left").removeClass("active");
+				$("#make-align-center").removeClass("active");
 				$(this).removeClass("active");
 				me.isAlignedLeft = false;
 				me.isAlignedCenter = false;
@@ -312,17 +312,15 @@ Presentation.prototype =
 	},
 	enableSort : function()
 	{
-		$(".slidethumbholder").sortable( { update : function( event, ui)
+		$(".slide-thumb-holder").sortable( { update : function( event, ui)
 			{
-				console.log("sort updated", event, ui);
 				me.assignSlideNumbers();
 				me.reArrangeImpressSlides();
 			}} );
-		//$(".slidethumbholder").disableSelection();
 	},
 	reArrangeImpressSlides : function()
 	{
-		children = $(".slidethumbholder").children();
+		children = $(".slide-thumb-holder").children();
 		var clonedElements = [];
 		for(var i=0; i<children.length; i++)
 		{
@@ -332,36 +330,38 @@ Presentation.prototype =
 			el = $("#impress_slide_"+id);
 			clonedElements.push( el );
 		}
-		$(".impress-slide-container").html("");
+		let impressSlideContainer = $(".impress-slide-container");
+		impressSlideContainer.html("");
+
 		for(var j=0; j< clonedElements.length; j++)
 		{
 			console.log("el", clonedElements[j]);
-			$(".impress-slide-container").append(clonedElements[j]);
+			impressSlideContainer.append(clonedElements[j]);
 		}
 		me.enableDrag();
 	},
 	setupDials : function()
 	{
-		$("#rotationknob").knob({change : function(v)
+		$("#rotation-knob").knob({change : function(v)
 		{
 			me.rotateElement(v);
 		}});
-		$("#skewxknob").knob({change : function(v)
+		$("#skew-x-knob").knob({change : function(v)
 		{
 			me.rotateElementX(v);
 		}});
-		$("#skewyknob").knob({change : function(v)
+		$("#skew-y-knob").knob({change : function(v)
 		{
 			me.rotateElementY(v);
 		}});
-		$("#scalerange").on("change", function(e)
+		$("#scale-range").on("change", function()
 		{
 			console.log("moving scale", $(this).val());
 			me.selectedOrchElement.attr("data-scale", $(this).val());
 			let id = me.selectedOrchElement.attr("id").split("_")[1];
 			$("#slidethumb_"+id).attr("data-scale", $(this).val());
 		});
-		$("#depthrange").on("change", function(e)
+		$("#depth-range").on("change", function()
 		{
 			me.selectedOrchElement.attr("data-z", $(this).val());
 			let id = me.selectedOrchElement.attr("id").split("_")[1];
@@ -372,8 +372,6 @@ Presentation.prototype =
 	},
 	rotateElement : function(value)
 	{
-		//me.selectedOrchElement.css("transform-origin", "0 0");
-		
 		rotx = me.selectedOrchElement.attr("data-rotate-x");
 		roty = me.selectedOrchElement.attr("data-rotate-y");
 		let s = "";
@@ -388,11 +386,11 @@ Presentation.prototype =
 
 		let id = me.selectedOrchElement.attr("id").split("_")[1];
 
-		$("#slidethumb_"+id).attr("data-rotate-x", rotx);
-		$("#slidethumb_"+id).attr("data-rotate-y", roty);
-		$("#slidethumb_"+id).attr("data-rotate", value);
-
-		$("#slidethumb_"+id).attr("data-transform-string", str);
+		let slideThumbId = $("#slidethumb_"+id);
+		slideThumbId.attr("data-rotate-x", rotx);
+		slideThumbId.attr("data-rotate-y", roty);
+		slideThumbId.attr("data-rotate", value);
+		slideThumbId.attr("data-transform-string", str);
 	},
 	rotateElementX : function(value)
 	{
@@ -408,10 +406,11 @@ Presentation.prototype =
 
 		let id = me.selectedOrchElement.attr("id").split("_")[1];
 
-		$("#slidethumb_"+id).attr("data-rotate-x", value);
-		$("#slidethumb_"+id).attr("data-rotate-y", roty);
-		$("#slidethumb_"+id).attr("data-rotate", rot);
-		$("#slidethumb_"+id).attr("data-transform-string", str);
+		let slideThumbId = $("#slidethumb_"+id);
+		slideThumbId.attr("data-rotate-x", value);
+		slideThumbId.attr("data-rotate-y", roty);
+		slideThumbId.attr("data-rotate", rot);
+		slideThumbId.attr("data-transform-string", str);
 	},
 	rotateElementY : function(value)
 	{
@@ -427,10 +426,11 @@ Presentation.prototype =
 
 		let id = me.selectedOrchElement.attr("id").split("_")[1];
 
-		$("#slidethumb_"+id).attr("data-rotate-x", rotx);
-		$("#slidethumb_"+id).attr("data-rotate-y", value);
-		$("#slidethumb_"+id).attr("data-rotate", rot);
-		$("#slidethumb_"+id).attr("data-transform-string", str);
+		let slideThumbId = $("#slidethumb_"+id);
+		slideThumbId.attr("data-rotate-x", rotx);
+		slideThumbId.attr("data-rotate-y", value);
+		slideThumbId.attr("data-rotate", rot);
+		slideThumbId.attr("data-transform-string", str);
 	},
 	setupPopover : function()
 	{
@@ -465,63 +465,64 @@ Presentation.prototype =
 	},
 	positionTransformControl : function()
 	{
+		let play = $("#play");
 		let _transform = me.selectedElement.css("-webkit-transform");
-		$("#play").css("-webkit-transform", _transform);
-		$("#play").css("display", "block");
-		$("#play").width ( me.selectedElement.width());
-		$("#play").css("left",   me.selectedElement.position().left+"px");
-		$("#play").css("top", 	 me.selectedElement.position().top+"px");
+		play.css("-webkit-transform", _transform);
+		play.css("display", "block");
+		play.width ( me.selectedElement.width());
+		play.css("left",   me.selectedElement.position().left+"px");
+		play.css("top", 	 me.selectedElement.position().top+"px");
 
 		$("#spandelete").on("click", function(e)
 		{
 			e.stopPropagation();
 			me.selectedElement.remove();
-			$("#play").css("display", "none");
+			play.css("display", "none");
 		})
 	},
 	setMenuControlValues : function(el)
 	{
-		var isbold 					= ( el.attr("data-isbold") == "true");
-		var isitalic 				= ( el.attr("data-isitalic")  == "true");
-		var isunderline 		= ( el.attr("data-isunderline")  == "true");
-		var isalignleft 		= ( el.attr("data-isalignleft")  == "true");
-		var isaligncenter 	= ( el.attr("data-isaligncenter")  == "true");
-		var isalignright 		= ( el.attr("data-isalignright")  == "true");
+		let isbold 					= (el.attr("data-isbold") == "true");
+		let isitalic 				= (el.attr("data-isitalic")  == "true");
+		let isunderline 		= (el.attr("data-isunderline")  == "true");
+		let isalignleft 		= (el.attr("data-isalignleft")  == "true");
+		let isaligncenter 	= (el.attr("data-isaligncenter")  == "true");
+		let isalignright 		= (el.attr("data-isalignright")  == "true");
 
 		if(isbold)
-			$("#makebold").addClass("active");
+			$("#make-bold").addClass("active");
 		else
-			$("#makebold").removeClass("active");
+			$("#make-bold").removeClass("active");
 
 
 		if(isitalic)
-			$("#makeitalic").addClass("active");
+			$("#make-italic").addClass("active");
 		else
-			$("#makeitalic").removeClass("active");
+			$("#make-italic").removeClass("active");
 
 
 		if(isunderline)
-			$("#makeunderline").addClass("active");
+			$("#make-underline").addClass("active");
 		else
-			$("#makeunderline").removeClass("active");
+			$("#make-underline").removeClass("active");
 
 
 		if(isalignleft)
-			$("#makealignleft").addClass("active");
+			$("#make-align-left").addClass("active");
 		else
-			$("#makealignleft").removeClass("active");
+			$("#make-align-left").removeClass("active");
 
 
 		if(isaligncenter)
-			$("#makealigncenter").addClass("active");
+			$("#make-align-center").addClass("active");
 		else
-			$("#makealigncenter").removeClass("active");
+			$("#make-align-center").removeClass("active");
 
 
 		if(isalignright)
-			$("#makealignright").addClass("active");
+			$("#make-align-right").addClass("active");
 		else
-			$("#makealignright").removeClass("active");
+			$("#make-align-right").removeClass("active");
 
 	},
 	resetMenuControlValues : function()
@@ -547,7 +548,7 @@ Presentation.prototype =
 	addSettingsPanel : function()
 	{
 		$(".settingsbox").html(newpresotemplate);
-		this.removelisteners();
+		this.removeListeners();
 		this.attachListeners();
 	},
 	manageGlobalClick : function()
@@ -568,12 +569,12 @@ Presentation.prototype =
 		let thumb = slidethumb;
 		let uid = me.generateUID();
 		thumb = thumb.split("slidethumb_^UID^").join("slidethumb_"+uid);
-		$(".slidethumbholder").append( thumb );
-		$("#slidethumb_"+uid).animate({opacity:1}, 200);
+		let slideThumbId = $("#slidethumb_"+uid);
 
-
-		$("#slidethumb_"+uid).attr("data-left", me.lastslideleftpos+"px");
-		$("#slidethumb_"+uid).attr("data-top", "0px");
+		$(".slide-thumb-holder").append(thumb);
+		slideThumbId.animate({opacity:1}, 200);
+		slideThumbId.attr("data-left", me.lastslideleftpos+"px");
+		slideThumbId.attr("data-top", "0px");
 		$(".deletebtn").on("click", function()
 		{
 			let p = $("#"+ $(this).attr("data-parent"));
@@ -599,7 +600,7 @@ Presentation.prototype =
 		me.assignSlideNumbers();
 		me.addImpressSlide( uid );
 		me.switchView( "right" );
-		$("#presentationmetatitle").html($("#titleinput").val());
+		$("#presentation-metatitle").html($("#titleinput").val());
 
 	},
 	addImpressSlide : function(id)
@@ -648,7 +649,8 @@ Presentation.prototype =
 	{
 		let newel = $(el).clone();
 		let id = newel.attr("id").split("_")[2];
-		let children = $("#slidethumb_"+id).children();
+		let slideThumbId = $("#slidethumb_"+id);
+		let children = slideThumbId.children();
 
 		newel.attr("id", "clonethumb_"+id);
 		newel.attr("data-clone", true);
@@ -661,18 +663,16 @@ Presentation.prototype =
 		{
 			child = children[i];
 			if($(child).attr("data-clone") == "true")
-			{
 				$(child).remove();
-			}
 		}
 
-		$("#slidethumb_"+id).append( newel );
+		slideThumbId.append( newel );
 	},
 	selectSlide : function(id)
 	{
 		let children = $(".impress-slide-container").children();
 
-		for(var i=0; i< children.length; i++)
+		for(let i=0; i< children.length; i++)
 		{
 			child = children[i];
 			childid = "#"+child.id;
@@ -682,15 +682,12 @@ Presentation.prototype =
 				me.selectedSlide = $(childid);
 			}
 			else
-			{
-				console.log("did not find", childid);
 				$(childid).css("z-index", -200 + (-(Math.round(Math.random()*1000))));
-			}
 		}
 	},
 	assignSlideNumbers : function()
 	{
-		let children = $(".slidethumbholder").children();
+		let children = $(".slide-thumb-holder").children();
 		let count = 0;
 
 		for(let i = 0; i< children.length; i++)
@@ -720,11 +717,12 @@ Presentation.prototype =
 	},
 	assembleOrchestrationTiles : function()
 	{
-		$(".orchestrationviewport").html("");
+		let orchestrationViewport = $(".orchestrationviewport");
 		let orchestrationElements = [];
-
-		let children = $(".slidethumbholder").children();
+		let children = $(".slide-thumb-holder").children();
 		let l = 10;
+
+		orchestrationViewport.html("");
 
 		for(let i=0 ; i<children.length; i++)
 		{
@@ -761,22 +759,23 @@ Presentation.prototype =
 				scale = me.selectedOrchElement.attr("data-scale");
 				depth = me.selectedOrchElement.attr("data-z");
 
-				$("#rotationknob").val(rot || 0).trigger("change");
-				$("#skewxknob").val(rotx || 0).trigger("change");
-				$("#skewyknob").val(roty || 0).trigger("change");
-				$("#scalerange").val( scale || 1 );
-				$("#depthrange").val( depth || 1000 );
+				$("#rotation-knob").val(rot || 0).trigger("change");
+				$("#skew-x-knob").val(rotx || 0).trigger("change");
+				$("#skew-y-knob").val(roty || 0).trigger("change");
+				$("#scale-range").val( scale || 1 );
+				$("#depth-range").val( depth || 1000 );
 			});
-			$(".orchestrationviewport").append(clone);
-			orchestrationElements.push( clone );
+			orchestrationViewport.append(clone);
+			orchestrationElements.push(clone);
 
 			l += 200;
 		}
 		me.repositionOrchestrationElements(orchestrationElements);
 	},
-	repositionOrchestrationElements : function( arr )
+	repositionOrchestrationElements : function(arr)
 	{
-		let children = $(".slidethumbholder").children();
+		let children = $(".slide-thumb-holder").children();
+
 		console.log("Current slide count", children.length, "Orchestration el count", arr.length);
 		for(let i=0 ; i < arr.length; i++)
 		{
@@ -787,21 +786,23 @@ Presentation.prototype =
 	},
 	switchView : function( direction )
 	{
+		let viewToggleIcon = $("#viewtoggleicon");
+
 		if(direction == "left")
 		{
-			$(".maingreyarea").css("display", "none");
+			$(".main-grey-area").css("display", "none");
 			$(".orchgreyarea").css("display", "block");
-			$("#viewtoggleicon").removeClass("icon-th-large");
-			$("#viewtoggleicon").addClass("fui-cross-24");
+			viewToggleIcon.removeClass("icon-th-large");
+			viewToggleIcon.addClass("fui-cross-24");
 			me.currentview = "orchestration";
 			me.assembleOrchestrationTiles();
 		}
 		else
 		{
-			$(".maingreyarea").css("display", "block");
+			$(".main-grey-area").css("display", "block");
 			$(".orchgreyarea").css("display", "none");
-			$("#viewtoggleicon").removeClass("fui-cross-24");
-			$("#viewtoggleicon").addClass("icon-th-large");
+			viewToggleIcon.removeClass("fui-cross-24");
+			viewToggleIcon.addClass("icon-th-large");
 			me.currentview = "mainarea";
 			me.persistOrchestrationCoordinates();
 		}
@@ -851,16 +852,16 @@ Presentation.prototype =
 		$(".settingsCancelBtn").on("click", me.onSettingsCancelClicked);
 		$("#newpresopanel").on("click", me.onMenuItemClicked);
 		$("#neworchestratepanel").on("click", me.onViewToggled);
-		$(".slidelement").on("click", me.triggetElementEdit);
+		$(".slidelement").on("click", me.triggerElementEdit);
 		$(".slidelement").on("mouseup", me.createEditor);
 		$("#newstylepanel").on("click", me.openStyleSelector);
 		$("#exportpresopanel").on("click", me.openCodeExportWindow);
-		$("#editpresonamebtn").on("click", function(e)
+		$("#edit-preso-name-btn").on("click", function(e)
 		{
 			$("#newpresentationmodal").modal("show");
 			$("#newpresoheader").html("Enregistrer la présentation sous...");
 			$("#titleinput").val( me.currentPresentation.title);
-			$("textarea#descriptioninput").val( me.currentPresentation.description);
+			$("#descriptioninput").val( me.currentPresentation.description);
 			me.mode = "save";
 		});
 		$(".previewpresobtn").on("click", function()
@@ -892,7 +893,6 @@ Presentation.prototype =
 		});
 		$("#openpreviewbtn").on("click", function(e)
 		{
-			window.open("http://harish.io/impressionist/viewer.php", "_blank");
 			$("#previewmodal").modal("hide");
 		});
 		$(".dropdownitem").on("click", function(e)
@@ -903,19 +903,19 @@ Presentation.prototype =
 			me.dropdownopen = true;
 			me.hideTransformControl();
 		});
-		$("#addtextbtn").on("click", function ()
+		$("#add-text-btn").on("click", function ()
 		{
 			me.addImpressSlideItem(me.selectedSlide);
 		});
-		$("#addimagebtn").on("click", function()
+		$("#add-image-btn").on("click", function()
 		{
 			$("#imagemodal").modal("show");
 		});
-		$("#addvideobtn").on("click", function()
+		$("#add-video-btn").on("click", function()
 		{
 			$("#videomodal").modal("show");
 		});
-		$("#addobjectbtn").on("click", function()
+		$("#add-object-btn").on("click", function()
 		{
 			$("#objectselectionmodal").modal("show");
 		});
@@ -930,7 +930,7 @@ Presentation.prototype =
 			video = video.replace("watch?v=","embed/");
 			$("#previewvideo").attr("src", video);
 		});
-		$("#addslidebtn").on("click", function()
+		$("#add-slide-btn").on("click", function()
 		{
 			me.addSlide();
 		});
@@ -966,7 +966,7 @@ Presentation.prototype =
 		{
 			me.generateExportMarkup(true);
 
-		
+
 		});
 		$(".stylethumbnail").on("click", function()
 		{
@@ -985,15 +985,16 @@ Presentation.prototype =
 			$(".objectthumbnail").css("border-bottom", "1px dotted #DDD");
 			$(this).css("border-bottom", "2px solid #1ABC9C");
 			objet =  $(this).attr('data-nom');
-		})
+		});
+
 		$("#applyobjectbtn").on("click", function()
 		{
             console.log("append object to stage");
             me.addObjectToSlide(objet);
             $("#objectselectionmodal").modal("hide");
-		})
+		});
 
-		$("#importobject").on("click", function(e)
+		$("#importobject").on("click", function()
 		{
 			$("#importobjetmodal").modal("show");
 		});
@@ -1022,8 +1023,9 @@ Presentation.prototype =
 	},
 	deleteSavedPresentation : function(id)
 	{
-		presentations = JSON.parse(me.getItem(me.saveKey));
-		for(var i=0; i< presentations.length; i++)
+		let presentations = JSON.parse(me.getItem(me.saveKey));
+
+		for(let i=0; i< presentations.length; i++)
 		{
 			presentation = presentations[i];
 			if(id == presentation.id)
@@ -1032,10 +1034,9 @@ Presentation.prototype =
 				break;
 			}
 		}
-		console.log("after delete", presentations);
 		me.saveItem(me.saveKey, JSON.stringify(presentations));
 		presentations = me.getSavedPresentations();
-		me.renderPresentations( presentations );
+		me.renderPresentations(presentations);
 		lastsaved = JSON.parse(me.getItem(me.lastSaved));
 		if(lastsaved.id == id)
 		{
@@ -1045,7 +1046,7 @@ Presentation.prototype =
 	},
 	generateExportMarkup : function(isPreview)
 	{
-		let children = $(".slidethumbholder").children();
+		let children = $(".slide-thumb-holder").children();
 			for(let i=0; i<children.length; i++)
 			{
 				child = $(children[i]);
@@ -1078,7 +1079,7 @@ Presentation.prototype =
 	},
 	createNewPresentation : function()
 	{
-		$(".slidethumbholder").html("");
+		$(".slide-thumb-holder").html("");
 		$(".impress-slide-container").html();
 		me.addSlide();
 		me.savePresentation();
@@ -1091,15 +1092,15 @@ Presentation.prototype =
 			if(id == presentation.id)
 			{
 				$(".impress-slide-container").html(presentation.contents);
-				$(".slidethumbholder").html(presentation.thumbcontents);
-				$(".slidethumbholder").each( function(i, object)
+				$(".slide-thumb-holder").html(presentation.thumbcontents);
+				$(".slide-thumb-holder").each( function(i, object)
 				{
 					$(this).css("opacity", 1);
 				});
 
 				me.selectedSlide = $(".impress-slide-container").find(".impress-slide-element");
 				me.currentPresentation = presentation;
-				$("#presentationmetatitle").html(me.currentPresentation.title);
+				$("#presentation-metatitle").html(me.currentPresentation.title);
 				console.log("rendered");
 			}
 
@@ -1184,12 +1185,12 @@ Presentation.prototype =
 				title: $("#titleinput").val(),
 				description: $("textarea#descriptioninput").val(),
 				contents : $(".impress-slide-container").html().toString(),
-				thumbcontents : $(".slidethumbholder").html().toString(),
+				thumbcontents : $(".slide-thumb-holder").html().toString(),
 				theme : me.theme
 			};
 
 			me.currentPresentation = o;
-			$("#presentationmetatitle").html(me.currentPresentation.title);
+			$("#presentation-metatitle").html(me.currentPresentation.title);
 			arr.push( o );
 			me.saveItem(me.saveKey, JSON.stringify(arr));
 			me.saveItem(me.lastSaved, JSON.stringify(o));
@@ -1214,9 +1215,9 @@ Presentation.prototype =
 		$("#savepresentationbtn").html('<div class="sb-nav-link-icon"><i class=\"fas fa-check-circle\"></i></div>Sauvegarde réussie!');
 		setTimeout(function(){ $("#savepresentationbtn").html('<div class="sb-nav-link-icon"><i class=\"fas fa-save\"></i></div>Sauvegarder'); }, 1000);
 	},
-	removeReference : function( arr )
+	removeReference : function(arr)
 	{
-		for(var i=0; i<arr.length; i++ )
+		for(let i=0; i<arr.length; i++ )
 		{
 			if(arr[i].id == me.currentPresentation.id)
 			{
@@ -1228,8 +1229,9 @@ Presentation.prototype =
 	},
 	getSavedPresentations : function()
 	{
-			item = me.getItem(me.saveKey);
-			arr = [];
+			let item = me.getItem(me.saveKey);
+			let arr = [];
+
 			if(item)
 				 arr = JSON.parse(item);
 
@@ -1237,9 +1239,11 @@ Presentation.prototype =
 	},
 	generatePreview : function ( str )
 	{
+		let openPreview = $("#openpreviewbtn");
+
 		$("#previewmodal").modal("show");
-		$("#openpreviewbtn").addClass("disabled");
-		$("#openpreviewbtn").removeClass("btn-primary");
+		openPreview.addClass("disabled");
+		openPreview.removeClass("btn-primary");
 		$("#progressmeter").css("display", "block");
 		$("#previewmessage").html("Veuillez patienter durant la génération de la prévisualisation.");
 		$.ajax({
@@ -1250,8 +1254,8 @@ Presentation.prototype =
 			 success: function(msg)
 			 {
 			 	console.log("Preview Generated");
-			 	$("#openpreviewbtn").removeClass("disabled");
-			 	$("#openpreviewbtn").addClass("btn-primary");
+			 	openPreview.removeClass("disabled");
+			 	openPreview.addClass("btn-primary");
 			 	$("#progressmeter").css("display", "none");
 			 	$("#previewmessage").html("Prévisualisation du diaporama généré avec succès.");
 
@@ -1263,24 +1267,27 @@ Presentation.prototype =
 		let vx = Math.round(((me.vxmax - me.vxmin)/(me.wxmax - me.wxmin) )*(wx - me.wxmin) + me.vxmin);
 		let vy = Math.round(((me.vymax - me.vymin)/(me.wymax - me.wymin) )*(wy - me.wymin) + me.vymin);
 		let object = {x:vx, y:vy};
+
 		console.log("object", object);
 		return object;
 	},
 	addImageToSlide : function(src)
 	{
 		let img = new Image();
+
 		$(img).attr("id", "slidelement_"+me.generateUID());
 		$(img).css("left", "200px");
 		$(img).css("top", "200px");
 		$(img).addClass("slidelement");
 		$(img).attr("src", src);
-		console.log("selectedslide", me.selectedSlide);
+
 		me.selectedSlide.append($(img));
 		me.enableDrag();
 	},
 	addVideoToSlide : function(src)
 	{
 		let video = $("iframe");
+
 		video.attr("id", "slidelement_"+me.generateUID());
 		video.attr("frameborder", 0);
 		video.attr("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture");
@@ -1290,33 +1297,35 @@ Presentation.prototype =
 		video.css("left", "200px");
 		video.css("top", "200px");
 		video.attr("src", src);
+
 		me.selectedSlide.append($(video));
 		me.enableDrag();
 	},
 	addObjectToSlide : function(obj)
 	{
-			console.log("adding object", obj);
-			var iframe =$('<iframe>', {
-					src: obj+'.html',
-					id:  'slidelement'+me.generateUID(),
-					class: 'slidelement',
-					frameborder: 5,
-					scrolling: 'no',
-		css: 'width: 200px; height: 200px;'
-			}).appendTo('.accordion');
-			me.selectedSlide.append($(iframe));
-			me.enableDrag();
+		let iframe = $('<iframe>', {
+			src: obj+'.html',
+			id:  'slidelement'+me.generateUID(),
+			class: 'slidelement',
+			frameborder: 5,
+			scrolling: 'no',
+			css: 'width: 200px; height: 200px;'
+		}).appendTo('.accordion');
+
+		me.selectedSlide.append($(iframe));
+		me.enableDrag();
 	},
 	createEditor : function(e)
 	{
-		editor = $(e.target).clone();
+		let editor = $(e.target).clone();
+
 		editor.attr("contentEditable", "true");
 	},
-	triggetElementEdit : function(e)
+	triggerElementEdit : function(e)
 	{
 		$(e.target).attr("contentEditable", true);
 	},
-	removelisteners : function()
+	removeListeners : function()
 	{
 		$(".settingsCancelBtn").off();
 		$("#neworchestratepanel").off();
@@ -1338,15 +1347,12 @@ Presentation.prototype =
 		if(me.isSupported())
 			localStorage.setItem(key, value);
 	},
-    getItem : function(key)
+	getItem : function(key)
 	{
 		return localStorage.getItem(key);
 	},
 	isSupported : function()
 	{
-		if(localStorage)
-			return true;
-		else
-			return false;
+			return localStorage;
 	}
 };
