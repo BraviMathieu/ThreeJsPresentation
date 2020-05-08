@@ -159,7 +159,7 @@ body
 	right:0px;
 	overflow: hidden;
 }
-.orchgreyarea
+.panorama-grey-area
 {
 	position: absolute;
 	left: 410px;
@@ -397,7 +397,7 @@ body
 	background-color: #3498DB;
 	border-radius: 5px;
 }
-.transformlabel
+.transform-label
 {
 	display:inline-block;
 	font-size:150%;
@@ -406,7 +406,7 @@ body
 	padding-left: 10px;
 	
 }
-.transformcontrolsholder
+.transform-controls-holder
 {
 	height : 50px;
 	background-color: #ECF0F1;
@@ -464,7 +464,7 @@ body
 {
 	text-transform: none;
 }
-.orchestrationviewport
+.panorama-viewport
 {
 	background-color: #FFF;
 	width : 930px;
@@ -514,7 +514,7 @@ body
 .savedpresos
 {
 	width: 100%;
-	height : 110px;
+	height : 150px;
 	border-bottom:  1px dotted #DDD;
 }
 .presothumb
@@ -689,7 +689,7 @@ body
 	background-color: #3498DB;
 }
 
-.titrepresentation{
+.titre-presentation{
 	width: 100% !important;
 	margin-left: 10px !important;
 }

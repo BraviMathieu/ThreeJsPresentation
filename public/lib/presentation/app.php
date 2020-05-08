@@ -42,7 +42,7 @@ use App\Session;
             <div class="sb-sidenav-menu-heading">Présentation</div>
             <a class="nav-link" id="exportcontentbtn" ><div class="sb-nav-link-icon"><i class="fas fa-eye"></i></div>
             Voir</a>
-            <a class="nav-link" id="savepresentationbtn" ><div class="sb-nav-link-icon"><i class="fas fa-save"></i></div>
+            <a class="nav-link" id="save-presentation-btn" ><div class="sb-nav-link-icon"><i class="fas fa-save"></i></div>
             Sauvegarder</a>
           </div>
         </div>
@@ -55,7 +55,7 @@ use App\Session;
     <div class="mainfooter palette-night">
       <div class="slide-thumb-holdercontainer">
         <div class="slide-thumb-holder"></div>
-        <a class="btn btn-large bg-primary text-white" href="#" id="add-slide-btn" style=""><i class="fas fa-plus"></i>&nbsp;Ajouter une slide</a>
+        <a class="btn btn-large bg-primary text-white" href="#" id="add-slide-btn"><i class="fas fa-plus"></i>&nbsp;Ajouter une slide</a>
       </div>
     </div>
   </div>
@@ -99,7 +99,7 @@ use App\Session;
         </div>
         <!-- main footer shows slide thumbnails-->
         <div class="presentation-meta">
-          <p id="presentation-metatitle" class="titrepresentation my-0 mx-auto text-white text-center" style="text-transform:none; font-size:160%;">
+          <p id="presentation-metatitle" class="titre-presentation my-0 mx-auto text-white text-center" style="text-transform:none; font-size:160%;">
           </p>
           <a class="btn btn-small btn-inline btn-success text-white position-absolute" style="right:5px; top:3px" id="edit-preso-name-btn" ><i class="fas fa-edit"></i></a>
         </div>
@@ -110,29 +110,29 @@ use App\Session;
               <span class="rotate label label-disabled btn btn-primary" id="spanrotate"><i class="fas fa-sync-alt"></i></span>
               <span class="skewx label label-disabled btn btn-primary" id="spanskewx"><i class="fas fa-arrows-alt-h"></i></span>
               <span class="skewy label label-disabled btn btn-primary" id="spanskewy"><i class="fas fa-arrows-alt-v"></i></span>
-              <span class="deleteicon label label-important btn btn-danger" id="spandelete"><i class="fas fa-trash-alt"></i></span>
+              <span class="delete-icon label label-important btn btn-danger" id="spandelete"><i class="fas fa-trash-alt"></i></span>
            </span>
           </div>
         </div>
       </div>
-      <div class="palette palette-clouds orchgreyarea">
+      <div class="palette palette-clouds panorama-grey-area">
         <div class="row">
           <div class="col-lg-12 text-center">
-            <div class="transformcontrolsholder">
-              <h3 class="transformlabel">Rotation Z</h3>
+            <div class="transform-controls-holder">
+              <h3 class="transform-label">Rotation Z</h3>
               <input class="knob" id="rotation-knob" data-width="50" data-min="-360" data-max="360" data-fgColor="#6f2232 " data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
-              <h3 class="transformlabel">Rotation X</h3>
+              <h3 class="transform-label">Rotation X</h3>
               <input class="knob" id="skew-x-knob" data-width="50" data-min="-360" data-max="360" data-fgColor="#6f2232 " data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
-              <h3 class="transformlabel">Rotation Y</h3>
+              <h3 class="transform-label">Rotation Y</h3>
               <input class="knob" id="skew-y-knob" data-width="50" data-min="-360" data-max="360" data-fgColor="#6f2232 " data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
-              <h3 class="transformlabel">Échelle</h3>
+              <h3 class="transform-label">Échelle</h3>
               <input type="range" id="scale-range" class="ranges" min="1" max="6" value="1" />
-              <h3 class="transformlabel">Profondeur</h3>
+              <h3 class="transform-label">Profondeur</h3>
               <input type="range" id="depth-range" class="ranges" min="-3000" max="5000" value="1" />
             </div>
           </div>
         </div>
-        <div class="orchestrationviewport"></div>
+        <div class="panorama-viewport"></div>
       </div>
     </div>
   </div>
@@ -223,7 +223,7 @@ use App\Session;
   </div>
 </div>
 
-<!-- importer objet Modal -->
+<!-- Importer Objet 3D Modal -->
 <div class="modal fade" id="importobjetmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -241,7 +241,7 @@ use App\Session;
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn btn-primary" id="createpresentation">&nbsp;Importer</button>
+        <button type="button" class="btn btn-primary" id="import-objet-3d">&nbsp;Importer</button>
       </div>
     </div>
   </div>
@@ -290,7 +290,7 @@ use App\Session;
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn bg-primary text-white" id="createpresentation"> <i class="fas fa-save"></i>&nbsp;Sauvegarder</button>
+        <button type="button" class="btn bg-primary text-white" id="create-presentation"> <i class="fas fa-save"></i>&nbsp;Sauvegarder</button>
       </div>
     </div>
   </div>
@@ -385,21 +385,19 @@ use App\Session;
         </button>
       </div>
       <div class="modal-body">
-        <input id="cp15" type="text" class="form-control input-lg" value="hex(#FFFFFF)"/>
+        <input id="color-picker" type="text" class="form-control input-lg" value="hex(#FFFFFF)"/>
       </div>
     </div>
   </div>
 </div>
 
-
-
 <script>
     $(document).ready(function() {
-        $(function(){
-            $("#typetitre li a").click(function(){
-                $("#dropdownMenu1:first-child").text($(this).text());
-                $("#dropdownMenu1:first-child").val($(this).text());
-            });
-        });
+      $("#typetitre li a").click(function(){
+        let dropdown =  $("#dropdownMenu1:first-child");
+
+          dropdown.text($(this).text());
+          dropdown.val($(this).text());
+      });
     });
 </script>

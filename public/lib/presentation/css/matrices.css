@@ -39,21 +39,21 @@ p {
 
 	
 }
-	#save a.reset {
-		position:absolute;
-		color:rgba(0,0,0,0.5);
-		left:20px;
-		bottom:20px;
-		text-decoration:none;
-		font-size:10px;
-	}
-		#save a.reset:hover {
-			-webkit-transform: matrix(1.4172,-0.3424,0.3074,1.2345,0,0); 
-			-moz-transform: matrix(1.4172,-0.3424,0.3074,1.2345,0px,0px); 
-			-ms-transform: matrix(1.4172,-0.3424,0.3074,1.2345,0,0); 
-			-o-transform: matrix(1.4172,-0.3424,0.3074,1.2345,0,0); 
-			transform: matrix(1.4172,-0.3424,0.3074,1.2345,0,0);
-		}
+#save a.reset {
+	position:absolute;
+	color:rgba(0,0,0,0.5);
+	left:20px;
+	bottom:20px;
+	text-decoration:none;
+	font-size:10px;
+}
+#save a.reset:hover {
+	-webkit-transform: matrix(1.4172,-0.3424,0.3074,1.2345,0,0);
+	-moz-transform: matrix(1.4172,-0.3424,0.3074,1.2345,0px,0px);
+	-ms-transform: matrix(1.4172,-0.3424,0.3074,1.2345,0,0);
+	-o-transform: matrix(1.4172,-0.3424,0.3074,1.2345,0,0);
+	transform: matrix(1.4172,-0.3424,0.3074,1.2345,0,0);
+}
 
 #play {
 	width:300px;
@@ -82,75 +82,75 @@ p {
 
 	-webkit-transform: translate3d(0,0,0);
 }
-	#play span {
-		position:absolute;
-		/*border:1px solid silver;
-		background:#FFCC00;
-		font-size:14px;
-		padding:4px 8px;
-		*/
-		white-space:nowrap;
-		cursor:pointer;
-		display: block;
-		
-		/*
-		-webkit-border-radius: 5px;
-		-moz-border-radius: 5px;
-		border-radius: 5px;
-		*/
-	}
-		#play span:hover {
-			border-color:gray;
-		}
+#play span {
+	position:absolute;
+	/*border:1px solid silver;
+	background:#FFCC00;
+	font-size:14px;
+	padding:4px 8px;
+	*/
+	white-space:nowrap;
+	cursor:pointer;
+	display: block;
 
-		#play .rotate {
-			right:-22px;
-			top:51%;
-			cursor: n-resize;
-			-webkit-transform: rotate(90deg);
-		}
+	/*
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	*/
+}
+#play span:hover {
+	border-color:gray;
+}
 
-		#play .scale {
-			bottom:-60px;
-			right:-50px;
-			cursor: nw-resize;
+#play .rotate {
+	right:-22px;
+	top:51%;
+	cursor: n-resize;
+	-webkit-transform: rotate(90deg);
+}
 
-			-webkit-transform: rotate(45deg);
-			-moz-transform: rotate(45deg);
-			-ms-transform: rotate(45deg);
-			-o-transform: rotate(45deg);
-			transform: rotate(45deg);
-		}
+#play .scale {
+	bottom:-60px;
+	right:-50px;
+	cursor: nw-resize;
 
-		#play .skewx {
-			left:50%;
-			top:-20px;
-			/*bottom:-15px;*/
-			cursor: w-resize;
-		}
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
 
-		#play .skewy {
-			left:-15px;
-			top:50%;
-			cursor: n-resize;
+#play .skewx {
+	left:50%;
+	top:-20px;
+	/*bottom:-15px;*/
+	cursor: w-resize;
+}
 
-			/*-webkit-transform: rotate(-90deg);
-			-moz-transform: rotate(-90deg);
-			-ms-transform: rotate(-90deg);
-			-o-transform: rotate(-90deg);
-			transform: rotate(-90deg);*/
-		}
-		#play .deleteicon
-		{
-			right:-44px;
-			top:5px
-		}
+#play .skewy {
+	left:-15px;
+	top:50%;
+	cursor: n-resize;
 
-		#play .move {
-			top:10px;
-			right:10px;
-			cursor: move;
-		}
+	/*-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+	transform: rotate(-90deg);*/
+}
+#play .delete-icon
+{
+	right:-44px;
+	top:5px
+}
+
+#play .move {
+	top:10px;
+	right:10px;
+	cursor: move;
+}
 
 #output {
 	position:absolute;
