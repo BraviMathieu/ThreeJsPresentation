@@ -690,6 +690,9 @@ body
 	margin-left: 10px !important;
 }
 
+#tableau-body>tr {
+	background-color:white;
+}
 #tableau-body>tr:first-child {
 	color:#fff;
 	background-color:#343a40;

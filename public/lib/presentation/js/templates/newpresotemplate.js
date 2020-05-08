@@ -15,7 +15,6 @@ var impress_slide = '<div class="impress-slide" id="impress_slide__slidenumber__
                 	'</div>';
 var text_snippet = '<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h2" style="width:auto; height:60px; position:absolute; left:300px; top:50px; whitespace:no-wrap;" contentEditable="true"> Titre d\'exemple </div>';
 
-
 var text_snippet_h1 = '<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h1" style=" font-size: 50px; width:auto; height:60px; position:absolute; left:300px; top:50px; whitespace:no-wrap;" contentEditable="true"> Titre H1 </div>';
 var text_snippet_h2 = '<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h2" style=" font-size: 40px; width:auto; height:60px; position:absolute; left:300px; top:50px; whitespace:no-wrap;" contentEditable="true"> Titre H2 </div>';
 var text_snippet_h3 = '<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h3" style=" font-size: 30px; width:auto; height:60px; position:absolute; left:300px; top:50px; whitespace:no-wrap;" contentEditable="true"> Titre H3 </div>';
@@ -32,3 +31,16 @@ var saved_presentations = '<div class="saved-presos">' +
  									'<a href="#"  data-id="__presoid__" class="btn btn-inline btn-danger deletepresobtn" style="position:absolute; right: 60px; top: 10px"><i class="fas fa-trash-alt"></i></a></br>'+
  								'</div>' +
  							'</div>';
+
+
+
+var tableau_previsualisation = "<table class=\"table table-responsive tableau-previsualisation\" align=\"center\"  style=\"width: auto;\">\n" +
+															"  <tbody id=\"tableau-body\">\n" +
+															"  <tr>\n" +
+															"    <td contenteditable=\"true\">Case</td>\n" +
+															"  </tr>\n" +
+															"  <tr>\n" +
+															"    <td contenteditable=\"true\">Case</td>\n" +
+															"  </tr>\n" +
+															"  </tbody>\n" +
+															"</table>";

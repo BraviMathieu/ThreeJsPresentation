@@ -212,17 +212,8 @@ use App\Session;
             <button id="tableau-suppression-colonne" type="button" class="btn btn-outline-danger"><i class="fas fa-minus"></i>&nbsp;Derniere colonne</button>
           </div>
         </div>
-
-        <table class="table table-responsive tableau-previsualisation" align="center">
-          <tbody id="tableau-body">
-            <tr>
-              <td contenteditable="true">Case</td>
-            </tr>
-            <tr>
-              <td contenteditable="true">Case</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="div-tableau-previsualisation">
+        </div>
 
       </div>
       <div class="modal-footer">

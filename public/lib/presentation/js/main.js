@@ -850,7 +850,7 @@ Presentation.prototype =
 		slideElement.on("mouseup", me.createEditor);
 		$("#new-style-panel").on("click", me.openStyleSelector);
 		$("#export-preso-panel").on("click", me.openCodeExportWindow);
-		$("#edit-preso-name-btn").on("click", function(e)
+		$("#edit-preso-name-btn").on("click", function()
 		{
 			$("#new-presentation-modal").modal("show");
 			$("#newpresoheader").html("Enregistrer la présentation sous...");
@@ -916,6 +916,7 @@ Presentation.prototype =
 		$("#add-tableau-btn").on("click", function()
 		{
 			$("#tableau-modal").modal("show");
+			$(".div-tableau-previsualisation").html(tableau_previsualisation);
 		});
 		$("#add-object-btn").on("click", function()
 		{
@@ -1351,6 +1352,7 @@ Presentation.prototype =
 	{
 		contenuTableau.addClass("slidelement");
 		contenuTableau.removeClass("table-responsive");
+		contenuTableau.removeClass("tableau-previsualisation");
 		contenuTableau.attr("id", 'slidelement'+me.generateUID());
 
 		me.selectedSlide.append($(contenuTableau));
