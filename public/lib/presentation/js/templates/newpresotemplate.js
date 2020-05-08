@@ -46,6 +46,6 @@ var tableau_previsualisation = "<table class=\"table table-responsive tableau-pr
 															"</table>";
 
 
-var video_template = "<iframe class=\"preview-video\" width=\"560\" height=\"315\" frameborder=\"0\" " +
+var video_template = "<iframe class=\"preview-video\" width=\"468\" height=\"315\" frameborder=\"0\" " +
 	"														allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\">" +
 	"											</iframe>";

@@ -1337,6 +1337,7 @@ Presentation.prototype =
 	addVideoToSlide : function(video)
 	{
 		video.attr("id", "slidelement_"+me.generateUID());
+		video.attr("width", "560");
 		video.removeClass("preview-video");
 
 		me.selectedSlide.append($(video));
