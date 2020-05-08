@@ -912,6 +912,7 @@ Presentation.prototype =
 		$("#add-video-btn").on("click", function()
 		{
 			$("#video-modal").modal("show");
+			$(".div-preview-video").html(video_template);
 		});
 		$("#add-tableau-btn").on("click", function()
 		{
@@ -932,7 +933,7 @@ Presentation.prototype =
 			if($("#video-input").val().includes("www.youtube.com/watch?v=")){
 				let video = $(this).val();
 				video = video.replace("watch?v=","embed/");
-				$("#preview-video").attr("src", video);
+				$(".preview-video").attr("src", video);
 			}
 		});
 		$("#add-slide-btn").on("click", function()
@@ -947,8 +948,8 @@ Presentation.prototype =
 		});
 		$("#append-video-btn").on("click", function()
 		{
-			let video = $("#preview-video").attr("src");
-			video = video.replace("watch?v=","embed/");
+			let video = $(".preview-video");
+
 			me.addVideoToSlide(video);
 			$("#video-modal").modal("hide");
 		});
@@ -1333,29 +1334,20 @@ Presentation.prototype =
 		me.selectedSlide.append($(img));
 		me.enableDrag();
 	},
-	addVideoToSlide : function(src)
+	addVideoToSlide : function(video)
 	{
-		let video = $("iframe");
-
 		video.attr("id", "slidelement_"+me.generateUID());
-		video.attr("frameborder", 0);
-		video.attr("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture");
-		video.attr("allowfullscreen", "");
-		video.attr("width", "560");
-		video.attr("height", "315");
-		video.css("left", "200px");
-		video.css("top", "200px");
-		video.attr("src", src);
+		video.removeClass("preview-video");
 
 		me.selectedSlide.append($(video));
 		me.enableDrag();
 	},
 	addTableauToSlide : function(contenuTableau)
 	{
+		contenuTableau.attr("id", 'slidelement_'+me.generateUID());
 		contenuTableau.addClass("slidelement");
 		contenuTableau.removeClass("table-responsive");
 		contenuTableau.removeClass("tableau-previsualisation");
-		contenuTableau.attr("id", 'slidelement'+me.generateUID());
 
 		me.selectedSlide.append($(contenuTableau));
 		me.enableDrag();
@@ -1370,7 +1362,7 @@ Presentation.prototype =
 	{
 		let iframe = $('<iframe>', {
 			src: obj+'.html',
-			id:  'slidelement'+me.generateUID(),
+			id:  'slidelement_'+me.generateUID(),
 			class: 'slidelement',
 			frameborder: 5,
 			scrolling: 'no',

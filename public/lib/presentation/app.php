@@ -178,7 +178,7 @@ use App\Session;
         <p>Coller l'URL de la vidéo </p>
         <input type="text" id="video-input" class="form-control">
         <p> La prévisualisation va apparaitre en dessous.</p>
-        <iframe id="preview-video" width="465" height="315" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+        <div class="div-preview-video"></div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
