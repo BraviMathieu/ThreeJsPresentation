@@ -1,15 +1,11 @@
 
 Presentation = function()
 {
-
-	this.slidecounter = 0;
-
 	this.menuopen = false;
 	this.currentview = "mainarea";
 	this.selectedElement;
 	this.clonedElement;
 	this.selectedSlide;
-	this.lasttextaddedcoords = {};
 	this.orchestrationcoords = [];
 	this.selectedOrchElement;
 	this.lastslideleftpos = 0;
@@ -21,14 +17,11 @@ Presentation = function()
 	this.theme = "montserrat";
 
 	this.dropdownopen = false;
-
 	this.selectedforedit = false;
-
 
 	this.isBold = false;
 	this.isItalic = false;
 	this.isUnderlined = false;
-
 	this.isAlignedLeft = false;
 	this.isAlignedCenter = false;
 	this.isAlignedRight = false;
@@ -56,11 +49,9 @@ Presentation.prototype =
 	{
 		me = this;
 		me.continueInit();
-		//me.openNewPresentationWindow();
 	},
 	continueInit : function()
 	{
-			me.positionOrchestrationPanel();
 			me.setupColorpicker();
 			me.setupMenuItemEvents();
 			me.enableSort();
@@ -117,11 +108,11 @@ Presentation.prototype =
 			templ = templ.split("__presoid__").join(presentation.id);
 			$("#savedpresentations").append(templ);
 		}
-		$(".savedpresos").on("mouseover", function(e)
+		$(".savedpresos").on("mouseover", function()
 		{
 			$(this).find(".presothumb").removeClass("idle");
 
-		}).on("mouseout", function(e)
+		}).on("mouseout", function()
 		{
 			$(this).find(".presothumb").addClass("idle");
 		});
@@ -130,7 +121,6 @@ Presentation.prototype =
 			if(confirm("Êtes-vous sûr de vouloir supprimer cette présentation ?"))
 				me.deleteSavedPresentation( $(this).attr("data-id") );
 		})
-		//$("#savedpresentationsmodal").modal("show");
 	},
 	hideTransformControl : function()
 	{
@@ -138,20 +128,17 @@ Presentation.prototype =
 	},
 	setupKeyboardShortcuts : function()
 	{
-			
-			key('⌘+c, ctrl+c', function(event, handler)
-			{
-				//console.log("hey there...")
-  				console.log(handler.shortcut, handler.scope);
-  				me.cloneElement();
-			});
-			key('⌘+v, ctrl+v', function(event, handler)
-			{
-				//console.log("hey there...")
-  				console.log(handler.shortcut, handler.scope);
-  				me.appendClonedElement();
-			});
-			key.setScope("issues");
+		key('⌘+c, ctrl+c', function(event, handler)
+		{
+				console.log(handler.shortcut, handler.scope);
+				me.cloneElement();
+		});
+		key('⌘+v, ctrl+v', function(event, handler)
+		{
+				console.log(handler.shortcut, handler.scope);
+				me.appendClonedElement();
+		});
+		key.setScope("issues");
 	},
 	cloneElement : function()
 	{
@@ -162,10 +149,6 @@ Presentation.prototype =
 			clone.css("left", me.selectedElement.position().left + 20+"px");
 			clone.css("top", me.selectedElement.position().top + 20+"px");
 			me.clonedElement = clone;
-		}
-		else
-		{
-			console.log("Nothing is selected");
 		}
 	},
 	appendClonedElement : function()
@@ -361,7 +344,6 @@ Presentation.prototype =
 	{
 		$("#rotationknob").knob({change : function(v)
 		{
-			//me.rotateElement( v );
 			me.rotateElement(v);
 		}});
 		$("#skewxknob").knob({change : function(v)
@@ -376,13 +358,13 @@ Presentation.prototype =
 		{
 			console.log("moving scale", $(this).val());
 			me.selectedOrchElement.attr("data-scale", $(this).val());
-			id = me.selectedOrchElement.attr("id").split("_")[1];
+			let id = me.selectedOrchElement.attr("id").split("_")[1];
 			$("#slidethumb_"+id).attr("data-scale", $(this).val());
 		});
 		$("#depthrange").on("change", function(e)
 		{
 			me.selectedOrchElement.attr("data-z", $(this).val());
-			id = me.selectedOrchElement.attr("id").split("_")[1];
+			let id = me.selectedOrchElement.attr("id").split("_")[1];
 			$("#slidethumb_"+id).attr("data-z", $(this).val());
 		});
 		$(".transformlabel").css("vertical-align", "top")
@@ -394,20 +376,17 @@ Presentation.prototype =
 		
 		rotx = me.selectedOrchElement.attr("data-rotate-x");
 		roty = me.selectedOrchElement.attr("data-rotate-y");
-		s = "";
+		let s = "";
 		if(rotx != undefined)
-		{
 			s += "rotateX("+rotx+"deg)";
-		}
 		if(roty != undefined)
-		{
 			s += "rotateY("+roty+"deg)";
-		}
-		str = s + " rotate("+value+"deg)";
+
+		let str = s + " rotate("+value+"deg)";
 		me.selectedOrchElement.css("transform", str);
 		me.selectedOrchElement.attr("data-rotate", value);
 
-		id = me.selectedOrchElement.attr("id").split("_")[1];
+		let id = me.selectedOrchElement.attr("id").split("_")[1];
 
 		$("#slidethumb_"+id).attr("data-rotate-x", rotx);
 		$("#slidethumb_"+id).attr("data-rotate-y", roty);
@@ -418,17 +397,16 @@ Presentation.prototype =
 	rotateElementX : function(value)
 	{
 		roty = me.selectedOrchElement.attr("data-rotate-y");
-		s = "";
+		let s = "";
 		if(roty != undefined)
-		{
 			s += "rotateY("+roty+"deg)";
-		}
-		str = s + " rotateX("+value+"deg)";
+
+		let str = s + " rotateX("+value+"deg)";
 		me.selectedOrchElement.css("transform", str);
 		me.selectedOrchElement.attr("data-rotate", value);
 		me.selectedOrchElement.attr("data-rotate-x", value);
 
-		id = me.selectedOrchElement.attr("id").split("_")[1];
+		let id = me.selectedOrchElement.attr("id").split("_")[1];
 
 		$("#slidethumb_"+id).attr("data-rotate-x", value);
 		$("#slidethumb_"+id).attr("data-rotate-y", roty);
@@ -438,17 +416,16 @@ Presentation.prototype =
 	rotateElementY : function(value)
 	{
 		rotx = me.selectedOrchElement.attr("data-rotate-x");
-		s = "";
+		let s = "";
 		if(rotx != undefined)
-		{
 			s += "rotateX("+rotx+"deg)";
-		}
-		str = s + " rotateY("+value+"deg)";
+
+		let str = s + " rotateY("+value+"deg)";
 		me.selectedOrchElement.css("transform", str);
 		me.selectedOrchElement.attr("data-rotate", value);
 		me.selectedOrchElement.attr("data-rotate-y", value);
 
-		id = me.selectedOrchElement.attr("id").split("_")[1];
+		let id = me.selectedOrchElement.attr("id").split("_")[1];
 
 		$("#slidethumb_"+id).attr("data-rotate-x", rotx);
 		$("#slidethumb_"+id).attr("data-rotate-y", value);
@@ -457,54 +434,44 @@ Presentation.prototype =
 	},
 	setupPopover : function()
 	{
-		$(".slidelement").popover({html:"hello world",placement:"bottom", trigger:"click"})
+		$(".slidelement").popover({html:"hello world",placement:"bottom", trigger:"click"});
 	},
 	enableDrag : function()
 	{
-
-		//$(".slidelement").drags();
 		$(".slidelement").draggable().on("dblclick", function(e)
 		{
 			e.stopPropagation();
 			$(this).draggable({disabled : false});
-			//$(this).attr("contentEditable", true);
 			$("#play").css("display", "none");
 			$(this).removeClass("movecursor");
-			
 
 		}).on("click", function (e)
 		{
-			console.log("click firing....");
 			e.stopPropagation();
 			$(this).draggable({disabled : true});
-			//$(this).attr("contentEditable", true);
 			$(".slidelement").removeClass("elementselected");
-			//$(this).addClass("elementselected")
 			me.selectElement( $(this));
 			me.selectedforedit = true;
-			me.setTransformValues($(this));
 			me.setMenuControlValues($(this));
 			me.positionTransformControl()
-			
-		}).on("mousedown mouseover", function(e)
+		}).on("mousedown mouseover", function()
 		{
 			$(this).addClass("movecursor")
-		}).on("mouseup", function(e)
+		}).on("mouseup", function()
 		{
 			console.log("mouse upping", me.selectedSlide );
 			me.generateScaledSlide( me.selectedSlide );
 		})
-		
 	},
 	positionTransformControl : function()
 	{
-		_transform = me.selectedElement.css("-webkit-transform");
+		let _transform = me.selectedElement.css("-webkit-transform");
 		$("#play").css("-webkit-transform", _transform);
 		$("#play").css("display", "block");
 		$("#play").width ( me.selectedElement.width());
-		//$("#play").height( me.selectedElement.height());
 		$("#play").css("left",   me.selectedElement.position().left+"px");
 		$("#play").css("top", 	 me.selectedElement.position().top+"px");
+
 		$("#spandelete").on("click", function(e)
 		{
 			e.stopPropagation();
@@ -561,16 +528,6 @@ Presentation.prototype =
 	{
 		$(".menubtn").removeClass("active");
 	},
-	setTransformValues : function(el)
-	{
-		/*rotation = el.attr("data-rotate");
-		skewx = el.attr("data-skewx");
-		skewy = el.attr("data-skewy");
-		$("#rotationknob").val( rotation || 0 )
-		$("#skewxknob").val( skewx  || 0)
-		$("#skewyknob").val( skewy || 0)
-		*/
-	},
 	selectElement : function(el)
 	{
 		me.selectedElement = el;
@@ -579,21 +536,13 @@ Presentation.prototype =
 	{
 		$('#cp15').colorpicker().on('colorpickerChange', function (e){
 			var io = e.colorpicker.element.find('.color-io');
-			if (e.value === io.val() || !e.color || !e.color.isValid()){
-				// do not replace the input value if the color is invalid or equals
+			if(e.value === io.val() || !e.color || !e.color.isValid()){
 				return;
 			}
 			io.val(e.color.string());
 			let couleur = $("#cp15").val();
 			me.colorSelectedElement(couleur);
 			});
-	},
-	positionOrchestrationPanel : function()
-	{
-		ypos = $(".mainfooter").position().top;
-		ht = $(".mainfooter").height();
-		orchestrationareapos = ypos + ht;
-		console.log("ypos", ypos)
 	},
 	addSettingsPanel : function()
 	{
@@ -612,14 +561,12 @@ Presentation.prototype =
 	colorSelectedElement : function(color)
 	{
 		if(me.selectedElement)
-		{
 			me.selectedElement.css("color", color);
-		}
 	},
 	addSlide : function()
 	{
-		thumb = slidethumb;
-		uid = me.generateUID();
+		let thumb = slidethumb;
+		let uid = me.generateUID();
 		thumb = thumb.split("slidethumb_^UID^").join("slidethumb_"+uid);
 		$(".slidethumbholder").append( thumb );
 		$("#slidethumb_"+uid).animate({opacity:1}, 200);
@@ -627,30 +574,27 @@ Presentation.prototype =
 
 		$("#slidethumb_"+uid).attr("data-left", me.lastslideleftpos+"px");
 		$("#slidethumb_"+uid).attr("data-top", "0px");
-		$(".deletebtn").on("click", function (e)
+		$(".deletebtn").on("click", function()
 		{
-			p = $("#"+ $(this).attr("data-parent"));
-			slideid = $(this).attr("data-parent").split("_")[1];
-			console.log("parent", p, slideid);
-			p.animate({opacity:0}, 200, function(e)
+			let p = $("#"+ $(this).attr("data-parent"));
+			let slideid = $(this).attr("data-parent").split("_")[1];
+			p.animate({opacity:0}, 200, function()
 			{
 				$(this).remove();
 				$("#impress_slide_"+slideid).remove();
 				me.assignSlideNumbers();
 			})
-		})
+		});
 		$(".slidemask").on("click", function(e)
 		{
 			e.stopPropagation();
-			id = (e.target.id).split("_")[1];
-			console.log("slidemask", id);
+			let id = (e.target.id).split("_")[1];
 			me.selectSlide( "#impress_slide_"+id );
 			$(".slidethumb").removeClass("currentselection");
 			$("#slidethumb_"+id).addClass("currentselection");
 			me.hideTransformControl();
 			me.switchView("right");
 		});
-		//me.orchestrationcoords.push({left:"0px", top:"0px"});
 		me.lastslideleftpos += 200;
 		me.assignSlideNumbers();
 		me.addImpressSlide( uid );
@@ -660,7 +604,7 @@ Presentation.prototype =
 	},
 	addImpressSlide : function(id)
 	{
-		islide = impress_slide;
+		let islide = impress_slide;
 		islide = islide.split("__slidenumber__").join("_"+id);
 		islide = islide.split("slidelement_id").join("slidelement_"+me.generateUID());
 		$(".impress-slide-container").append( islide );
@@ -675,6 +619,7 @@ Presentation.prototype =
 	{
 		console.log("adding the new item....");
 		let typeText = $("#dropdownMenu1").val();
+		let item ="";
 
 		switch (typeText){
 			case 'Titre 1':
@@ -701,27 +646,17 @@ Presentation.prototype =
 	},
 	generateScaledSlide : function(el)
 	{
-		tempel = el;
-		newel = $(el).clone();
-		try
-		{
-			id = newel.attr("id").split("_")[2];
-		}
-		catch(e)
-		{
-			//error.
-		}
-		//console.log("element id", id);
-		//$("clonethumb_"+id).remove();
+		let newel = $(el).clone();
+		let id = newel.attr("id").split("_")[2];
+		let children = $("#slidethumb_"+id).children();
+
 		newel.attr("id", "clonethumb_"+id);
 		newel.attr("data-clone", true);
 		newel.css("-webkit-transform", "scale(0.18, 0.18)");
 		newel.removeClass("impress-slide-element");
-		//newel.css("border", "1px solid #999");
 		newel.css("left", "-110px");
 		newel.css("top", "-75px");
-		children = $("#slidethumb_"+id).children();
-		//console.log("children", children)
+
 		for(var i=0; i<children.length; i++)
 		{
 			child = children[i];
@@ -735,15 +670,14 @@ Presentation.prototype =
 	},
 	selectSlide : function(id)
 	{
-		children = $(".impress-slide-container").children();
-		//console.log("I am in selection", children)
+		let children = $(".impress-slide-container").children();
+
 		for(var i=0; i< children.length; i++)
 		{
 			child = children[i];
 			childid = "#"+child.id;
 			if(childid == id)
 			{
-				//console.log("found", childid);
 				$(childid).css("z-index", 1);
 				me.selectedSlide = $(childid);
 			}
@@ -756,16 +690,15 @@ Presentation.prototype =
 	},
 	assignSlideNumbers : function()
 	{
-		children = $(".slidethumbholder").children();
-		//console.log("children", children);
-		for(var i = 0; i< children.length; i++)
+		let children = $(".slidethumbholder").children();
+		let count = 0;
+
+		for(let i = 0; i< children.length; i++)
 		{
 			child = $(children[i]);
 			count = i;
-			//console.log("child", $("#"+child[0].id).find(".slidedisplay").html())
+
 			$("#"+child[0].id).find(".slidedisplay").html("Slide "+(++count))
-			//slidenumber = $("#"+child[0].id).find(".slidedisplay").html();
-			//child.innerText = child.innerText.split("__text__").join("Slide "+(++count));
 		}
 	},
 	generateUID: function ()
@@ -788,13 +721,12 @@ Presentation.prototype =
 	assembleOrchestrationTiles : function()
 	{
 		$(".orchestrationviewport").html("");
-		orchestrationElements = [];
+		let orchestrationElements = [];
 
-		var children = $(".slidethumbholder").children();
+		let children = $(".slidethumbholder").children();
+		let l = 10;
 
-		l = 10;
-
-		for(var i=0 ; i<children.length; i++)
+		for(let i=0 ; i<children.length; i++)
 		{
 			child = children[i];
 			clone = $(child).clone();
@@ -817,7 +749,7 @@ Presentation.prototype =
 					$("#slidethumb_"+id).attr("data-top",$(this).css("top"));
 
 			});
-			clone.on("click", function(e)
+			clone.on("click", function()
 			{
 				$(".orchthumb").removeClass("currentselection");
 				$(this).addClass("currentselection");
@@ -838,15 +770,15 @@ Presentation.prototype =
 			$(".orchestrationviewport").append(clone);
 			orchestrationElements.push( clone );
 
-			l+= 200;
+			l += 200;
 		}
 		me.repositionOrchestrationElements(orchestrationElements);
 	},
 	repositionOrchestrationElements : function( arr )
 	{
-		var children = $(".slidethumbholder").children();
+		let children = $(".slidethumbholder").children();
 		console.log("Current slide count", children.length, "Orchestration el count", arr.length);
-		for(var i=0 ; i < arr.length; i++)
+		for(let i=0 ; i < arr.length; i++)
 		{
 			console.log("Props", $(children[i]).attr("data-left"), $(children[i]).attr("data-top"));
 			arr[i].css("left", $(children[i]).attr("data-left"));
@@ -876,9 +808,9 @@ Presentation.prototype =
 	},
 	persistOrchestrationCoordinates : function()
 	{
-		var children = $(".orchestrationviewport").children();
+		let children = $(".orchestrationviewport").children();
 		me.orchestrationcoords = [];
-		for(var i=0; i<children.length; i++)
+		for(let i=0; i<children.length; i++)
 		{
 			child = $(children[i]);
 			l = child.attr("data-left");
@@ -890,13 +822,9 @@ Presentation.prototype =
 	onViewToggled : function ()
 	{
 		if(me.currentview == "mainarea")
-		{
 			me.switchView( "left");
-		}
 		else
-		{
 			me.switchView( "right");
-		}
 	},
 	changeTextFormat : function(classname)
 	{
@@ -942,22 +870,15 @@ Presentation.prototype =
 		});
 		$(".openpresobtn").on("click", function()
 		{
-			console.log("Edit presentation");
 			me.mode = "save";
 			me.openPresentationForEdit($(this).attr("data-id"));
 		});
 		$("#createpresentation").on("click", function()
 		{
-			console.log("Mode", me.mode);
 			if(me.mode == "create")
-			{
 				me.createNewPresentation();
-			}
 			else
-			{
 				me.savePresentation();
-			}
-			
 		});
 		$("#savepresentationbtn").on("click", function()
 		{
@@ -976,32 +897,38 @@ Presentation.prototype =
 		});
 		$(".dropdownitem").on("click", function(e)
 		{
-				console.log("Dd value: " , $(e.target).attr("data-dk-dropdown-value"));
-				me.changeTextFormat($(e.target).attr("data-dk-dropdown-value"));
-				$(".dropdownpopup").css("display", "block");
-				$(".pulldownmenu").html($(e.target).html());
-				me.dropdownopen = true;
-				me.hideTransformControl();	
+			me.changeTextFormat($(e.target).attr("data-dk-dropdown-value"));
+			$(".dropdownpopup").css("display", "block");
+			$(".pulldownmenu").html($(e.target).html());
+			me.dropdownopen = true;
+			me.hideTransformControl();
 		});
 		$("#addtextbtn").on("click", function ()
 		{
-			console.log("add btn clicked...");
-			me.addImpressSlideItem( me.selectedSlide );
+			me.addImpressSlideItem(me.selectedSlide);
 		});
 		$("#addimagebtn").on("click", function()
 		{
-			console.log("open image modal...");
 			$("#imagemodal").modal("show");
+		});
+		$("#addvideobtn").on("click", function()
+		{
+			$("#videomodal").modal("show");
 		});
 		$("#addobjectbtn").on("click", function()
 		{
-			console.log("open object modal...");
 			$("#objectselectionmodal").modal("show");
 		});
 		$("#imageinput").on("blur keyup", function()
 		{
-			image = $(this).val();
+			let image = $(this).val();
 			$("#previewimg").attr("src", image);
+		});
+		$("#videoinput").on("blur keyup", function()
+		{
+			let video = $(this).val();
+			video = video.replace("watch?v=","embed/");
+			$("#previewvideo").attr("src", video);
 		});
 		$("#addslidebtn").on("click", function()
 		{
@@ -1009,10 +936,16 @@ Presentation.prototype =
 		});
 		$("#appendimagebtn").on("click", function()
 		{
-			console.log("append image to stage");
-			image = $("#previewimg").attr("src");
-			me.addImageToSlide( image );
+			let image = $("#previewimg").attr("src");
+			me.addImageToSlide(image);
 			$("#imagemodal").modal("hide");
+		});
+		$("#appendvideobtn").on("click", function()
+		{
+			let video = $("#previewvideo").attr("src");
+			video = video.replace("watch?v=","embed/");
+			me.addVideoToSlide(video);
+			$("#videomodal").modal("hide");
 		});
 		$("#openpresentationsbtn").on("click", function()
 		{
@@ -1031,7 +964,7 @@ Presentation.prototype =
 		});
 		$("#exportcontentbtn").on("click", function()
 		{
-			me.generateExportMarkup( true );
+			me.generateExportMarkup(true);
 
 		
 		});
@@ -1062,13 +995,8 @@ Presentation.prototype =
 
 		$("#importobject").on("click", function(e)
 		{
-			console.log("open import objet modal...");
 			$("#importobjetmodal").modal("show");
 		});
-		$("#objinput").on("blur keyup", function(e)
-		{
-		});
-		
 	},
 	applyStyle : function()
 	{
@@ -1076,7 +1004,6 @@ Presentation.prototype =
 			{
 				if($(this).hasClass("slidelementh1"))
 				{
-					console.log("Only change headings.");
 					me.removeAllStyles( $(this));
 					$(this).addClass(me.theme);
 				}
@@ -1109,7 +1036,7 @@ Presentation.prototype =
 		me.saveItem(me.saveKey, JSON.stringify(presentations));
 		presentations = me.getSavedPresentations();
 		me.renderPresentations( presentations );
-		lastsaved =JSON.parse(me.getItem(me.lastSaved));
+		lastsaved = JSON.parse(me.getItem(me.lastSaved));
 		if(lastsaved.id == id)
 		{
 			console.log("lastsaved", lastsaved.id);
@@ -1118,8 +1045,8 @@ Presentation.prototype =
 	},
 	generateExportMarkup : function(isPreview)
 	{
-		var children = $(".slidethumbholder").children();
-			for(var i=0; i<children.length; i++)
+		let children = $(".slidethumbholder").children();
+			for(let i=0; i<children.length; i++)
 			{
 				child = $(children[i]);
 				id = child.attr("id").split("_")[1];
@@ -1137,11 +1064,9 @@ Presentation.prototype =
 				el.attr("data-scale", child.attr("data-scale"));
 				el.addClass("step");
 			}
-			outputcontainer = $(".impress-slide-container").clone();
-			console.log("output", $(".impress-slide-container").html().toString());
+			let outputcontainer = $(".impress-slide-container").clone();
 			outputcontainer.find(".impress-slide").each( function(i, object)
 			{
-				console.log("Physically adding sizing information");
 				$(this).css("width", "1024px");
 				$(this).css("height", "768px");
 			});
@@ -1160,8 +1085,7 @@ Presentation.prototype =
 	},
 	openPresentationForEdit : function(id)
 	{
-		console.log("id", id);
-		for(var i=0; i<me.mypresentations.length; i++)
+		for(let i=0; i<me.mypresentations.length; i++)
 		{
 			presentation = me.mypresentations[i];
 			if(id == presentation.id)
@@ -1183,15 +1107,15 @@ Presentation.prototype =
 		}
 		$(".slidemask").on("click", function(e)
 		{
-				console.log("repopulated zone");
-				e.stopPropagation();
-				id = (e.target.id).split("_")[1];
-				console.log("slidemask", id);
-				me.selectSlide( "#impress_slide_"+id );
-				$(".slidethumb").removeClass("currentselection");
-				$("#slidethumb_"+id).addClass("currentselection");
-				me.hideTransformControl();
-				me.switchView("right");
+			console.log("repopulated zone");
+			e.stopPropagation();
+			id = (e.target.id).split("_")[1];
+			console.log("slidemask", id);
+			me.selectSlide( "#impress_slide_"+id );
+			$(".slidethumb").removeClass("currentselection");
+			$("#slidethumb_"+id).addClass("currentselection");
+			me.hideTransformControl();
+			me.switchView("right");
 		});
 		$(".deletebtn").on("click", function (e)
 		{
@@ -1232,46 +1156,38 @@ Presentation.prototype =
 	savePresentation : function()
 	{
 			$("#savepresentationbtn").html('<div class="sb-nav-link-icon"><i class=\"fas fa-save\"></i></div>Sauvegarde en cours...');
-			item = me.getItem(me.saveKey);
+			let item = me.getItem(me.saveKey);
 			if(item)
 			{
 				arr = JSON.parse(item);
 				if(this.mode == "save")
 				{
 					if(me.currentPresentation)
-					{
-						arr = me.removeReference( arr );
-					}
+						arr = me.removeReference(arr);
 				}
 			}
 			else
-			{
 				arr = [];
-			}
+
 			if(this.mode == "save")
 			{
 				if(me.currentPresentation)
-				{
-					tempid = me.currentPresentation.id
-				}
+					tempid = me.currentPresentation.id;
 				else
-				{
-					tempid = Math.round(Math.random() * 201020)
-				}
+					tempid = Math.round(Math.random() * 201020);
 			}
 			else
-			{
-				tempid = Math.round(Math.random() * 201020)
-			}
-			
-			var o = {
-							id : tempid,
-							title: $("#titleinput").val(), 
-							description: $("textarea#descriptioninput").val(),
-							contents : $(".impress-slide-container").html().toString(),
-							thumbcontents : $(".slidethumbholder").html().toString(),
-							theme : me.theme
-					};
+				tempid = Math.round(Math.random() * 201020);
+
+			let o = {
+				id : tempid,
+				title: $("#titleinput").val(),
+				description: $("textarea#descriptioninput").val(),
+				contents : $(".impress-slide-container").html().toString(),
+				thumbcontents : $(".slidethumbholder").html().toString(),
+				theme : me.theme
+			};
+
 			me.currentPresentation = o;
 			$("#presentationmetatitle").html(me.currentPresentation.title);
 			arr.push( o );
@@ -1283,12 +1199,10 @@ Presentation.prototype =
 
 			$(".previewpresobtn").on("click", function(e)
 			{
-				console.log("data parent id", $(this).attr("data-id"));
 				me.fetchAndPreview( $(this).attr("data-id") )
 			});
 			$(".openpresobtn").on("click", function(e)
 			{
-				console.log("Edit presentation");
 				me.mode = "save";
 				me.openPresentationForEdit( $(this).attr("data-id") );
 			});
@@ -1317,9 +1231,8 @@ Presentation.prototype =
 			item = me.getItem(me.saveKey);
 			arr = [];
 			if(item)
-			{
 				 arr = JSON.parse(item);
-			}
+
 			return arr;
 	},
 	generatePreview : function ( str )
@@ -1347,16 +1260,15 @@ Presentation.prototype =
 	},
 	calculateSlideCoordinates : function(wx, wy)
 	{
-		var vx = Math.round(((me.vxmax - me.vxmin)/(me.wxmax - me.wxmin) )*(wx - me.wxmin) + me.vxmin);
-		var vy = Math.round(((me.vymax - me.vymin)/(me.wymax - me.wymin) )*(wy - me.wymin) + me.vymin);
-		var object = {x:vx, y:vy};
+		let vx = Math.round(((me.vxmax - me.vxmin)/(me.wxmax - me.wxmin) )*(wx - me.wxmin) + me.vxmin);
+		let vy = Math.round(((me.vymax - me.vymin)/(me.wymax - me.wymin) )*(wy - me.wymin) + me.vymin);
+		let object = {x:vx, y:vy};
 		console.log("object", object);
 		return object;
 	},
-	addImageToSlide : function( src )
+	addImageToSlide : function(src)
 	{
-		console.log("adding image", src);
-		var img = new Image();
+		let img = new Image();
 		$(img).attr("id", "slidelement_"+me.generateUID());
 		$(img).css("left", "200px");
 		$(img).css("top", "200px");
@@ -1366,20 +1278,35 @@ Presentation.prototype =
 		me.selectedSlide.append($(img));
 		me.enableDrag();
 	},
-    addObjectToSlide : function(obj)
-    {
-        console.log("adding object", obj);
-        var iframe =$('<iframe>', {
-            src: obj+'.html',
-            id:  'slidelement'+me.generateUID(),
-            class: 'slidelement',
-            frameborder: 5,
-            scrolling: 'no',
-			css: 'width: 200px; height: 200px;'
-        }).appendTo('.accordion');
-        me.selectedSlide.append($(iframe));
-        me.enableDrag();
-    },
+	addVideoToSlide : function(src)
+	{
+		let video = $("iframe");
+		video.attr("id", "slidelement_"+me.generateUID());
+		video.attr("frameborder", 0);
+		video.attr("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture");
+		video.attr("allowfullscreen", "");
+		video.attr("width", "560");
+		video.attr("height", "315");
+		video.css("left", "200px");
+		video.css("top", "200px");
+		video.attr("src", src);
+		me.selectedSlide.append($(video));
+		me.enableDrag();
+	},
+	addObjectToSlide : function(obj)
+	{
+			console.log("adding object", obj);
+			var iframe =$('<iframe>', {
+					src: obj+'.html',
+					id:  'slidelement'+me.generateUID(),
+					class: 'slidelement',
+					frameborder: 5,
+					scrolling: 'no',
+		css: 'width: 200px; height: 200px;'
+			}).appendTo('.accordion');
+			me.selectedSlide.append($(iframe));
+			me.enableDrag();
+	},
 	createEditor : function(e)
 	{
 		editor = $(e.target).clone();
@@ -1394,11 +1321,11 @@ Presentation.prototype =
 		$(".settingsCancelBtn").off();
 		$("#neworchestratepanel").off();
 	},
-	onSettingsCancelClicked : function(e)
+	onSettingsCancelClicked : function()
 	{
-		me.animateSettingsPanel( "left" )
+		me.animateSettingsPanel("left")
 	},
-	onMenuItemClicked : function(e)
+	onMenuItemClicked : function()
 	{
 		$("#newpresentationmodal").modal("show");
 		$("#newpresoheader").html("Créer une nouvelle présentation");
@@ -1409,9 +1336,7 @@ Presentation.prototype =
 	saveItem : function(key, value)
 	{
 		if(me.isSupported())
-		{
 			localStorage.setItem(key, value);
-		}
 	},
     getItem : function(key)
 	{
@@ -1420,12 +1345,8 @@ Presentation.prototype =
 	isSupported : function()
 	{
 		if(localStorage)
-		{
 			return true;
-		}
 		else
-		{
 			return false;
-		}
 	}
 };

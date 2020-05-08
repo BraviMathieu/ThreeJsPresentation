@@ -102,6 +102,7 @@ use App\Session;
                 <button type="button" id="colorpickerbtn" data-toggle="modal" data-target="#colorpickerModal" class="btn btn-secondary"><i class="fas fa-tint"></i></button>
                 <button type="button" id="addtextbtn" class="btn btn-secondary"><i class="fas fa-font"></i></button>
                 <button type="button" id="addimagebtn" class="btn btn-secondary"><i class="fas fa-images"></i></button>
+                <button type="button" id="addvideobtn" class="btn btn-secondary"><i class="fas fa-video"></i></button>
                 <button type="button" id="addobjectbtn" class="btn btn-secondary"><i class="fas fa-cube"></i></button>
               </div>
             </div>
@@ -158,7 +159,7 @@ use App\Session;
 </div>
 
     <!-- Ajouter Image Modal -->
-    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -181,8 +182,32 @@ use App\Session;
       </div>
     </div>
 
+  <!-- Ajouter Video Modal -->
+  <div class="modal fade" id="videomodal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ajouter une vidéo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Coller l'URL de la vidéo </p>
+          <input type="text" id="videoinput" class="form-control">
+          <p> La prévisualisation va apparaitre en dessous.</p>
+          <iframe id="previewvideo" width="465" height="315" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          <button type="button" class="btn bg-rouge text-white" id="appendvideobtn"><i class="fas fa-plus"></i>&nbsp;Ajouter la vidéo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
     <!-- Prévisualisation Modal -->
-    <div class="modal fade" id="previewmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="previewmodal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -206,7 +231,7 @@ use App\Session;
     </div>
 
     <!-- Nouvelle présentation Modal -->
-    <div class="modal fade" id="newpresentationmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="newpresentationmodal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -230,7 +255,7 @@ use App\Session;
     </div>
 
     <!-- Mes présentations Modal -->
-    <div class="modal fade" id="savedpresentationsmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="savedpresentationsmodal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -249,7 +274,7 @@ use App\Session;
     </div>
 
     <!-- Exporter Code Modal -->
-    <div class="modal fade" id="exportcodemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exportcodemodal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -272,7 +297,7 @@ use App\Session;
     </div>
 
     <!-- Selectionner une police Modal -->
-    <div class="modal fade" id="styleselectionmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="styleselectionmodal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">

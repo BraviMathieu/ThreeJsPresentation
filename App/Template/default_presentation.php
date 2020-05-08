@@ -47,8 +47,6 @@
 
     <script src="../../public/lib/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 
-    <script src="../../public/lib/presentation/js/jquery.placeholder.js"></script>
-
     <script src="../../public/lib/presentation/js/matrix.js"></script>
     <script src="../../public/lib/presentation/js/knob.js"></script>
     <script type="text/javascript" src="subj.js"></script>
