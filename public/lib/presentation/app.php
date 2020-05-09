@@ -240,11 +240,9 @@ use App\Session;
           <div class="col-lg-12">
             <label for="preview-graphique-type">Type de graphique</label>
             <select class="form-control" name="preview-graphique-type" id="preview-graphique-type">
-              <option value="bar">Bâton</option>
+              <option value="bar">Diagramme en bâtons</option>
               <option value="pie">Diagramme circulaire</option>
-              <option value="doughnut">doughnut</option>
-              <option value="radar">Diagramme de Kiviat</option>
-              <option value="line">Courbe</option>
+              <option value="doughnut">Diagramme en anneau</option>
             </select>
           </div>
         </div>

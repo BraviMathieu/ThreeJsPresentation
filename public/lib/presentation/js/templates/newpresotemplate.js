@@ -51,4 +51,4 @@ var video_template = "<iframe class=\"preview-video\" width=\"468\" height=\"315
 	"											</iframe>";
 
 
-var graphique_previsualisation= "<canvas id=\"preview-graphique\" width=\"400\" height=\"400\"></canvas>";
+var graphique_previsualisation= "<canvas id=\"preview-graphique\" width=\"400\" height=\"400\" style=\"background-color: white;\"></canvas>";
