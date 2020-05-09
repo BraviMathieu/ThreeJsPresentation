@@ -66,14 +66,14 @@ use App\Session;
           <div class="col-lg-12 text-center">
             <div role="toolbar">
               <div class="btn-group mr-2">
-                <button type="button" id="make-bold"      class="btn btn-secondary" title="Gras"><i class="fas fa-bold"></i></button>
-                <button type="button" id="make-italic"    class="btn btn-secondary" title="Italique"><i class="fas fa-italic"></i></button>
-                <button type="button" id="make-underline" class="btn btn-secondary" title="Souligné"><i class="fas fa-underline"></i></button>
+                <button id="make-bold"      class="btn btn-secondary" title="Gras"><i class="fas fa-bold"></i></button>
+                <button id="make-italic"    class="btn btn-secondary" title="Italique"><i class="fas fa-italic"></i></button>
+                <button id="make-underline" class="btn btn-secondary" title="Souligné"><i class="fas fa-underline"></i></button>
               </div>
               <div class="btn-group mr-2">
-                <button type="button" id="make-align-left"   class="btn btn-secondary" title="Aligner à gauche"><i class="fas fa-align-left"></i></button>
-                <button type="button" id="make-align-center" class="btn btn-secondary" title="Centrer"><i class="fas fa-align-center"></i></button>
-                <button type="button" id="make-align-right"  class="btn btn-secondary" title="Aligner à droite"><i class="fas fa-align-right"></i></button>
+                <button id="make-align-left"   class="btn btn-secondary" title="Aligner à gauche"><i class="fas fa-align-left"></i></button>
+                <button id="make-align-center" class="btn btn-secondary" title="Centrer"><i class="fas fa-align-center"></i></button>
+                <button id="make-align-right"  class="btn btn-secondary" title="Aligner à droite"><i class="fas fa-align-right"></i></button>
               </div>
               <div class="btn-group" role="group">
                 <button class="btn btn-secondary dropdown-toggle" title="Choisir un texte" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -88,12 +88,13 @@ use App\Session;
                 </div>
               </div>
               <div class="btn-group">
-                <button type="button" id="colorpicker-btn" title="Choisir une couleur" class="btn btn-secondary"><i class="fas fa-tint"></i></button>
-                <button type="button" id="add-text-btn"    title="Ajouter un texte" class="btn btn-secondary"><i class="fas fa-font"></i></button>
-                <button type="button" id="add-image-btn"   title="Ajouter une image" class="btn btn-secondary"><i class="fas fa-images"></i></button>
-                <button type="button" id="add-video-btn"   title="Ajouter une vidéo" class="btn btn-secondary"><i class="fas fa-video"></i></button>
-                <button type="button" id="add-tableau-btn" title="Ajouter un tableau" class="btn btn-secondary"><i class="fas fa-table"></i></button>
-                <button type="button" id="add-object-btn"  title="Ajouter une forme 3D" class="btn btn-secondary"><i class="fas fa-cube"></i></button>
+                <button id="colorpicker-btn" title="Choisir une couleur" class="btn btn-secondary"><i class="fas fa-tint"></i></button>
+                <button id="add-text-btn"    title="Ajouter un texte" class="btn btn-secondary"><i class="fas fa-font"></i></button>
+                <button id="add-image-btn"   title="Ajouter une image" class="btn btn-secondary"><i class="fas fa-images"></i></button>
+                <button id="add-video-btn"   title="Ajouter une vidéo" class="btn btn-secondary"><i class="fas fa-video"></i></button>
+                <button id="add-tableau-btn" title="Ajouter un tableau" class="btn btn-secondary"><i class="fas fa-table"></i></button>
+                <button id="add-graphique-btn"title="Ajouter un graphique" class="btn btn-secondary"><i class="fas fa-chart-pie"></i></button>
+                <button id="add-object-btn"  title="Ajouter une forme 3D" class="btn btn-secondary"><i class="fas fa-cube"></i></button>
               </div>
             </div>
           </div>
@@ -146,7 +147,7 @@ use App\Session;
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Ajouter une image</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -157,8 +158,8 @@ use App\Session;
         <img id="preview-image">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn btn-primary" id="append-image-btn"><i class="fas fa-plus"></i>&nbsp;Ajouter l'image</button>
+        <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button class="btn btn-primary" id="append-image-btn"><i class="fas fa-plus"></i>&nbsp;Ajouter l'image</button>
       </div>
     </div>
   </div>
@@ -170,7 +171,7 @@ use App\Session;
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Ajouter une vidéo</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -181,8 +182,8 @@ use App\Session;
         <div class="div-preview-video"></div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn btn-primary text-white" id="append-video-btn"><i class="fas fa-plus"></i>&nbsp;Ajouter la vidéo</button>
+        <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button class="btn btn-primary text-white" id="append-video-btn"><i class="fas fa-plus"></i>&nbsp;Ajouter la vidéo</button>
       </div>
     </div>
   </div>
@@ -194,7 +195,7 @@ use App\Session;
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Ajouter un tableau</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -217,13 +218,76 @@ use App\Session;
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn btn-primary text-white" id="append-tableau-btn"><i class="fas fa-plus"></i>&nbsp;Ajouter le tableau</button>
+        <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button class="btn btn-primary text-white" id="append-tableau-btn"><i class="fas fa-plus"></i>&nbsp;Ajouter le tableau</button>
       </div>
     </div>
   </div>
 </div>
 
+<!-- Ajouter graphique Modal -->
+<div class="modal fade" id="graphique-modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Ajouter un graphique</h5>
+        <button class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <label for="preview-graphique-type">Type de graphique</label>
+            <select class="form-control" name="preview-graphique-type" id="preview-graphique-type">
+              <option value="bar">Bâton</option>
+              <option value="pie">Diagramme circulaire</option>
+              <option value="doughnut">doughnut</option>
+              <option value="radar">Diagramme de Kiviat</option>
+              <option value="line">Courbe</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-lg-12">
+            <label for="preview-graphique-add-donnee-val">Valeur</label>
+            <input type="number" class="form-control" id="preview-graphique-add-donnee-val" value="1">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <label for="preview-graphique-add-donnee-color">Couleur</label>
+            <input id="preview-graphique-add-donnee-color" type="text" class="form-control input-lg" value="hex(#FFFFFF)"/>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <label for="preview-graphique-add-nom">Nom</label>
+            <input id="preview-graphique-add-donnee-nom" type="text" class="form-control input-lg"/>
+          </div>
+        </div>
+
+        <div class="row my-1 text-center">
+          <div class="col-lg-6">
+            <button id="preview-grahpique-add-donnee"class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp;Donnée</button>
+          </div>
+          <div class="col-lg-6">
+            <button id="preview-grahpique-delete-donnee"class="btn btn-danger"><i class="fas fa-minus"></i>&nbsp;Dernière donnée</button>
+          </div>
+        </div>
+        <div class="div-graphique-previsualisation">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button class="btn btn-primary text-white" id="append-graphique-btn"><i class="fas fa-plus"></i>&nbsp;Ajouter le graphique</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Selectionner Objet 3D Modal -->
 <div class="modal fade" id="objet-selection-modal" tabindex="-1">
@@ -231,7 +295,7 @@ use App\Session;
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Selectionner un objet 3D</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -253,8 +317,8 @@ use App\Session;
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn btn-primary" id="append-object-btn"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
+        <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button class="btn btn-primary" id="append-object-btn"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
       </div>
     </div>
   </div>
@@ -266,7 +330,7 @@ use App\Session;
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Ajouter un ou plusieurs objet 3D</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -277,8 +341,8 @@ use App\Session;
         <img id="previewimg">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn btn-primary" id="import-objet-3d">&nbsp;Importer</button>
+        <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button class="btn btn-primary" id="import-objet-3d">&nbsp;Importer</button>
       </div>
     </div>
   </div>
@@ -291,7 +355,7 @@ use App\Session;
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Génération de la prévisualisation</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -302,8 +366,8 @@ use App\Session;
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn disabled" id="open-preview-btn"> Ouvrir la prévisualisation</button>
+        <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button class="btn disabled" id="open-preview-btn"> Ouvrir la prévisualisation</button>
       </div>
     </div>
   </div>
@@ -315,7 +379,7 @@ use App\Session;
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="new-preso-header">Nouvelle présentation</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -326,8 +390,8 @@ use App\Session;
         <textarea id="description-input" class="form-control">Exemple de description de présentation</textarea>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn bg-primary text-white" id="create-presentation"> <i class="fas fa-save"></i>&nbsp;Sauvegarder</button>
+        <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button class="btn bg-primary text-white" id="create-presentation"> <i class="fas fa-save"></i>&nbsp;Sauvegarder</button>
       </div>
     </div>
   </div>
@@ -339,14 +403,14 @@ use App\Session;
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Mes Présentations</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body" id="saved-presentations" style="overflow:scroll;">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
       </div>
     </div>
   </div>
@@ -358,7 +422,7 @@ use App\Session;
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Exporter le code</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -369,7 +433,7 @@ use App\Session;
         </pre>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
       </div>
     </div>
   </div>
@@ -381,7 +445,7 @@ use App\Session;
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Selectionner une police</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -403,8 +467,8 @@ use App\Session;
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn btn-primary" id="apply-style-btn">&nbsp;Appliquer</button>
+        <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button class="btn btn-primary" id="apply-style-btn">&nbsp;Appliquer</button>
       </div>
     </div>
   </div>
@@ -416,7 +480,7 @@ use App\Session;
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Choisir une couleur</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>

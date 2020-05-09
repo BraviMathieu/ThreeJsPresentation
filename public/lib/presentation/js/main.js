@@ -26,6 +26,11 @@ Presentation = function()
 	this.isAlignedCenter = false;
 	this.isAlignedRight = false;
 
+	//Graphique
+	this.monGraphique;
+	this.ctxGraphique;
+	this.dataGraphique;
+
 	this.vxmax = 6000;
 	//Viewport x min
 	this.vxmin = -6000;
@@ -537,6 +542,11 @@ Presentation.prototype =
 			io.val(e.color.string());
 			me.colorSelectedElement(couleur);
 			});
+
+		$('#preview-graphique-add-donnee-color').colorpicker().on('colorpickerChange', function (e){
+
+		});
+
 	},
 	addSettingsPanel : function()
 	{
@@ -918,6 +928,84 @@ Presentation.prototype =
 		{
 			$("#tableau-modal").modal("show");
 			$(".div-tableau-previsualisation").html(tableau_previsualisation);
+		});
+		$("#add-graphique-btn").on("click", function()
+		{
+			$("#graphique-modal").modal("show");
+			$(".div-graphique-previsualisation").html(graphique_previsualisation);
+
+			me.ctxGraphique = $("#preview-graphique").get(0).getContext('2d');
+			me.dataGraphique = {
+				labels: ["Jaune", "Orange", "Rose", "Vert", "Bleu", "Violet","Gris"],
+				datasets: [{
+					label: 'Valeur',
+					data: [12, 19, 3, 5, 2, 3, 10],
+					backgroundColor:[
+						"#ffe600",
+						"#ff6400",
+						"#ff0062",
+						"#46c446",
+						"#3a76ff",
+						"#8634ff",
+						"#baabbb",
+					],
+				}],
+			};
+			me.monGraphique = new Chart(me.ctxGraphique, {
+				type: 'bar',
+				data: me.dataGraphique,
+				options: {
+					title: {
+						display: true,
+					},
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true
+							}
+						}]
+					}
+				}
+			});
+		});
+		$("#preview-grahpique-add-donnee").on("click", function()
+		{
+			let couleur = $("#preview-graphique-add-donnee-color").val();
+			let valeur = $("#preview-graphique-add-donnee-val").val();
+			let nom = $("#preview-graphique-add-donnee-nom").val();
+
+			me.monGraphique.data.labels.push(nom);
+			me.monGraphique.data.datasets.forEach((dataset) => {
+				dataset.data.push(valeur);
+				dataset.backgroundColor.push(couleur);
+			});
+			me.monGraphique.update();
+		});
+		$("#preview-grahpique-delete-donnee").on("click", function()
+		{
+			me.monGraphique.data.labels.pop();
+			me.monGraphique.data.datasets.forEach((dataset) => {
+				dataset.data.pop();
+				dataset.backgroundColor.pop();
+			});
+			me.monGraphique.update();
+		});
+		$("#append-graphique-btn").on("click", function()
+		{
+			let graphique = $("#preview-graphique");
+
+			me.addGraphiqueToSlide(graphique);
+			$("#graphique-modal").modal("hide");
+		});
+		$("#preview-graphique-type").on("change", function()
+		{
+			let typeGraphique = $("#preview-graphique-type").val();
+
+			me.monGraphique.destroy();
+			me.monGraphique = new Chart(me.ctxGraphique, {
+				type: typeGraphique,
+				data: me.dataGraphique
+			});
 		});
 		$("#add-object-btn").on("click", function()
 		{
@@ -1358,6 +1446,16 @@ Presentation.prototype =
 		contenuTableau.removeClass("tableau-previsualisation");
 
 		me.selectedSlide.append($(contenuTableau));
+		me.enableDrag();
+	},
+	addGraphiqueToSlide : function(graphique)
+	{
+		graphique.attr("id", 'slidelement_'+me.generateUID());
+		graphique.addClass("slidelement");
+
+		let div = $("<div style=\"width: 400px; height: 400px;\">").html(graphique);
+
+		me.selectedSlide.append($(div));
 		me.enableDrag();
 	},
 	creerCase : function(cell)

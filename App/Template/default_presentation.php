@@ -44,6 +44,7 @@
 
     <script src="../../public/lib/jquery-ui/js/jquery-ui.min.js"></script>
     <script src="../../public/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../public/lib/chartjs/Chart.min.js"></script>
 
     <script src="../../public/lib/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 
