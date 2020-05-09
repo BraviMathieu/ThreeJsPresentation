@@ -103,7 +103,7 @@ use App\Session;
         <div class="presentation-meta">
           <p id="presentation-metatitle" class="titre-presentation my-0 mx-auto text-white text-center" style="text-transform:none; font-size:160%;">
           </p>
-          <a class="btn btn-small btn-inline btn-success text-white position-absolute" style="right:5px; top:3px" id="edit-preso-name-btn" ><i class="fas fa-edit"></i></a>
+          <a id="edit-preso-name-btn" class="btn btn-small btn-inline btn-success text-white position-absolute" title="Enregistrer sous..." style="right:5px; top:3px"><i class="fas fa-edit"></i></a>
         </div>
         <div class="slide-viewport-container">
           <div class="slide-viewport">
@@ -213,7 +213,7 @@ use App\Session;
             <button id="tableau-suppression-colonne" type="button" class="btn btn-outline-danger"><i class="fas fa-minus"></i>&nbsp;Derniere colonne</button>
           </div>
         </div>
-        <div class="div-tableau-previsualisation">
+        <div class="div-tableau-previsualisation my-2">
         </div>
 
       </div>
@@ -301,16 +301,16 @@ use App\Session;
         <div class="objet-thumbnail" style="width: 130px" data-nom="cube">
           <img src="lib/presentation/images/Cube.PNG" style="width: 130px" >
         </div>
-        <div class="objectthumbnail" style="width: 130px" data-nom="cone">
+        <div class="objet-thumbnail" style="width: 130px" data-nom="cone">
           <img src="lib/presentation/images/Cone.PNG" style="width: 130px" >
         </div>
-        <div class="objectthumbnail" style="width: 130px" data-nom="sphere">
+        <div class="objet-thumbnail" style="width: 130px" data-nom="sphere">
           <img src="lib/presentation/images/Sphere.PNG" style="width: 130px">
         </div>
-        <div class="objectthumbnail" style="width: 130px" data-nom="pyramid">
+        <div class="objet-thumbnail" style="width: 130px" data-nom="pyramid">
           <img src="lib/presentation/images/Pyramid.PNG" style="width: 130px">
         </div>
-        <div class="objectthumbnail" style="width: 130px" data-nom="rectangle">
+        <div class="objet-thumbnail" style="width: 130px" data-nom="rectangle">
           <img src="lib/presentation/images/Rectangle.PNG" style="width: 130px">
         </div>
       </div>
@@ -333,9 +333,9 @@ use App\Session;
         </button>
       </div>
       <div class="modal-body">
-        <p>importer un fichier obj </p>
+        <p>Importer un fichier .obj </p>
         <input type="file" accept=".obj" multiple  id="objinput" >
-        <p> La prévisualisation va apparaitre en dessous.</p>
+        <p>La prévisualisation va apparaitre en dessous.</p>
         <img id="previewimg">
       </div>
       <div class="modal-footer">

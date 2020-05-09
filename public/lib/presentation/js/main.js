@@ -862,7 +862,7 @@ Presentation.prototype =
 		$("#edit-preso-name-btn").on("click", function()
 		{
 			$("#new-presentation-modal").modal("show");
-			$("#newpresoheader").html("Enregistrer la présentation sous...");
+			$("#new-preso-header").html("Enregistrer la présentation sous...");
 			$("#title-input").val(me.currentPresentation.title);
 			$("#description-input").val(me.currentPresentation.description);
 			me.mode = "save";
