@@ -927,10 +927,8 @@ Presentation.prototype =
 		{
 			let image = $(this).val();
 
-			if(me.isValidUrl(image)){
+			if(me.isValidUrl(image))
 				$("#preview-image").attr("src", image);
-			}
-
 		});
 		$("#video-input").on("blur keyup", function()
 		{
@@ -992,7 +990,8 @@ Presentation.prototype =
 			let tableau = $(".tableau-previsualisation").get(0);
 			let derniereLigne = tableau.rows.length - 1;
 
-			tableau.deleteRow(derniereLigne);
+			if(derniereLigne !== 0)
+				tableau.deleteRow(derniereLigne);
 		});
 
 		$("#tableau-suppression-colonne").on("click", function()
@@ -1002,7 +1001,9 @@ Presentation.prototype =
 			let i = tableau.rows[0].cells.length - 1;
 
 			for (i = 0; i < tableau.rows.length; i++) {
-				tableau.rows[i].deleteCell(derniereColonne);
+
+				if(derniereColonne !== 0)
+					tableau.rows[i].deleteCell(derniereColonne);
 			}
 		});
 		$("#open-presentations-panel").on("click", function()
