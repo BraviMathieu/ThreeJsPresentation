@@ -66,17 +66,17 @@ use App\Session;
           <div class="col-lg-12 text-center">
             <div role="toolbar">
               <div class="btn-group mr-2">
-                <button type="button" id="make-bold"      class="btn btn-secondary"><i class="fas fa-bold"></i></button>
-                <button type="button" id="make-italic"    class="btn btn-secondary"><i class="fas fa-italic"></i></button>
-                <button type="button" id="make-underline" class="btn btn-secondary"><i class="fas fa-underline"></i></button>
+                <button type="button" id="make-bold"      class="btn btn-secondary" title="Gras"><i class="fas fa-bold"></i></button>
+                <button type="button" id="make-italic"    class="btn btn-secondary" title="Italique"><i class="fas fa-italic"></i></button>
+                <button type="button" id="make-underline" class="btn btn-secondary" title="Souligné"><i class="fas fa-underline"></i></button>
               </div>
               <div class="btn-group mr-2">
-                <button type="button" id="make-align-left"    class="btn btn-secondary"><i class="fas fa-align-left"></i></button>
-                <button type="button" id="make-align-center"  class="btn btn-secondary"><i class="fas fa-align-center"></i></button>
-                <button type="button" id="make-align-right"   class="btn btn-secondary"><i class="fas fa-align-right"></i></button>
+                <button type="button" id="make-align-left"   class="btn btn-secondary" title="Aligner à gauche"><i class="fas fa-align-left"></i></button>
+                <button type="button" id="make-align-center" class="btn btn-secondary" title="Centrer"><i class="fas fa-align-center"></i></button>
+                <button type="button" id="make-align-right"  class="btn btn-secondary" title="Aligner à droite"><i class="fas fa-align-right"></i></button>
               </div>
               <div class="btn-group" role="group">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <button class="btn btn-secondary dropdown-toggle" title="Choisir un texte" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                   Titre 1
                   <span class="caret"></span>
                 </button>
@@ -88,12 +88,12 @@ use App\Session;
                 </div>
               </div>
               <div class="btn-group">
-                <button type="button" id="colorpicker-btn" class="btn btn-secondary"><i class="fas fa-tint"></i></button>
-                <button type="button" id="add-text-btn"   class="btn btn-secondary"><i class="fas fa-font"></i></button>
-                <button type="button" id="add-image-btn"  class="btn btn-secondary"><i class="fas fa-images"></i></button>
-                <button type="button" id="add-video-btn"  class="btn btn-secondary"><i class="fas fa-video"></i></button>
-                <button type="button" id="add-tableau-btn"class="btn btn-secondary"><i class="fas fa-table"></i></button>
-                <button type="button" id="add-object-btn" class="btn btn-secondary"><i class="fas fa-cube"></i></button>
+                <button type="button" id="colorpicker-btn" title="Choisir une couleur" class="btn btn-secondary"><i class="fas fa-tint"></i></button>
+                <button type="button" id="add-text-btn"    title="Ajouter un texte" class="btn btn-secondary"><i class="fas fa-font"></i></button>
+                <button type="button" id="add-image-btn"   title="Ajouter une image" class="btn btn-secondary"><i class="fas fa-images"></i></button>
+                <button type="button" id="add-video-btn"   title="Ajouter une vidéo" class="btn btn-secondary"><i class="fas fa-video"></i></button>
+                <button type="button" id="add-tableau-btn" title="Ajouter un tableau" class="btn btn-secondary"><i class="fas fa-table"></i></button>
+                <button type="button" id="add-object-btn"  title="Ajouter une forme 3D" class="btn btn-secondary"><i class="fas fa-cube"></i></button>
               </div>
             </div>
           </div>
