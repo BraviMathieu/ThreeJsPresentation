@@ -789,23 +789,22 @@ Presentation.prototype =
 	},
 	switchView : function(direction)
 	{
-		let viewToggleIcon = $("#viewtoggleicon");
+		let viewToggle = $("#new-panorama-panel");
+		console.log(viewToggle);
 
 		if(direction == "left")
 		{
+			$("#new-panorama-panel").html('<div class="sb-nav-link-icon"><i id="view-toggle-icon" class="fas fa-chevron-left"></i></div>Mode edition');
 			$(".main-grey-area").css("display", "none");
 			$(".panorama-grey-area").css("display", "block");
-			viewToggleIcon.removeClass("icon-th-large");
-			viewToggleIcon.addClass("fui-cross-24");
 			me.currentview = "orchestration";
 			me.assemblePanoramaCases();
 		}
 		else
 		{
+			$("#new-panorama-panel").html('<div class="sb-nav-link-icon"><i id="view-toggle-icon" class="fas fa-th"></i></div>Panorama');
 			$(".main-grey-area").css("display", "block");
 			$(".panorama-grey-area").css("display", "none");
-			viewToggleIcon.removeClass("fui-cross-24");
-			viewToggleIcon.addClass("icon-th-large");
 			me.currentview = "mainarea";
 			me.persistOrchestrationCoordinates();
 		}

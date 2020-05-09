@@ -31,7 +31,7 @@ use App\Session;
             Nouvelle présentation</a>
             <a class="nav-link" id="new-style-panel"><div class="sb-nav-link-icon"><i class="fas fa-pencil-alt"></i></div>
             Selectionner une police</a>
-            <a class="nav-link" id="new-panorama-panel"><div class="sb-nav-link-icon"><i id="viewtoggleicon" class="fas fa-th"></i></div>
+            <a class="nav-link" id="new-panorama-panel"><div class="sb-nav-link-icon"><i id="view-toggle-icon" class="fas fa-th"></i></div>
             Panorama</a>
             <a class="nav-link" id="import-objet-panel"><div class="sb-nav-link-icon"><i class="fas fa-file-download"></i></div>
             Importer des objets 3D</a>

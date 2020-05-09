@@ -283,9 +283,6 @@ body
 	left: 233px;
 	top: 65px;
 }
-.viewtogglebtn
-{
-}
 .slidethumb
 {
 	display: block;
@@ -627,10 +624,6 @@ body
 	background-color: #DDD;
 	border: 1px solid #DDD;
 	cursor:pointer;
-}
-.headingelement
-{
-
 }
 /** Landing page specific styles **/
 .landingcontainer
