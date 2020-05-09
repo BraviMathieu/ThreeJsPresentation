@@ -926,14 +926,20 @@ Presentation.prototype =
 		$("#image-input").on("blur keyup", function()
 		{
 			let image = $(this).val();
-			$("#preview-image").attr("src", image);
+
+			if(me.isValidUrl(image)){
+				$("#preview-image").attr("src", image);
+			}
+
 		});
 		$("#video-input").on("blur keyup", function()
 		{
-			if($("#video-input").val().includes("www.youtube.com/watch?v=")){
-				let video = $(this).val();
-				video = video.replace("watch?v=","embed/");
-				$(".preview-video").attr("src", video);
+			let video = $("#video-input").val();
+			if(me.isValidUrl(video)){
+				if(video.includes("www.youtube.com/watch?v=")){
+					video = video.replace("watch?v=","embed/");
+					$(".preview-video").attr("src", video);
+				}
 			}
 		});
 		$("#add-slide-btn").on("click", function()
@@ -1353,12 +1359,13 @@ Presentation.prototype =
 		me.selectedSlide.append($(contenuTableau));
 		me.enableDrag();
 	},
-	creerCase : function(cell) {
+	creerCase : function(cell)
+	{
 	let  txt = document.createTextNode("Case");
 
 	cell.appendChild(txt);
 	cell.setAttribute('contenteditable', "true");
-},
+	},
 	addObjectToSlide : function(obj)
 	{
 		let iframe = $('<iframe>', {
@@ -1412,5 +1419,15 @@ Presentation.prototype =
 	isSupported : function()
 	{
 			return localStorage;
-	}
+	},
+	isValidUrl : function(url)
+	{
+		try {
+			new URL(url);
+		}
+		catch (e) {
+			return false;
+		}
+		return true;
+	},
 };
