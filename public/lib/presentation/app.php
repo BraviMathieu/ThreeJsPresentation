@@ -29,8 +29,6 @@ use App\Session;
             <div class="sb-sidenav-menu-heading">Core</div>
             <a class="nav-link" id="new-preso-panel"><div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
             Nouvelle présentation</a>
-            <a class="nav-link" id="new-style-panel"><div class="sb-nav-link-icon"><i class="fas fa-pencil-alt"></i></div>
-            Selectionner une police</a>
             <a class="nav-link" id="new-panorama-panel"><div class="sb-nav-link-icon"><i id="view-toggle-icon" class="fas fa-th"></i></div>
             Panorama</a>
             <a class="nav-link" id="import-objet-panel"><div class="sb-nav-link-icon"><i class="fas fa-file-download"></i></div>
@@ -90,6 +88,7 @@ use App\Session;
               <div class="btn-group">
                 <button id="colorpicker-btn" title="Choisir une couleur" class="btn btn-secondary"><i class="fas fa-tint"></i></button>
                 <button id="add-text-btn"    title="Ajouter un texte" class="btn btn-secondary"><i class="fas fa-font"></i></button>
+                <button id="change-font-btn" title="Changer la police d'écriture" class="btn btn-secondary"><i class="fas fa-heading"></i></button>
                 <button id="add-image-btn"   title="Ajouter une image" class="btn btn-secondary"><i class="fas fa-images"></i></button>
                 <button id="add-video-btn"   title="Ajouter une vidéo" class="btn btn-secondary"><i class="fas fa-video"></i></button>
                 <button id="add-tableau-btn" title="Ajouter un tableau" class="btn btn-secondary"><i class="fas fa-table"></i></button>

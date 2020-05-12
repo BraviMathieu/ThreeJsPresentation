@@ -862,7 +862,7 @@ Presentation.prototype =
 		$("#new-panorama-panel").on("click", me.onViewToggled);
 		slideElement.on("click", me.triggerElementEdit);
 		slideElement.on("mouseup", me.createEditor);
-		$("#new-style-panel").on("click", me.openStyleSelector);
+		$("#change-font-btn").on("click", me.openStyleSelector);
 		$("#export-preso-panel").on("click", me.openCodeExportWindow);
 		$("#edit-preso-name-btn").on("click", function()
 		{
