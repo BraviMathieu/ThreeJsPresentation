@@ -103,7 +103,6 @@ use App\Session;
         <div class="presentation-meta">
           <p id="presentation-metatitle" class="titre-presentation my-0 mx-auto text-white text-center" style="text-transform:none; font-size:160%;">
           </p>
-          <a id="edit-preso-name-btn" class="btn btn-small btn-inline btn-success text-white position-absolute" title="Enregistrer sous..." style="right:5px; top:3px"><i class="fas fa-edit"></i></a>
         </div>
         <div class="slide-viewport-container">
           <div class="slide-viewport">
