@@ -10,7 +10,7 @@ Presentation = function()
 	this.selectedOrchElement;
 	this.lastslideleftpos = 0;
 	this.userId = user_id_ajax;
-	this.lastSaved = "impressionist_lastsaved";
+	this.lastSaved = "";
 	this.currentPresentation;
 	this.mypresentations = [];
 	this.mycurrentpresntationid = 0;
@@ -861,16 +861,8 @@ Presentation.prototype =
 		$("#new-panorama-panel").on("click", me.onViewToggled);
 		slideElement.on("click", me.triggerElementEdit);
 		slideElement.on("mouseup", me.createEditor);
-		$("#new-style-panel").on("click", me.openStyleSelector);
+		$("#change-font-btn").on("click", me.openStyleSelector);
 		$("#export-preso-panel").on("click", me.openCodeExportWindow);
-		$("#edit-preso-name-btn").on("click", function()
-		{
-			$("#new-presentation-modal").modal("show");
-			$("#new-preso-header").html("Enregistrer la présentation sous...");
-			$("#title-input").val(me.currentPresentation.title);
-			$("#description-input").val(me.currentPresentation.description);
-			me.mode = "save";
-		});
 		$(".previewpresobtn").on("click", function()
 		{
 			console.log("data parent id", $(this).attr("data-id"));
@@ -1359,23 +1351,8 @@ Presentation.prototype =
 
 			me.currentPresentation = o;
 			$("#presentation-metatitle").html(me.currentPresentation.title);
-			arr.push(o);
 
-
-		console.log(o);
-
-		if(this.mode == "save") {
-			for (let i = 0; i < arr.length; i++) {
-				if (arr[i]['id'] != me.mycurrentpresntationid) {
-					arr.splice(i, 1);
-				}
-			}
-		}else{
-			arr = [];
-			arr.push(o);
-		}
-
-			me.sauvegarderBDD(arr);
+			me.sauvegarderBDD(o);
 
 			presentations = me.getSavedPresentations();
 			presentations.reverse();
@@ -1448,21 +1425,7 @@ Presentation.prototype =
 		openPreview.removeClass("btn-primary");
 		$("#progressmeter").css("display", "block");
 		$("#previewmessage").html("Veuillez patienter durant la génération de la prévisualisation.");
-		$.ajax({
-			type: 'POST',
-			 url: "http://harish.io/impressionist/generatePreview.php",
-			 data: {generateddata:str},
-			 dataType: "html",
-			 success: function(msg)
-			 {
-			 	console.log("Preview Generated");
-			 	openPreview.removeClass("disabled");
-			 	openPreview.addClass("btn-primary");
-			 	$("#progressmeter").css("display", "none");
-			 	$("#previewmessage").html("Prévisualisation du diaporama généré avec succès.");
 
-			 }
-		});
 	},
 	calculateSlideCoordinates : function(wx, wy)
 	{

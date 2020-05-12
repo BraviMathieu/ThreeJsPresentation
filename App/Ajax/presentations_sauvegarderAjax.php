@@ -9,18 +9,16 @@ require_once "../Classe/Database/Bootstrap.php";
 $user_id = $_POST['user_id'];
 $new_presentation = $_POST['new_presentation'];
 
-$id = $new_presentation[0]['id'];
-$titre = $new_presentation[0]['title'];
-$desc = $new_presentation[0]['description'];
-$contents = $new_presentation[0]['contents'];
-$thumbcontents = $new_presentation[0]['thumbcontents'];
+$id = $new_presentation['id'];
+$titre = $new_presentation['title'];
+$desc = $new_presentation['description'];
+$contents = $new_presentation['contents'];
+$thumbcontents = $new_presentation['thumbcontents'];
 
 $presentation = Presentation::where('id',$id)
   ->first();
 
-
 if($presentation == null){
-
   $presentationobj = new Presentation;
   $presentationobj->title = $titre;
   $presentationobj->description = $desc;
@@ -28,7 +26,6 @@ if($presentation == null){
   $presentationobj->thumbcontents = $thumbcontents;
   $presentationobj->user_id = $user_id;
   $presentationobj->save();
-
   echo 1;
 }else{
   $presentation->title = $titre;
@@ -37,7 +34,6 @@ if($presentation == null){
   $presentation->thumbcontents = $thumbcontents;
   $presentation->user_id = $user_id;
   $presentation->save();
-
 echo 2;
 }
 
