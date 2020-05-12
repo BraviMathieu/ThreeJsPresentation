@@ -5,7 +5,7 @@ ob_start();
 
 $path = (isset($_SERVER['PATH_INFO']))?$_SERVER['PATH_INFO']:'/';
 
-if($path != '/login' && $path != '/presentation_visualisation' && $path != '/presentation_creation_new'){
+if($path != '/login' && $path != '/presentation_visualisation' && $path != '/presentation_creation_new' && !strpos($path, 'ajax')){
   if(!Session::read('User.id')){
     header("Location: /public/login"); // redirection si l'utilisateur n'est pas connecté
     exit();
@@ -32,17 +32,16 @@ elseif(startsWith($path,"/objet3d_")){
 }
 
 
-if($path != '/login' && $path != '/presentation_visualisation' && $path != '/presentation_creation_new'){
+if($path != '/login' && $path != '/presentation_visualisation' && $path != '/presentation_creation_new' && !strpos($path, 'ajax')){
   include_once APP . '/Template/inc/footer.php';
 }
-//TODO On pourra inclure des conditions pour afficher une page 404 en cas de page inexistante.
 
 $content = ob_get_clean();
 
 if($path == '/presentation_creation_new'){
   include_once APP . '/Template/default_presentation.php';
-}elseif($path != '/login') {
-  include_once APP . '/Template/default.php';
-}else{
+}elseif($path == '/login'){
   include_once APP . '/Template/default_login.php';
+}elseif($path != '/login' && !strpos($path, 'ajax')) {
+  include_once APP . '/Template/default.php';
 }

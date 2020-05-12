@@ -18,6 +18,6 @@ class Presentation extends Model
    * @var array
    */
   protected $fillable = [
-    'title', 'user_id'
+    'title','description', 'content', 'user_id'
   ];
 }

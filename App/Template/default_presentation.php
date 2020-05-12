@@ -1,3 +1,6 @@
+<?php
+use App\Session;
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -50,7 +53,6 @@
 
     <script src="../../public/lib/presentation/js/matrix.js"></script>
     <script src="../../public/lib/presentation/js/knob.js"></script>
-    <script type="text/javascript" src="subj.js"></script>
 
     <script src="../../public/lib/presentation/js/transform2d.js"></script>
     <script src="../../public/lib/presentation/js/keymaster.js"></script>
@@ -59,6 +61,9 @@
     <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
     <script src="lib/font-awesome/js/all.min.js"></script>
 
+      <script>
+        const user_id_ajax = "<?=Session::read('User.id')?>";
+      </script>
 
     <script src="../../public/lib/presentation/js/main.js"></script>
     <script src ="../../public/lib/presentation/js/startup.js"></script>
