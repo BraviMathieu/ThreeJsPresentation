@@ -15,6 +15,7 @@ Presentation = function()
 	this.mypresentations = [];
 	this.mode = "create";
 	this.theme = "montserrat";
+	this.backgroundColor = "";
 
 	this.dropdownopen = false;
 	this.selectedforedit = false;
@@ -703,7 +704,11 @@ Presentation.prototype =
 	},
 	generateUID: function ()
 	{
-		return Math.round(Math.random()*10000);
+		let id = Math.round(Math.random()*10000);
+		while($("slidelement_" + id).length){
+			id = Math.round(Math.random()*10000);
+		}
+		return id;
 	},
 	animateSettingsPanel : function (direction)
 	{
