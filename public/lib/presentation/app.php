@@ -333,7 +333,7 @@ use App\Session;
       </div>
       <div class="modal-body">
         <p>Importer un fichier .obj </p>
-        <input type="file" accept=".obj" multiple  id="objinput" >
+        <input type="file" accept=".obj" multiple  id="objinput"  >
         <p>La prévisualisation va apparaitre en dessous.</p>
         <img id="previewimg">
       </div>

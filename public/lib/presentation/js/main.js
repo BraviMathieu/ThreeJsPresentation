@@ -9,12 +9,12 @@ Presentation = function()
 	this.orchestrationcoords = [];
 	this.selectedOrchElement;
 	this.lastslideleftpos = 0;
-	this.saveKey = "impressionist_decks";
+	this.userId = user_id_ajax;
 	this.lastSaved = "impressionist_lastsaved";
 	this.currentPresentation;
 	this.mypresentations = [];
+	this.mycurrentpresntationid = 0;
 	this.mode = "create";
-	this.theme = "montserrat";
 	this.backgroundColor = "";
 
 	this.dropdownopen = false;
@@ -58,26 +58,25 @@ Presentation.prototype =
 	},
 	continueInit : function()
 	{
-			me.setupColorpicker();
-			me.setupMenuItemEvents();
-			me.enableSort();
-			me.setupPopover();
-			me.setupDials();	
-			me.setupKeyboardShortcuts();	
-			me.hideTransformControl();
-			presentations = me.getSavedPresentations();
-			me.renderPresentations(presentations);
-			me.openLastSavedPresentation();
-			me.switchView("right");
-		
+		me.setupColorpicker();
+		me.setupMenuItemEvents();
+		me.enableSort();
+		me.setupPopover();
+		me.setupDials();
+		me.setupKeyboardShortcuts();
+		me.hideTransformControl();
+		presentations = me.getSavedPresentations();
+		me.renderPresentations(presentations);
+		me.openLastSavedPresentation();
+		me.switchView("right");
 	},
 	openLastSavedPresentation : function()
 	{
-		presentation = JSON.parse(me.getItem(me.lastSaved));
+		presentation = JSON.parse(me.getLastItem());
 		console.log("lastsaved", presentation);
 		if(!presentation)
 		{
-			let savedpresos = JSON.parse(me.getItem(me.saveKey));
+			let savedpresos = presentation;
 
 			if(savedpresos && savedpresos.length > 0)
 				$("#saved-presentations-modal").modal("show");
@@ -88,7 +87,6 @@ Presentation.prototype =
 		{
 			me.currentPresentation = presentation;
 			console.log("Retrieved id: ", me.currentPresentation);
-			me.theme = presentation.theme;
 			me.openPresentationForEdit(me.currentPresentation.id);
 			me.applyStyle();
 		}
@@ -572,6 +570,7 @@ Presentation.prototype =
 	{
 		let thumb = slidethumb;
 		let uid = me.generateUID();
+		me.mycurrentpresntationid = uid;
 		thumb = thumb.split("slidethumb_^UID^").join("slidethumb_"+uid);
 		let slideThumbId = $("#slidethumb_"+uid);
 
@@ -1121,7 +1120,6 @@ Presentation.prototype =
 		{
 			$(".style-thumbnail").css("border-bottom", "1px dotted #DDD");
 			$(this).css("border-bottom", "2px solid #6f2232");
-			me.theme = $(this).attr("data-style");
 		});
 		$("#apply-style-btn").on("click", function()
 		{
@@ -1147,6 +1145,24 @@ Presentation.prototype =
 		{
 			$("#import-objet-modal").modal("show");
 		});
+		$("#objinput").change( function()
+		{
+			 formdata = new FormData();
+			if($(this).prop('files').length > 0)
+			{
+				file =$(this).prop('files')[0];
+				console.log(file);
+				formdata.append("objet", file);
+			}
+
+			$.ajax({
+				type: "POST",
+				url: "objet3d_import",
+				data: formdata,
+				processData: false,
+				contentType: false,
+			});
+		});
 	},
 	applyStyle : function()
 	{
@@ -1155,7 +1171,6 @@ Presentation.prototype =
 				if($(this).hasClass("slidelementh1"))
 				{
 					me.removeAllStyles($(this));
-					$(this).addClass(me.theme);
 				}
 			})
 	},
@@ -1172,26 +1187,21 @@ Presentation.prototype =
 	},
 	deleteSavedPresentation : function(id)
 	{
-		let presentations = JSON.parse(me.getItem(me.saveKey));
-
-		for(let i=0; i< presentations.length; i++)
-		{
-			presentation = presentations[i];
-			if(id == presentation.id)
+		let data = {presentation_id: id};
+		$.ajax({
+			type: "POST",
+			url: "../App/Ajax/presentations_suppressionAjax.php",
+			data: data,
+			async:false,
+			success: function(retour)
 			{
-				presentations.splice(i, 1);
-				break;
+			},
+			error: function (err) {
+				console.log(err);
 			}
-		}
-		me.saveItem(me.saveKey, JSON.stringify(presentations));
-		presentations = me.getSavedPresentations();
-		me.renderPresentations(presentations);
-		lastsaved = JSON.parse(me.getItem(me.lastSaved));
-		if(lastsaved.id == id)
-		{
-			console.log("lastsaved", lastsaved.id);
-			localStorage.removeItem(me.lastSaved);
-		}
+		});
+
+
 	},
 	generateExportMarkup : function(isPreview)
 	{
@@ -1235,6 +1245,7 @@ Presentation.prototype =
 	},
 	openPresentationForEdit : function(id)
 	{
+		me.mycurrentpresntationid = id;
 		for(let i=0; i<me.mypresentations.length; i++)
 		{
 			presentation = me.mypresentations[i];
@@ -1305,19 +1316,23 @@ Presentation.prototype =
 	},
 	savePresentation : function()
 	{
-			$("#save-presentation-panel").html('<div class="sb-nav-link-icon"><i class=\"fas fa-save\"></i></div>Sauvegarde en cours...');
-			let item = me.getItem(me.saveKey);
-			if(item)
+		$("#save-presentation-panel").html('<div class="sb-nav-link-icon"><i class=\"fas fa-save\"></i></div>Sauvegarde en cours...');
+			let items = me.getItems();
+			let arr = [];
+			if(items) {
+				arr = JSON.parse(items);
+			}
+			if(arr)
 			{
-				arr = JSON.parse(item);
 				if(this.mode == "save")
 				{
 					if(me.currentPresentation)
 						arr = me.removeReference(arr);
 				}
 			}
-			else
+			else{
 				arr = [];
+			}
 
 			if(this.mode == "save")
 			{
@@ -1335,14 +1350,28 @@ Presentation.prototype =
 				description: $("textarea#description-input").val(),
 				contents : $(".impress-slide-container").html().toString(),
 				thumbcontents : $(".slide-thumb-holder").html().toString(),
-				theme : me.theme
 			};
 
 			me.currentPresentation = o;
 			$("#presentation-metatitle").html(me.currentPresentation.title);
 			arr.push(o);
-			me.saveItem(me.saveKey, JSON.stringify(arr));
-			me.saveItem(me.lastSaved, JSON.stringify(o));
+
+
+		console.log(o);
+
+		if(this.mode == "save") {
+			for (let i = 0; i < arr.length; i++) {
+				if (arr[i]['id'] != me.mycurrentpresntationid) {
+					arr.splice(i, 1);
+				}
+			}
+		}else{
+			arr = [];
+			arr.push(o);
+		}
+
+			me.sauvegarderBDD(arr);
+
 			presentations = me.getSavedPresentations();
 			presentations.reverse();
 			me.renderPresentations(presentations);
@@ -1364,6 +1393,24 @@ Presentation.prototype =
 		$("#save-presentation-panel").html('<div class="sb-nav-link-icon"><i class=\"fas fa-check-circle\"></i></div>Sauvegarde réussie!');
 		setTimeout(function(){ $("#save-presentation-panel").html('<div class="sb-nav-link-icon"><i class=\"fas fa-save\"></i></div>Sauvegarder'); }, 1000);
 	},
+	sauvegarderBDD : function(tableau)
+	{
+		let data = {user_id : me.userId, new_presentation:tableau};
+
+		$.ajax({
+			type: "POST",
+			url: "../App/Ajax/presentations_sauvegarderAjax.php",
+			data: data,
+			async:false,
+			success: function(retour)
+			{
+				presentationsRetour = retour;
+			},
+			error: function (err) {
+				console.log(err);
+			}
+		});
+	},
 	removeReference : function(arr)
 	{
 		for(let i=0; i<arr.length; i++ )
@@ -1378,11 +1425,12 @@ Presentation.prototype =
 	},
 	getSavedPresentations : function()
 	{
-			let item = me.getItem(me.saveKey);
+			let items = me.getItems();
 			let arr = [];
 
-			if(item)
-				 arr = JSON.parse(item);
+			if(items) {
+				arr = JSON.parse(items);
+			}
 
 			return arr;
 	},
@@ -1510,14 +1558,44 @@ Presentation.prototype =
 		$("textarea#description-input").val("Exemple de description de présentation");
 		me.mode = "create";
 	},
-	saveItem : function(key, value)
+	getItems : function()
 	{
-		if(me.isSupported())
-			localStorage.setItem(key, value);
+		let presentationsRetour;
+		let data = {user_id : me.userId};
+		$.ajax({
+			type: "POST",
+			url: "../App/Ajax/presentations_affichageAjax.php",
+			data: data,
+			async:false,
+			success: function(retour)
+			{
+				presentationsRetour = retour;
+			},
+			error: function (err) {
+				console.log(err);
+			}
+		});
+		return presentationsRetour;
 	},
-	getItem : function(key)
+	getLastItem : function()
 	{
-		return localStorage.getItem(key);
+		let presentationRetour;
+		let data = {user_id : me.userId};
+		$.ajax({
+			type: "POST",
+			url: "../App/Ajax/presentations_last_affichageAjax.php",
+			data: data,
+			async:false,
+			success: function(retour)
+			{
+				console.log(retour);
+				presentationRetour = retour;
+			},
+			error: function (err) {
+				console.log(err);
+			}
+		});
+		return presentationRetour;
 	},
 	isSupported : function()
 	{

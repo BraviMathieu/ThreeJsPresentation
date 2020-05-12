@@ -6,6 +6,7 @@ define('CONFIG', ROOT . '/Config');
 define('APP', ROOT . '/App');
 define('VUE', APP . '/Vue');
 define('CONTROLLER', APP . '/Controleur');
+define('AJAX', APP . '/Ajax');
 
 require_once CONFIG."/config.php";
 require_once CONFIG."/utils.php";
