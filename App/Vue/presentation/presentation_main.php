@@ -297,19 +297,19 @@ use App\Session;
       </div>
       <div class="modal-body" style="overflow:scroll;">
         <div class="objet-thumbnail" style="width: 130px" data-nom="cube">
-          <img src="lib/presentation/images/Cube.PNG" style="width: 130px" >
+          <img src="../../../public/images/Cube.PNG" style="width: 130px" >
         </div>
         <div class="objet-thumbnail" style="width: 130px" data-nom="cone">
-          <img src="lib/presentation/images/Cone.PNG" style="width: 130px" >
+          <img src="../../../public/images/Cone.PNG" style="width: 130px" >
         </div>
         <div class="objet-thumbnail" style="width: 130px" data-nom="sphere">
-          <img src="lib/presentation/images/Sphere.PNG" style="width: 130px">
+          <img src="../../../public/images/Sphere.PNG" style="width: 130px">
         </div>
         <div class="objet-thumbnail" style="width: 130px" data-nom="pyramid">
-          <img src="lib/presentation/images/Pyramid.PNG" style="width: 130px">
+          <img src="../../../public/images/Pyramid.PNG" style="width: 130px">
         </div>
         <div class="objet-thumbnail" style="width: 130px" data-nom="rectangle">
-          <img src="lib/presentation/images/Rectangle.PNG" style="width: 130px">
+          <img src="../../../public/images/Rectangle.PNG" style="width: 130px">
         </div>
       </div>
       <div class="modal-footer">
