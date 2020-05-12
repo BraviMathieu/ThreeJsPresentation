@@ -13,10 +13,9 @@ use App\Session;
 
     <link rel="icon" type="image/ico" href="images/favicon.ico" />
     <link href="../../public/lib/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
-    <link href="../../public/lib/presentation/css/freetrans.css" rel="stylesheet">
+    <link href="../../public/css/presentation/freetrans.css" rel="stylesheet">
     <link href="../../public/lib/codemirror/codemirror.css" rel="stylesheet">
-    <link rel="stylesheet" href="subj.css">
-    <link href="../../public/lib/presentation/css/matrices.css" rel="stylesheet">
+    <link href="../../public/css/presentation/matrices.css" rel="stylesheet">
 
 
     <!-- webfonts -->
@@ -26,7 +25,7 @@ use App\Session;
     <link href='http://fonts.googleapis.com/css?family=Miltonian' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Cabin+Sketch' rel='stylesheet' type='text/css'>
 
-    <link href="../../public/lib/presentation/css/custom.css" rel="stylesheet">
+    <link href="../../public/css/presentation/custom.css" rel="stylesheet">
 
     <link href="../../public/css/styles.css" rel="stylesheet" />
 
@@ -51,22 +50,22 @@ use App\Session;
 
     <script src="../../public/lib/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 
-    <script src="../../public/lib/presentation/js/matrix.js"></script>
-    <script src="../../public/lib/presentation/js/knob.js"></script>
+    <script src="../../public/js/presentation/matrix.js"></script>
+    <script src="../../public/js/presentation/knob.js"></script>
 
-    <script src="../../public/lib/presentation/js/transform2d.js"></script>
-    <script src="../../public/lib/presentation/js/keymaster.js"></script>
-    <script src="../../public/lib/presentation/js/templates/newpresotemplate.js"></script>
-    <script src="../../public/lib/presentation/js/matrices.js"></script>
+    <script src="../../public/js/presentation/transform2d.js"></script>
+    <script src="../../public/js/presentation/keymaster.js"></script>
+    <script src="../../public/js/presentation/templates/newpresotemplate.js"></script>
+    <script src="../../public/js/presentation/matrices.js"></script>
     <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
-    <script src="lib/font-awesome/js/all.min.js"></script>
+    <script src="../../public/lib/font-awesome/js/all.min.js"></script>
 
       <script>
         const user_id_ajax = "<?=Session::read('User.id')?>";
       </script>
 
-    <script src="../../public/lib/presentation/js/main.js"></script>
-    <script src ="../../public/lib/presentation/js/startup.js"></script>
+    <script src="../../public/js/presentation/main.js"></script>
+    <script src ="../../public/js/presentation/startup.js"></script>
     </main>
 </div>
 </body>
