@@ -12,3 +12,8 @@ if($path == "/objet3d_creation"){
 
   include_once VUE . '/objet3d/objet3d_creation.php';
 }
+if($path == "/objet3d_import"){
+    $file = $_FILES["objet"]["tmp_name"];
+    echo($file);
+   // move_uploaded_file( $file, "../uploads/" . $file);
+}
