@@ -1147,6 +1147,24 @@ Presentation.prototype =
 		{
 			$("#import-objet-modal").modal("show");
 		});
+		$("#objinput").change( function()
+		{
+			 formdata = new FormData();
+			if($(this).prop('files').length > 0)
+			{
+				file =$(this).prop('files')[0];
+				console.log(file);
+				formdata.append("objet", file);
+			}
+
+			$.ajax({
+				type: "POST",
+				url: "objet3d_import",
+				data: formdata,
+				processData: false,
+				contentType: false,
+			});
+		});
 	},
 	applyStyle : function()
 	{
