@@ -12,11 +12,11 @@ use App\Session;
       <link href="../../public/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
       <!-- CSS -->
+      <link href="../../public/js/toastr/toastr.min.css" rel="stylesheet">
       <link href="../../public/lib/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
       <link href="../../public/css/presentation/freetrans.css" rel="stylesheet">
       <link href="../../public/lib/codemirror/codemirror.css" rel="stylesheet">
       <link href="../../public/css/presentation/matrices.css" rel="stylesheet">
-      <link href="/pace/themes/pace-theme-barber-shop.css" rel="stylesheet">
       <link href="../../public/css/presentation/custom.css" rel="stylesheet">
       <link href="../../public/css/styles.css" rel="stylesheet">
       <link href="../../public/lib/pace/css/pace.css" rel="stylesheet">
@@ -42,6 +42,7 @@ use App\Session;
       <?= $content; ?>
 
         <!--  JS -->
+        <script src="../../public/js/toastr/toastr.min.js"></script>
         <script src="../../public/lib/bootstrap/js/bootstrap.min.js"></script>
         <script src="../../public/lib/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
         <script src="../../public/lib/jquery-ui/js/jquery-ui.min.js"></script>

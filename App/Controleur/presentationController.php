@@ -29,7 +29,7 @@ if($path == "/presentation_visualisation"){
       include_once VUE . '/Presentation/presentation_visualisation.php';
   }
 
-}elseif($path == "/presentation_creation"){
+}elseif($path == "/presentation_creation_old"){
   $title = "Création d'une présentation";
 
   $pathToPresentation = "/Presentation/template.html";
@@ -65,7 +65,7 @@ if($path == "/presentation_visualisation"){
   $contenuFichier = file_get_contents("../".$pathToPresentation);
   include_once VUE . '/Presentation/presentation_creation.php';
 
-}elseif($path == "/presentation_creation_new"){
+}elseif($path == "/presentation_creation"){
 
   $title = "Création d'une présentation";
   include_once VUE . '/presentation/presentation_main.php';
