@@ -121,6 +121,7 @@ Presentation.prototype =
 	hideTransformControl : function()
 	{
 		$("#play").css("display", "none");
+		$("#spandelete").css("display", "none");
 	},
 	setupKeyboardShortcuts : function()
 	{
@@ -439,6 +440,7 @@ Presentation.prototype =
 			e.stopPropagation();
 			$(this).draggable({disabled : false});
 			$("#play").css("display", "none");
+			$("#spandelete").css("display", "none");
 			$(this).removeClass("movecursor");
 
 		}).on("click", function (e)
@@ -465,6 +467,7 @@ Presentation.prototype =
 		let _transform = me.selectedElement.css("-webkit-transform");
 		play.css("-webkit-transform", _transform);
 		play.css("display", "block");
+		$("#spandelete").css("display", "block");
 		play.width (me.selectedElement.width());
 		play.css("left",   me.selectedElement.position().left+"px");
 		play.css("top", 	 me.selectedElement.position().top+"px");
@@ -474,6 +477,7 @@ Presentation.prototype =
 			e.stopPropagation();
 			me.selectedElement.remove();
 			play.css("display", "none");
+			$("#spandelete").css("display", "none");
 		})
 	},
 	setMenuControlValues : function(el)
@@ -557,6 +561,7 @@ Presentation.prototype =
 	{
 		$(".slidelement").draggable({disabled : false});
 		$("#play").css("display", "none");
+		$("#spandelete").css("display", "none");
 		me.generateScaledSlide(me.selectedSlide);
 		me.selectedforedit = false;
 		me.resetMenuControlValues();
