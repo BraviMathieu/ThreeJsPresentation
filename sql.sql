@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mar. 12 mai 2020 à 17:41
--- Version du serveur :  10.1.38-MariaDB
--- Version de PHP :  7.3.2
+-- Généré le : mer. 13 mai 2020 à 16:42
+-- Version du serveur :  10.4.11-MariaDB
+-- Version de PHP : 7.4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `threejs`
+-- Base de données : `threejs`
 --
 
 -- --------------------------------------------------------
@@ -32,15 +31,16 @@ CREATE TABLE `configurations` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `code` varchar(255) NOT NULL,
-  `value` varchar(255) NOT NULL DEFAULT 'default'
+  `value` varchar(255) NOT NULL DEFAULT 'default',
+  `night` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `configurations`
 --
 
-INSERT INTO `configurations` (`id`, `user_id`, `code`, `value`) VALUES
-(1, 1, 'EDITOR_THEME', 'gruvbox-dark');
+INSERT INTO `configurations` (`id`, `user_id`, `code`, `value`, `night`) VALUES
+(1, 1, 'EDITOR_THEME', 'gruvbox-dark', 0);
 
 -- --------------------------------------------------------
 
