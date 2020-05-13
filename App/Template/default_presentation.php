@@ -60,6 +60,7 @@ use App\Session;
         <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
         <script>
           const user_id_ajax = "<?=Session::read('User.id')?>";
+          const night_mode = "<?=$night_mode?>";
         </script>
         <script src="../../public/js/presentation/main.js"></script>
         <script src ="../../public/js/presentation/startup.js"></script>

@@ -10,6 +10,8 @@ Presentation = function()
 	this.selectedOrchElement;
 	this.lastslideleftpos = 0;
 	this.userId = user_id_ajax;
+	this.night_mode = night_mode;
+
 	this.lastSaved = "";
 	this.currentPresentation;
 	this.mypresentations = [];
