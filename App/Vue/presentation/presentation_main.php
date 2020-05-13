@@ -332,9 +332,10 @@ use App\Session;
       </div>
       <div class="modal-body">
         <p>Importer un fichier .obj </p>
-        <input type="file" accept=".obj" multiple  id="objinput"  >
-        <p>La prévisualisation va apparaitre en dessous.</p>
-        <img id="previewimg">
+        <input type="file" accept=".obj"  id="objinput"  >
+          <div class="alert alert-danger" role="alert"  id="formatalert" style="visibility: hidden">
+              vous ne pouvez importer que des fichiers .obj
+          </div>
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>

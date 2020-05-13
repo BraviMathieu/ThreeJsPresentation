@@ -1140,21 +1140,26 @@ Presentation.prototype =
 		$("#objinput").change( function()
 		{
 			 formdata = new FormData();
-			if($(this).prop('files').length > 0)
-			{
-				file =$(this).prop('files')[0];
-				console.log(file);
-				formdata.append("objet", file);
-			}
+			if($(this).prop('files').length > 0) {
+				file = $(this).prop('files')[0];
+				if (!file.name.includes(".obj")) {
+					document.getElementById("formatalert").style.visibility = "visible";
 
-			$.ajax({
-				type: "POST",
-				url: "objet3d_import",
-				data: formdata,
-				processData: false,
-				contentType: false,
-			});
+				} else {
+					document.getElementById("formatalert").style.visibility = "hidden";
+					formdata.append("obj", file);
+				}
+
+				$.ajax({
+					type: "POST",
+					url: "objet3d_import",
+					data: formdata,
+					processData: false,
+					contentType: false,
+				});
+			}
 		});
+
 	},
 	applyStyle : function()
 	{
