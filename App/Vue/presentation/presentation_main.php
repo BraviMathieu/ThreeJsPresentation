@@ -338,6 +338,10 @@ use App\Session;
           <div class="alert alert-danger" role="alert"  id="formatalert" style="visibility: hidden">
               vous ne pouvez importer que des fichiers .obj
           </div>
+          <p>prévisualisation</p>
+          <iframe id="objPrevu">
+
+          </iframe>
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
