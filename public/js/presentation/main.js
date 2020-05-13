@@ -10,12 +10,15 @@ Presentation = function()
 	this.selectedOrchElement;
 	this.lastslideleftpos = 0;
 	this.userId = user_id_ajax;
+	this.night_mode = night_mode;
+
 	this.lastSaved = "";
 	this.currentPresentation;
 	this.mypresentations = [];
 	this.mycurrentpresntationid = 0;
 	this.mode = "create";
 	this.backgroundColor = "";
+	this.nightMode = false;
 
 	this.dropdownopen = false;
 	this.selectedforedit = false;
@@ -121,6 +124,7 @@ Presentation.prototype =
 	hideTransformControl : function()
 	{
 		$("#play").css("display", "none");
+		$("#spandelete").css("display", "none");
 	},
 	setupKeyboardShortcuts : function()
 	{
@@ -439,6 +443,7 @@ Presentation.prototype =
 			e.stopPropagation();
 			$(this).draggable({disabled : false});
 			$("#play").css("display", "none");
+			$("#spandelete").css("display", "none");
 			$(this).removeClass("movecursor");
 
 		}).on("click", function (e)
@@ -465,6 +470,7 @@ Presentation.prototype =
 		let _transform = me.selectedElement.css("-webkit-transform");
 		play.css("-webkit-transform", _transform);
 		play.css("display", "block");
+		$("#spandelete").css("display", "block");
 		play.width (me.selectedElement.width());
 		play.css("left",   me.selectedElement.position().left+"px");
 		play.css("top", 	 me.selectedElement.position().top+"px");
@@ -474,6 +480,7 @@ Presentation.prototype =
 			e.stopPropagation();
 			me.selectedElement.remove();
 			play.css("display", "none");
+			$("#spandelete").css("display", "none");
 		})
 	},
 	setMenuControlValues : function(el)
@@ -557,6 +564,7 @@ Presentation.prototype =
 	{
 		$(".slidelement").draggable({disabled : false});
 		$("#play").css("display", "none");
+		$("#spandelete").css("display", "none");
 		me.generateScaledSlide(me.selectedSlide);
 		me.selectedforedit = false;
 		me.resetMenuControlValues();
@@ -1173,6 +1181,10 @@ Presentation.prototype =
 			}
 		});
 
+		$("#night-mode").on("click", function() {
+			me.toggleNightMode();
+		});
+
 	},
 	applyStyle : function()
 	{
@@ -1606,5 +1618,38 @@ Presentation.prototype =
 			return false;
 		}
 		return true;
+	},
+	toggleNightMode : function()
+	{
+		if(me.nightMode === false)
+		{
+			me.nightMode = true;
+
+			$("#night-mode").html("<div class=\"sb-nav-link-icon\"><i class=\"fas fa-moon\"></i></div>Activé</a>")
+
+			$("#sidenavAccordion").removeClass("sb-sidenav-light");
+			$("#sidenavAccordion").addClass("sb-sidenav-dark");
+
+			$("#navSlide").removeClass("mainfooter-light");
+			$("#navSlide").addClass("mainfooter");
+
+			$("#visualisation").removeClass("main-viewport");
+			$("#visualisation").addClass("main-viewport-dark");
+		}
+		else
+		{
+			me.nightMode = false;
+
+			$("#night-mode").html("<div class=\"sb-nav-link-icon\"><i class=\"fas fa-sun\"></i></div>Desactivé</a>")
+
+			$("#sidenavAccordion").removeClass("sb-sidenav-dark");
+			$("#sidenavAccordion").addClass("sb-sidenav-light");
+
+			$("#navSlide").removeClass("mainfooter");
+			$("#navSlide").addClass("mainfooter-light");
+
+			$("#visualisation").removeClass("main-viewport-dark");
+			$("#visualisation").addClass("main-viewport");
+		}
 	}
 };

@@ -8,60 +8,74 @@ class Alert
 
     public static function getInstance()
     {
-        if (is_null(self::$_instance)) {
-            self::$_instance = new Alert();
-        }
-        return self::$_instance;
+      if (is_null(self::$_instance))
+        self::$_instance = new Alert();
+
+      return self::$_instance;
     }
 
     public function __construct($type = null, $message = null)
     {
-        if (session_status() !== PHP_SESSION_ACTIVE) {
-            session_start();
-        }
-        if ($type && $message) {
-            $this->$type($message);
-        }
+      if(session_status() !== PHP_SESSION_ACTIVE)
+        session_start();
+
+      if($type && $message)
+        $this->$type($message);
     }
 
     public static function display()
     {
-        self::getInstance();
+      self::getInstance();
 
-        if (!isset($_SESSION['alert']) || !is_array($_SESSION['alert'])) {
-            return "";
-        }
-        $out = "";
-        foreach ($_SESSION['alert'] as $item) {
-            $out .= self::pattern($item);
-        }
-        unset($_SESSION['alert']);
-        return $out;
+      if (!isset($_SESSION['alert']) || !is_array($_SESSION['alert']))
+          return "";
+
+      $out = "";
+      foreach ($_SESSION['alert'] as $item)
+          $out .= self::pattern($item);
+
+      unset($_SESSION['alert']);
+      return $out;
     }
 
     private static function pattern($data)
     {
-        return "<div class=\"col-lg-12\" style=\"padding-top: 15px;\">
-                  <div class=\"alert alert-{$data['type']}\">
-                  {$data['message']}
-                  </div>
-                </div>";
+      return "<script>
+      $(document).ready(function(){
+        toastr.{$data['type']}(\"{$data['message']}\")
+      });
+      </script>";
     }
 
-    public function error($message)
-    {
-        $_SESSION['alert'][] = [
-            'message' => $message,
-            'type' => 'danger'
-        ];
-    }
+  public function error($message)
+  {
+    $_SESSION['alert'][] = [
+      'message' => $message,
+      'type' => 'error'
+    ];
+  }
 
-    public function success($message)
-    {
-        $_SESSION['alert'][] = [
-            'message' => $message,
-            'type' => 'success'
-        ];
-    }
+  public function info($message)
+  {
+    $_SESSION['alert'][] = [
+      'message' => $message,
+      'type' => 'info'
+    ];
+  }
 
+  public function success($message)
+  {
+    $_SESSION['alert'][] = [
+      'message' => $message,
+      'type' => 'success'
+    ];
+  }
+
+  public function warning($message)
+  {
+    $_SESSION['alert'][] = [
+      'message' => $message,
+      'type' => 'warning'
+    ];
+  }
 }

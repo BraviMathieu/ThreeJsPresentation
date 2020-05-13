@@ -23,7 +23,7 @@ use App\Session;
 </nav>
 <div id="layoutSidenav">
   <div id="layoutSidenav_nav">
-    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+    <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
       <div class="sb-sidenav-menu">
         <div class="nav">
           <div class="sb-sidenav-menu-heading">Core</div>
@@ -37,11 +37,14 @@ use App\Session;
             Exporter présentation</a>
           <a class="nav-link" id="open-presentations-panel"><div class="sb-nav-link-icon"><i class="fas fa-save"></i></div>
             Mes Présentations</a>
-          <div class="sb-sidenav-menu-heading">Présentation</div>
+        <div class="sb-sidenav-menu-heading">Présentation</div>
           <a class="nav-link" id="export-content-panel"><div class="sb-nav-link-icon"><i class="fas fa-eye"></i></div>
             Voir</a>
           <a class="nav-link" id="save-presentation-panel" ><div class="sb-nav-link-icon"><i class="fas fa-save"></i></div>
             Sauvegarder</a>
+        <div class="sb-sidenav-menu-heading">Mode nuit</div>
+          <a class="nav-link" id="night-mode"><div class="sb-nav-link-icon"><i class="fas fa-sun"></i></div>
+            Désactivé</a>
         </div>
       </div>
       <div class="sb-sidenav-footer">
@@ -50,7 +53,7 @@ use App\Session;
       </div>
     </nav>
   </div>
-  <div class="mainfooter palette-night">
+  <div class="mainfooter-light palette-night" id="navSlide">
     <div class="slide-thumb-holdercontainer">
       <div class="slide-thumb-holder"></div>
       <a class="btn btn-large bg-primary text-white" href="#" id="add-slide-btn"><i class="fas fa-plus"></i>&nbsp;Ajouter une slide</a>
@@ -58,7 +61,7 @@ use App\Session;
   </div>
 </div>
 <div class="masked-container">
-  <div class="main-viewport">
+  <div class="main-viewport" id="visualisation">
     <div class="palette palette-clouds main-grey-area">
       <div class="row m-1">
         <div class="col-lg-12 text-center">
@@ -106,12 +109,11 @@ use App\Session;
       <div class="slide-viewport-container">
         <div class="slide-viewport">
           <div class="impress-slide-container"></div>
-          <span id="play" style="margin-left: 300px; margin-top: -5px;">
+          <span id="play" style="margin-left: 320px; margin-top: -3px;">
               <span class="rotate label label-disabled btn btn-primary" id="spanrotate"><i class="fas fa-sync-alt"></i></span>
-              <span class="skewx label label-disabled btn btn-primary" id="spanskewx"><i class="fas fa-arrows-alt-h"></i></span>
-              <span class="skewy label label-disabled btn btn-primary" id="spanskewy"><i class="fas fa-arrows-alt-v"></i></span>
-              <span class="delete-icon label label-important btn btn-danger" id="spandelete"><i class="fas fa-trash-alt"></i></span>
            </span>
+            <br>
+           <span class="delete-icon label label-important btn btn-danger" id="spandelete"><i class="fas fa-trash-alt"></i>&nbsp;&nbsp;Supprimer l'élément</span>
         </div>
       </div>
     </div>

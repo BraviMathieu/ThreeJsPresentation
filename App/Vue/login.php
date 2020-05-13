@@ -2,7 +2,6 @@
 use Core\Form;
 $form = new Form();
 ?>
-
   <div class="container">
     <main role="main">
     <div class="box"></div>

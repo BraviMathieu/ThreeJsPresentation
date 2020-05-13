@@ -21,10 +21,11 @@ if($path == "/login"){
     if(password_verify($pwd_peppered, $user->password)) {
       Session::write('User', $user);
       Alert::getInstance()->success('Vous êtes connecté.');
+      redirect('/public/presentation_creation');
     }else{
       Alert::getInstance()->error("Identifiant ou mot de passe non valide.");
+      redirect('/public/login');
     }
-    redirect('/public/main_dashboard');
   }
 
   //REGISTER
