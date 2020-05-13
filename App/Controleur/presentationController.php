@@ -67,6 +67,10 @@ if($path == "/presentation_visualisation"){
 
 }elseif($path == "/presentation_creation"){
 
+  $night_mode = Configuration::where('code',"NIGHT")
+    ->where('user_id',$user_id)
+    ->first();
+
   $title = "Création d'une présentation";
   include_once VUE . '/presentation/presentation_main.php';
 
