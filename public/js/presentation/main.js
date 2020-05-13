@@ -1137,26 +1137,39 @@ Presentation.prototype =
 		{
 			$("#import-objet-modal").modal("show");
 		});
+
 		$("#objinput").change( function()
 		{
 			 formdata = new FormData();
 			if($(this).prop('files').length > 0) {
 				file = $(this).prop('files')[0];
+				console.log(file);
 				if (!file.name.includes(".obj")) {
 					document.getElementById("formatalert").style.visibility = "visible";
 
 				} else {
 					document.getElementById("formatalert").style.visibility = "hidden";
 					formdata.append("obj", file);
-				}
 
-				$.ajax({
-					type: "POST",
-					url: "objet3d_import",
-					data: formdata,
-					processData: false,
-					contentType: false,
-				});
+					$.ajax({
+						type: "POST",
+						url: "objet3d_import",
+						data: formdata,
+						processData: false,
+						contentType: false,
+						async: false,
+					});
+                        document.getElementById("objPrevu").src= "../uploads/"+file.name+".html";
+				}
+			}
+		});
+
+		$("#import-objet-3d").on("click", function()
+		{
+			if( file !== undefined && file.name.includes(".obj")){
+				me.addMyObjectToSlide(file.name);
+				$("#import-objet-modal").modal("hide");
+
 			}
 		});
 
@@ -1499,6 +1512,21 @@ Presentation.prototype =
 		me.selectedSlide.append($(iframe));
 		me.enableDrag();
 	},
+	addMyObjectToSlide : function(obj)
+	{
+		console.log("../uploads/"+obj+'.html')
+		let iframe = $('<iframe>', {
+			src: "../uploads/"+obj+'.html',
+			id:  'slidelement_'+me.generateUID(),
+			class: 'slidelement',
+			frameborder: 5,
+			scrolling: 'no',
+			css: 'width: 200px; height: 200px;'
+		}).appendTo('.accordion');
+
+		me.selectedSlide.append($(iframe));
+		me.enableDrag();
+	},
 	createEditor : function(e)
 	{
 		let editor = $(e.target).clone();
@@ -1578,5 +1606,5 @@ Presentation.prototype =
 			return false;
 		}
 		return true;
-	},
+	}
 };
