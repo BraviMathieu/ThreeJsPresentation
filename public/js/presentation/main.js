@@ -10,7 +10,6 @@ Presentation = function()
 	this.selectedOrchElement;
 	this.lastslideleftpos = 0;
 	this.userId = user_id_ajax;
-	this.night_mode = night_mode;
 
 	this.lastSaved = "";
 	this.currentPresentation;
@@ -1612,7 +1611,7 @@ Presentation.prototype =
 		{
 			me.nightMode = false;
 
-			$("#night-mode").html("<div class=\"sb-nav-link-icon\"><i class=\"fas fa-sun\"></i></div>Desactivé</a>")
+			$("#night-mode").html("<div class=\"sb-nav-link-icon\"><i class=\"fas fa-sun\"></i></div>Désactivé</a>")
 
 			$("#sidenavAccordion").removeClass("sb-sidenav-dark");
 			$("#sidenavAccordion").addClass("sb-sidenav-light");
