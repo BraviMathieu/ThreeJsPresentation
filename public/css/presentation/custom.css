@@ -621,6 +621,7 @@ body
 	position: relative;
 	display: inline-block;
 }
+
 .styleh3
 {
 	margin-left: 30px;
@@ -644,6 +645,19 @@ body
 	background-color: #DDD;
 	border: 1px solid #DDD;
 	cursor:pointer;
+}
+
+.svg-thumbnail
+{
+	width: 150px;
+	height : 100px;
+	margin-right: 5px;
+	margin-bottom: 15px;
+	margin-top:10px;
+	background-color: white;
+	border: 1px dotted #CCC;
+	position: relative;
+	display: inline-block;
 }
 /** Landing page specific styles **/
 .landingcontainer
