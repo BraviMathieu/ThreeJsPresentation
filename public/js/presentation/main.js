@@ -1160,7 +1160,7 @@ Presentation.prototype =
 
 					$.ajax({
 						type: "POST",
-						url: "objet3d_import",
+						url: "../App/Ajax/objet3d_importAjax.php",
 						data: formdata,
 						processData: false,
 						contentType: false,
