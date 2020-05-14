@@ -1147,36 +1147,78 @@ Presentation.prototype =
 
 		$("#objinput").change( function()
 		{
-			 formdata = new FormData();
 			if($(this).prop('files').length > 0) {
-				file = $(this).prop('files')[0];
-				console.log(file);
-				if (!file.name.includes(".obj")) {
-					document.getElementById("formatalert").style.visibility = "visible";
-
-				} else {
-					document.getElementById("formatalert").style.visibility = "hidden";
-					formdata.append("obj", file);
-
-					$.ajax({
-						type: "POST",
-						url: "../App/Ajax/objet3d_importAjax.php",
-						data: formdata,
-						processData: false,
-						contentType: false,
-						async: false,
-					});
-                        document.getElementById("objPrevu").src= "../uploads/"+file.name+".html";
+				objimport = $(this).prop('files')[0];
+				console.log(objimport);
+				if (!objimport.name.includes(".obj")) {
+					document.getElementById("objinput").value = '';
+					toastr.error("vous devez importer un .obj");
 				}
+			}
+		});
+
+		$("#mtlinput").change( function()
+		{
+			if($(this).prop('files').length > 0) {
+				mtlimport = $(this).prop('files')[0];
+				console.log(mtlimport);
+				if (!mtlimport.name.includes(".mtl")) {
+					document.getElementById("mtlinput").value = '';
+					toastr.error("vous devez importer un .mtl");
+				}
+			}
+		});
+		$("#imginput").change( function()
+		{
+			if($(this).prop('files').length > 0) {
+					for(let i =0; i <=$(this).prop('files').length; i++)
+					{
+						imgimport = $(this).prop('files')[i];
+						formdata = new FormData();
+						if (!imgimport.name.includes(".jpg")) {
+							document.getElementById("imageinput").value = '';
+							toastr.error("vous devez importer un .jpg");
+						}
+							formdata.append("img", imgimport);
+							$.ajax
+							({
+								type: "POST",
+								url: "../App/Ajax/texturejpg_importAjax.php",
+								data: formdata,
+								processData: false,
+								contentType: false,
+								async: false,
+							});
+
+
+
+					}
 			}
 		});
 
 		$("#import-objet-3d").on("click", function()
 		{
-			if( file !== undefined && file.name.includes(".obj")){
-				me.addMyObjectToSlide(file.name);
+			objinput =document.getElementById("mtlinput").value;
+			imgimput = document.getElementById("objinput").value;
+			if( objinput !== ""  && imginput !== ""){
+				formdata = new FormData();
+				formdata.append("obj", objimport);
+				formdata.append("mtl",mtlimport);
+				$.ajax
+				({
+					type: "POST",
+					url: "../App/Ajax/objet3d_importAjax.php",
+					data: formdata,
+					processData: false,
+					contentType: false,
+					async: false,
+				});
+				me.addMyObjectToSlide(objimport.name);
 				$("#import-objet-modal").modal("hide");
 
+			}
+			else {
+				toastr.error("veuillez importer vos fichiers mtl et obj");
 			}
 		});
 

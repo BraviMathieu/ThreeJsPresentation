@@ -328,21 +328,16 @@ use App\Session;
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Ajouter un ou plusieurs objet 3D</h5>
+        <h5 class="modal-title">Ajouter un objet 3D</h5>
         <button class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>Importer un fichier .obj </p>
-        <input type="file" accept=".obj"  id="objinput"  >
-          <div class="alert alert-danger" role="alert"  id="formatalert" style="visibility: hidden">
-              vous ne pouvez importer que des fichiers .obj
-          </div>
-          <p>prévisualisation</p>
-          <iframe id="objPrevu">
-
-          </iframe>
+        <p>Importer un fichier .obj et .mtl </p>
+        <input type="file" accept=".obj"  id="objinput">
+        <input type="file" accept=".mtl"  id="mtlinput">
+        <input type="file" accept=".jpg"  id="imginput" multiple>
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -495,7 +490,7 @@ use App\Session;
                     </svg>
                 </div>
                 <div class="svg-thumbnail" style="width: 200px" data-nom="circle">
-                    <svg preserveAspectRatio="none" viewBox="0 0 80 80" width="100" height="100">
+                    <svg preserveAspectRatio="none" viewBox="0 0 80 80" width="100" height="100" >
                         <circle cx="40" cy="40" r="40" id="circle"></circle>
                     </svg>
                 </div>
@@ -515,7 +510,7 @@ use App\Session;
                     </svg>
                 </div>
                 <div class="svg-thumbnail" style="width: 200px" data-nom="etoile">
-                    <svg  viewBox="0 0 180 180" preserveAspectRatio="none" width="100" height="100" id="etoile">
+                    <svg  viewBox="0 0 180 180" preserveAspectRatio="none" width="100" height="100" id="etoile" >
                         <polygon points="90,0 30,170 180,50 0,50 150,170"></polygon>
                     </svg>
                 </div>
