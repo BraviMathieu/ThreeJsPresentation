@@ -437,7 +437,7 @@ Presentation.prototype =
 	},
 	enableDrag : function()
 	{
-		$(".slidelement").draggable().on("dblclick", function(e)
+		$(".slidelement").draggable().resizable().on("dblclick", function(e)
 		{
 			e.stopPropagation();
 			$(this).draggable({disabled : false});
@@ -454,6 +454,7 @@ Presentation.prototype =
 			me.selectedforedit = true;
 			me.setMenuControlValues($(this));
 			me.positionTransformControl()
+			$("#play").css("transform", "matrix(1, 0, 0, 1, 0, 0)");
 		}).on("mousedown mouseover", function()
 		{
 			$(this).addClass("movecursor")

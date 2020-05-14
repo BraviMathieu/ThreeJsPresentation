@@ -110,7 +110,7 @@ use App\Session;
       <div class="slide-viewport-container">
         <div class="slide-viewport">
           <div class="impress-slide-container"></div>
-          <span id="play" style="margin-left: 320px; margin-top: -3px;">
+          <span id="play">
               <span class="rotate label label-disabled btn btn-primary" id="spanrotate"><i class="fas fa-sync-alt"></i></span>
            </span>
             <br>
