@@ -34,21 +34,56 @@ var saved_presentations = '<div class="saved-presos">' +
 
 
 
-var tableau_previsualisation = "<table class=\"table table-responsive tableau-previsualisation\" align=\"center\"  style=\"width: auto;\">\n" +
-															"  <tbody id=\"tableau-body\">\n" +
-															"  <tr>\n" +
-															"    <td contenteditable=\"true\">Case</td>\n" +
-															"  </tr>\n" +
-															"  <tr>\n" +
-															"    <td contenteditable=\"true\">Case</td>\n" +
-															"  </tr>\n" +
-															"  </tbody>\n" +
+var tableau_previsualisation = "<table class=\"table table-responsive tableau-previsualisation\" align=\"center\"  style=\"width: auto;\">" +
+																"<tbody id=\"tableau-body\">" +
+																"<tr>" +
+																	"<td contenteditable=\"true\">Case</td>" +
+																"</tr>" +
+																"<tr>" +
+																	"<td contenteditable=\"true\">Case</td>" +
+																"</tr>" +
+																"</tbody>" +
 															"</table>";
 
 
-var video_template = "<iframe class=\"preview-video\" width=\"468\" height=\"315\" frameborder=\"0\" " +
-	"														allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\">" +
-	"											</iframe>";
+var video_template = "<iframe class=\"preview-video\" width=\"468\" height=\"315\" frameborder=\"0\""+
+											"allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\">" +
+											"</iframe>";
 
 
-var graphique_previsualisation= "<canvas id=\"preview-graphique\" width=\"400\" height=\"400\" style=\"background-color: white;\"></canvas>";
+var graphique_previsualisation = "<canvas id=\"preview-graphique\" width=\"400\" height=\"400\" style=\"background-color: white;\"></canvas>";
+
+var export_template = "<!doctype HTML>" +
+											"<html lang=\"fr\">" +
+												"<head>" +
+													"<meta charset=\"utf-8\"/>" +
+													"<meta name=\"viewport\" content=\"width=1024\"/>" +
+													"<title>__slidetitle__</title>" +
+													"<link href=\"impress-common.css\" rel=\"stylesheet\" />"+
+													"<link href=\"bootstrap.css\" rel=\"stylesheet\"/>"+
+													"<link href=\"custom.css\" rel=\"stylesheet\"/>"+
+													"<link href=\"styles.css\" rel=\"stylesheet\">"+
+												"</head>" +
+												"<body class=\"impress-not-supported\">" +
+													"<div class=\"fallback-message\">" +
+														"<p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>" +
+														"<p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>" +
+													"</div>" +
+													"<div id=\"impress\">" +
+													"__contenuslide__"+
+													"</div>" +
+													"<div id=\"impress-toolbar\"></div>" +
+													"<div class=\"hint\">" +
+														"<p>Use a spacebar or arrow keys to navigate. <br/>" +
+														"Press 'P' to launch speaker console.</p>" +
+													"</div>" +
+											"<script>" +
+												"if (\"ontouchstart\" in document.documentElement) { " +
+												"    document.querySelector(\".hint\").innerHTML = \"<p>Swipe left or right to navigate</p>\";" +
+												"}" +
+											"</script>" +
+											"<script src=\"impress.js\"></script>" +
+											"<script src=\"chart.js\"></script>" +
+											"<script>impress().init();</script>" +
+											"</body>" +
+											"</html>";

@@ -856,7 +856,7 @@ Presentation.prototype =
 	openCodeExportWindow : function()
 	{
 		me.generateExportMarkup();
-		$('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+		//$('pre code').each(function(i, e) {hljs.highlightBlock(e)});
 		$("#export-code-modal").modal("show");
 	},
 	attachListeners : function()
@@ -1230,35 +1230,122 @@ Presentation.prototype =
 	generateExportMarkup : function(isPreview)
 	{
 		let children = $(".slide-thumb-holder").children();
-			for(let i=0; i<children.length; i++)
-			{
-				child = $(children[i]);
-				id = child.attr("id").split("_")[1];
-				l = child.attr("data-left").split("px")[0];
-				t = child.attr("data-top").split("px")[0];
+		for(let i=0; i<children.length; i++)
+		{
+			child = $(children[i]);
+			id = child.attr("id").split("_")[1];
+			l = child.attr("data-left").split("px")[0];
+			t = child.attr("data-top").split("px")[0];
 
-				coords = me.calculateSlideCoordinates(l,t);
-				el = $("#impress_slide_"+id);
-				el.attr("data-x", coords.x - 500);
-				el.attr("data-y", coords.y);
-				el.attr("data-rotate", child.attr("data-rotate"));
-				el.attr("data-rotate-x", child.attr("data-rotate-x"));
-				el.attr("data-rotate-y", child.attr("data-rotate-y"));
-				el.attr("data-z", child.attr("data-z"));
-				el.attr("data-scale", child.attr("data-scale"));
-				el.addClass("step");
+			coords = me.calculateSlideCoordinates(l,t);
+			el = $("#impress_slide_"+id);
+			el.attr("data-x", coords.x - 500);
+			el.attr("data-y", coords.y);
+			el.attr("data-rotate", child.attr("data-rotate"));
+			el.attr("data-rotate-x", child.attr("data-rotate-x"));
+			el.attr("data-rotate-y", child.attr("data-rotate-y"));
+			el.attr("data-z", child.attr("data-z"));
+			el.attr("data-scale", child.attr("data-scale"));
+			el.addClass("step");
+		}
+		let outputcontainer = $(".impress-slide-container").clone();
+		outputcontainer.find(".impress-slide").each(function()
+		{
+			$(this).css("width", "1024px");
+			$(this).css("height", "768px");
+		});
+
+		if(isPreview)
+			me.generatePreview(outputcontainer.html().toString());
+
+		 $("#exported-code").text(outputcontainer.html().toString());
+
+		let codeExport =  $(".impress-slide-container").html();
+
+		let presentation_export = export_template;
+		presentation_export = presentation_export.split("__slidetitle__").join(me.currentPresentation.title);
+		presentation_export = presentation_export.split("__contenuslide__").join(codeExport);
+		presentation_export = presentation_export.replace("contenteditable=\"true\"", "");
+
+		let zip = new JSZip();
+		$.ajax({
+			type: "GET",
+			url: "lib/impressjs/js/impress.js",
+			success: function(data)
+			{
+				let impressJs = data;
+				zip.file("presentation.html",presentation_export);
+				zip.file("impress.js",impressJs);
+
+				$.ajax({
+					type: "GET",
+					url: "lib/impressjs/css/impress-common.css",
+					success: function(data)
+					{
+						zip.file("impress-common.css",data);
+
+						$.ajax({
+							type: "GET",
+							url: "lib/bootstrap/css/bootstrap.min.css",
+							success: function(data)
+							{
+								zip.file("bootstrap.css",data);
+
+								$.ajax({
+									type: "GET",
+									url: "css/styles.css",
+									success: function(data)
+									{
+										zip.file("styles.css",data);
+
+										$.ajax({
+											type: "GET",
+											url: "css/presentation/custom.css",
+											success: function(data)
+											{
+												zip.file("styles.css",data);
+
+												$.ajax({
+													type: "GET",
+													url: "lib/chartjs/Chart.min.js",
+													success: function(data)
+													{
+														zip.file("chart.js",data);
+
+														zip.generateAsync({type:"blob"}).then(function(content) {
+															saveAs(content, "threejs-presentation.zip");
+														});
+													},
+													error: function (err) {
+														console.log(err);
+													}
+												});
+											},
+											error: function (err) {
+												console.log(err);
+											}
+										});
+									},
+									error: function (err) {
+										console.log(err);
+									}
+								});
+							},
+							error: function (err) {
+								console.log(err);
+							}
+						});
+					},
+					error: function (err) {
+						console.log(err);
+					}
+				});
+			},
+			error: function (err) {
+				console.log(err);
 			}
-			let outputcontainer = $(".impress-slide-container").clone();
-			outputcontainer.find(".impress-slide").each(function()
-			{
-				$(this).css("width", "1024px");
-				$(this).css("height", "768px");
-			});
+		});
 
-			if(isPreview)
-				me.generatePreview(outputcontainer.html().toString());
-			
-			$("#exported-code").text(outputcontainer.html().toString());
 	},
 	createNewPresentation : function()
 	{

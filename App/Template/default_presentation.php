@@ -58,6 +58,8 @@ use App\Session;
         <script src="../../public/lib/bootstrap/js/bootstrap.min.js"></script>
         <script src="../../public/lib/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
         <script src="../../public/lib/font-awesome/js/all.min.js"></script>
+        <script src="../../public/lib/jszip/jszip.min.js"></script>
+        <script src="../../public/lib/filesaver/FileSaver.min.js"></script>
 
         <script src="../../public/lib/jquery-ui/js/jquery-ui.min.js"></script>
         <script src="../../public/js/toastr/toastr.min.js"></script>
