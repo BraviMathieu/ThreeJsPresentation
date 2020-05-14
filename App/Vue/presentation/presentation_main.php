@@ -110,8 +110,10 @@ use App\Session;
       <div class="slide-viewport-container">
         <div class="slide-viewport">
           <div class="impress-slide-container"></div>
-          <span id="play">
+          <span id="play" style="position: ">
               <span class="rotate label label-disabled btn btn-primary" id="spanrotate"><i class="fas fa-sync-alt"></i></span>
+              <!--<span class="skewx label label-disabled btn btn-primary" id="spanskewx"><i class="fas fa-arrows-alt-h"></i></span>
+              <span class="skewy label label-disabled btn btn-primary" id="spanskewy"><i class="fas fa-arrows-alt-v"></i></span>-->
            </span>
             <br>
            <span class="delete-icon label label-important btn btn-danger" id="spandelete"><i class="fas fa-trash-alt"></i>&nbsp;&nbsp;Supprimer l'élément</span>
