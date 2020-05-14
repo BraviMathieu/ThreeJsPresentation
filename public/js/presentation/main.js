@@ -1184,6 +1184,9 @@ Presentation.prototype =
 			me.toggleNightMode();
 		});
 
+		$("#configuration").on("click", function() {
+			$("#configuration-modal").modal("show");
+		});
 	},
 	applyStyle : function()
 	{

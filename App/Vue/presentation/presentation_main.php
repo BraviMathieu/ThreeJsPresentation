@@ -14,7 +14,7 @@ use App\Session;
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-        <a class="dropdown-item" href="main_configuration">Configuration</a>
+        <a class="dropdown-item" id="configuration">Configuration</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="logout">Se déconnecter</a>
       </div>
@@ -489,6 +489,156 @@ use App\Session;
       </div>
       <div class="modal-body">
         <input id="color-picker" type="text" class="form-control input-lg" value="hex(#FFFFFF)"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Configuration Modal -->
+<div class="modal fade" id="configuration-modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width: 150%; left: -25%">
+      <div class="modal-header">
+        <h5 class="modal-title">Configuration</h5>
+        <button class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-lg-12">
+              <article>
+                <h2>Couleur de l'éditeur</h2>
+                <form><textarea id="codetest" name="codetest">
+        function findSequence(goal) {
+          function find(start, history) {
+            if (start == goal)
+              return history;
+            else if (start > goal)
+              return null;
+            else
+              return find(start + 5, "(" + history + " + 5)") ||
+                     find(start * 3, "(" + history + " * 3)");
+          }
+          return find(1, "1");
+        }</textarea></form>
+        <br>
+                <form action="presentation_creation" method="POST">
+                  <div class="col-lg-12">
+                    <div class="form-group">
+                      <label for="select">Choisissez un thème:</label>
+                      <select name="theme" class="form-control" onchange="selectTheme()" id="select">
+                        <option value="default">default</option>
+                        <option value="3024-day">3024-day</option>
+                        <option value="3024-night">3024-night</option>
+                        <option value="abcdef">abcdef</option>
+                        <option value="ambiance">ambiance</option>
+                        <option value="ayu-dark">ayu-dark</option>
+                        <option value="ayu-mirage">ayu-mirage</option>
+                        <option value="base16-dark">base16-dark</option>
+                        <option value="base16-light">base16-light</option>
+                        <option value="bespin">bespin</option>
+                        <option value="blackboard">blackboard</option>
+                        <option value="cobalt">cobalt</option>
+                        <option value="colorforth">colorforth</option>
+                        <option value="darcula">darcula</option>
+                        <option value="dracula">dracula</option>
+                        <option value="duotone-dark">duotone-dark</option>
+                        <option value="duotone-light">duotone-light</option>
+                        <option value="eclipse">eclipse</option>
+                        <option value="elegant">elegant</option>
+                        <option value="erlang-dark">erlang-dark</option>
+                        <option value="gruvbox-dark">gruvbox-dark</option>
+                        <option value="hopscotch">hopscotch</option>
+                        <option value="icecoder">icecoder</option>
+                        <option value="idea">idea</option>
+                        <option value="isotope">isotope</option>
+                        <option value="lesser-dark">lesser-dark</option>
+                        <option value="liquibyte">liquibyte</option>
+                        <option value="lucario">lucario</option>
+                        <option value="material">material</option>
+                        <option value="material-darker">material-darker</option>
+                        <option value="material-palenight">material-palenight</option>
+                        <option value="material-ocean">material-ocean</option>
+                        <option value="mbo">mbo</option>
+                        <option value="mdn-like">mdn-like</option>
+                        <option value="midnight">midnight</option>
+                        <option value="monokai">monokai</option>
+                        <option value="moxer">moxer</option>
+                        <option value="neat">neat</option>
+                        <option value="neo">neo</option>
+                        <option value="night">night</option>
+                        <option value="nord">nord</option>
+                        <option value="oceanic-next">oceanic-next</option>
+                        <option value="panda-syntax">panda-syntax</option>
+                        <option value="paraiso-dark">paraiso-dark</option>
+                        <option value="paraiso-light">paraiso-light</option>
+                        <option value="pastel-on-dark">pastel-on-dark</option>
+                        <option value="railscasts">railscasts</option>
+                        <option value="rubyblue">rubyblue</option>
+                        <option value="seti">seti</option>
+                        <option value="shadowfox">shadowfox</option>
+                        <option value="solarized dark">solarized dark</option>
+                        <option value="solarized light">solarized light</option>
+                        <option value="the-matrix">the-matrix</option>
+                        <option value="tomorrow-night-bright">tomorrow-night-bright</option>
+                        <option value="tomorrow-night-eighties">tomorrow-night-eighties</option>
+                        <option value="ttcn">ttcn</option>
+                        <option value="twilight">twilight</option>
+                        <option value="vibrant-ink">vibrant-ink</option>
+                        <option value="xq-dark">xq-dark</option>
+                        <option value="xq-light">xq-light</option>
+                        <option value="yeti">yeti</option>
+                        <option value="yonce">yonce</option>
+                        <option value="zenburn">zenburn</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>ATTENTION : la modification de la configuration va rafraîchir la page. Veuillez sauvegarder votre
+                  présentation avant d'enregistrer.</div>
+                  <br>
+                  <input type="submit" class="btn btn-primary" value="Enregistrer" name="envoyer">
+                </form>
+
+                <script type="text/javascript" defer="defer">
+                    // A $( document ).ready() block.
+                    $( document ).ready(function() {
+                        currLoc = $(location).attr('href');
+                        currLoc += "#<?=$theme_editor->value?>";
+                        window.location.replace(currLoc)
+                    });
+                </script>
+
+                <script>
+                  var editor = CodeMirror.fromTextArea(document.getElementById("codetest"), {
+                        lineNumbers: true,
+                        styleActiveLine: true,
+                        matchBrackets: true
+                    });
+
+                    var input = document.getElementById("select");
+
+                    function selectTheme() {
+                        var theme = input.options[input.selectedIndex].textContent;
+                        editor.setOption("theme", theme);
+                        location.hash = "#" + theme;
+                    }
+
+                    var choice = (location.hash && location.hash.slice(1)) ||
+                        (document.location.search &&
+                            decodeURIComponent(document.location.search.slice(1)));
+                    if (choice) {
+                        input.value = choice;
+                        editor.setOption("theme", choice);
+                    }
+                    CodeMirror.on(window, "hashchange", function() {
+                        var theme = location.hash.slice(1);
+                        if (theme) { input.value = theme; selectTheme(); }
+                    });
+                </script>
+              </article>
+            </div>
+        </div>
       </div>
     </div>
   </div>
