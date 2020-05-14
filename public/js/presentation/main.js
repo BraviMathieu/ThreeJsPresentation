@@ -1181,6 +1181,26 @@ Presentation.prototype =
 			}
 		});
 
+		$("#add-svg-btn").on("click",function () {
+			$("#svg-selection-modal").modal("show");
+		});
+
+		$(".svg-thumbnail").on("click", function()
+		{
+			$(".svg-thumbnail").css("border-bottom", "1px dotted #DDD");
+			$(this).css("border-bottom", "2px solid #1ABC9C");
+			forme = $(this).attr('data-nom');
+		});
+
+		$("#append-svg-btn").on("click", function()
+		{
+			console.log("append svg to stage");
+			forme = me.pickSvg(forme);
+			console.log(forme);
+			me.addSvgToSlide(forme);
+			$("#svg-selection-modal").modal("hide");
+		});
+
 		$("#night-mode").on("click", function() {
 			me.toggleNightMode();
 		});
@@ -1541,6 +1561,55 @@ Presentation.prototype =
 
 		me.selectedSlide.append($(iframe));
 		me.enableDrag();
+	},
+	addSvgToSlide : function(forme)
+	{
+		$(forme).attr("id", "slidelement_"+me.generateUID());
+		$(forme).css("left", "200px");
+		$(forme).css("top", "200px");
+		$(forme).addClass("slidelement");
+
+		me.selectedSlide.append($(forme));
+		me.enableDrag();
+	},
+	pickSvg: function (forme)
+	{
+		let svg;
+		switch (forme) {
+			case "pentagon":
+				svg = $("<svg viewBox=\"0 0 200 200\"  preserveAspectRatio=\"none\" width=\"100\" height=\"100\">\n" +
+					"                        <polygon points=\"156.427384220077,186.832815729997 43.5726157799226,186.832815729997 8.69857443566525,79.5015528100076 100,13.1671842700025 191.301425564335,79.5015528100076\" id=\"pentagon\"></polygon>\n" +
+					"                    </svg>");
+			break;
+
+			case "circle":
+				svg = $("<svg preserveAspectRatio=\"none\" viewBox=\"0 0 80 80\" width=\"100\" height=\"100\">\n" +
+					"                        <circle cx=\"40\" cy=\"40\" r=\"40\" id=\"circle\"></circle>\n" +
+					"                    </svg>");
+			break;
+			case "rectangle":
+				svg = $("<svg viewBox=\"0 0 50 50\" preserveAspectRatio=\"none\" width=\"100\" height=\"100\" id=\"rectangle\">\n" +
+					"                        <rect width=\"50\" height=\"50\"></rect>\n" +
+					"                    </svg>");
+			break;
+			case "triangle":
+				svg = $("<svg viewBox=\"0 0 50 50\" preserveAspectRatio=\"none\" width=\"100\" height=\"100\"id=\"triangle\">\n" +
+					"                        <polygon points=\"25,0 50,50 0,50\"></polygon>\n" +
+					"                    </svg>");
+			break;
+			case "hexagone":
+				svg = $("<svg viewBox=\"0 0 726 726\" preserveAspectRatio=\"none\" width=\"100\" height=\"100\">\n" +
+					"                        <polygon points=\"723,314 543,625.769145 183,625.769145 3,314 183,2.230855 543,2.230855 723,314\" id=\"hexagone\"></polygon>\n" +
+					"                    </svg>");
+			break;
+			case "etoile":
+				svg = $("<svg  viewBox=\"0 0 180 180\" preserveAspectRatio=\"none\" width=\"100\" height=\"100\" id=\"etoile\">\n" +
+					"                        <polygon points=\"90,0 30,170 180,50 0,50 150,170\"></polygon>\n" +
+					"                    </svg>");
+			break;
+		}
+		return svg;
+		
 	},
 	createEditor : function(e)
 	{
