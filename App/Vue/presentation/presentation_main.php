@@ -97,6 +97,7 @@ use App\Session;
               <button id="add-tableau-btn" title="Ajouter un tableau" class="btn btn-secondary"><i class="fas fa-table"></i></button>
               <button id="add-graphique-btn"title="Ajouter un graphique" class="btn btn-secondary"><i class="fas fa-chart-pie"></i></button>
               <button id="add-object-btn"  title="Ajouter une forme 3D" class="btn btn-secondary"><i class="fas fa-cube"></i></button>
+                <button id="add-svg-btn"  title="Ajouter un svg" class="btn btn-secondary"><i class="fas fa-object-ungroup"></i></button>
             </div>
           </div>
         </div>
@@ -477,6 +478,56 @@ use App\Session;
   </div>
 </div>
 
+<!-- Selectionner Svg Modal -->
+<div class="modal fade" id="svg-selection-modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Selectionner un svg </h5>
+                <button class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="overflow:scroll;">
+                <div class="svg-thumbnail" style="width: 200px" data-nom="pentagon">
+                    <svg viewBox="0 0 200 200"  preserveAspectRatio="none" width="100" height="100">
+                        <polygon points="156.427384220077,186.832815729997 43.5726157799226,186.832815729997 8.69857443566525,79.5015528100076 100,13.1671842700025 191.301425564335,79.5015528100076" id="pentagon"></polygon>
+                    </svg>
+                </div>
+                <div class="svg-thumbnail" style="width: 200px" data-nom="circle">
+                    <svg preserveAspectRatio="none" viewBox="0 0 80 80" width="100" height="100">
+                        <circle cx="40" cy="40" r="40" id="circle"></circle>
+                    </svg>
+                </div>
+                <div class="svg-thumbnail" style="width: 200px" data-nom="rectangle">
+                    <svg viewBox="0 0 50 50" preserveAspectRatio="none" width="100" height="100" id="rectangle">
+                        <rect width="50" height="50"></rect>
+                    </svg>
+                </div>
+                <div class="svg-thumbnail" style="width: 200px" data-nom="triangle">
+                    <svg viewBox="0 0 50 50" preserveAspectRatio="none" width="100" height="100"id="triangle">
+                        <polygon points="25,0 50,50 0,50"></polygon>
+                    </svg>
+                </div>
+                <div class="svg-thumbnail" style="width: 200px" data-nom="hexagone">
+                    <svg viewBox="0 0 726 726" preserveAspectRatio="none" width="100" height="100">
+                        <polygon points="723,314 543,625.769145 183,625.769145 3,314 183,2.230855 543,2.230855 723,314" id="hexagone"></polygon>
+                    </svg>
+                </div>
+                <div class="svg-thumbnail" style="width: 200px" data-nom="etoile">
+                    <svg  viewBox="0 0 180 180" preserveAspectRatio="none" width="100" height="100" id="etoile">
+                        <polygon points="90,0 30,170 180,50 0,50 150,170"></polygon>
+                    </svg>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                <button class="btn btn-primary" id="append-svg-btn"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Colorpicker Modal -->
 <div class="modal fade" id="colorpicker-modal" tabindex="-1">
   <div class="modal-dialog">
@@ -599,43 +650,6 @@ use App\Session;
                   <br>
                   <input type="submit" class="btn btn-primary" value="Enregistrer" name="envoyer">
                 </form>
-
-                <script type="text/javascript" defer="defer">
-                    // A $( document ).ready() block.
-                    $( document ).ready(function() {
-                        currLoc = $(location).attr('href');
-                        currLoc += "#<?=$theme_editor->value?>";
-                        window.location.replace(currLoc)
-                    });
-                </script>
-
-                <script>
-                  var editor = CodeMirror.fromTextArea(document.getElementById("codetest"), {
-                        lineNumbers: true,
-                        styleActiveLine: true,
-                        matchBrackets: true
-                    });
-
-                    var input = document.getElementById("select");
-
-                    function selectTheme() {
-                        var theme = input.options[input.selectedIndex].textContent;
-                        editor.setOption("theme", theme);
-                        location.hash = "#" + theme;
-                    }
-
-                    var choice = (location.hash && location.hash.slice(1)) ||
-                        (document.location.search &&
-                            decodeURIComponent(document.location.search.slice(1)));
-                    if (choice) {
-                        input.value = choice;
-                        editor.setOption("theme", choice);
-                    }
-                    CodeMirror.on(window, "hashchange", function() {
-                        var theme = location.hash.slice(1);
-                        if (theme) { input.value = theme; selectTheme(); }
-                    });
-                </script>
               </article>
             </div>
         </div>

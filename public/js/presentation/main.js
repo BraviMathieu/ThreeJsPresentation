@@ -10,7 +10,6 @@ Presentation = function()
 	this.selectedOrchElement;
 	this.lastslideleftpos = 0;
 	this.userId = user_id_ajax;
-	this.night_mode = night_mode;
 
 	this.lastSaved = "";
 	this.currentPresentation;
@@ -858,7 +857,7 @@ Presentation.prototype =
 	openCodeExportWindow : function()
 	{
 		me.generateExportMarkup();
-		$('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+		//$('pre code').each(function(i, e) {hljs.highlightBlock(e)});
 		$("#export-code-modal").modal("show");
 	},
 	attachListeners : function()
@@ -1162,7 +1161,7 @@ Presentation.prototype =
 
 					$.ajax({
 						type: "POST",
-						url: "objet3d_import",
+						url: "../App/Ajax/objet3d_importAjax.php",
 						data: formdata,
 						processData: false,
 						contentType: false,
@@ -1180,6 +1179,26 @@ Presentation.prototype =
 				$("#import-objet-modal").modal("hide");
 
 			}
+		});
+
+		$("#add-svg-btn").on("click",function () {
+			$("#svg-selection-modal").modal("show");
+		});
+
+		$(".svg-thumbnail").on("click", function()
+		{
+			$(".svg-thumbnail").css("border-bottom", "1px dotted #DDD");
+			$(this).css("border-bottom", "2px solid #1ABC9C");
+			forme = $(this).attr('data-nom');
+		});
+
+		$("#append-svg-btn").on("click", function()
+		{
+			console.log("append svg to stage");
+			forme = me.pickSvg(forme);
+			console.log(forme);
+			me.addSvgToSlide(forme);
+			$("#svg-selection-modal").modal("hide");
 		});
 
 		$("#night-mode").on("click", function() {
@@ -1232,35 +1251,122 @@ Presentation.prototype =
 	generateExportMarkup : function(isPreview)
 	{
 		let children = $(".slide-thumb-holder").children();
-			for(let i=0; i<children.length; i++)
-			{
-				child = $(children[i]);
-				id = child.attr("id").split("_")[1];
-				l = child.attr("data-left").split("px")[0];
-				t = child.attr("data-top").split("px")[0];
+		for(let i=0; i<children.length; i++)
+		{
+			child = $(children[i]);
+			id = child.attr("id").split("_")[1];
+			l = child.attr("data-left").split("px")[0];
+			t = child.attr("data-top").split("px")[0];
 
-				coords = me.calculateSlideCoordinates(l,t);
-				el = $("#impress_slide_"+id);
-				el.attr("data-x", coords.x - 500);
-				el.attr("data-y", coords.y);
-				el.attr("data-rotate", child.attr("data-rotate"));
-				el.attr("data-rotate-x", child.attr("data-rotate-x"));
-				el.attr("data-rotate-y", child.attr("data-rotate-y"));
-				el.attr("data-z", child.attr("data-z"));
-				el.attr("data-scale", child.attr("data-scale"));
-				el.addClass("step");
+			coords = me.calculateSlideCoordinates(l,t);
+			el = $("#impress_slide_"+id);
+			el.attr("data-x", coords.x - 500);
+			el.attr("data-y", coords.y);
+			el.attr("data-rotate", child.attr("data-rotate"));
+			el.attr("data-rotate-x", child.attr("data-rotate-x"));
+			el.attr("data-rotate-y", child.attr("data-rotate-y"));
+			el.attr("data-z", child.attr("data-z"));
+			el.attr("data-scale", child.attr("data-scale"));
+			el.addClass("step");
+		}
+		let outputcontainer = $(".impress-slide-container").clone();
+		outputcontainer.find(".impress-slide").each(function()
+		{
+			$(this).css("width", "1024px");
+			$(this).css("height", "768px");
+		});
+
+		if(isPreview)
+			me.generatePreview(outputcontainer.html().toString());
+
+		 $("#exported-code").text(outputcontainer.html().toString());
+
+		let codeExport =  $(".impress-slide-container").html();
+
+		let presentation_export = export_template;
+		presentation_export = presentation_export.split("__slidetitle__").join(me.currentPresentation.title);
+		presentation_export = presentation_export.split("__contenuslide__").join(codeExport);
+		presentation_export = presentation_export.replace("contenteditable=\"true\"", "");
+
+		let zip = new JSZip();
+		$.ajax({
+			type: "GET",
+			url: "lib/impressjs/js/impress.js",
+			success: function(data)
+			{
+				let impressJs = data;
+				zip.file("presentation.html",presentation_export);
+				zip.file("impress.js",impressJs);
+
+				$.ajax({
+					type: "GET",
+					url: "lib/impressjs/css/impress-common.css",
+					success: function(data)
+					{
+						zip.file("impress-common.css",data);
+
+						$.ajax({
+							type: "GET",
+							url: "lib/bootstrap/css/bootstrap.min.css",
+							success: function(data)
+							{
+								zip.file("bootstrap.css",data);
+
+								$.ajax({
+									type: "GET",
+									url: "css/styles.css",
+									success: function(data)
+									{
+										zip.file("styles.css",data);
+
+										$.ajax({
+											type: "GET",
+											url: "css/presentation/custom.css",
+											success: function(data)
+											{
+												zip.file("styles.css",data);
+
+												$.ajax({
+													type: "GET",
+													url: "lib/chartjs/Chart.min.js",
+													success: function(data)
+													{
+														zip.file("chart.js",data);
+
+														zip.generateAsync({type:"blob"}).then(function(content) {
+															saveAs(content, "threejs-presentation.zip");
+														});
+													},
+													error: function (err) {
+														console.log(err);
+													}
+												});
+											},
+											error: function (err) {
+												console.log(err);
+											}
+										});
+									},
+									error: function (err) {
+										console.log(err);
+									}
+								});
+							},
+							error: function (err) {
+								console.log(err);
+							}
+						});
+					},
+					error: function (err) {
+						console.log(err);
+					}
+				});
+			},
+			error: function (err) {
+				console.log(err);
 			}
-			let outputcontainer = $(".impress-slide-container").clone();
-			outputcontainer.find(".impress-slide").each(function()
-			{
-				$(this).css("width", "1024px");
-				$(this).css("height", "768px");
-			});
+		});
 
-			if(isPreview)
-				me.generatePreview(outputcontainer.html().toString());
-			
-			$("#exported-code").text(outputcontainer.html().toString());
 	},
 	createNewPresentation : function()
 	{
@@ -1543,6 +1649,55 @@ Presentation.prototype =
 		me.selectedSlide.append($(iframe));
 		me.enableDrag();
 	},
+	addSvgToSlide : function(forme)
+	{
+		$(forme).attr("id", "slidelement_"+me.generateUID());
+		$(forme).css("left", "200px");
+		$(forme).css("top", "200px");
+		$(forme).addClass("slidelement");
+
+		me.selectedSlide.append($(forme));
+		me.enableDrag();
+	},
+	pickSvg: function (forme)
+	{
+		let svg;
+		switch (forme) {
+			case "pentagon":
+				svg = $("<svg viewBox=\"0 0 200 200\"  preserveAspectRatio=\"none\" width=\"100\" height=\"100\">\n" +
+					"                        <polygon points=\"156.427384220077,186.832815729997 43.5726157799226,186.832815729997 8.69857443566525,79.5015528100076 100,13.1671842700025 191.301425564335,79.5015528100076\" id=\"pentagon\"></polygon>\n" +
+					"                    </svg>");
+			break;
+
+			case "circle":
+				svg = $("<svg preserveAspectRatio=\"none\" viewBox=\"0 0 80 80\" width=\"100\" height=\"100\">\n" +
+					"                        <circle cx=\"40\" cy=\"40\" r=\"40\" id=\"circle\"></circle>\n" +
+					"                    </svg>");
+			break;
+			case "rectangle":
+				svg = $("<svg viewBox=\"0 0 50 50\" preserveAspectRatio=\"none\" width=\"100\" height=\"100\" id=\"rectangle\">\n" +
+					"                        <rect width=\"50\" height=\"50\"></rect>\n" +
+					"                    </svg>");
+			break;
+			case "triangle":
+				svg = $("<svg viewBox=\"0 0 50 50\" preserveAspectRatio=\"none\" width=\"100\" height=\"100\"id=\"triangle\">\n" +
+					"                        <polygon points=\"25,0 50,50 0,50\"></polygon>\n" +
+					"                    </svg>");
+			break;
+			case "hexagone":
+				svg = $("<svg viewBox=\"0 0 726 726\" preserveAspectRatio=\"none\" width=\"100\" height=\"100\">\n" +
+					"                        <polygon points=\"723,314 543,625.769145 183,625.769145 3,314 183,2.230855 543,2.230855 723,314\" id=\"hexagone\"></polygon>\n" +
+					"                    </svg>");
+			break;
+			case "etoile":
+				svg = $("<svg  viewBox=\"0 0 180 180\" preserveAspectRatio=\"none\" width=\"100\" height=\"100\" id=\"etoile\">\n" +
+					"                        <polygon points=\"90,0 30,170 180,50 0,50 150,170\"></polygon>\n" +
+					"                    </svg>");
+			break;
+		}
+		return svg;
+		
+	},
 	createEditor : function(e)
 	{
 		let editor = $(e.target).clone();
@@ -1644,7 +1799,7 @@ Presentation.prototype =
 		{
 			me.nightMode = false;
 
-			$("#night-mode").html("<div class=\"sb-nav-link-icon\"><i class=\"fas fa-sun\"></i></div>Desactivé</a>")
+			$("#night-mode").html("<div class=\"sb-nav-link-icon\"><i class=\"fas fa-sun\"></i></div>Désactivé</a>")
 
 			$("#sidenavAccordion").removeClass("sb-sidenav-dark");
 			$("#sidenavAccordion").addClass("sb-sidenav-light");

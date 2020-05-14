@@ -6,7 +6,6 @@ $(function () {
 });
 
 $(document).ready(function() {
-    // Todo list
     $(".todo li").click(function() {
         $(this).toggleClass("todo-done");
     });
