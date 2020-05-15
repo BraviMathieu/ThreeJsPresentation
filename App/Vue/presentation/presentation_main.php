@@ -650,7 +650,9 @@ use App\Session;
                   <div>ATTENTION : la modification de la configuration va rafraîchir la page. Veuillez sauvegarder votre
                   présentation avant d'enregistrer.</div>
                   <br>
-                  <input type="submit" class="btn btn-primary" value="Enregistrer" name="envoyer">
+                  <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Enregistrer" name="envoyer">
+                  </div>
                 </form>
               </article>
             </div>

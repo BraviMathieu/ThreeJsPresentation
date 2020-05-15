@@ -437,7 +437,7 @@ Presentation.prototype =
 	},
 	enableDrag : function()
 	{
-		$(".slidelement").draggable().resizable().on("dblclick", function(e)
+		$(".slidelement").draggable().on("dblclick", function(e)
 		{
 			e.stopPropagation();
 			$(this).draggable({disabled : false});
