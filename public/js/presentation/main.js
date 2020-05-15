@@ -1020,6 +1020,8 @@ Presentation.prototype =
 
 			if(me.isValidUrl(image))
 				$("#preview-image").attr("src", image);
+				$("#image-width").attr("value", $("#preview-image").width());
+				$("#image-height").attr("value", $("#preview-image").height());
 		});
 		$("#video-input").on("blur keyup", function()
 		{
