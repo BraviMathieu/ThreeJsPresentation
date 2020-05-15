@@ -7,13 +7,13 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Connexion / Inscription</title>
-    <link rel="stylesheet" href="../../public/css/login.css">
-    <link href="../../public/js/toastr/toastr.min.css" rel="stylesheet">
-    <script src='../../public/lib/jquery/jquery.min.js'></script>
+    <link rel="stylesheet" href="public/css/login.css">
+    <link href="public/lib/toastr/css/toastr.min.css" rel="stylesheet">
+    <script src='public/lib/jquery/jquery.min.js'></script>
   </head>
   <body>
     <?= $content; ?>
-    <script src="../../public/js/login.js"></script>
-    <script src="../../public/js/toastr/toastr.min.js"></script>
+    <script src="public/js/login.js"></script>
+    <script src="public/lib/toastr/js/toastr.min.js"></script>
   </body>
 </html>

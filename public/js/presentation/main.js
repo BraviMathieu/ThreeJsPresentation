@@ -442,7 +442,7 @@ Presentation.prototype =
 	},
 	enableDrag : function()
 	{
-		$(".slidelement").draggable().resizable().on("dblclick", function(e)
+		$(".slidelement").draggable().on("dblclick", function(e)
 		{
 			e.stopPropagation();
 			$(this).draggable({disabled : false});
@@ -1025,6 +1025,8 @@ Presentation.prototype =
 
 			if(me.isValidUrl(image))
 				$("#preview-image").attr("src", image);
+				$("#image-width").attr("value", $("#preview-image").width());
+				$("#image-height").attr("value", $("#preview-image").height());
 		});
 		$("#video-input").on("blur keyup", function()
 		{
@@ -1043,7 +1045,9 @@ Presentation.prototype =
 		$("#append-image-btn").on("click", function()
 		{
 			let image = $("#preview-image").attr("src");
-			me.addImageToSlide(image);
+			let width = $("#image-width").val();
+			let height = $("#image-height").val();
+			me.addImageToSlide(image, width, height);
 			$("#image-modal").modal("hide");
 		});
 		$("#append-video-btn").on("click", function()
@@ -1191,7 +1195,7 @@ Presentation.prototype =
 							$.ajax
 							({
 								type: "POST",
-								url: "../App/Ajax/texturejpg_importAjax.php",
+								url: "App/Ajax/texturejpg_importAjax.php",
 								data: formdata,
 								processData: false,
 								contentType: false,
@@ -1216,7 +1220,7 @@ Presentation.prototype =
 				$.ajax
 				({
 					type: "POST",
-					url: "../App/Ajax/objet3d_importAjax.php",
+					url: "App/Ajax/objet3d_importAjax.php",
 					data: formdata,
 					processData: false,
 					contentType: false,
@@ -1313,7 +1317,7 @@ Presentation.prototype =
 		let data = {presentation_id: id};
 		$.ajax({
 			type: "POST",
-			url: "../App/Ajax/presentations_suppressionAjax.php",
+			url: "App/Ajax/presentations_suppressionAjax.php",
 			data: data,
 			async:false,
 			success: function(retour)
@@ -1369,7 +1373,7 @@ Presentation.prototype =
 		let zip = new JSZip();
 		$.ajax({
 			type: "GET",
-			url: "lib/impressjs/js/impress.js",
+			url: "public/lib/impressjs/js/impress.js",
 			success: function(data)
 			{
 				let impressJs = data;
@@ -1378,35 +1382,35 @@ Presentation.prototype =
 
 				$.ajax({
 					type: "GET",
-					url: "lib/impressjs/css/impress-common.css",
+					url: "public/lib/impressjs/css/impress-common.css",
 					success: function(data)
 					{
 						zip.file("impress-common.css",data);
 
 						$.ajax({
 							type: "GET",
-							url: "lib/bootstrap/css/bootstrap.min.css",
+							url: "public/lib/bootstrap/css/bootstrap.min.css",
 							success: function(data)
 							{
 								zip.file("bootstrap.css",data);
 
 								$.ajax({
 									type: "GET",
-									url: "css/styles.css",
+									url: "public/css/styles.css",
 									success: function(data)
 									{
 										zip.file("styles.css",data);
 
 										$.ajax({
 											type: "GET",
-											url: "css/presentation/custom.css",
+											url: "public/css/presentation/custom.css",
 											success: function(data)
 											{
 												zip.file("styles.css",data);
 
 												$.ajax({
 													type: "GET",
-													url: "lib/chartjs/Chart.min.js",
+													url: "public/lib/chartjs/Chart.min.js",
 													success: function(data)
 													{
 														zip.file("chart.js",data);
@@ -1594,7 +1598,7 @@ Presentation.prototype =
 
 		$.ajax({
 			type: "POST",
-			url: "../App/Ajax/presentations_sauvegarderAjax.php",
+			url: "App/Ajax/presentations_sauvegarderAjax.php",
 			data: data,
 			async:false,
 			success: function(retour)
@@ -1649,7 +1653,7 @@ Presentation.prototype =
 		console.log("object", object);
 		return object;
 	},
-	addImageToSlide : function(src)
+	addImageToSlide : function(src, width, height)
 	{
 		let img = new Image();
 
@@ -1658,6 +1662,12 @@ Presentation.prototype =
 		$(img).css("top", "200px");
 		$(img).addClass("slidelement");
 		$(img).attr("src", src);
+
+		if(width !== "" && height !== "")
+		{
+			$(img).css("width", width + "px");
+			$(img).css("height", height + "px")
+		}
 
 		me.selectedSlide.append($(img));
 		me.enableDrag();
@@ -1810,7 +1820,7 @@ Presentation.prototype =
 		let data = {user_id : me.userId};
 		$.ajax({
 			type: "POST",
-			url: "../App/Ajax/presentations_affichageAjax.php",
+			url: "App/Ajax/presentations_affichageAjax.php",
 			data: data,
 			async:false,
 			success: function(retour)
@@ -1829,7 +1839,7 @@ Presentation.prototype =
 		let data = {user_id : me.userId};
 		$.ajax({
 			type: "POST",
-			url: "../App/Ajax/presentations_last_affichageAjax.php",
+			url: "App/Ajax/presentations_last_affichageAjax.php",
 			data: data,
 			async:false,
 			success: function(retour)

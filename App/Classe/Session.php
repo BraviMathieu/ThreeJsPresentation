@@ -41,7 +41,7 @@ class Session
         $_SESSION = [];
         session_destroy();
         Alert::getInstance()->success('Vous êtes déconnecté !');
-        header('Location: /public');
+        header('Location: login');
         exit();
     }
 

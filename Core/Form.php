@@ -26,7 +26,7 @@ class Form
             'class' => null,
             'method' => 'post',
             'id' => 'form',
-            'action' => $_SERVER['PHP_SELF'],
+            'action' => $_SERVER['REQUEST_URI'],
         ], $parameters);
         return '<form ' . $this->attributes($parameters) . '>';
     }

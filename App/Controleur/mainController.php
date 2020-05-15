@@ -7,15 +7,7 @@ $theme_editor = Configuration::where('code',"EDITOR_THEME")
   ->where('user_id',$user_id)
   ->first();
 
-if($path == "/main_dashboard"){
-  $title = "Dashboard";
-
-  $tabPresentations = Presentation::where('user_id',$user_id)
-    ->get();
-
-  include_once VUE . '/home.php';
-
-}elseif ($path == "/main_configuration"){
+if($path == "/main_configuration"){
   $title = "Configuration";
   $user_id = Session::read('User.id');
 
