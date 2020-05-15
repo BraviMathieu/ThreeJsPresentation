@@ -21,10 +21,10 @@ if($path == "/login"){
     if(password_verify($pwd_peppered, $user->password)) {
       Session::write('User', $user);
       Alert::getInstance()->success('Vous êtes connecté.');
-      redirect('/public/presentation_creation');
+      redirect('presentation_creation');
     }else{
       Alert::getInstance()->error("Identifiant ou mot de passe non valide.");
-      redirect('/public/login');
+      redirect('login');
     }
   }
 
@@ -38,7 +38,7 @@ if($path == "/login"){
 
     if($password != $password_bis){
       Alert::getInstance()->error("Les mots de passe sont différents.");
-      redirect('/public/login');
+      redirect('login');
     }
 
     //Vérification si utilisateur déjà existant
@@ -46,7 +46,7 @@ if($path == "/login"){
       ->first();
     if($user != null){
       Alert::getInstance()->error("Utilisateur déjà existant.");
-      redirect('/public/login');
+      redirect('login');
     }
 
     //Chiffrement du mot de passe
@@ -57,7 +57,7 @@ if($path == "/login"){
     //Création de l'utilisateur
     User::Create(['name' => $user_name, 'password' => $pwd_hashed]);
     Alert::getInstance()->success("Utilisateur créé.");
-    redirect('/public/login');
+    redirect('login');
   }
   include_once VUE . '/login.php';
 }

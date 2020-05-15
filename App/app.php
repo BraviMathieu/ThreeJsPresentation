@@ -3,11 +3,13 @@ namespace App;
 
 ob_start();
 
-$path = (isset($_SERVER['PATH_INFO']))?$_SERVER['PATH_INFO']:'/';
+$path = $_SERVER['REQUEST_URI'];
 
-if($path != '/login' && $path != '/presentation_visualisation' && $path != '/presentation_creation' && !strpos($path, 'ajax')){
+$path = str_replace("/ThreeJS_Presentation", "", $path);
+
+if($path != '/login' && $path != '/logout' && $path != '/presentation_creation' && !strpos($path, 'ajax')){
   if(!Session::read('User.id')){
-    header("Location: /public/login"); // redirection si l'utilisateur n'est pas connecté
+    redirect("login"); // redirection si l'utilisateur n'est pas connecté
     exit();
   }
   include_once APP . '/Template/inc/nav_menu.php';
@@ -27,12 +29,9 @@ elseif(startsWith($path,"/login")){
 elseif(startsWith($path,"/logout")){
   include_once CONTROLLER . '/logoutController.php';
 }
-elseif(startsWith($path,"/objet3d_")){
-  include_once CONTROLLER . '/objet3dController.php';
-}
 
 
-if($path != '/login' && $path != '/presentation_visualisation' && $path != '/presentation_creation' && !strpos($path, 'ajax')){
+if($path != '/login' && $path != '/logout' && $path != '/presentation_creation' && !strpos($path, 'ajax')){
   include_once APP . '/Template/inc/footer.php';
 }
 

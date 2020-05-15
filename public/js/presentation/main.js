@@ -1184,7 +1184,7 @@ Presentation.prototype =
 							$.ajax
 							({
 								type: "POST",
-								url: "../App/Ajax/texturejpg_importAjax.php",
+								url: "App/Ajax/texturejpg_importAjax.php",
 								data: formdata,
 								processData: false,
 								contentType: false,
@@ -1208,7 +1208,7 @@ Presentation.prototype =
 				$.ajax
 				({
 					type: "POST",
-					url: "../App/Ajax/objet3d_importAjax.php",
+					url: "App/Ajax/objet3d_importAjax.php",
 					data: formdata,
 					processData: false,
 					contentType: false,
@@ -1277,7 +1277,7 @@ Presentation.prototype =
 		let data = {presentation_id: id};
 		$.ajax({
 			type: "POST",
-			url: "../App/Ajax/presentations_suppressionAjax.php",
+			url: "App/Ajax/presentations_suppressionAjax.php",
 			data: data,
 			async:false,
 			success: function(retour)
@@ -1333,7 +1333,7 @@ Presentation.prototype =
 		let zip = new JSZip();
 		$.ajax({
 			type: "GET",
-			url: "lib/impressjs/js/impress.js",
+			url: "public/lib/impressjs/js/impress.js",
 			success: function(data)
 			{
 				let impressJs = data;
@@ -1342,35 +1342,35 @@ Presentation.prototype =
 
 				$.ajax({
 					type: "GET",
-					url: "lib/impressjs/css/impress-common.css",
+					url: "public/lib/impressjs/css/impress-common.css",
 					success: function(data)
 					{
 						zip.file("impress-common.css",data);
 
 						$.ajax({
 							type: "GET",
-							url: "lib/bootstrap/css/bootstrap.min.css",
+							url: "public/lib/bootstrap/css/bootstrap.min.css",
 							success: function(data)
 							{
 								zip.file("bootstrap.css",data);
 
 								$.ajax({
 									type: "GET",
-									url: "css/styles.css",
+									url: "public/css/styles.css",
 									success: function(data)
 									{
 										zip.file("styles.css",data);
 
 										$.ajax({
 											type: "GET",
-											url: "css/presentation/custom.css",
+											url: "public/css/presentation/custom.css",
 											success: function(data)
 											{
 												zip.file("styles.css",data);
 
 												$.ajax({
 													type: "GET",
-													url: "lib/chartjs/Chart.min.js",
+													url: "public/lib/chartjs/Chart.min.js",
 													success: function(data)
 													{
 														zip.file("chart.js",data);
@@ -1558,7 +1558,7 @@ Presentation.prototype =
 
 		$.ajax({
 			type: "POST",
-			url: "../App/Ajax/presentations_sauvegarderAjax.php",
+			url: "App/Ajax/presentations_sauvegarderAjax.php",
 			data: data,
 			async:false,
 			success: function(retour)
@@ -1773,7 +1773,7 @@ Presentation.prototype =
 		let data = {user_id : me.userId};
 		$.ajax({
 			type: "POST",
-			url: "../App/Ajax/presentations_affichageAjax.php",
+			url: "App/Ajax/presentations_affichageAjax.php",
 			data: data,
 			async:false,
 			success: function(retour)
@@ -1792,7 +1792,7 @@ Presentation.prototype =
 		let data = {user_id : me.userId};
 		$.ajax({
 			type: "POST",
-			url: "../App/Ajax/presentations_last_affichageAjax.php",
+			url: "App/Ajax/presentations_last_affichageAjax.php",
 			data: data,
 			async:false,
 			success: function(retour)
