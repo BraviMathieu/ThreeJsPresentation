@@ -15,6 +15,7 @@ if($path == "/presentation_creation"){
     Session::destroy();
   }
 
+
   $night_mode = Configuration::where('code',"NIGHT")
     ->where('user_id',$user_id)
     ->first();
