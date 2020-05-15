@@ -1038,7 +1038,9 @@ Presentation.prototype =
 		$("#append-image-btn").on("click", function()
 		{
 			let image = $("#preview-image").attr("src");
-			me.addImageToSlide(image);
+			let width = $("#image-width").val();
+			let height = $("#image-height").val();
+			me.addImageToSlide(image, width, height);
 			$("#image-modal").modal("hide");
 		});
 		$("#append-video-btn").on("click", function()
@@ -1571,7 +1573,7 @@ Presentation.prototype =
 		console.log("object", object);
 		return object;
 	},
-	addImageToSlide : function(src)
+	addImageToSlide : function(src, width, height)
 	{
 		let img = new Image();
 
@@ -1580,6 +1582,12 @@ Presentation.prototype =
 		$(img).css("top", "200px");
 		$(img).addClass("slidelement");
 		$(img).attr("src", src);
+
+		if(width !== "" && height !== "")
+		{
+			$(img).css("width", width + "px");
+			$(img).css("height", height + "px")
+		}
 
 		me.selectedSlide.append($(img));
 		me.enableDrag();
