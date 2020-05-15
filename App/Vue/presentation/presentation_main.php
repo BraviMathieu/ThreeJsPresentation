@@ -263,9 +263,9 @@ use App\Session;
         </div>
 
         <div class="row">
-          <div class="col-lg-12">
+          <div class="col-lg-12 text-center">
             <label for="preview-graphique-add-donnee-color">Couleur</label>
-            <input id="preview-graphique-add-donnee-color" type="text" class="form-control input-lg" value="hex(#FFFFFF)"/>
+            <input id="preview-graphique-add-donnee-color" type="text" class="form-control" />
           </div>
         </div>
 
@@ -528,23 +528,6 @@ use App\Session;
             </div>
         </div>
     </div>
-</div>
-
-<!-- Colorpicker Modal -->
-<div class="modal fade" id="colorpicker-modal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Choisir une couleur</h5>
-        <button class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <input id="color-picker" type="text" class="form-control input-lg" value="hex(#FFFFFF)"/>
-      </div>
-    </div>
-  </div>
 </div>
 
 <!-- Configuration Modal -->
