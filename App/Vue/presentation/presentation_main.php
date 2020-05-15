@@ -35,13 +35,11 @@ use App\Session;
             Importer des objets 3D</a>
           <a class="nav-link" id="export-preso-panel"><div class="sb-nav-link-icon"><i class="fas fa-cloud"></i></div>
             Exporter présentation</a>
-          <a class="nav-link" id="open-presentations-panel"><div class="sb-nav-link-icon"><i class="fas fa-save"></i></div>
+          <a class="nav-link" id="open-presentations-panel"><div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
             Mes Présentations</a>
             <a class="nav-link" id="open-mesObj-panel"><div class="sb-nav-link-icon"><i class="fas fa-save"></i></div>
                 Mes Objets 3D</a>
         <div class="sb-sidenav-menu-heading">Présentation</div>
-          <a class="nav-link" id="export-content-panel"><div class="sb-nav-link-icon"><i class="fas fa-eye"></i></div>
-            Voir</a>
           <a class="nav-link" id="save-presentation-panel" ><div class="sb-nav-link-icon"><i class="fas fa-save"></i></div>
             Sauvegarder</a>
         <div class="sb-sidenav-menu-heading">Mode nuit</div>

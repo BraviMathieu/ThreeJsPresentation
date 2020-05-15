@@ -1174,10 +1174,6 @@ Presentation.prototype =
 			});
 			$("#saved-presentations-modal").modal("show");
 		});
-		$("#export-content-panel").on("click", function()
-		{
-			me.generateExportMarkup(true);
-		});
 		$(".style-thumbnail").on("click", function()
 		{
 			$(".style-thumbnail").css("border-bottom", "1px dotted #DDD");
