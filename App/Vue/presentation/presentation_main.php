@@ -160,9 +160,9 @@ use App\Session;
         <p> La prévisualisation va apparaitre en dessous.</p>
         <img id="preview-image">
         <h2>Taille de l'image:</h2>
-        <label for="image-width">Largeur de l'image: </label>
+        <label for="image-width">Largeur de l'image (en px): </label>
         <input type="text" id="image-width" class="form-control">
-        <label for="image-height">Hauteur de l'image: </label>
+        <label for="image-height">Hauteur de l'image (en px): </label>
         <input type="text" id="image-height" class="form-control">
       </div>
       <div class="modal-footer">
