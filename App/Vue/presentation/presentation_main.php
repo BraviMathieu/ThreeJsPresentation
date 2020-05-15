@@ -155,10 +155,15 @@ use App\Session;
         </button>
       </div>
       <div class="modal-body">
-        <p>Coller l'URL de l'image </p>
-        <input type="text" id="image-input" class="form-control">
+        <h2>Coller l'URL de l'image </h2>
+          <input type="text" id="image-input" class="form-control">
         <p> La prévisualisation va apparaitre en dessous.</p>
         <img id="preview-image">
+        <h2>Taille de l'image:</h2>
+        <label for="image-width">Largeur de l'image (en px): </label>
+        <input type="text" id="image-width" class="form-control">
+        <label for="image-height">Hauteur de l'image (en px): </label>
+        <input type="text" id="image-height" class="form-control">
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -645,7 +650,9 @@ use App\Session;
                   <div>ATTENTION : la modification de la configuration va rafraîchir la page. Veuillez sauvegarder votre
                   présentation avant d'enregistrer.</div>
                   <br>
-                  <input type="submit" class="btn btn-primary" value="Enregistrer" name="envoyer">
+                  <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Enregistrer" name="envoyer">
+                  </div>
                 </form>
               </article>
             </div>

@@ -437,7 +437,7 @@ Presentation.prototype =
 	},
 	enableDrag : function()
 	{
-		$(".slidelement").draggable().resizable().on("dblclick", function(e)
+		$(".slidelement").draggable().on("dblclick", function(e)
 		{
 			e.stopPropagation();
 			$(this).draggable({disabled : false});
@@ -1020,6 +1020,8 @@ Presentation.prototype =
 
 			if(me.isValidUrl(image))
 				$("#preview-image").attr("src", image);
+				$("#image-width").attr("value", $("#preview-image").width());
+				$("#image-height").attr("value", $("#preview-image").height());
 		});
 		$("#video-input").on("blur keyup", function()
 		{
@@ -1038,7 +1040,9 @@ Presentation.prototype =
 		$("#append-image-btn").on("click", function()
 		{
 			let image = $("#preview-image").attr("src");
-			me.addImageToSlide(image);
+			let width = $("#image-width").val();
+			let height = $("#image-height").val();
+			me.addImageToSlide(image, width, height);
 			$("#image-modal").modal("hide");
 		});
 		$("#append-video-btn").on("click", function()
@@ -1162,7 +1166,6 @@ Presentation.prototype =
 		{
 			if($(this).prop('files').length > 0) {
 				mtlimport = $(this).prop('files')[0];
-				console.log(mtlimport);
 				if (!mtlimport.name.includes(".mtl")) {
 					document.getElementById("mtlinput").value = '';
 					toastr.error("vous devez importer un .mtl");
@@ -1172,14 +1175,17 @@ Presentation.prototype =
 		$("#imginput").change( function()
 		{
 			if($(this).prop('files').length > 0) {
-					for(let i =0; i <=$(this).prop('files').length; i++)
+					for(let n = 0; n < $(this).prop('files').length; n++)
 					{
-						imgimport = $(this).prop('files')[i];
+
+						imgimport = $(this).prop('files')[n];
+						console.log(imgimport);
 						formdata = new FormData();
-						if (!imgimport.name.includes(".jpg")) {
-							document.getElementById("imageinput").value = '';
+						if (!imgimport.type.includes("image/jpeg")) {
+							document.getElementById("imginput").value = '';
 							toastr.error("vous devez importer un .jpg");
 						}
+						else {
 							formdata.append("img", imgimport);
 							$.ajax
 							({
@@ -1190,6 +1196,7 @@ Presentation.prototype =
 								contentType: false,
 								async: false,
 							});
+						}
 
 
 
@@ -1613,7 +1620,7 @@ Presentation.prototype =
 		console.log("object", object);
 		return object;
 	},
-	addImageToSlide : function(src)
+	addImageToSlide : function(src, width, height)
 	{
 		let img = new Image();
 
@@ -1622,6 +1629,12 @@ Presentation.prototype =
 		$(img).css("top", "200px");
 		$(img).addClass("slidelement");
 		$(img).attr("src", src);
+
+		if(width !== "" && height !== "")
+		{
+			$(img).css("width", width + "px");
+			$(img).css("height", height + "px")
+		}
 
 		me.selectedSlide.append($(img));
 		me.enableDrag();
@@ -1680,6 +1693,8 @@ Presentation.prototype =
 	{
 		console.log("../uploads/"+obj+'.html')
 		let iframe = $('<iframe>', {
+			width: 500,
+			height: 500,
 			src: "../uploads/"+obj+'.html',
 			id:  'slidelement_'+me.generateUID(),
 			class: 'slidelement',
