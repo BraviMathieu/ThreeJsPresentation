@@ -62,6 +62,7 @@ use App\Session;
         <script src="public/lib/toastr/js/toastr.min.js"></script>
         <script src="public/lib/pace/js/pace.min.js"></script>
         <script src="public/lib/chartjs/Chart.min.js"></script>
+        <script src="public/js/presentation/startup.js"></script>
         <script src="public/js/presentation/main.js"></script>
         <script src="public/js/presentation/matrix.js"></script>
         <script src="public/js/presentation/knob.js"></script>
