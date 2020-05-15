@@ -1162,7 +1162,6 @@ Presentation.prototype =
 		{
 			if($(this).prop('files').length > 0) {
 				mtlimport = $(this).prop('files')[0];
-				console.log(mtlimport);
 				if (!mtlimport.name.includes(".mtl")) {
 					document.getElementById("mtlinput").value = '';
 					toastr.error("vous devez importer un .mtl");
@@ -1172,14 +1171,17 @@ Presentation.prototype =
 		$("#imginput").change( function()
 		{
 			if($(this).prop('files').length > 0) {
-					for(let i =0; i <=$(this).prop('files').length; i++)
+					for(let n = 0; n < $(this).prop('files').length; n++)
 					{
-						imgimport = $(this).prop('files')[i];
+
+						imgimport = $(this).prop('files')[n];
+						console.log(imgimport);
 						formdata = new FormData();
-						if (!imgimport.name.includes(".jpg")) {
-							document.getElementById("imageinput").value = '';
+						if (!imgimport.type.includes("image/jpeg")) {
+							document.getElementById("imginput").value = '';
 							toastr.error("vous devez importer un .jpg");
 						}
+						else {
 							formdata.append("img", imgimport);
 							$.ajax
 							({
@@ -1190,6 +1192,7 @@ Presentation.prototype =
 								contentType: false,
 								async: false,
 							});
+						}
 
 
 
@@ -1680,6 +1683,8 @@ Presentation.prototype =
 	{
 		console.log("../uploads/"+obj+'.html')
 		let iframe = $('<iframe>', {
+			width: 500,
+			height: 500,
 			src: "../uploads/"+obj+'.html',
 			id:  'slidelement_'+me.generateUID(),
 			class: 'slidelement',

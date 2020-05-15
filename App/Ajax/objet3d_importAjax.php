@@ -60,7 +60,6 @@ $html ="
         new OBJLoader( manager )
           .setMaterials( materials )
           .load(\"$obj\", function ( object ) {
-            object.position.y = - 95;
             scene.add( object );
           }, onProgress, onError );
       });
