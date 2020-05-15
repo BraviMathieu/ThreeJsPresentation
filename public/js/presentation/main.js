@@ -35,6 +35,8 @@ Presentation = function()
 	this.ctxGraphique;
 	this.dataGraphique;
 
+	this.objboolean = false;
+
 	this.vxmax = 6000;
 	//Viewport x min
 	this.vxmin = -6000;
@@ -51,9 +53,12 @@ Presentation = function()
 	//Window y min
 	this.wymin = 0;
 
+
+
 }
 Presentation.prototype =
 {
+
 	initialize  : function()
 	{
 		me = this;
@@ -1274,6 +1279,7 @@ Presentation.prototype =
 					contentType: false,
 					async: false,
 				});
+				objurl = objimport.name+".html";
 				me.addMyObjectToSlide(objimport.name);
 				$("#import-objet-modal").modal("hide");
 
@@ -1281,6 +1287,33 @@ Presentation.prototype =
 			else {
 				toastr.error("veuillez importer vos fichiers mtl et obj");
 			}
+		});
+
+		$("#open-mesObj-panel").on("click",function () {
+
+			$("#saved-objects-modal").modal("show");
+			if( me.objboolean === false) {
+				$.ajax({
+					datatype: "JSON",
+					url: "../App/Ajax/mesobjet3d_affichageAjax.php",
+					success: function (retour) {
+						objRetour = JSON.parse(retour);
+					},
+					async: false,
+				});
+				me.afficheMesObj(objRetour)
+			}
+			me.objboolean = true;
+		});
+
+		$("#savedobjects").on("change",function () {
+			urlmyobj =$(this).prop("options")[$(this).prop("selectedIndex")].value;
+			document.getElementById("previewobj").src = "../uploads/"+urlmyobj;
+		});
+
+		$("#append-myobject-btn").on("click",function () {
+			me.addMyObjectToSlide(urlmyobj);
+			$("#saved-objects-modal").modal("hide");
 		});
 
 		$("#add-svg-btn").on("click",function () {
@@ -1744,11 +1777,10 @@ Presentation.prototype =
 	},
 	addMyObjectToSlide : function(obj)
 	{
-		console.log("../uploads/"+obj+'.html')
 		let iframe = $('<iframe>', {
 			width: 500,
 			height: 500,
-			src: "../uploads/"+obj+'.html',
+			src: "../uploads/"+obj,
 			id:  'slidelement_'+me.generateUID(),
 			class: 'slidelement',
 			frameborder: 5,
@@ -1919,6 +1951,12 @@ Presentation.prototype =
 
 			$("#visualisation").removeClass("main-viewport-dark");
 			$("#visualisation").addClass("main-viewport");
+		}
+	},
+	afficheMesObj : function (mesObj) {
+		for (let i = 0; i < mesObj.length; i++) {
+			console.log(i);
+			document.getElementById("savedobjects").innerHTML += "<option value='"+mesObj[i].basename+"'>"+mesObj[i].basename+"</option>";
 		}
 	}
 };

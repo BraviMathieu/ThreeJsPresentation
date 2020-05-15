@@ -37,6 +37,8 @@ use App\Session;
             Exporter présentation</a>
           <a class="nav-link" id="open-presentations-panel"><div class="sb-nav-link-icon"><i class="fas fa-save"></i></div>
             Mes Présentations</a>
+            <a class="nav-link" id="open-mesObj-panel"><div class="sb-nav-link-icon"><i class="fas fa-save"></i></div>
+                Mes Objets 3D</a>
         <div class="sb-sidenav-menu-heading">Présentation</div>
           <a class="nav-link" id="export-content-panel"><div class="sb-nav-link-icon"><i class="fas fa-eye"></i></div>
             Voir</a>
@@ -420,6 +422,28 @@ use App\Session;
       </div>
     </div>
   </div>
+</div>
+
+<!-- Mes objets 3D Modal -->
+<div class="modal fade" id="saved-objects-modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Mes Objets 3D</h5>
+                <button class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <select id="savedobjects">
+                <option selected></option>
+            </select>
+            <iframe id="previewobj"></iframe>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="append-myobject-btn"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
+                <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Exporter Code Modal -->
