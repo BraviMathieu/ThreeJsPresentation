@@ -121,7 +121,6 @@ Presentation.prototype =
 		{
 			if(confirm("Êtes-vous sûr de vouloir supprimer cette présentation ?"))
 				me.deleteSavedPresentation($(this).attr("data-id"));
-			document.location.reload(true);
 		})
 	},
 	hideTransformControl : function()
@@ -921,8 +920,7 @@ Presentation.prototype =
 	},
 	openCodeExportWindow : function()
 	{
-		me.generateExportMarkup();
-		//$('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+		me.generateExport();
 		$("#export-code-modal").modal("show");
 	},
 	attachListeners : function()
@@ -938,7 +936,6 @@ Presentation.prototype =
 		$("#export-preso-panel").on("click", me.openCodeExportWindow);
 		$(".previewpresobtn").on("click", function()
 		{
-			console.log("data parent id", $(this).attr("data-id"));
 			me.fetchAndPreview($(this).attr("data-id"))
 		});
 		$(".openpresobtn").on("click", function()
@@ -1166,12 +1163,10 @@ Presentation.prototype =
 		{
 			$(".previewpresobtn").on("click", function()
 			{
-				console.log("data parent id", $(this).attr("data-id"));
 				me.fetchAndPreview($(this).attr("data-id"))
 			});
 			$(".openpresobtn").on("click", function()
 			{
-				console.log("Edit presentation");
 				me.mode = "save";
 				me.openPresentationForEdit($(this).attr("data-id"));
 			});
@@ -1198,7 +1193,6 @@ Presentation.prototype =
 
 		$("#append-object-btn").on("click", function()
 		{
-			console.log("append object to stage");
 			me.addObjectToSlide(objet);
 			$("#objet-selection-modal").modal("hide");
 		});
@@ -1325,9 +1319,7 @@ Presentation.prototype =
 
 		$("#append-svg-btn").on("click", function()
 		{
-			console.log("append svg to stage");
 			forme = me.pickSvg(forme);
-			console.log(forme);
 			me.addSvgToSlide(forme);
 			$("#svg-selection-modal").modal("hide");
 		});
@@ -1368,15 +1360,16 @@ Presentation.prototype =
 			url: "App/Ajax/presentations_suppressionAjax.php",
 			data: data,
 			async:false,
-			success: function(retour)
+			success: function()
 			{
+				document.location.reload(true);
 			},
 			error: function (err) {
 				console.log(err);
 			}
 		});
 	},
-	generateExportMarkup : function(isPreview)
+	generateExport : function(isPreview)
 	{
 		let children = $(".slide-thumb-holder").children();
 		for(let i=0; i<children.length; i++)
