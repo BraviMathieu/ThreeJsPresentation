@@ -454,11 +454,8 @@ use App\Session;
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" id="export-code">
-        <pre style="height:300px; overflow:scroll;">
-            <code class="html" id="exported-code" >
-            </code>
-        </pre>
+      <div class="modal-body">
+        <p>La présentation est en train d'être téléchargée.</p>
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -671,7 +668,6 @@ use App\Session;
   $(document).ready(function() {
     $("#typetitre li a").click(function(){
       let dropdown =  $("#dropdownMenu1:first-child");
-
       dropdown.text($(this).text());
       dropdown.val($(this).text());
     });

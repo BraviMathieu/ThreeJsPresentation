@@ -124,6 +124,7 @@ Presentation.prototype =
 		{
 			if(confirm("Êtes-vous sûr de vouloir supprimer cette présentation ?"))
 				me.deleteSavedPresentation($(this).attr("data-id"));
+			document.location.reload(true);
 		})
 	},
 	hideTransformControl : function()
@@ -646,7 +647,7 @@ Presentation.prototype =
 
 		$(".slide-thumb-holder").append(thumb);
 		slideThumbId.animate({opacity:1}, 200);
-		slideThumbId.attr("data-left", me.lastslideleftpos+"px");
+		slideThumbId.attr("data-left", "0px");
 		slideThumbId.attr("data-top", "0px");
 		$(".deletebtn").on("click", function()
 		{
@@ -1417,7 +1418,7 @@ Presentation.prototype =
 		let presentation_export = export_template;
 		presentation_export = presentation_export.split("__slidetitle__").join(me.currentPresentation.title);
 		presentation_export = presentation_export.split("__contenuslide__").join(codeExport);
-		presentation_export = presentation_export.replace("contenteditable=\"true\"", "");
+		presentation_export = presentation_export.replace(/contenteditable="true"/g, "");
 
 		let zip = new JSZip();
 		$.ajax({
