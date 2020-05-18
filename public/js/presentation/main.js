@@ -1276,7 +1276,7 @@ Presentation.prototype =
 					async: false,
 				});
 				objurl = objimport.name+".html";
-				me.addMyObjectToSlide(objimport.name);
+				me.addMyObjectToSlide(objurl);
 				$("#import-objet-modal").modal("hide");
 
 			}
@@ -1304,7 +1304,7 @@ Presentation.prototype =
 
 		$("#savedobjects").on("change",function () {
 			urlmyobj =$(this).prop("options")[$(this).prop("selectedIndex")].value;
-			document.getElementById("previewobj").src = "../uploads/"+urlmyobj;
+			document.getElementById("previewobj").src = "uploads/"+urlmyobj;
 		});
 
 		$("#append-myobject-btn").on("click",function () {
@@ -1776,7 +1776,7 @@ Presentation.prototype =
 		let iframe = $('<iframe>', {
 			width: 500,
 			height: 500,
-			src: "../uploads/"+obj,
+			src: "http://localhost/ThreeJS_Presentation/uploads/"+obj,
 			id:  'slidelement_'+me.generateUID(),
 			class: 'slidelement',
 			frameborder: 5,
