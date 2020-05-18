@@ -1319,7 +1319,7 @@ Presentation.prototype =
 		$(".svg-thumbnail").on("click", function()
 		{
 			$(".svg-thumbnail").css("border-bottom", "1px dotted #DDD");
-			$(this).css("border-bottom", "2px solid #1ABC9C");
+			$(this).css("border-bottom", "2px solid #6f2232");
 			forme = $(this).attr('data-nom');
 		});
 
@@ -1796,7 +1796,7 @@ Presentation.prototype =
 	{
 		$(forme).attr("id", "slidelement_"+me.generateUID());
 		$(forme).css("left", "200px");
-		$(forme).css("top", "200px");
+		$(forme).css("top", "0px");
 		$(forme).addClass("slidelement");
 
 		me.selectedSlide.append($(forme));
