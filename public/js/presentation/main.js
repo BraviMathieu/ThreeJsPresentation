@@ -1192,7 +1192,7 @@ Presentation.prototype =
 		$(".objet-thumbnail").on("click", function()
 		{
 			$(".objet-thumbnail").css("border-bottom", "1px dotted #DDD");
-			$(this).css("border-bottom", "2px solid #1ABC9C");
+			$(this).css("border-bottom", "2px solid #6f2232");
 			objet = $(this).attr('data-nom');
 		});
 
