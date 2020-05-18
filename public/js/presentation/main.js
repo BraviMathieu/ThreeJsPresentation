@@ -53,9 +53,6 @@ Presentation = function()
 	this.wymax = 630;
 	//Window y min
 	this.wymin = 0;
-
-
-
 }
 Presentation.prototype =
 {
@@ -78,11 +75,11 @@ Presentation.prototype =
 		me.renderPresentations(presentations);
 		me.openLastSavedPresentation();
 		me.switchView("right");
+		me.selectFirstThumb();
 	},
 	openLastSavedPresentation : function()
 	{
 		presentation = JSON.parse(me.getLastItem());
-		console.log("lastsaved", presentation);
 		if(!presentation)
 		{
 			let savedpresos = presentation;
@@ -95,7 +92,6 @@ Presentation.prototype =
 		else
 		{
 			me.currentPresentation = presentation;
-			console.log("Retrieved id: ", me.currentPresentation);
 			me.openPresentationForEdit(me.currentPresentation.id);
 			me.applyStyle();
 		}
@@ -135,15 +131,17 @@ Presentation.prototype =
 	},
 	setupKeyboardShortcuts : function()
 	{
-		key('⌘+c, ctrl+c', function(event, handler)
+		key('ctrl+c', function()
 		{
-				console.log(handler.shortcut, handler.scope);
 				me.cloneElement();
 		});
-		key('⌘+v, ctrl+v', function(event, handler)
+		key('ctrl+v', function()
 		{
-				console.log(handler.shortcut, handler.scope);
 				me.appendClonedElement();
+		});
+		key('del', function()
+		{
+			$("#spandelete").click();
 		});
 		key.setScope("issues");
 	},
@@ -1504,6 +1502,7 @@ Presentation.prototype =
 		$(".impress-slide-container").html();
 		me.addSlide();
 		me.savePresentation();
+		me.selectFirstThumb();
 	},
 	openPresentationForEdit : function(id)
 	{
@@ -1540,7 +1539,7 @@ Presentation.prototype =
 			me.hideTransformControl();
 			me.switchView("right");
 		});
-		$(".deletebtn").on("click", function (e)
+		$(".deletebtn").on("click", function ()
 		{
 			p = $("#"+ $(this).attr("data-parent"));
 			slideid = $(this).attr("data-parent").split("_")[1];
@@ -1553,6 +1552,7 @@ Presentation.prototype =
 			})
 		});
 		me.enableDrag();
+		me.selectFirstThumb();
 	},
 	fetchAndPreview : function(id)
 	{
@@ -1966,5 +1966,12 @@ Presentation.prototype =
 			console.log(i);
 			document.getElementById("savedobjects").innerHTML += "<option value='"+mesObj[i].basename+"'>"+mesObj[i].basename+"</option>";
 		}
-	}
+	},
+	selectFirstThumb : function(){
+		let firstThumb = $("div .slide-thumb-holder").html();
+		let docThumb = new DOMParser().parseFromString(firstThumb, "text/xml");
+		let idThumb = docThumb.firstChild.id.split('_');
+		$("div #slidethumb_"+idThumb[1]).click();
+		$("div #orchestrationelement_6984").click();
+	},
 };
