@@ -1738,7 +1738,6 @@ Presentation.prototype =
 	{
 		contenuTableau.attr("id", 'slidelement_'+me.generateUID());
 		contenuTableau.addClass("slidelement");
-
 		contenuTableau.css("position", 'absolute');
 		contenuTableau.css("top", '0px');
 		contenuTableau.css("left", '450px');
@@ -1752,6 +1751,9 @@ Presentation.prototype =
 	{
 		graphique.attr("id", 'slidelement_'+me.generateUID());
 		graphique.addClass("slidelement");
+		graphique.css("position", 'absolute');
+		graphique.css("top", '0px');
+		graphique.css("left", '260px');
 
 		let div = $("<div style=\"width: 400px; height: 400px;\">").html(graphique);
 
