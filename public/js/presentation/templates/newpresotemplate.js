@@ -34,7 +34,7 @@ var saved_presentations = '<div class="saved-presos">' +
 
 
 
-var tableau_previsualisation = "<table class=\"table table-responsive tableau-previsualisation\" align=\"center\"  style=\"width: auto;\">" +
+var tableau_previsualisation = "<table class=\"table table-responsive tableau-previsualisation\" align=\"center\" style=\"width: auto;\">" +
 																"<tbody id=\"tableau-body\">" +
 																"<tr>" +
 																	"<td contenteditable=\"true\">Case</td>" +

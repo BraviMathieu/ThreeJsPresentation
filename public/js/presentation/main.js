@@ -1738,6 +1738,10 @@ Presentation.prototype =
 	{
 		contenuTableau.attr("id", 'slidelement_'+me.generateUID());
 		contenuTableau.addClass("slidelement");
+
+		contenuTableau.css("position", 'absolute');
+		contenuTableau.css("top", '0px');
+		contenuTableau.css("left", '450px');
 		contenuTableau.removeClass("table-responsive");
 		contenuTableau.removeClass("tableau-previsualisation");
 
