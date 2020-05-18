@@ -1233,32 +1233,28 @@ Presentation.prototype =
 		$("#imginput").change( function()
 		{
 			if($(this).prop('files').length > 0) {
-					for(let n = 0; n < $(this).prop('files').length; n++)
-					{
-
-						imgimport = $(this).prop('files')[n];
-						console.log(imgimport);
-						formdata = new FormData();
-						if (!imgimport.type.includes("image/jpeg")) {
-							document.getElementById("imginput").value = '';
-							toastr.error("vous devez importer un .jpg");
-						}
-						else {
-							formdata.append("img", imgimport);
-							$.ajax
-							({
-								type: "POST",
-								url: "App/Ajax/texturejpg_importAjax.php",
-								data: formdata,
-								processData: false,
-								contentType: false,
-								async: false,
-							});
-						}
-
-
-
+				for(let n = 0; n < $(this).prop('files').length; n++)
+				{
+					imgimport = $(this).prop('files')[n];
+					console.log(imgimport);
+					formdata = new FormData();
+					if (!imgimport.type.includes("image/jpeg")) {
+						document.getElementById("imginput").value = '';
+						toastr.error("vous devez importer un .jpg");
 					}
+					else {
+						formdata.append("img", imgimport);
+						$.ajax
+						({
+							type: "POST",
+							url: "App/Ajax/texturejpg_importAjax.php",
+							data: formdata,
+							processData: false,
+							contentType: false,
+							async: false,
+						});
+					}
+				}
 			}
 		});
 
@@ -1380,8 +1376,6 @@ Presentation.prototype =
 				console.log(err);
 			}
 		});
-
-
 	},
 	generateExportMarkup : function(isPreview)
 	{
@@ -1711,8 +1705,9 @@ Presentation.prototype =
 		let img = new Image();
 
 		$(img).attr("id", "slidelement_"+me.generateUID());
-		$(img).css("left", "200px");
-		$(img).css("top", "200px");
+		$(img).css("position", "absolute");
+		$(img).css("left", "345px");
+		$(img).css("top", "0px");
 		$(img).addClass("slidelement");
 		$(img).attr("src", src);
 
