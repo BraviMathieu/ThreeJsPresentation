@@ -474,7 +474,7 @@ use App\Session;
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" id="styleselections" style="overflow:scroll;">
+      <div class="modal-body text-center" id="styleselections" style="overflow:hidden;">
         <div class="style-thumbnail" data-style="lato" style="width: 100px">
           <h3 class="styleh3 style1">Lato</h3>
         </div>

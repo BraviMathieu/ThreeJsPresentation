@@ -7,9 +7,10 @@
   </style>
 </head>
 <body>
-<script src="../threejs/three.js"></script>
-<script src="../threejs/OrbitControls.js"></script>
-<script>
+<script type="module">
+  import * as THREE from '../threejs/three.module.js';
+  import { OrbitControls } from '../threejs/OrbitControls.js';
+
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera( 20, window.innerWidth/window.innerHeight, 0.3, 1000 );
     var renderer = new THREE.WebGLRenderer( {alpha: true});
@@ -28,7 +29,7 @@
     camera.position.z = 5;
     renderer.setClearColor(0x000000 , 0);
 
-    controls = new THREE.OrbitControls (camera, renderer.domElement);
+   var controls = new OrbitControls (camera, renderer.domElement);
 
     var animate = function () {
         controls.update();
