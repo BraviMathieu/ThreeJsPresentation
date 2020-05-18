@@ -636,6 +636,9 @@ Presentation.prototype =
 	{
 		if(me.selectedElement)
 			me.selectedElement.css("color", "rgb("+color._r+","+color._g+","+color._b+")");
+
+		if(me.selectedElement[0].localName === "svg")
+			me.selectedElement.css("fill", "rgb("+color._r+","+color._g+","+color._b+")");
 	},
 	addSlide : function()
 	{
