@@ -124,6 +124,7 @@ Presentation.prototype =
 		{
 			if(confirm("Êtes-vous sûr de vouloir supprimer cette présentation ?"))
 				me.deleteSavedPresentation($(this).attr("data-id"));
+			document.location.reload(true);
 		})
 	},
 	hideTransformControl : function()
@@ -635,6 +636,9 @@ Presentation.prototype =
 	{
 		if(me.selectedElement)
 			me.selectedElement.css("color", "rgb("+color._r+","+color._g+","+color._b+")");
+
+		if(me.selectedElement[0].localName === "svg")
+			me.selectedElement.css("fill", "rgb("+color._r+","+color._g+","+color._b+")");
 	},
 	addSlide : function()
 	{
@@ -646,7 +650,7 @@ Presentation.prototype =
 
 		$(".slide-thumb-holder").append(thumb);
 		slideThumbId.animate({opacity:1}, 200);
-		slideThumbId.attr("data-left", me.lastslideleftpos+"px");
+		slideThumbId.attr("data-left", "0px");
 		slideThumbId.attr("data-top", "0px");
 		$(".deletebtn").on("click", function()
 		{
@@ -1188,7 +1192,7 @@ Presentation.prototype =
 		$(".objet-thumbnail").on("click", function()
 		{
 			$(".objet-thumbnail").css("border-bottom", "1px dotted #DDD");
-			$(this).css("border-bottom", "2px solid #1ABC9C");
+			$(this).css("border-bottom", "2px solid #6f2232");
 			objet = $(this).attr('data-nom');
 		});
 
@@ -1229,32 +1233,28 @@ Presentation.prototype =
 		$("#imginput").change( function()
 		{
 			if($(this).prop('files').length > 0) {
-					for(let n = 0; n < $(this).prop('files').length; n++)
-					{
-
-						imgimport = $(this).prop('files')[n];
-						console.log(imgimport);
-						formdata = new FormData();
-						if (!imgimport.type.includes("image/jpeg")) {
-							document.getElementById("imginput").value = '';
-							toastr.error("vous devez importer un .jpg");
-						}
-						else {
-							formdata.append("img", imgimport);
-							$.ajax
-							({
-								type: "POST",
-								url: "App/Ajax/texturejpg_importAjax.php",
-								data: formdata,
-								processData: false,
-								contentType: false,
-								async: false,
-							});
-						}
-
-
-
+				for(let n = 0; n < $(this).prop('files').length; n++)
+				{
+					imgimport = $(this).prop('files')[n];
+					console.log(imgimport);
+					formdata = new FormData();
+					if (!imgimport.type.includes("image/jpeg")) {
+						document.getElementById("imginput").value = '';
+						toastr.error("vous devez importer un .jpg");
 					}
+					else {
+						formdata.append("img", imgimport);
+						$.ajax
+						({
+							type: "POST",
+							url: "App/Ajax/texturejpg_importAjax.php",
+							data: formdata,
+							processData: false,
+							contentType: false,
+							async: false,
+						});
+					}
+				}
 			}
 		});
 
@@ -1276,7 +1276,7 @@ Presentation.prototype =
 					async: false,
 				});
 				objurl = objimport.name+".html";
-				me.addMyObjectToSlide(objimport.name);
+				me.addMyObjectToSlide(objurl);
 				$("#import-objet-modal").modal("hide");
 
 			}
@@ -1304,7 +1304,7 @@ Presentation.prototype =
 
 		$("#savedobjects").on("change",function () {
 			urlmyobj =$(this).prop("options")[$(this).prop("selectedIndex")].value;
-			document.getElementById("previewobj").src = "../uploads/"+urlmyobj;
+			document.getElementById("previewobj").src = "uploads/"+urlmyobj;
 		});
 
 		$("#append-myobject-btn").on("click",function () {
@@ -1319,7 +1319,7 @@ Presentation.prototype =
 		$(".svg-thumbnail").on("click", function()
 		{
 			$(".svg-thumbnail").css("border-bottom", "1px dotted #DDD");
-			$(this).css("border-bottom", "2px solid #1ABC9C");
+			$(this).css("border-bottom", "2px solid #6f2232");
 			forme = $(this).attr('data-nom');
 		});
 
@@ -1376,8 +1376,6 @@ Presentation.prototype =
 				console.log(err);
 			}
 		});
-
-
 	},
 	generateExportMarkup : function(isPreview)
 	{
@@ -1417,7 +1415,7 @@ Presentation.prototype =
 		let presentation_export = export_template;
 		presentation_export = presentation_export.split("__slidetitle__").join(me.currentPresentation.title);
 		presentation_export = presentation_export.split("__contenuslide__").join(codeExport);
-		presentation_export = presentation_export.replace("contenteditable=\"true\"", "");
+		presentation_export = presentation_export.replace(/contenteditable="true"/g, "");
 
 		let zip = new JSZip();
 		$.ajax({
@@ -1707,8 +1705,9 @@ Presentation.prototype =
 		let img = new Image();
 
 		$(img).attr("id", "slidelement_"+me.generateUID());
-		$(img).css("left", "200px");
-		$(img).css("top", "200px");
+		$(img).css("position", "absolute");
+		$(img).css("left", "345px");
+		$(img).css("top", "0px");
 		$(img).addClass("slidelement");
 		$(img).attr("src", src);
 
@@ -1734,6 +1733,9 @@ Presentation.prototype =
 	{
 		contenuTableau.attr("id", 'slidelement_'+me.generateUID());
 		contenuTableau.addClass("slidelement");
+		contenuTableau.css("position", 'absolute');
+		contenuTableau.css("top", '0px');
+		contenuTableau.css("left", '450px');
 		contenuTableau.removeClass("table-responsive");
 		contenuTableau.removeClass("tableau-previsualisation");
 
@@ -1744,6 +1746,9 @@ Presentation.prototype =
 	{
 		graphique.attr("id", 'slidelement_'+me.generateUID());
 		graphique.addClass("slidelement");
+		graphique.css("position", 'absolute');
+		graphique.css("top", '0px');
+		graphique.css("left", '260px');
 
 		let div = $("<div style=\"width: 400px; height: 400px;\">").html(graphique);
 
@@ -1776,7 +1781,7 @@ Presentation.prototype =
 		let iframe = $('<iframe>', {
 			width: 500,
 			height: 500,
-			src: "../uploads/"+obj,
+			src: "http://localhost/ThreeJS_Presentation/uploads/"+obj,
 			id:  'slidelement_'+me.generateUID(),
 			class: 'slidelement',
 			frameborder: 5,
@@ -1791,7 +1796,7 @@ Presentation.prototype =
 	{
 		$(forme).attr("id", "slidelement_"+me.generateUID());
 		$(forme).css("left", "200px");
-		$(forme).css("top", "200px");
+		$(forme).css("top", "0px");
 		$(forme).addClass("slidelement");
 
 		me.selectedSlide.append($(forme));

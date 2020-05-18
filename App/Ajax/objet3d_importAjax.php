@@ -55,7 +55,7 @@ $html ="
 
   
   new MTLLoader( manager )
-      .load( 'male02.mtl', function ( materials ) {
+      .load( \"$mtl\", function ( materials ) {
         materials.preload();
         new OBJLoader( manager )
           .setMaterials( materials )
