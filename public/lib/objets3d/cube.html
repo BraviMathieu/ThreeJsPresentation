@@ -7,9 +7,9 @@
   </style>
 </head>
 <body>
-<script src="../threejs/three.js"></script>
-<script src="../threejs/OrbitControls.js"></script>
-<script>
+<script type="module">
+    import * as THREE from '../threejs/three.module';
+    import { OrbitControls } from '../threejs/OrbitControls';
 
     var controls;
     var scene = new THREE.Scene();
@@ -32,7 +32,7 @@
 
     renderer.setClearColor(0x000000 , 0);
 
-    controls = new THREE.OrbitControls (camera, renderer.domElement);
+    controls = new OrbitControls (camera, renderer.domElement);
 
 
     var animate = function () {
