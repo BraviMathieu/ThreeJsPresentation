@@ -1723,7 +1723,12 @@ Presentation.prototype =
 	addVideoToSlide : function(video)
 	{
 		video.attr("id", "slidelement_"+me.generateUID());
-		video.attr("width", "560");
+		video.addClass("slidelement");
+		video.attr("width", "426");
+		video.attr("height", "240");
+		video.css("width", "426");
+		video.css("height", "240");
+		video.css("border", "solid 6px");
 		video.removeClass("preview-video");
 
 		me.selectedSlide.append($(video));
