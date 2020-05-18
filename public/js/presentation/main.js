@@ -1767,7 +1767,7 @@ Presentation.prototype =
 	addObjectToSlide : function(obj)
 	{
 		let iframe = $('<iframe>', {
-			src: obj+'.html',
+			src: "public/lib/objets3d/"+obj+'.html',
 			id:  'slidelement_'+me.generateUID(),
 			class: 'slidelement',
 			frameborder: 5,
