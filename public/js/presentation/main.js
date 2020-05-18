@@ -29,6 +29,7 @@ Presentation = function()
 	this.isAlignedLeft = false;
 	this.isAlignedCenter = false;
 	this.isAlignedRight = false;
+	this.theme = "montserrat";
 
 	//Graphique
 	this.monGraphique;
@@ -1182,6 +1183,7 @@ Presentation.prototype =
 		{
 			$(".style-thumbnail").css("border-bottom", "1px dotted #DDD");
 			$(this).css("border-bottom", "2px solid #6f2232");
+			me.theme = $(this).attr("data-style");
 		});
 		$("#apply-style-btn").on("click", function()
 		{
@@ -1345,9 +1347,8 @@ Presentation.prototype =
 		$(".slidelement").each(function()
 			{
 				if($(this).hasClass("slidelementh1"))
-				{
 					me.removeAllStyles($(this));
-				}
+					$(this).addClass(me.theme);
 			})
 	},
 	removeAllStyles : function(el)
@@ -1611,6 +1612,7 @@ Presentation.prototype =
 				description: $("textarea#description-input").val(),
 				contents : $(".impress-slide-container").html().toString(),
 				thumbcontents : $(".slide-thumb-holder").html().toString(),
+				theme : me.theme
 			};
 
 			me.currentPresentation = o;
