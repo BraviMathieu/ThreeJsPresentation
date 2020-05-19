@@ -75,7 +75,6 @@ Presentation.prototype =
 		me.renderPresentations(presentations);
 		me.openLastSavedPresentation();
 		me.switchView("right");
-		me.selectFirstThumb();
 	},
 	openLastSavedPresentation : function()
 	{
