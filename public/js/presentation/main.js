@@ -1199,7 +1199,6 @@ Presentation.prototype =
 		{
 			if($(this).prop('files').length > 0) {
 				objimport = $(this).prop('files')[0];
-				console.log(objimport);
 				if (!objimport.name.includes(".obj")) {
 					document.getElementById("objinput").value = '';
 					toastr.error("vous devez importer un .obj");
@@ -1223,7 +1222,6 @@ Presentation.prototype =
 				for(let n = 0; n < $(this).prop('files').length; n++)
 				{
 					imgimport = $(this).prop('files')[n];
-					console.log(imgimport);
 					formdata = new FormData();
 					if (!imgimport.type.includes("image/jpeg")) {
 						document.getElementById("imginput").value = '';
