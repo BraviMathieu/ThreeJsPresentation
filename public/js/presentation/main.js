@@ -74,7 +74,6 @@ Presentation.prototype =
 		me.renderPresentations(presentations);
 		me.openLastSavedPresentation();
 		me.switchView("right");
-		me.selectFirstThumb();
 	},
 	openLastSavedPresentation : function()
 	{
@@ -120,7 +119,6 @@ Presentation.prototype =
 		{
 			if(confirm("Êtes-vous sûr de vouloir supprimer cette présentation ?"))
 				me.deleteSavedPresentation($(this).attr("data-id"));
-			document.location.reload(true);
 		})
 	},
 	hideTransformControl : function()
@@ -157,7 +155,6 @@ Presentation.prototype =
 	},
 	appendClonedElement : function()
 	{
-		console.log(me.clonedElement, "clonedelement");
 		me.selectedSlide.append(me.clonedElement);
 		me.enableDrag();
 	},
@@ -329,7 +326,6 @@ Presentation.prototype =
 		for(var i=0; i<children.length; i++)
 		{
 			child = children[i];
-			console.log("Rearrange child", child.id);
 			id = (child.id).split("_")[1];
 			el = $("#impress_slide_"+id);
 			clonedElements.push(el);
@@ -339,7 +335,6 @@ Presentation.prototype =
 
 		for(var j=0; j< clonedElements.length; j++)
 		{
-			console.log("el", clonedElements[j]);
 			impressSlideContainer.append(clonedElements[j]);
 		}
 		me.enableDrag();
@@ -360,7 +355,6 @@ Presentation.prototype =
 		}});
 		$("#scale-range").on("change", function()
 		{
-			console.log("moving scale", $(this).val());
 			me.selectedOrchElement.attr("data-scale", $(this).val());
 			let id = me.selectedOrchElement.attr("id").split("_")[1];
 			$("#slidethumb_"+id).attr("data-scale", $(this).val());
@@ -866,7 +860,6 @@ Presentation.prototype =
 	switchView : function(direction)
 	{
 		let viewToggle = $("#new-panorama-panel");
-		console.log(viewToggle);
 
 		if(direction == "left")
 		{
@@ -920,8 +913,7 @@ Presentation.prototype =
 	},
 	openCodeExportWindow : function()
 	{
-		me.generateExportMarkup();
-		//$('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+		me.generateExport();
 		$("#export-code-modal").modal("show");
 	},
 	attachListeners : function()
@@ -937,7 +929,6 @@ Presentation.prototype =
 		$("#export-preso-panel").on("click", me.openCodeExportWindow);
 		$(".previewpresobtn").on("click", function()
 		{
-			console.log("data parent id", $(this).attr("data-id"));
 			me.fetchAndPreview($(this).attr("data-id"))
 		});
 		$(".openpresobtn").on("click", function()
@@ -1165,12 +1156,10 @@ Presentation.prototype =
 		{
 			$(".previewpresobtn").on("click", function()
 			{
-				console.log("data parent id", $(this).attr("data-id"));
 				me.fetchAndPreview($(this).attr("data-id"))
 			});
 			$(".openpresobtn").on("click", function()
 			{
-				console.log("Edit presentation");
 				me.mode = "save";
 				me.openPresentationForEdit($(this).attr("data-id"));
 			});
@@ -1197,7 +1186,6 @@ Presentation.prototype =
 
 		$("#append-object-btn").on("click", function()
 		{
-			console.log("append object to stage");
 			me.addObjectToSlide(objet);
 			$("#objet-selection-modal").modal("hide");
 		});
@@ -1328,9 +1316,7 @@ Presentation.prototype =
 
 		$("#append-svg-btn").on("click", function()
 		{
-			console.log("append svg to stage");
 			forme = me.pickSvg(forme);
-			console.log(forme);
 			me.addSvgToSlide(forme);
 			$("#svg-selection-modal").modal("hide");
 		});
@@ -1371,15 +1357,16 @@ Presentation.prototype =
 			url: "App/Ajax/presentations_suppressionAjax.php",
 			data: data,
 			async:false,
-			success: function(retour)
+			success: function()
 			{
+				document.location.reload(true);
 			},
 			error: function (err) {
 				console.log(err);
 			}
 		});
 	},
-	generateExportMarkup : function(isPreview)
+	generateExport : function(isPreview)
 	{
 		let children = $(".slide-thumb-holder").children();
 		for(let i=0; i<children.length; i++)
@@ -1525,17 +1512,14 @@ Presentation.prototype =
 				me.selectedSlide = $(".impress-slide-container").find(".impress-slide-element");
 				me.currentPresentation = presentation;
 				$("#presentation-metatitle").html(me.currentPresentation.title);
-				console.log("rendered");
 			}
 
 			$("#saved-presentations-modal").modal("hide");
 		}
 		$(".slidemask").on("click", function(e)
 		{
-			console.log("repopulated zone");
 			e.stopPropagation();
 			id = (e.target.id).split("_")[1];
-			console.log("slidemask", id);
 			me.selectSlide("#impress_slide_"+id);
 			$(".slidethumb").removeClass("currentselection");
 			$("#slidethumb_"+id).addClass("currentselection");
@@ -1546,7 +1530,6 @@ Presentation.prototype =
 		{
 			p = $("#"+ $(this).attr("data-parent"));
 			slideid = $(this).attr("data-parent").split("_")[1];
-			console.log("parent", p, slideid);
 			p.animate({opacity:0}, 200, function()
 			{
 				$(this).remove();
@@ -1564,11 +1547,9 @@ Presentation.prototype =
 			presentation = me.mypresentations[i];
 			if(id == presentation.id)
 			{
-				console.log("content", presentation.contents);
 				$(".placeholder").html(presentation.contents);
 				$(".placeholder").find(".impress-slide").each(function()
 				{
-					console.log("Physically adding sizing information, again");
 					$(this).css("width", "1024px");
 					$(this).css("height", "768px");
 					$(this).addClass("step");
@@ -1702,7 +1683,6 @@ Presentation.prototype =
 		let vy = Math.round(((me.vymax - me.vymin)/(me.wymax - me.wymin) )*(wy - me.wymin) + me.vymin);
 		let object = {x:vx, y:vy};
 
-		console.log("object", object);
 		return object;
 	},
 	addImageToSlide : function(src, width, height)
@@ -1910,7 +1890,6 @@ Presentation.prototype =
 			async:false,
 			success: function(retour)
 			{
-				console.log(retour);
 				presentationRetour = retour;
 			},
 			error: function (err) {
@@ -1938,30 +1917,24 @@ Presentation.prototype =
 		if(me.nightMode === false)
 		{
 			me.nightMode = true;
-
-			$("#night-mode").html("<div class=\"sb-nav-link-icon\"><i class=\"fas fa-moon\"></i></div>Activé</a>")
+			$("#night-mode").html("<div class=\"sb-nav-link-icon\"><i class=\"fas fa-moon\"></i></div>Activé</a>");
 
 			$("#sidenavAccordion").removeClass("sb-sidenav-light");
 			$("#sidenavAccordion").addClass("sb-sidenav-dark");
-
 			$("#navSlide").removeClass("mainfooter-light");
 			$("#navSlide").addClass("mainfooter");
-
 			$("#visualisation").removeClass("main-viewport");
 			$("#visualisation").addClass("main-viewport-dark");
 		}
 		else
 		{
 			me.nightMode = false;
-
-			$("#night-mode").html("<div class=\"sb-nav-link-icon\"><i class=\"fas fa-sun\"></i></div>Désactivé</a>")
+			$("#night-mode").html("<div class=\"sb-nav-link-icon\"><i class=\"fas fa-sun\"></i></div>Désactivé</a>");
 
 			$("#sidenavAccordion").removeClass("sb-sidenav-dark");
 			$("#sidenavAccordion").addClass("sb-sidenav-light");
-
 			$("#navSlide").removeClass("mainfooter");
 			$("#navSlide").addClass("mainfooter-light");
-
 			$("#visualisation").removeClass("main-viewport-dark");
 			$("#visualisation").addClass("main-viewport");
 		}
@@ -1969,7 +1942,6 @@ Presentation.prototype =
 	afficheMesObj : function (mesObj) {
 		document.getElementById("savedobjects").innerHTML+="<option selected></option>";
 		for (let i = 0; i < mesObj.length; i++) {
-			console.log(i);
 			document.getElementById("savedobjects").innerHTML += "<option value='"+mesObj[i].basename+"'>"+mesObj[i].basename+"</option>";
 		}
 	},
