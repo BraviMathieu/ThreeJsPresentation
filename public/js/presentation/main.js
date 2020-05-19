@@ -36,7 +36,6 @@ Presentation = function()
 	this.ctxGraphique;
 	this.dataGraphique;
 
-	this.objboolean = false;
 
 	this.vxmax = 6000;
 	//Viewport x min
@@ -1244,6 +1243,7 @@ Presentation.prototype =
 					}
 					else {
 						formdata.append("img", imgimport);
+                        formdata.append("idUser",user_id_ajax);
 						$.ajax
 						({
 							type: "POST",
@@ -1266,6 +1266,7 @@ Presentation.prototype =
 				formdata = new FormData();
 				formdata.append("obj", objimport);
 				formdata.append("mtl",mtlimport);
+				formdata.append("idUser",user_id_ajax);
 				$.ajax
 				({
 					type: "POST",
@@ -1286,20 +1287,22 @@ Presentation.prototype =
 		});
 
 		$("#open-mesObj-panel").on("click",function () {
-
+			document.getElementById('savedobjects').options.length=0;
+			formdata = new FormData();
 			$("#saved-objects-modal").modal("show");
-			if( me.objboolean === false) {
 				$.ajax({
+					type:"POST",
 					datatype: "JSON",
-					url: "../App/Ajax/mesobjet3d_affichageAjax.php",
+					url: "App/Ajax/mesobjet3d_affichageAjax.php",
+					data: {
+						"idUser": user_id_ajax
+					},
 					success: function (retour) {
 						objRetour = JSON.parse(retour);
 					},
 					async: false,
 				});
 				me.afficheMesObj(objRetour)
-			}
-			me.objboolean = true;
 		});
 
 		$("#savedobjects").on("change",function () {
@@ -1964,6 +1967,7 @@ Presentation.prototype =
 		}
 	},
 	afficheMesObj : function (mesObj) {
+		document.getElementById("savedobjects").innerHTML+="<option selected></option>";
 		for (let i = 0; i < mesObj.length; i++) {
 			console.log(i);
 			document.getElementById("savedobjects").innerHTML += "<option value='"+mesObj[i].basename+"'>"+mesObj[i].basename+"</option>";
