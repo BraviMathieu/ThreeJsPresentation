@@ -121,7 +121,7 @@ use App\Session;
     <div class="palette palette-clouds panorama-grey-area">
       <div class="row">
         <div class="col-lg-12 text-center">
-          <div class="transform-controls-holder">
+          <div class="transform-controls-holder" id="panorama-navbar">
             <h3 class="transform-label">Rotation Z</h3>
             <input class="knob" id="rotation-knob" data-width="50" data-min="-360" data-max="360" data-fgColor="#6f2232 " data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
             <h3 class="transform-label">Rotation X</h3>
