@@ -14,8 +14,6 @@ use App\Session;
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-        <a class="dropdown-item" id="configuration">Configuration</a>
-        <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="logout">Se déconnecter</a>
       </div>
     </li>
@@ -34,11 +32,11 @@ use App\Session;
           <a class="nav-link" id="import-objet-panel"><div class="sb-nav-link-icon"><i class="fas fa-file-download"></i></div>
             Importer des objets 3D</a>
           <a class="nav-link" id="export-preso-panel"><div class="sb-nav-link-icon"><i class="fas fa-cloud"></i></div>
-            Exporter présentation</a>
+            Exporter la présentation</a>
           <a class="nav-link" id="open-presentations-panel"><div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
-            Mes Présentations</a>
+            Mes présentations</a>
             <a class="nav-link" id="open-mesObj-panel"><div class="sb-nav-link-icon"><i class="fas fa-save"></i></div>
-                Mes Objets 3D</a>
+                Mes objets 3D</a>
         <div class="sb-sidenav-menu-heading">Présentation</div>
           <a class="nav-link" id="save-presentation-panel" ><div class="sb-nav-link-icon"><i class="fas fa-save"></i></div>
             Sauvegarder</a>
@@ -300,7 +298,7 @@ use App\Session;
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Selectionner un objet 3D</h5>
+        <h5 class="modal-title">Sélectionner un objet 3D</h5>
         <button class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -348,7 +346,7 @@ use App\Session;
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button class="btn btn-primary" id="import-objet-3d">&nbsp;Importer</button>
+        <button class="btn btn-primary" id="import-objet-3d">&nbsp;Ajouter</button>
       </div>
     </div>
   </div>
@@ -408,7 +406,7 @@ use App\Session;
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Mes Présentations</h5>
+        <h5 class="modal-title">Mes présentations</h5>
         <button class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -427,7 +425,7 @@ use App\Session;
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Mes Objets 3D</h5>
+                <h5 class="modal-title">Mes objets 3D</h5>
                 <button class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -437,8 +435,8 @@ use App\Session;
             </select>
             <iframe id="previewobj"></iframe>
             <div class="modal-footer">
-                <button class="btn btn-primary" id="append-myobject-btn"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
-                <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+              <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+              <button class="btn btn-primary" id="append-myobject-btn"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
             </div>
         </div>
     </div>
@@ -449,7 +447,7 @@ use App\Session;
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Exporter le code</h5>
+        <h5 class="modal-title">Exporter la présentation</h5>
         <button class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -469,7 +467,7 @@ use App\Session;
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Selectionner une police</h5>
+        <h5 class="modal-title">Sélectionner une police</h5>
         <button class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -504,7 +502,7 @@ use App\Session;
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Selectionner un svg </h5>
+        <h5 class="modal-title">Sélectionner un svg</h5>
         <button class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
