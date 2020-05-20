@@ -82,3 +82,5 @@ $html ="
 ";
 fwrite($f,$html);
 fclose($f);
+
+echo $id;
