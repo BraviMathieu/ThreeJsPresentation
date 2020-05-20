@@ -30,6 +30,7 @@ Presentation = function()
 	this.isAlignedCenter = false;
 	this.isAlignedRight = false;
 	this.theme = "montserrat";
+	this.obj3dUrl = obj3dUrl;
 
 	//Graphique
 	this.monGraphique;
