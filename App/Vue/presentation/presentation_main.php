@@ -30,7 +30,7 @@ use App\Session;
           <a class="nav-link" id="new-panorama-panel"><div class="sb-nav-link-icon"><i id="view-toggle-icon" class="fas fa-th"></i></div>
             Panorama</a>
           <a class="nav-link" id="import-objet-panel"><div class="sb-nav-link-icon"><i class="fas fa-file-download"></i></div>
-            Importer des objets 3D</a>
+            Importer un objet 3D</a>
           <a class="nav-link" id="export-preso-panel"><div class="sb-nav-link-icon"><i class="fas fa-cloud"></i></div>
             Exporter la présentation</a>
           <a class="nav-link" id="open-presentations-panel"><div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
