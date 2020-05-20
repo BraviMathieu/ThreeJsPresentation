@@ -26,10 +26,10 @@ $html ="
 <body>
 
 <script  type=\"module\">
-  import * as THREE from '../public/lib/threejs/three.module.js';
-  import { MTLLoader } from '../public/lib/threejs/MTLLoader.js';
-  import { OBJLoader } from '../public/lib/threejs/OBJLoader.js';
-  import { OrbitControls } from '../public/lib/threejs/OrbitControls.js';
+  import * as THREE from '../../public/lib/threejs/three.module.js';
+  import { MTLLoader } from '../../public/lib/threejs/MTLLoader.js';
+  import { OBJLoader } from '../../public/lib/threejs/OBJLoader.js';
+  import { OrbitControls } from '../../public/lib/threejs/OrbitControls.js';
   
   var onError = function () { };
 

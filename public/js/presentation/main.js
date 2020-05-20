@@ -1293,7 +1293,7 @@ Presentation.prototype =
 
 		$("#savedobjects").on("change",function () {
 			urlmyobj =$(this).prop("options")[$(this).prop("selectedIndex")].value;
-			document.getElementById("previewobj").src = "uploads/"+urlmyobj;
+			document.getElementById("previewobj").src = "uploads/"+user_id_ajax+"/"+urlmyobj;
 		});
 
 		$("#append-myobject-btn").on("click",function () {
@@ -1771,7 +1771,7 @@ Presentation.prototype =
 		let iframe = $('<iframe>', {
 			width: 500,
 			height: 500,
-			src: "http://localhost/ThreeJS_Presentation/uploads/"+obj,
+			src: "http://localhost/ThreeJS_Presentation/uploads/"+user_id_ajax+"/"+obj,
 			id:  'slidelement_'+me.generateUID(),
 			class: 'slidelement',
 			frameborder: 5,
