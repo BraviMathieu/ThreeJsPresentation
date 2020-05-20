@@ -36,7 +36,6 @@ Presentation = function()
 	this.ctxGraphique;
 	this.dataGraphique;
 
-	this.objboolean = false;
 
 	this.vxmax = 6000;
 	//Viewport x min
@@ -1200,7 +1199,6 @@ Presentation.prototype =
 		{
 			if($(this).prop('files').length > 0) {
 				objimport = $(this).prop('files')[0];
-				console.log(objimport);
 				if (!objimport.name.includes(".obj")) {
 					document.getElementById("objinput").value = '';
 					toastr.error("vous devez importer un .obj");
@@ -1224,7 +1222,6 @@ Presentation.prototype =
 				for(let n = 0; n < $(this).prop('files').length; n++)
 				{
 					imgimport = $(this).prop('files')[n];
-					console.log(imgimport);
 					formdata = new FormData();
 					if (!imgimport.type.includes("image/jpeg")) {
 						document.getElementById("imginput").value = '';
@@ -1232,6 +1229,7 @@ Presentation.prototype =
 					}
 					else {
 						formdata.append("img", imgimport);
+                        formdata.append("idUser",user_id_ajax);
 						$.ajax
 						({
 							type: "POST",
@@ -1254,6 +1252,7 @@ Presentation.prototype =
 				formdata = new FormData();
 				formdata.append("obj", objimport);
 				formdata.append("mtl",mtlimport);
+				formdata.append("idUser",user_id_ajax);
 				$.ajax
 				({
 					type: "POST",
@@ -1274,20 +1273,22 @@ Presentation.prototype =
 		});
 
 		$("#open-mesObj-panel").on("click",function () {
-
+			document.getElementById('savedobjects').options.length=0;
+			formdata = new FormData();
 			$("#saved-objects-modal").modal("show");
-			if( me.objboolean === false) {
 				$.ajax({
+					type:"POST",
 					datatype: "JSON",
-					url: "../App/Ajax/mesobjet3d_affichageAjax.php",
+					url: "App/Ajax/mesobjet3d_affichageAjax.php",
+					data: {
+						"idUser": user_id_ajax
+					},
 					success: function (retour) {
 						objRetour = JSON.parse(retour);
 					},
 					async: false,
 				});
 				me.afficheMesObj(objRetour)
-			}
-			me.objboolean = true;
 		});
 
 		$("#savedobjects").on("change",function () {
@@ -1937,6 +1938,7 @@ Presentation.prototype =
 		}
 	},
 	afficheMesObj : function (mesObj) {
+		document.getElementById("savedobjects").innerHTML+="<option selected></option>";
 		for (let i = 0; i < mesObj.length; i++) {
 			document.getElementById("savedobjects").innerHTML += "<option value='"+mesObj[i].basename+"'>"+mesObj[i].basename+"</option>";
 		}

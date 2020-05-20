@@ -7,9 +7,13 @@ require_once CONFIG."/config.php";
 
     $obj = $_FILES["obj"]["name"];
     $mtl = $_FILES["mtl"]["name"];
-move_uploaded_file(  $_FILES["mtl"]["tmp_name"], APP."/../uploads/" . $mtl);
-move_uploaded_file(  $_FILES["obj"]["tmp_name"], APP."/../uploads/" . $obj);
-$f =fopen(APP."/../uploads/" . $obj.".html","w");
+    $id = $_POST["idUser"];
+if(!is_dir(APP."/../uploads/".$id)){
+    mkdir( APP."/../uploads/".$id, 0755);
+}
+move_uploaded_file(  $_FILES["mtl"]["tmp_name"], APP."/../uploads/" .$id."/".$mtl);
+move_uploaded_file(  $_FILES["obj"]["tmp_name"], APP."/../uploads/" .$id."/". $obj);
+$f =fopen(APP."/../uploads/".$id."/". $obj.".html","w");
 $html ="
 <html>
 <head>

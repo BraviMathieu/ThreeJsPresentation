@@ -431,7 +431,6 @@ use App\Session;
                 </button>
             </div>
             <select id="savedobjects">
-                <option selected></option>
             </select>
             <iframe id="previewobj"></iframe>
             <div class="modal-footer">
