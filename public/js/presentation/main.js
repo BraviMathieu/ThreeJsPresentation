@@ -30,6 +30,7 @@ Presentation = function()
 	this.isAlignedCenter = false;
 	this.isAlignedRight = false;
 	this.theme = "montserrat";
+	this.obj3dUrl = obj3dUrl;
 
 	//Graphique
 	this.monGraphique;
@@ -1755,7 +1756,7 @@ Presentation.prototype =
 		let iframe = $('<iframe>', {
             width: 500,
             height: 500,
-			src: "public/lib/objets3d/"+obj+'.html',
+			src: "http://"+me.obj3dUrl+"public/lib/objets3d/"+obj+'.html',
 			id:  'slidelement_'+me.generateUID(),
 			class: 'slidelement',
 			frameborder: 5,
@@ -1771,7 +1772,7 @@ Presentation.prototype =
 		let iframe = $('<iframe>', {
 			width: 500,
 			height: 500,
-			src: "uploads/"+user_id_ajax+"/"+obj,
+			src: "http://"+me.obj3dUrl+"uploads/"+user_id_ajax+"/"+obj,
 			id:  'slidelement_'+me.generateUID(),
 			class: 'slidelement',
 			frameborder: 5,
