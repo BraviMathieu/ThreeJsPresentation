@@ -1771,7 +1771,7 @@ Presentation.prototype =
 		let iframe = $('<iframe>', {
 			width: 500,
 			height: 500,
-			src: "http://localhost/ThreeJS_Presentation/uploads/"+user_id_ajax+"/"+obj,
+			src: "uploads/"+user_id_ajax+"/"+obj,
 			id:  'slidelement_'+me.generateUID(),
 			class: 'slidelement',
 			frameborder: 5,
