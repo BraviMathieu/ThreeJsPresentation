@@ -4,6 +4,9 @@ use App\Alert;
 use App\Session;
 
 if($path == "/login"){
+  //REDIRECTION SI CONNECTÉ
+  if(Session::read('User') != null) redirect('presentation_creation');
+
   //LOGIN
   if(isset($_POST['c_user'], $_POST['c_mdp'])){
 
