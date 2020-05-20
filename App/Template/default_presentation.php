@@ -76,7 +76,7 @@ use App\Session;
         <script>
           const user_id_ajax = "<?=Session::read('User.id')?>";
           const night_mode = "<?=$night_mode?>";
-          const obj3dUrl = "<?=$_SERVER['HTTP_REFERER']."/ThreeJS_Presentation/uploads/"?>";
+          const obj3dUrl = "<?=$_SERVER['HTTP_HOST']."/ThreeJS_Presentation/"?>";
         </script>
       </main>
     </div>
