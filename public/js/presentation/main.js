@@ -1923,6 +1923,8 @@ Presentation.prototype =
 			$("#navSlide").addClass("mainfooter");
 			$("#visualisation").removeClass("main-viewport");
 			$("#visualisation").addClass("main-viewport-dark");
+			$("#panorama-navbar").removeClass("transform-controls-holder");
+			$("#panorama-navbar").addClass("transform-controls-holder-night");
 		}
 		else
 		{
@@ -1935,6 +1937,8 @@ Presentation.prototype =
 			$("#navSlide").addClass("mainfooter-light");
 			$("#visualisation").removeClass("main-viewport-dark");
 			$("#visualisation").addClass("main-viewport");
+			$("#panorama-navbar").removeClass("transform-controls-holder-night");
+			$("#panorama-navbar").addClass("transform-controls-holder");
 		}
 	},
 	afficheMesObj : function (mesObj) {
