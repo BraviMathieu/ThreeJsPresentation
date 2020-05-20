@@ -84,3 +84,4 @@ fwrite($f,$html);
 fclose($f);
 
 echo $id;
+var_dump(!is_dir(APP."/../uploads/".$id));
