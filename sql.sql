@@ -66,7 +66,7 @@ CREATE TABLE `presentations` (
 
 CREATE TABLE `users` (
   `id` tinyint(4) NOT NULL,
-  `name` varchar(8) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
