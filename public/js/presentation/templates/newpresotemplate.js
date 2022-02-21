@@ -6,19 +6,19 @@ var newpresotemplate = '<div id="newpreso">'+
           				'</div>'
 var slidethumb = '<div id="slidethumb_^UID^" class="slidethumb thumbelement">'+
 					 '<div class="thumbnailholder"></div>'+
-					 '<canvas class="slidemask" id="slidethumb_^UID^" style="z-index:1000; width:100%; height:100%; background-color:#FFF; opacity:0.1; left:0px; top:0px; position:absolute"></canvas>'+
+					 '<canvas class="slidemask" id="slidethumb_^UID^" style="z-index:1000; width:100%; height:100%; background-color:#FFF; opacity:0.1; left:0; top:0; position:absolute"></canvas>'+
 					'<a id="deletebtn" data-parent="slidethumb_^UID^" style="z-index:1001;" class="btn btn-danger btn-small deletebtn text-white"><i class="fas fa-trash-alt"></i></a>'+
 				 '</div>';
 var impress_slide = '<div class="impress-slide" id="impress_slide__slidenumber__">'+
-						'<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h2" style="width:auto; height:60px; position:absolute; left:202px; top:50px; whitespace:no-wrap;" contentEditable="true"> Titre d\'exemple</div>'+
-                    	'<div class="slidelement slidelementh3" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h3" style="position:absolute; width:auto; height:40px; left:268px; top:120px; whitespace:no-wrap;"> Paragraphe d\'exemple </div>'
+						'<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h2" style="width:auto; height:100px; position:absolute; left:216px; top:50px; " contentEditable="true"> Titre d\'exemple</div>'+
+                    	'<div class="slidelement slidelementh3" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h3" style="position:absolute; width:auto; height:65px; left:236px; top:160px; "> Paragraphe d\'exemple </div>'
                 	'</div>';
-var text_snippet = '<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h2" style="width:auto; height:60px; position:absolute; left:300px; top:50px; whitespace:no-wrap;" contentEditable="true"> Titre d\'exemple </div>';
+var text_snippet = '<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h2" style="width:auto; height:auto; position:absolute; left:300px; top:50px; " contentEditable="true"> Titre d\'exemple </div>';
 
-var text_snippet_h1 = '<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h1" style=" font-size: 50px; width:auto; height:60px; position:absolute; left:300px; top:50px; whitespace:no-wrap;" contentEditable="true"> Titre H1 </div>';
-var text_snippet_h2 = '<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h2" style=" font-size: 40px; width:auto; height:60px; position:absolute; left:300px; top:50px; whitespace:no-wrap;" contentEditable="true"> Titre H2 </div>';
-var text_snippet_h3 = '<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h3" style=" font-size: 30px; width:auto; height:60px; position:absolute; left:300px; top:50px; whitespace:no-wrap;" contentEditable="true"> Titre H3 </div>';
-var text_snippet_p = '<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="p" style=" font-size: 20px; width:auto; height:60px; position:absolute; left:300px; top:50px; whitespace:no-wrap;" contentEditable="true"> Paragraphe </div>';
+var text_snippet_h1 = '<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h1" style=" font-size: 50px; width:auto; height:auto; position:absolute; left:300px; top:50px;" contentEditable="true"> Titre H1 </div>';
+var text_snippet_h2 = '<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h2" style=" font-size: 40px; width:auto; height:auto; position:absolute; left:300px; top:50px;" contentEditable="true"> Titre H2 </div>';
+var text_snippet_h3 = '<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h3" style=" font-size: 30px; width:auto; height:auto; position:absolute; left:300px; top:50px;" contentEditable="true"> Titre H3 </div>';
+var text_snippet_p = '<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="p" style=" font-size: 20px; width:auto; height:auto; position:absolute; left:300px; top:50px;" contentEditable="true"> Paragraphe </div>';
 
 
 var saved_presentations = '<div class="saved-presos">' +
@@ -47,7 +47,7 @@ var tableau_previsualisation = "<table class=\"table table-responsive tableau-pr
 
 
 var video_template = "<iframe class=\"preview-video\" width=\"468\" height=\"315\" frameborder=\"0\""+
-											"allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\">" +
+											" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\">" +
 											"</iframe>";
 
 

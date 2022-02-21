@@ -54,8 +54,8 @@ use App\Session;
       <?= $content; ?>
 
         <!--  JS -->
-        <script src="public/lib/bootstrap/js/bootstrap.min.js"></script>
         <script src="public/lib/jquery-ui/js/jquery-ui.min.js"></script>
+        <script src="public/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="public/lib/font-awesome/js/all.min.js"></script>
 
         <script src="public/lib/spectrum/js/spectrum.js"></script>
@@ -77,6 +77,9 @@ use App\Session;
           const user_id_ajax = "<?=Session::read('User.id')?>";
           const night_mode = "<?=$night_mode?>";
           const obj3dUrl = "<?=$_SERVER['HTTP_HOST']."/ThreeJS_Presentation/"?>";
+          $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip({delay:50})
+          });
         </script>
       </main>
     </div>
