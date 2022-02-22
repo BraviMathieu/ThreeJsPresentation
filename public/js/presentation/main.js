@@ -128,7 +128,7 @@ Presentation.prototype =
     },
     cloneElement: function(){
       if(me.selectedElement){
-        clone = me.selectedElement.clone();
+        let clone = me.selectedElement.clone();
         clone.attr("id", "slideelement_" + me.generateUID());
         clone.css("left", me.selectedElement.position().left + 20 + "px");
         clone.css("top", me.selectedElement.position().top + 20 + "px");

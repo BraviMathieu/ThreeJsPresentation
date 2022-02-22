@@ -5,7 +5,6 @@ html, body {
 }
 
 body {
-	
 	line-height:1.5;
 	padding:20px;
 }
@@ -60,20 +59,16 @@ p {
 	position:absolute;
 	display: block;
 	z-index:300;
-	/*
-	padding:20px;
-	
-	*/
+	/*padding:20px;*/
 	left:50%;
 	top:50%;
 	margin:0 0 0 294px;
-
+	left: 96px !important;
 	-webkit-user-select: none;
 
 	/*-webkit-box-shadow: 0 0 10px rgba(0,0,0,0.15);
 	-moz-box-shadow: 0 0 10px rgba(0,0,0,0.15);
 	box-shadow: 0 0 10px rgba(0,0,0,0.15);
-
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
