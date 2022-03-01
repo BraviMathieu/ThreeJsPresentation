@@ -654,10 +654,8 @@ Presentation.prototype =
 
       newel.attr("id", "clonethumb_" + id);
       newel.attr("data-clone", true);
-      newel.css("-webkit-transform", "scale(0.18, 0.18)");
+      newel.css("transform", "translate(-41%, -41%) scale(0.172)");
       newel.removeClass("impress-slide-element");
-      newel.css("left", "-110px");
-      newel.css("top", "-75px");
 
       for(var i = 0; i < children.length; i++){
         child = children[i];
