@@ -235,7 +235,6 @@ use App\Session;
         </div>
         <div class="div-tableau-previsualisation my-2">
         </div>
-
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -353,10 +352,26 @@ use App\Session;
         </button>
       </div>
       <div class="modal-body">
-        <p>Importer un fichier .obj et .mtl </p>
-        <input type="file" accept=".obj" id="objinput">
-        <input type="file" accept=".mtl" id="mtlinput">
-        <input type="file" accept=".jpg" id="imginput" multiple>
+        <p>Pour importer votre propre objet 3D, vous devez téléverser les fichiers suivants :</p>
+        <ul>
+          <li>Un fichier <b>.obj</b> pour le modèle 3D</li>
+          <li>Un fichier <b>.mtl</b> pour lier l'objet 3D à la texture</li>
+          <li>Au moins un fichier <b>.jpg</b> pour la texture (vous pouvez en choisir plusieurs)</li>
+        </ul>
+        <div class="form-group">
+          <label for="objinput">Importer un fichier .obj</label>
+          <input id="objinput" class="form-control-file" type="file" accept=".obj" >
+        </div>
+
+        <div class="form-group">
+          <label for="mtlinput">Importer un fichier .mtl</label>
+          <input id="mtlinput" class="form-control-file" type="file" accept=".mtl" >
+        </div>
+
+        <div class="form-group">
+          <label for="imginput">Importer un fichier .jpg</label>
+          <input id="imginput" class="form-control-file" type="file" accept=".jpg"  multiple>
+        </div>
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -444,12 +459,13 @@ use App\Session;
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <select id="savedobjects">
-      </select>
-      <iframe id="previewobj"></iframe>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <button class="btn btn-primary" id="append-myobject-btn"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
+      <div class="modal-body">
+        <select id="savedobjects" class="custom-select mb-3"></select>
+        <iframe id="previewobj" class="w-100"></iframe>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          <button class="btn btn-primary" id="append-myobject-btn"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
+        </div>
       </div>
     </div>
   </div>

@@ -1,15 +1,16 @@
 <?php
+
 namespace Core;
 
 class Form
 {
-    private function attributes(array $data):string
+    private function attributes(array $data): string
     {
         $attributes = '';
         foreach ($data as $key => $value) {
             if ($value === true) {
                 $attributes .= ' ' . $key;
-            }elseif ($value) {
+            } elseif ($value) {
                 $attributes .= ' ' . $key . '="' . $value . '"';
             }
         }

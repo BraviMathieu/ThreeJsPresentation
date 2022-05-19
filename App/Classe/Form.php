@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 
 
@@ -24,7 +25,7 @@ class Form extends \Core\Form
      * @param array $options
      * @return string
      */
-    public function create(array $options = []) :string
+    public function create(array $options = []): string
     {
         return $this->open(
             $this->option($options, 'form-horizontal style-form')
@@ -36,7 +37,7 @@ class Form extends \Core\Form
      * @param array $options
      * @return string
      */
-    public function input($name, array $options = []) :string
+    public function input($name, array $options = []): string
     {
         if (isset($options['label'])) {
             $label = $options['label'];
@@ -51,7 +52,6 @@ class Form extends \Core\Form
                       ' . parent::input($name, $this->option($options)) . '
                   </div>
               </div>';
-
     }
 
     /**
@@ -59,7 +59,7 @@ class Form extends \Core\Form
      * @param string $text Le texte dans le button submit
      * @return string Un bouton HTML au template de bootstrap en primary color
      */
-    public function button(string $text = "Enregistrer"):string
+    public function button(string $text = "Enregistrer"): string
     {
         $this->button = true;
         return '<div class="form-group">
@@ -71,7 +71,7 @@ class Form extends \Core\Form
 
     public function end()
     {
-        if(!$this->button){
+        if (!$this->button) {
             return $this->button() . parent::end();
         }
         return parent::end();

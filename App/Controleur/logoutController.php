@@ -1,6 +1,7 @@
 <?php
+
 use App\Session;
 
-if($path == "/logout"){
-  Session::destroy();
+if ($path == "/logout") {
+    Session::destroy();
 }

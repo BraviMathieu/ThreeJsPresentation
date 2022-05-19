@@ -10,7 +10,7 @@ var slidethumb = '<div id="slidethumb_^UID^" class="slidethumb thumbelement">'+
 					'<a id="deletebtn" data-parent="slidethumb_^UID^" style="z-index:1001;" class="btn btn-danger btn-small deletebtn text-white"><i class="fas fa-trash-alt"></i></a>'+
 				 '</div>';
 var impress_slide = '<div class="impress-slide" id="impress_slide__slidenumber__">'+
-						'<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h2" style="width:auto; height:100px; position:absolute; left:216px; top:50px; " contentEditable="true"> Titre d\'exemple</div>'+
+						'<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h2" style="width:auto; height:auto; position:absolute; left:216px; top:50px; " contentEditable="true"> Titre d\'exemple</div>'+
                     	'<div class="slidelement slidelementh3" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h3" style="position:absolute; width:auto; height:65px; left:236px; top:160px; "> Paragraphe d\'exemple </div>'
                 	'</div>';
 var text_snippet = '<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h2" style="width:auto; height:auto; position:absolute; left:300px; top:50px; " contentEditable="true"> Titre d\'exemple </div>';
@@ -38,8 +38,29 @@ var tableau_previsualisation = "<table class=\"table table-responsive tableau-pr
 																"<tbody id=\"tableau-body\">" +
 																"<tr>" +
 																	"<td contenteditable=\"true\">Case</td>" +
+																	"<td contenteditable=\"true\">Case</td>" +
+																	"<td contenteditable=\"true\">Case</td>" +
+																	"<td contenteditable=\"true\">Case</td>" +
+																	"<td contenteditable=\"true\">Case</td>" +
+																	"<td contenteditable=\"true\">Case</td>" +
+																	"<td contenteditable=\"true\">Case</td>" +
 																"</tr>" +
 																"<tr>" +
+																	"<td contenteditable=\"true\">Case</td>" +
+																	"<td contenteditable=\"true\">Case</td>" +
+																	"<td contenteditable=\"true\">Case</td>" +
+																	"<td contenteditable=\"true\">Case</td>" +
+																	"<td contenteditable=\"true\">Case</td>" +
+																	"<td contenteditable=\"true\">Case</td>" +
+																	"<td contenteditable=\"true\">Case</td>" +
+																"</tr>" +
+																"<tr>" +
+																	"<td contenteditable=\"true\">Case</td>" +
+																	"<td contenteditable=\"true\">Case</td>" +
+																	"<td contenteditable=\"true\">Case</td>" +
+																	"<td contenteditable=\"true\">Case</td>" +
+																	"<td contenteditable=\"true\">Case</td>" +
+																	"<td contenteditable=\"true\">Case</td>" +
 																	"<td contenteditable=\"true\">Case</td>" +
 																"</tr>" +
 																"</tbody>" +

@@ -1,20 +1,21 @@
 <?php
+
 define('ROOT', "../..");
 define('CONFIG', ROOT . '/Config');
 define('APP', ROOT . '/App');
 
-require_once CONFIG."/config.php";
+require_once CONFIG . "/config.php";
 
-    $obj = $_FILES["obj"]["name"];
-    $mtl = $_FILES["mtl"]["name"];
-    $id = $_POST["idUser"];
-if(!is_dir(APP."/../uploads/".$id)){
-    mkdir( APP."/../uploads/".$id, 0755);
+$obj = $_FILES["obj"]["name"];
+$mtl = $_FILES["mtl"]["name"];
+$id = $_POST["idUser"];
+if (!is_dir(APP . "/../uploads/" . $id)) {
+    mkdir(APP . "/../uploads/" . $id, 0755);
 }
-move_uploaded_file(  $_FILES["mtl"]["tmp_name"], APP."/../uploads/" .$id."/".$mtl);
-move_uploaded_file(  $_FILES["obj"]["tmp_name"], APP."/../uploads/" .$id."/". $obj);
-$f =fopen(APP."/../uploads/".$id."/". $obj.".html","w");
-$html ="
+move_uploaded_file($_FILES["mtl"]["tmp_name"], APP . "/../uploads/" . $id . "/" . $mtl);
+move_uploaded_file($_FILES["obj"]["tmp_name"], APP . "/../uploads/" . $id . "/" . $obj);
+$f = fopen(APP . "/../uploads/" . $id . "/" . $obj . ".html", "w");
+$html = "
 <html>
 <head>
   <title>My first three.js app</title>
@@ -80,8 +81,8 @@ $html ="
 </body>
 </html>
 ";
-fwrite($f,$html);
+fwrite($f, $html);
 fclose($f);
 
 echo $id;
-var_dump(!is_dir(APP."/../uploads/".$id));
+var_dump(!is_dir(APP . "/../uploads/" . $id));
