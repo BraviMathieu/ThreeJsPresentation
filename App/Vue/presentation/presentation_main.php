@@ -75,17 +75,17 @@ use App\Session;
       <div class="row m-1">
         <div class="col-lg-12 text-center">
           <div role="toolbar">
-            <div class="btn-group mr-2">
+            <div class="btn-group mr-2 mb-1">
               <button id="make-bold" class="btn btn-secondary" title="Gras" data-toggle="tooltip" data-placement="bottom"><i class="fas fa-bold"></i></button>
               <button id="make-italic" class="btn btn-secondary" title="Italique" data-toggle="tooltip" data-placement="bottom"><i class="fas fa-italic"></i></button>
               <button id="make-underline" class="btn btn-secondary" title="Souligné" data-toggle="tooltip" data-placement="bottom"><i class="fas fa-underline"></i></button>
             </div>
-            <div class="btn-group mr-2">
+            <div class="btn-group mr-2 mb-1">
               <button id="make-align-left" class="btn btn-secondary" title="Aligner à gauche" data-toggle="tooltip" data-placement="bottom"><i class="fas fa-align-left"></i></button>
               <button id="make-align-center" class="btn btn-secondary" title="Centrer" data-toggle="tooltip" data-placement="bottom"><i class="fas fa-align-center"></i></button>
               <button id="make-align-right" class="btn btn-secondary" title="Aligner à droite" data-toggle="tooltip" data-placement="bottom"><i class="fas fa-align-right"></i></button>
             </div>
-            <div class="btn-group" role="group">
+            <div class="btn-group mb-1" role="group">
               <button class="btn btn-secondary dropdown-toggle" title="Choisir un texte" type="button" id="dropdownMenu1" data-toggle="dropdown"
                       aria-haspopup="true" aria-expanded="true">Titre 1<span class="caret"></span>
               </button>
@@ -96,7 +96,7 @@ use App\Session;
                 <span><a data-dk-dropdown-value="P">Paragraphe</a></span>
               </div>
             </div>
-            <div class="btn-group">
+            <div class="btn-group mb-1">
               <button id="colorpicker-btn" title="Choisir une couleur" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom"><i class="fas fa-tint"></i></button>
               <button id="add-text-btn" title="Ajouter un texte" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom"><i class="fas fa-font"></i></button>
               <button id="change-font-btn" title="Changer la police d'écriture" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom"><i class="fas fa-heading"></i></button>
@@ -165,15 +165,20 @@ use App\Session;
         </button>
       </div>
       <div class="modal-body">
-        <h2>Coller l'URL de l'image </h2>
-        <input type="text" id="image-input" class="form-control">
+        <div class="form-group">
+            <label for="image-input">Coller l'URL de l'image </label>
+            <input type="text" id="image-input" class="form-control">
+        </div>
         <p> La prévisualisation va apparaitre en dessous.</p>
         <img id="preview-image" alt="" src="">
-        <h2>Taille de l'image:</h2>
-        <label for="image-width">Largeur de l'image (en px): </label>
-        <input type="text" id="image-width" class="form-control">
-        <label for="image-height">Hauteur de l'image (en px): </label>
-        <input type="text" id="image-height" class="form-control">
+        <div class="form-group">
+            <label for="image-width">Largeur de l'image (en px): </label>
+            <input type="text" id="image-width" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="image-height">Hauteur de l'image (en px): </label>
+            <input type="text" id="image-height" class="form-control">
+        </div>
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -194,8 +199,11 @@ use App\Session;
         </button>
       </div>
       <div class="modal-body">
-        <p>Coller l'URL de la vidéo </p>
-        <input type="text" id="video-input" class="form-control">
+          <div class="form-group">
+              <label for="video-input">Coller l'URL de la vidéo</label>
+              <input type="text" id="video-input" class="form-control">
+          </div>
+
         <p> La prévisualisation va apparaitre en dessous.</p>
         <div class="div-preview-video"></div>
       </div>
@@ -257,33 +265,41 @@ use App\Session;
       <div class="modal-body">
         <div class="row">
           <div class="col-lg-12">
-            <label for="preview-graphique-type">Type de graphique</label>
-            <select class="form-control" name="preview-graphique-type" id="preview-graphique-type">
-              <option value="bar">Diagramme en bâtons</option>
-              <option value="pie">Diagramme circulaire</option>
-              <option value="doughnut">Diagramme en anneau</option>
-            </select>
+              <div class="form-group">
+                <label for="preview-graphique-type">Type de graphique</label>
+                <select class="form-control" name="preview-graphique-type" id="preview-graphique-type">
+                  <option value="bar">Diagramme en bâtons</option>
+                  <option value="pie">Diagramme circulaire</option>
+                  <option value="doughnut">Diagramme en anneau</option>
+                </select>
+              </div>
           </div>
         </div>
         <br>
         <div class="row">
           <div class="col-lg-12">
-            <label for="preview-graphique-add-donnee-val">Valeur</label>
-            <input type="number" class="form-control" id="preview-graphique-add-donnee-val" value="1">
+              <div class="form-group">
+                <label for="preview-graphique-add-donnee-val">Valeur</label>
+                <input type="number" class="form-control" id="preview-graphique-add-donnee-val" value="1">
+            </div>
           </div>
         </div>
 
         <div class="row">
           <div class="col-lg-12 text-center">
-            <label for="preview-graphique-add-donnee-color">Couleur</label>
-            <input id="preview-graphique-add-donnee-color" type="text" class="form-control"/>
+              <div class="form-group">
+                <label for="preview-graphique-add-donnee-color">Couleur</label>
+                <input id="preview-graphique-add-donnee-color" type="text" class="form-control"/>
+              </div>
           </div>
         </div>
 
         <div class="row">
           <div class="col-lg-12">
-            <label for="preview-graphique-add-donnee-nom">Nom</label>
-            <input id="preview-graphique-add-donnee-nom" type="text" class="form-control input-lg"/>
+              <div class="form-group">
+                <label for="preview-graphique-add-donnee-nom">Nom</label>
+                <input id="preview-graphique-add-donnee-nom" type="text" class="form-control input-lg"/>
+              </div>
           </div>
         </div>
 
@@ -417,10 +433,14 @@ use App\Session;
         </button>
       </div>
       <div class="modal-body">
-        <p>Titre</p>
-        <input type="text" id="title-input" class="form-control" value="Nouvelle présentation" maxlength="60">
-        <p>Description</p>
-        <textarea id="description-input" class="form-control">Exemple de description de présentation</textarea>
+        <div class="form-group">
+            <label for="title-input">Titre</label>
+            <input type="text" id="title-input" class="form-control" value="Nouvelle présentation" maxlength="60">
+        </div>
+        <div class="form-group">
+            <label for="description-input">Description</label>
+            <textarea id="description-input" class="form-control">Exemple de description de présentation</textarea>
+        </div>
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -440,7 +460,7 @@ use App\Session;
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" id="saved-presentations" style="overflow-y:scroll;">
+      <div class="modal-body" id="saved-presentations" style="overflow-y:auto;">
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -461,7 +481,7 @@ use App\Session;
       </div>
       <div class="modal-body">
         <select id="savedobjects" class="custom-select mb-3"></select>
-        <iframe id="previewobj" class="w-100"></iframe>
+        <iframe id="previewobj" class="w-100 border-0"></iframe>
         <div class="modal-footer">
           <button class="btn btn-secondary" data-dismiss="modal">Fermer</button>
           <button class="btn btn-primary" id="append-myobject-btn"><i class="fas fa-plus"></i>&nbsp;Ajouter</button>
