@@ -8,7 +8,7 @@ use App\Session;
         background-color: #6f2232 !important;
     }
 </style>
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-primary gradient-bg">
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-rouge">
   <a class="navbar-brand" href="#">Presentation ThreeJs</a>
   <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"></div>
   <!-- Navbar-->
@@ -65,7 +65,7 @@ use App\Session;
   <div class="mainfooter-light palette-night" id="navSlide">
     <div class="slide-thumb-holdercontainer">
       <div class="slide-thumb-holder"></div>
-      <a class="btn btn-large bg-primary text-white gradient-bg" href="#" id="add-slide-btn"><i class="fas fa-plus"></i>&nbsp;Ajouter une slide</a>
+      <a class="btn btn-large bg-primary text-white" href="#" id="add-slide-btn"><i class="fas fa-plus"></i>&nbsp;Ajouter une slide</a>
     </div>
   </div>
 </div>

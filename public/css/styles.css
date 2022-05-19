@@ -1,29 +1,3 @@
-/*test*/
-:root {
-  --gradient: linear-gradient(90deg, #962369, #c46206);
-}
-
-.bg-primary {
-  background-size: 300%;
-  background-image: var(--gradient);
-  animation: bg-animation 35s infinite;
-}
-
-@-webkit-keyframes bg-animation {
-  0% {background-position: left;}
-  50% {background-position: right;}
-  100% {background-position: left;}
-}
-
-@keyframes bg-animation {
-  0% {background-position: left;}
-  50% {background-position: right;}
-  100% {background-position: left;}
-}
-/*test*/
-
-
-
 .embed-responsive-21by9::before {
   padding-top: 42.8571428571%;
 }
