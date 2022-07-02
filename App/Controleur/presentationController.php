@@ -41,4 +41,13 @@ if ($path == "/presentation_creation") {
         $contenuFichier = file_get_contents("../" . $pathToPresentation);
         include_once VUE . '/Presentation/presentation_modification.php';
     }
+} elseif ($path == "/presentation_telecharger") {
+    $ficher_nom = pathinfo($_GET['nom_ficher']);
+
+    header("Content-type: application/zip");
+    header("Content-Disposition: attachment; filename=".$ficher_nom['filename'].".tmp");
+    header("Pragma: no-cache");
+    header("Expires: 0");
+    readfile(sys_get_temp_dir().DIRECTORY_SEPARATOR.$ficher_nom['basename']);
+    die();
 }

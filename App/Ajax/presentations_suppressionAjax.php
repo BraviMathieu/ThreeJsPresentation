@@ -7,7 +7,8 @@ define('APP', ROOT . '/App');
 require_once CONFIG . "/config.php";
 require_once "../Classe/Database/Bootstrap.php";
 
-$presentation_id = intval($_POST['presentation_id']);
+$tabData = json_decode(file_get_contents("php://input"), true);
+$presentation_id = intval($tabData['presentation_id']);
 
 //Vérification si le user a le droit a la ressource
 $presentation = Presentation::where('id', $presentation_id)

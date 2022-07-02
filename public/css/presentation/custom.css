@@ -211,7 +211,6 @@ body {
     position: relative;
     width: 100%;
     height: 100%
-
 }
 
 .impress-slide {
@@ -287,11 +286,17 @@ body {
 
 .slide-thumb-holder {
     position: absolute;
+    padding-bottom: 10px;
     left: 0;
     top: 60px;
     bottom: 0;
     right: 0;
     overflow-x: hidden;
+    scrollbar-width : thin;
+}
+
+.slide-thumb-holder::-webkit-scrollbar {
+    width: 5px;
 }
 
 .slidedisplay {
@@ -348,7 +353,6 @@ body {
 
 .slidelement {
     white-space: nowrap;
-    height: 100px;
 }
 
 .slidelementh1 {
@@ -393,7 +397,6 @@ body {
     position: absolute;
     display: none;
     width: 250px;
-    height: 200px;
 }
 
 .thumbnailholder {
@@ -512,6 +515,11 @@ body {
 .currentselection {
     border-bottom: 4px solid #007BFF;
 }
+
+.currentselection-item {
+    border-bottom: 2px solid #6f2232;
+}
+
 
 .stylebg {
     background-color: #FFCC00 !important;

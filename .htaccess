@@ -4,3 +4,4 @@ RewriteBase /ThreeJS_Presentation/
 RewriteRule ^login$     index.php?action=login [L]
 RewriteRule ^logout$    index.php?action=logout [L]
 RewriteRule ^presentation_creation$  index.php?action=presentation_creation [L]
+RewriteRule ^presentation_telecharger$  index.php?action=presentation_telecharger [L,QSA]

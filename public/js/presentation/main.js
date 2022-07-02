@@ -1,24 +1,22 @@
+function isEmpty(obj) {
+  return Object.keys(obj).length === 0;
+}
+
 Presentation = function() {
-  this.menuopen = false;
   this.currentview = 'mainarea';
   this.selectedElement;
   this.clonedElement;
   this.selectedSlide;
   this.orchestrationcoords = [];
   this.selectedOrchElement;
-  this.lastslideleftpos = 0;
   this.userId = user_id_ajax;
 
-  this.lastSaved = '';
   this.currentPresentation;
   this.mypresentations = [];
-  this.mycurrentpresntationid = 0;
   this.mode = 'create';
   this.backgroundColor = '';
   this.nightMode = false;
 
-  this.dropdownopen = false;
-  this.selectedforedit = false;
   this.graphiqueColor = '#FFFFFF';
 
   this.isBold = false;
@@ -29,6 +27,21 @@ Presentation = function() {
   this.isAlignedRight = false;
   this.theme = 'montserrat';
   this.obj3dUrl = obj3dUrl;
+
+  //Modals
+  this.NewPresntationModal = new bootstrap.Modal('#new-presentation-modal');
+  this.exportCodeModal = new bootstrap.Modal('#export-code-modal');
+  this.previewModal = new bootstrap.Modal('#preview-modal');
+  this.newImageModal = new bootstrap.Modal('#image-modal');
+  this.newVideoModal = new bootstrap.Modal('#video-modal');
+  this.newTableauModal = new bootstrap.Modal('#tableau-modal');
+  this.newGraphiqueModal = new bootstrap.Modal('#graphique-modal');
+  this.newObjetModal = new bootstrap.Modal('#objet-selection-modal');
+  this.newAllPresentationsModal = new bootstrap.Modal('#saved-presentations-modal');
+  this.newPoliceModal = new bootstrap.Modal('#police-selection-modal');
+  this.newImportObjetModal = new bootstrap.Modal('#import-objet-modal');
+  this.newSavedObjetModal = new bootstrap.Modal('#saved-objects-modal');
+  this.newSvgModal = new bootstrap.Modal('#svg-selection-modal');
 
   //Graphique
   this.monGraphique;
@@ -53,7 +66,6 @@ Presentation = function() {
 };
 Presentation.prototype =
     {
-
       initialize: function() {
         me = this;
         me.continueInit();
@@ -62,24 +74,22 @@ Presentation.prototype =
         me.setupColorpicker();
         me.setupMenuItemEvents();
         me.enableSort();
-        me.setupPopover();
         me.setupDials();
         me.setupKeyboardShortcuts();
         me.hideTransformControl();
-        presentations = me.getSavedPresentations();
-        me.renderPresentations(presentations);
-        me.openLastSavedPresentation();
-        me.switchView('right');
+        me.continueInitAsync();
       },
-      openLastSavedPresentation: function() {
-        presentation = JSON.parse(me.getLastItem());
+      continueInitAsync: async function() {
+        let presentationsAsync = await me.getSavedPresentationsAsync();
+        presentationsAsync.json().then(function(presentations){
+          me.renderPresentations(presentations);
+          me.openPresentation(presentations.at(-1));
+          me.switchView('right');
+        });
+      },
+      openPresentation: function(presentation) {
         if (!presentation) {
-          let savedpresos = presentation;
-
-          if (savedpresos && savedpresos.length > 0)
-            $('#saved-presentations-modal').modal('show');
-          else
-            me.openNewPresentationWindow();
+          me.openNewPresentationWindow();
         } else {
           me.currentPresentation = presentation;
           me.openPresentationForEdit(me.currentPresentation.id);
@@ -87,37 +97,37 @@ Presentation.prototype =
         }
       },
       openNewPresentationWindow: function() {
-        $('#new-presentation-modal').modal();
+        me.NewPresntationModal.show();
       },
       renderPresentations: function(presentations) {
         me.mypresentations = presentations;
-        $('#saved-presentations').
-            html(
-                '<h3 style=\'display:inline-block; color:#2980B9; font-size:120%\'> Vous n\'avez aucune présentation sauvegardées. </h3>');
-        if (presentations.length > 0)
-          $('#saved-presentations').html('');
+
+        if(presentations.length > 0){
+          document.querySelector('#saved-presentations').innerHTML ="";
+        }else{
+          document.querySelector('#saved-presentations').innerHTML =
+              '<span>' +
+              ' Vous n\'avez aucune présentation sauvegardée. ' +
+              '</span>';
+        }
 
         let templ;
-        for (var i = 0; i < presentations.length; i++) {
+        for (let i = 0; i < presentations.length; i++) {
           presentation = presentations[i];
           templ = saved_presentations;
           templ = templ.split('__presotitle__').join(presentation.title);
-          templ = templ.split('__presodescription__').
-              join(presentation.description);
+          templ = templ.split('__presodescription__').join(presentation.description);
           templ = templ.split('__presoid__').join(presentation.id);
-          $('#saved-presentations').append(templ);
+          document.querySelector('#saved-presentations').insertAdjacentHTML('beforeend', templ);
         }
-        $('.deletepresobtn').on('click', function() {
-          if (confirm(
-              'Êtes-vous sûr de vouloir supprimer cette présentation ?'))
-            me.deleteSavedPresentation($(this).attr('data-id'));
-        });
+
       },
       hideTransformControl: function() {
-        $('#play').css('display', 'none');
-        $('#spandelete').css('display', 'none');
+        document.querySelector('#play').style.display =  'none';
+        document.querySelector('#spandelete').style.display =  'none';
       },
       setupKeyboardShortcuts: function() {
+        //TODO
         key('ctrl+c', function() {
           me.cloneElement();
         });
@@ -131,171 +141,182 @@ Presentation.prototype =
       },
       cloneElement: function() {
         if (me.selectedElement) {
-          let clone = me.selectedElement.clone();
-          clone.attr('id', 'slideelement_' + me.generateUID());
-          clone.css('left', me.selectedElement.position().left + 20 + 'px');
-          clone.css('top', me.selectedElement.position().top + 20 + 'px');
+          let clone = me.selectedElement.cloneNode(true);
+          clone.id =  'slideelement_' + me.generateUID();
+          clone.left =  me.selectedElement.position().left + 20 + 'px';
+          clone.top =  me.selectedElement.position().top + 20 + 'px';
           me.clonedElement = clone;
         }
       },
       appendClonedElement: function() {
-        me.selectedSlide.append(me.clonedElement);
+        me.selectedSlide.appendChild(me.clonedElement);
         me.enableDrag();
       },
       setupMenuItemEvents: function() {
-        $('#make-bold').on('click', function(e) {
+        document.querySelector('#make-bold').addEventListener('click', function(e) {
+          let element = e.target;
           e.stopPropagation();
           if (!me.isBold && me.selectedElement) {
-            me.selectedElement.css('fontWeight', 'bold');
-            me.selectedElement.attr('data-isbold', true);
-            $(this).addClass('active');
+            me.selectedElement.style.fontWeight = 'bold';
+            me.selectedElement.setAttribute('data-isbold', true);
+            element.classList.add('active');
             me.isBold = true;
           } else if (me.isBold && me.selectedElement) {
-            me.selectedElement.css('fontWeight', 'normal');
-            me.selectedElement.attr('data-isbold', false);
-            $(this).removeClass('active');
+            me.selectedElement.style.fontWeight = 'normal';
+            me.selectedElement.setAttribute('data-isbold', false);
+            element.classList.add('active');
             me.isBold = false;
           }
         });
-        $('#make-italic').on('click', function(e) {
+
+        document.querySelector('#make-italic').addEventListener('click', function(e) {
+          let element = e.target;
           e.stopPropagation();
-          $(this).removeClass('active');
+          element.classList.remove('active');
           if (!me.isItalic && me.selectedElement) {
-            me.selectedElement.css('fontStyle', 'italic');
-            me.selectedElement.attr('data-isitalic', true);
-            $(this).addClass('active');
+            me.selectedElement.style.fontStyle = 'italic';
+            me.selectedElement.setAttribute('data-isitalic', true);
+            element.classList.add('active');
             me.isItalic = true;
           } else if (me.isItalic && me.selectedElement) {
-            me.selectedElement.css('fontStyle', 'normal');
-            me.selectedElement.attr('data-isitalic', false);
-            $(this).removeClass('active');
+            me.selectedElement.style.fontStyle = 'normal';
+            me.selectedElement.setAttribute('data-isitalic', false);
+            element.classList.remove('active');
             me.isItalic = false;
           }
         });
-        $('#make-underline').on('click', function(e) {
+
+        document.querySelector('#make-underline').addEventListener('click', function(e) {
+          let element = e.target;
           e.stopPropagation();
-          $(this).removeClass('active');
+          element.classList.remove('active');
           if (!me.isUnderlined && me.selectedElement) {
-            me.selectedElement.css('text-decoration', 'underline');
-            me.selectedElement.attr('data-isunderline', true);
-            $(this).addClass('active');
+            me.selectedElement.style.textDecoration = 'underline';
+            me.selectedElement.setAttribute('data-isunderline', true);
+            element.classList.add('active');
             me.isUnderlined = true;
           } else if (me.isUnderlined && me.selectedElement) {
-            me.selectedElement.css('text-decoration', 'none');
-            me.selectedElement.attr('data-isunderline', false);
-            $(this).removeClass('active');
+            me.selectedElement.style.textDecoration = 'none';
+            me.selectedElement.setAttribute('data-isunderline', false);
+            element.classList.remove('active');
             me.isUnderlined = false;
           }
         });
-        $('#make-align-left').on('click', function(e) {
+
+        document.querySelector('#make-align-left').addEventListener('click', function(e) {
+          let element = e.target;
           e.stopPropagation();
-          $(this).removeClass('active');
+          element.classList.remove('active');
           if (!me.isAlignedLeft && me.selectedElement) {
-            me.selectedElement.css('text-align', 'left');
-            me.selectedElement.attr('data-isalignleft', true);
-            me.selectedElement.attr('data-isaligncenter', false);
-            me.selectedElement.attr('data-isalignright', false);
-            $(this).addClass('active');
-            $('#make-align-center').removeClass('active');
-            $('#make-align-right').removeClass('active');
+            me.selectedElement.style.textAlign = 'left';
+            me.selectedElement.setAttribute('data-isalignleft', true);
+            me.selectedElement.setAttribute('data-isaligncenter', false);
+            me.selectedElement.setAttribute('data-isalignright', false);
+            element.classList.add('active');
+            document.querySelector('#make-align-center').classList.remove('active');
+            document.querySelector('#make-align-right').classList.remove('active');
             me.isAlignedLeft = true;
             me.isAlignedCenter = false;
             me.isAlignedRight = false;
           } else if (me.isAlignedLeft && me.selectedElement) {
-            me.selectedElement.css('text-align', 'left');
-            me.selectedElement.attr('data-isalignleft', false);
-            me.selectedElement.attr('data-isaligncenter', false);
-            me.selectedElement.attr('data-isalignright', false);
-            $(this).removeClass('active');
-            $('#make-align-center').removeClass('active');
-            $('#make-align-right').removeClass('active');
-            me.isAlignedLeft = false;
-            me.isAlignedCenter = false;
-            me.isAlignedRight = false;
-          }
-        });
-        $('#make-align-center').on('click', function(e) {
-          e.stopPropagation();
-          $(this).removeClass('active');
-          if (!me.isAlignedCenter && me.selectedElement) {
-            me.selectedElement.css('text-align', 'center');
-            me.selectedElement.attr('data-isalignleft', false);
-            me.selectedElement.attr('data-isaligncenter', true);
-            me.selectedElement.attr('data-isalignright', false);
-            $('#make-align-left').removeClass('active');
-            $(this).addClass('active');
-            $('#make-align-right').removeClass('active');
-            me.isAlignedLeft = false;
-            me.isAlignedCenter = true;
-            me.isAlignedRight = false;
-          } else if (me.isAlignedCenter && me.selectedElement) {
-            me.selectedElement.css('text-align', 'left');
-            me.selectedElement.attr('data-isalignleft', false);
-            me.selectedElement.attr('data-isaligncenter', false);
-            me.selectedElement.attr('data-isalignright', false);
-            $('#make-align-left').removeClass('active');
-            $(this).removeClass('active');
-            $('#make-align-right').removeClass('active');
-            me.isAlignedLeft = false;
-            me.isAlignedCenter = false;
-            me.isAlignedRight = false;
-          }
-        });
-        $('#make-align-right').on('click', function(e) {
-          e.stopPropagation();
-          $(this).removeClass('active');
-          if (!me.isAlignedRight && me.selectedElement) {
-            me.selectedElement.css('text-align', 'right');
-            me.selectedElement.attr('data-isalignleft', false);
-            me.selectedElement.attr('data-isaligncenter', false);
-            me.selectedElement.attr('data-isalignright', true);
-            $('#make-align-left').removeClass('active');
-            $('#make-align-center').removeClass('active');
-            $(this).addClass('active');
-            me.isAlignedLeft = false;
-            me.isAlignedCenter = false;
-            me.isAlignedRight = true;
-          } else if (me.isAlignedRight && me.selectedElement) {
-            me.selectedElement.css('text-align', 'left');
-            me.selectedElement.attr('data-isalignleft', false);
-            me.selectedElement.attr('data-isaligncenter', false);
-            me.selectedElement.attr('data-isalignright', false);
-            $('#make-align-left').removeClass('active');
-            $('#make-align-center').removeClass('active');
-            $(this).removeClass('active');
+            me.selectedElement.style.textAlign =  'left';
+            me.selectedElement.setAttribute('data-isalignleft', false);
+            me.selectedElement.setAttribute('data-isaligncenter', false);
+            me.selectedElement.setAttribute('data-isalignright', false);
+            element.classList.remove('active');
+            document.querySelector('#make-align-center').classList.remove('active');
+            document.querySelector('#make-align-right').classList.remove('active');
             me.isAlignedLeft = false;
             me.isAlignedCenter = false;
             me.isAlignedRight = false;
           }
         });
 
+        document.querySelector('#make-align-center').addEventListener('click', function(e) {
+          let element = e.target;
+          e.stopPropagation();
+          element.classList.remove('active');
+          if (!me.isAlignedCenter && me.selectedElement) {
+            me.selectedElement.style.textAlign = 'center';
+            me.selectedElement.setAttribute('data-isalignleft', false);
+            me.selectedElement.setAttribute('data-isaligncenter', true);
+            me.selectedElement.setAttribute('data-isalignright', false);
+            document.querySelector('#make-align-left').classList.remove('active');
+            document.querySelector('#make-align-right').classList.remove('active');
+            element.classList.remove('active');
+            me.isAlignedLeft = false;
+            me.isAlignedCenter = true;
+            me.isAlignedRight = false;
+          } else if (me.isAlignedCenter && me.selectedElement) {
+            me.selectedElement.style.textAlign = 'left';
+            me.selectedElement.setAttribute('data-isalignleft', false);
+            me.selectedElement.setAttribute('data-isaligncenter', false);
+            me.selectedElement.setAttribute('data-isalignright', false);
+            document.querySelector('#make-align-left').classList.remove('active');
+            document.querySelector('#make-align-right').classList.remove('active');
+            element.classList.remove('active');
+            me.isAlignedLeft = false;
+            me.isAlignedCenter = false;
+            me.isAlignedRight = false;
+          }
+        });
+
+        document.querySelector('#make-align-right').addEventListener('click', function(e) {
+          let element = e.target;
+          e.stopPropagation();
+          element.classList.remove('active');
+          if (!me.isAlignedRight && me.selectedElement) {
+            me.selectedElement.style.textAlign = 'right';
+            me.selectedElement.setAttribute('data-isalignleft', false);
+            me.selectedElement.setAttribute('data-isaligncenter', false);
+            me.selectedElement.setAttribute('data-isalignright', true);
+            document.querySelector('#make-align-left').classList.remove('active');
+            document.querySelector('#make-align-center').classList.remove('active');
+            element.addClass('active');
+            me.isAlignedLeft = false;
+            me.isAlignedCenter = false;
+            me.isAlignedRight = true;
+          } else if (me.isAlignedRight && me.selectedElement) {
+            me.selectedElement.style.textAlign = 'left';
+            me.selectedElement.setAttribute('data-isalignleft', false);
+            me.selectedElement.setAttribute('data-isaligncenter', false);
+            me.selectedElement.setAttribute('data-isalignright', false);
+            document.querySelector('#make-align-left').classList.remove('active');
+            document.querySelector('#make-align-center').classList.remove('active');
+            element.classList.remove('active');
+            me.isAlignedLeft = false;
+            me.isAlignedCenter = false;
+            me.isAlignedRight = false;
+          }
+        });
       },
       enableSort: function() {
+        //TODO
         $('.slide-thumb-holder').sortable({
           update: function() {
-            me.assignSlideNumbers();
             me.reArrangeImpressSlides();
           },
         });
       },
       reArrangeImpressSlides: function() {
-        children = $('.slide-thumb-holder').children();
-        var clonedElements = [];
-        for (var i = 0; i < children.length; i++) {
-          child = children[i];
-          id = (child.id).split('_')[1];
-          el = $('#impress_slide_' + id);
+        let children = document.querySelector('.slide-thumb-holder').children;
+        let clonedElements = [];
+        for (let i = 0; i < children.length; i++) {
+          let child = children[i];
+          let id = (child.id).split('_')[1];
+          let el = document.querySelector('#impress_slide_' + id);
           clonedElements.push(el);
         }
-        let impressSlideContainer = $('.impress-slide-container');
-        impressSlideContainer.html('');
+        let impressSlideContainer = document.querySelector('.impress-slide-container');
+        impressSlideContainer.innerHTML = '';
 
-        for (var j = 0; j < clonedElements.length; j++) {
-          impressSlideContainer.append(clonedElements[j]);
+        for(let j = 0; j < clonedElements.length; j++) {
+          impressSlideContainer.appendChild(clonedElements[j]);
         }
         me.enableDrag();
       },
       setupDials: function() {
+        //TODO
         $('#rotation-knob').knob({
           change: function(v) {
             me.rotateElement(v);
@@ -311,22 +332,26 @@ Presentation.prototype =
             me.rotateElementY(v);
           },
         });
-        $('#scale-range').on('change', function() {
-          me.selectedOrchElement.attr('data-scale', $(this).val());
-          let id = me.selectedOrchElement.attr('id').split('_')[1];
-          $('#slidethumb_' + id).attr('data-scale', $(this).val());
+
+        document.querySelector('#scale-range').addEventListener('change', function(e) {
+         let element = e.target;
+          me.selectedOrchElement.setAttribute('data-scale', element.value);
+          let id = me.selectedOrchElement.id.split('_')[1];
+          document.querySelector('#slidethumb_' + id).setAttribute('data-scale', element.value);
         });
-        $('#depth-range').on('change', function() {
-          me.selectedOrchElement.attr('data-z', $(this).val());
-          let id = me.selectedOrchElement.attr('id').split('_')[1];
-          $('#slidethumb_' + id).attr('data-z', $(this).val());
+
+        document.querySelector('#depth-range').addEventListener('change', function(e) {
+         let element = e.target;
+          me.selectedOrchElement.setAttribute('data-z', element.value);
+          let id = me.selectedOrchElement.id.split('_')[1];
+          document.querySelector('#slidethumb_' + id).setAttribute('data-z', element.value);
         });
-        $('.transform-label').css('vertical-align', 'top');
+        document.querySelector('.transform-label').style.verticalAlign = 'top';
 
       },
       rotateElement: function(value) {
-        rotx = me.selectedOrchElement.attr('data-rotate-x');
-        roty = me.selectedOrchElement.attr('data-rotate-y');
+        let rotx = me.selectedOrchElement.getAttribute('data-rotate-x');
+        let roty = me.selectedOrchElement.getAttribute('data-rotate-y');
         let s = '';
         if (rotx !== undefined)
           s += 'rotateX(' + rotx + 'deg)';
@@ -334,149 +359,161 @@ Presentation.prototype =
           s += 'rotateY(' + roty + 'deg)';
 
         let str = s + ' rotate(' + value + 'deg)';
-        me.selectedOrchElement.css('transform', str);
-        me.selectedOrchElement.attr('data-rotate', value);
+        me.selectedOrchElement.style.transform= str;
+        me.selectedOrchElement.setAttribute('data-rotate', value);
 
-        let id = me.selectedOrchElement.attr('id').split('_')[1];
+        let id = me.selectedOrchElement.id.split('_')[1];
 
-        let slideThumbId = $('#slidethumb_' + id);
-        slideThumbId.attr('data-rotate-x', rotx);
-        slideThumbId.attr('data-rotate-y', roty);
-        slideThumbId.attr('data-rotate', value);
-        slideThumbId.attr('data-transform-string', str);
+        let slideThumbId = document.querySelector('#slidethumb_' + id);
+        slideThumbId.setAttribute('data-rotate-x', rotx);
+        slideThumbId.setAttribute('data-rotate-y', roty);
+        slideThumbId.setAttribute('data-rotate', value);
+        slideThumbId.setAttribute('data-transform-string', str);
       },
       rotateElementX: function(value) {
-        roty = me.selectedOrchElement.attr('data-rotate-y');
+        let roty = me.selectedOrchElement.getAttribute('data-rotate-y');
         let s = '';
         if (roty !== undefined)
           s += 'rotateY(' + roty + 'deg)';
 
         let str = s + ' rotateX(' + value + 'deg)';
-        me.selectedOrchElement.css('transform', str);
-        me.selectedOrchElement.attr('data-rotate', value);
-        me.selectedOrchElement.attr('data-rotate-x', value);
+        me.selectedOrchElement.style.transform = str;
+        me.selectedOrchElement.setAttribute('data-rotate', value);
+        me.selectedOrchElement.setAttribute('data-rotate-x', value);
 
-        let id = me.selectedOrchElement.attr('id').split('_')[1];
+        let id = me.selectedOrchElement.id.split('_')[1];
 
-        let slideThumbId = $('#slidethumb_' + id);
-        slideThumbId.attr('data-rotate-x', value);
-        slideThumbId.attr('data-rotate-y', roty);
-        slideThumbId.attr('data-rotate', rot);
-        slideThumbId.attr('data-transform-string', str);
+        let slideThumbId = document.querySelector('#slidethumb_' + id);
+        slideThumbId.setAttribute('data-rotate-x', value);
+        slideThumbId.setAttribute('data-rotate-y', roty);
+        slideThumbId.setAttribute('data-rotate', rot);
+        slideThumbId.setAttribute('data-transform-string', str);
       },
       rotateElementY: function(value) {
-        rotx = me.selectedOrchElement.attr('data-rotate-x');
+        let rotx = me.selectedOrchElement.getAttribute('data-rotate-x');
         let s = '';
         if (rotx !== undefined)
           s += 'rotateX(' + rotx + 'deg)';
 
         let str = s + ' rotateY(' + value + 'deg)';
-        me.selectedOrchElement.css('transform', str);
-        me.selectedOrchElement.attr('data-rotate', value);
-        me.selectedOrchElement.attr('data-rotate-y', value);
+        me.selectedOrchElement.style.transform = str;
+        me.selectedOrchElement.setAttribute('data-rotate', value);
+        me.selectedOrchElement.setAttribute('data-rotate-y', value);
 
-        let id = me.selectedOrchElement.attr('id').split('_')[1];
+        let id = me.selectedOrchElement.id.split('_')[1];
 
-        let slideThumbId = $('#slidethumb_' + id);
-        slideThumbId.attr('data-rotate-x', rotx);
-        slideThumbId.attr('data-rotate-y', value);
-        slideThumbId.attr('data-rotate', rot);
-        slideThumbId.attr('data-transform-string', str);
-      },
-      setupPopover: function() {
-        $('.slidelement').
-            popover(
-                {html: 'hello world', placement: 'bottom', trigger: 'click'});
+        let slideThumbId = document.querySelector('#slidethumb_' + id);
+        slideThumbId.setAttribute('data-rotate-x', rotx);
+        slideThumbId.setAttribute('data-rotate-y', value);
+        slideThumbId.setAttribute('data-rotate', rot);
+        slideThumbId.setAttribute('data-transform-string', str);
       },
       enableDrag: function() {
-        $('.slidelement').draggable().on('dblclick', function(e) {
-          e.stopPropagation();
-          $(this).draggable({disabled: false});
-          $('#play').css('display', 'none');
-          $('#spandelete').css('display', 'none');
-          $(this).removeClass('movecursor');
+        //TODO
+        document.querySelectorAll('.slidelement').forEach(function(element){
 
-        }).on('click', function(e) {
-          e.stopPropagation();
-          $(this).draggable({disabled: true});
-          $('.slidelement').removeClass('elementselected');
-          me.selectElement($(this));
-          me.selectedforedit = true;
-          me.setMenuControlValues($(this));
-          me.positionTransformControl();
-          $('#play').css('transform', 'matrix(1, 0, 0, 1, 0, 0)');
-        }).on('mousedown mouseover', function() {
-          $(this).addClass('movecursor');
-        }).on('mouseup', function() {
-          console.log('mouse upping', me.selectedSlide);
-          me.generateScaledSlide(me.selectedSlide);
-        });
+          element.addEventListener("click",function(e){
+            e.stopPropagation();
+            //$(this).draggable({disabled: true});
+            document.querySelectorAll('.slidelement').forEach(function(subElement){
+              subElement.classList.remove('elementselected');
+            });
+
+            me.selectElement(element);
+            me.setMenuControlValues(element);
+            me.positionTransformControl();
+            //$('#play').css('transform', 'matrix(1, 0, 0, 1, 0, 0)');
+          });
+
+          //mousedown et mouseover
+          element.addEventListener("mousedown",function(e){
+            e.stopPropagation();
+            //$(this).draggable({disabled: true});
+            document.querySelectorAll('.slidelement').forEach(function(subElement){
+              subElement.classList.remove('elementselected');
+            });
+
+            me.selectElement(element);
+            me.setMenuControlValues(element);
+            me.positionTransformControl();
+            //$('#play').css('transform', 'matrix(1, 0, 0, 1, 0, 0)');
+          });
+
+          element.addEventListener("mouseup",function(e){
+            me.generateScaledSlide(me.selectedSlide);
+          })
+        })
+        /*$('.slidelement').draggable().on('dblclick', function(e) {
+              e.stopPropagation();
+              $(this).draggable({disabled: false});
+              $('#play').css('display', 'none');
+              $('#spandelete').css('display', 'none');
+              $(this).removeClass('movecursor');
+            });*/
       },
       positionTransformControl: function() {
-        let play = $('#play');
-        let _transform = me.selectedElement.css('-webkit-transform');
-        let selector_spandelete = $('#spandelete');
+        let play = document.querySelector('#play');
+        let _transform = me.selectedElement.style.transform;
+        let selector_spandelete = document.querySelector('#spandelete');
 
-        play.css('-webkit-transform', _transform);
-        play.css('display', 'block');
-        selector_spandelete.css('display', 'block');
-        play.width(me.selectedElement.width());
-        play.css('left', me.selectedElement.position().left + 'px');
-        play.css('top', me.selectedElement.position().top + 'px');
+        play.style.transform =  _transform;
+        play.style.display =  'block';
+        selector_spandelete.style.display = 'block';
+        play.style.width = me.selectedElement.style.width;
+        play.style.left = me.selectedElement.offsetLeft + 'px';
+        play.style.top = me.selectedElement.offsetTop + 'px';
 
-        selector_spandelete.on('click', function(e) {
+        selector_spandelete.addEventListener('click', function(e) {
           e.stopPropagation();
           me.selectedElement.remove();
-          play.css('display', 'none');
-          $('#spandelete').css('display', 'none');
+          play.style.display = 'none';
+          document.querySelector('#spandelete').style.display = 'none';
         });
       },
       setMenuControlValues: function(el) {
-        let isbold = (el.attr('data-isbold') === 'true');
-        let isitalic = (el.attr('data-isitalic') === 'true');
-        let isunderline = (el.attr('data-isunderline') === 'true');
-        let isalignleft = (el.attr('data-isalignleft') === 'true');
-        let isaligncenter = (el.attr('data-isaligncenter') === 'true');
-        let isalignright = (el.attr('data-isalignright') === 'true');
+        let isbold = (el.getAttribute('data-isbold') === 'true');
+        let isitalic = (el.getAttribute('data-isitalic') === 'true');
+        let isunderline = (el.getAttribute('data-isunderline') === 'true');
+        let isalignleft = (el.getAttribute('data-isalignleft') === 'true');
+        let isaligncenter = (el.getAttribute('data-isaligncenter') === 'true');
+        let isalignright = (el.getAttribute('data-isalignright') === 'true');
 
         if (isbold)
-          $('#make-bold').addClass('active');
+          document.querySelector('#make-bold').classList.add('active');
         else
-          $('#make-bold').removeClass('active');
+          document.querySelector('#make-bold').classList.remove('active');
 
         if (isitalic)
-          $('#make-italic').addClass('active');
+          document.querySelector('#make-italic').classList.add('active');
         else
-          $('#make-italic').removeClass('active');
+          document.querySelector('#make-italic').classList.remove('active');
 
         if (isunderline)
-          $('#make-underline').addClass('active');
+          document.querySelector('#make-underline').classList.add('active');
         else
-          $('#make-underline').removeClass('active');
+          document.querySelector('#make-underline').classList.remove('active');
 
         if (isalignleft)
-          $('#make-align-left').addClass('active');
+          document.querySelector('#make-align-left').classList.add('active');
         else
-          $('#make-align-left').removeClass('active');
+          document.querySelector('#make-align-left').classList.remove('active');
 
         if (isaligncenter)
-          $('#make-align-center').addClass('active');
+          document.querySelector('#make-align-center').classList.add('active');
         else
-          $('#make-align-center').removeClass('active');
+          document.querySelector('#make-align-center').classList.remove('active');
 
         if (isalignright)
-          $('#make-align-right').addClass('active');
+          document.querySelector('#make-align-right').classList.add('active');
         else
-          $('#make-align-right').removeClass('active');
+          document.querySelector('#make-align-right').classList.remove('active');
 
-      },
-      resetMenuControlValues: function() {
-        $('.menubtn').removeClass('active');
       },
       selectElement: function(el) {
         me.selectedElement = el;
       },
       setupColorpicker: function() {
+        //TODO
         $('#colorpicker-btn').spectrum({
           allowEmpty: true,
           color: '#000000',
@@ -660,80 +697,83 @@ Presentation.prototype =
 
       },
       addSettingsPanel: function() {
-        $('.settingsbox').html(newpresotemplate);
         this.removeListeners();
         this.attachListeners();
       },
       manageGlobalClick: function() {
-        $('.slidelement').draggable({disabled: false});
-        $('#play').css('display', 'none');
-        $('#spandelete').css('display', 'none');
+
+        let slideElement = document.querySelector('.slidelement');
+        if(slideElement){
+        //TODO
+        //slideElement.draggable({disabled: false});
+        }
+        document.querySelector('#play').style.display = 'none';
+        document.querySelector('#spandelete').style.display = 'none';
+
         me.generateScaledSlide(me.selectedSlide);
-        me.selectedforedit = false;
-        me.resetMenuControlValues();
       },
       colorSelectedElement: function(color) {
         if (me.selectedElement)
-          me.selectedElement.css('color',
-              'rgb(' + color._r + ',' + color._g + ',' + color._b + ')');
+          me.selectedElement.style.color = 'rgb(' + color._r + ',' + color._g + ',' + color._b + ')';
 
         if (me.selectedElement[0].localName === 'svg')
-          me.selectedElement.css('fill',
-              'rgb(' + color._r + ',' + color._g + ',' + color._b + ')');
+          me.selectedElement.style.fill = 'rgb(' + color._r + ',' + color._g + ',' + color._b + ')';
       },
       addSlide: function() {
         let thumb = slidethumb;
         let uid = me.generateUID();
-        me.mycurrentpresntationid = uid;
         thumb = thumb.split('slidethumb_^UID^').join('slidethumb_' + uid);
-        let slideThumbId = $('#slidethumb_' + uid);
+        document.querySelector('.slide-thumb-holder').insertAdjacentHTML('beforeend', thumb);
 
-        $('.slide-thumb-holder').append(thumb);
+        let slideThumbId = document.querySelector('#slidethumb_' + uid);
         slideThumbId.animate({opacity: 1}, 200);
-        slideThumbId.attr('data-left', '0px');
-        slideThumbId.attr('data-top', '0px');
-        $('.deletebtn').on('click', function() {
-          let p = $('#' + $(this).attr('data-parent'));
-          let slideid = $(this).attr('data-parent').split('_')[1];
-          p.animate({opacity: 0}, 200, function() {
-            $(this).remove();
-            $('#impress_slide_' + slideid).remove();
-            me.assignSlideNumbers();
-          });
+        slideThumbId.setAttribute('data-left', '0px');
+        slideThumbId.setAttribute('data-top', '0px');
+
+        slideThumbId.querySelector('.deletebtn').addEventListener('click', function(e) {
+          let element = e.target;
+          let slideid = element.getAttribute('data-parent').split('_')[1];
+          slideThumbId.remove();
+          document.querySelector('#impress_slide_' + slideid).remove();
+          me.selectThumb("first")
         });
-        $('.slidemask').on('click', function(e) {
-          e.stopPropagation();
-          let id = (e.target.id).split('_')[1];
-          me.selectSlide('#impress_slide_' + id);
-          $('.slidethumb').removeClass('currentselection');
-          $('#slidethumb_' + id).addClass('currentselection');
-          me.hideTransformControl();
-          me.switchView('right');
+
+        document.querySelectorAll('.slidemask ').forEach(function(element){
+          element.addEventListener("click", function(e){
+            e.stopPropagation();
+
+            document.querySelectorAll('.slidethumb').forEach(function(subElement){
+              subElement.classList.remove('currentselection');
+            });
+
+            let id = (e.target.id).split('_')[1];
+            me.selectSlide('#impress_slide_' + id);
+            document.querySelector('#slidethumb_' + id).classList.add('currentselection');
+            me.hideTransformControl();
+            me.switchView('right');
+          })
         });
-        me.lastslideleftpos += 200;
-        me.assignSlideNumbers();
         me.addImpressSlide(uid);
         me.switchView('right');
-        $('#presentation-metatitle').html($('#title-input').val());
-
+        me.selectThumb("last");
       },
       addImpressSlide: function(id) {
         let islide = impress_slide;
-        let selector_impress_slide_new = $('#impress_slide_' + id);
         islide = islide.split('__slidenumber__').join('_' + id);
-        islide = islide.split('slidelement_id').
-            join('slidelement_' + me.generateUID());
-        $('.impress-slide-container').append(islide);
-        selector_impress_slide_new.addClass('impress-slide-element');
+        islide = islide.split('slidelement_id').join('slidelement_' + me.generateUID());
+        document.querySelector('.impress-slide-container').insertAdjacentHTML('beforeend', islide);
+
+        let selector_impress_slide_new = document.querySelector('#impress_slide_' + id);
+        selector_impress_slide_new.classList.add('impress-slide-element');
         me.removeAllStyles(selector_impress_slide_new);
         me.applyStyle();
+        me.generateScaledSlide('#impress_slide_' + id);
+
         me.selectSlide('#impress_slide_' + id);
         me.enableDrag();
-        me.generateScaledSlide('#impress_slide_' + id);
       },
       addImpressSlideItem: function(el) {
-        console.log('adding the new item....');
-        let typeText = $('#dropdownMenu1').val();
+        let typeText = document.querySelector('#dropdownMenuButton1').value;
         let item;
 
         switch (typeText) {
@@ -754,104 +794,93 @@ Presentation.prototype =
             break;
         }
 
-        item = item.split('slidelement_id').
-            join('slidelement_' + me.generateUID());
-        $(el).append(item);
+        item = item.split('slidelement_id').join('slidelement_' + me.generateUID());
+        document.querySelector(el).insertAdjacentHTML('beforeend', item);
+
         me.enableDrag();
         me.generateScaledSlide(me.selectedSlide);
       },
       generateScaledSlide: function(el) {
-        let newel = $(el).clone();
-        let id;
-        let slideThumbId;
-        let children;
+        if(document.querySelector(el)){
+          let newel = document.querySelector(el).cloneNode(true);
+          let id;
+          let slideThumbId;
+          let children;
+          if (!newel) {
+            return;
+          }
 
-        if (newel.length <= 0) {
-          return;
+          id = newel.id.split('_')[2];
+          slideThumbId = document.querySelector('#slidethumb_' + id);
+          children = slideThumbId.children;
+          newel.id = 'clonethumb_' + id;
+          newel.setAttribute('data-clone', true);
+          newel.style.transform = 'translate(-41%, -41%) scale(0.172)';
+          newel.classList.remove('impress-slide-element');
+          let child;
+          for (let i = 0; i < children.length; i++) {
+            child = children[i];
+            if (child.getAttribute('data-clone') === 'true')
+              child.remove();
+          }
+          slideThumbId.appendChild(newel);
         }
-
-        id = newel.attr('id').split('_')[2];
-        slideThumbId = $('#slidethumb_' + id);
-        children = slideThumbId.children();
-        newel.attr('id', 'clonethumb_' + id);
-        newel.attr('data-clone', true);
-        newel.css('transform', 'translate(-41%, -41%) scale(0.172)');
-        newel.removeClass('impress-slide-element');
-        let child;
-        for (let i = 0; i < children.length; i++) {
-          child = children[i];
-          if ($(child).attr('data-clone') === 'true')
-            $(child).remove();
-        }
-        slideThumbId.append(newel);
       },
       selectSlide: function(id) {
-        let children = $('.impress-slide-container').children();
+        let children = document.querySelector('.impress-slide-container').children;
 
         for (let i = 0; i < children.length; i++) {
-          child = children[i];
-          childid = '#' + child.id;
+          let child = children[i];
+          let childid = '#' + child.id;
           if (childid === id) {
-            $(childid).css('z-index', 1);
-            me.selectedSlide = $(childid);
+            document.querySelector(childid).style.zIndex =  1;
+            me.selectedSlide = childid;
           } else
-            $(childid).
-                css('z-index', -200 + (-(Math.round(Math.random() * 1000))));
-        }
-      },
-      assignSlideNumbers: function() {
-        let children = $('.slide-thumb-holder').children();
-        let count = 0;
-
-        for (let i = 0; i < children.length; i++) {
-          child = $(children[i]);
-          count = i;
-
-          $('#' + child[0].id).find('.slidedisplay').html('Slide ' + (++count));
+            document.querySelector(childid).style.zIndex =  -200 + (-(Math.round(Math.random() * 1000)));
         }
       },
       generateUID: function() {
-        let id = Math.round(Math.random() * 10000);
-        while ($('slidelement_' + id).length) {
+        let id
+        do{
           id = Math.round(Math.random() * 10000);
-        }
+        }while (document.querySelector('slidelement_' + id));
         return id;
       },
       animateSettingsPanel: function(direction) {
+        //TODO
         if (direction === 'left') {
           $('.settingsbox').
               animate({'left': '-500px', 'opacity': 0},
                   {duration: 300, easing: 'linear'});
-          me.menuopen = false;
         }
         if (direction === 'right') {
           $('.settingsbox').
               animate({'left': '230px', 'opacity': 1},
                   {duration: 300, easing: 'linear'});
-          me.menuopen = true;
         }
       },
       assemblePanoramaCases: function() {
-        let panoramaViewport = $('.panorama-viewport');
+        let panoramaViewport = document.querySelector('.panorama-viewport');
         let orchestrationElements = [];
-        let children = $('.slide-thumb-holder').children();
+        let children = document.querySelector('.slide-thumb-holder').children;
         let l = 10;
+        panoramaViewport.innerHTML = '';
 
-        panoramaViewport.html('');
-
+        let child;
+        let clone;
         for (let i = 0; i < children.length; i++) {
           child = children[i];
-          clone = $(child).clone();
-          clone.removeClass('slidethumb');
-          clone.addClass('orchthumb');
-          clone.attr('id',
-              'orchestrationelement_' + $(child).attr('id').split('_')[1]);
-          clone.css('opacity', 1);
-          clone.css('position', 'absolute');
-          clone.css('transform', clone.attr('data-transform-string'));
+          clone = child.cloneNode(true);
+          clone.classList.remove('slidethumb');
+          clone.classList.add('orchthumb');
+          clone.id = 'orchestrationelement_' + child.id.split('_')[1];
+          clone.style.opacity = 1;
+          clone.style.position = 'absolute';
+          clone.style.transform = clone.getAttribute('data-transform-string');
 
-          clone.find('.deletebtn').remove();
-          clone.draggable().on('mouseup', function() {
+          clone.querySelector('.deletebtn').remove();
+          //TODO
+          /*clone.draggable().on('mouseup', function() {
             $(this).attr('data-left', $(this).css('left'));
             $(this).attr('data-top', $(this).css('top'));
             console.log('accessing ', $(this).attr('id'));
@@ -860,26 +889,31 @@ Presentation.prototype =
             let selector_slidethumb_id = $('#slidethumb_' + id);
             selector_slidethumb_id.attr('data-left', $(this).css('left'));
             selector_slidethumb_id.attr('data-top', $(this).css('top'));
+          });*/
 
+          clone.addEventListener('click', function(e) {
+            let element = e.target;
+            document.querySelector('.orchthumb').classList.remove('currentselection');
+            element.classList.add('currentselection');
+            me.selectedOrchElement = element;
+
+            let rot = me.selectedOrchElement.getAttribute('data-rotate');
+            let rotx = me.selectedOrchElement.getAttribute('data-rotate-x');
+            let roty = me.selectedOrchElement.getAttribute('data-rotate-y');
+            let scale = me.selectedOrchElement.getAttribute('data-scale');
+            let depth = me.selectedOrchElement.getAttribute('data-z');
+
+            document.querySelector('#rotation-knob').value = rot || 0
+            document.querySelector('#rotation-knob').dispatchEvent(new Event('change'))
+            document.querySelector('#skew-x-knob').value = rotx || 0
+            document.querySelector('#skew-x-knob').dispatchEvent(new Event('change'))
+            document.querySelector('#skew-y-knob').value = roty || 0
+            document.querySelector('#skew-y-knob').dispatchEvent(new Event('change'))
+
+            document.querySelector('#scale-range').value = scale || 1;
+            document.querySelector('#depth-range').value = depth || 1000;
           });
-          clone.on('click', function() {
-            $('.orchthumb').removeClass('currentselection');
-            $(this).addClass('currentselection');
-            me.selectedOrchElement = $(this);
-
-            rot = me.selectedOrchElement.attr('data-rotate');
-            rotx = me.selectedOrchElement.attr('data-rotate-x');
-            roty = me.selectedOrchElement.attr('data-rotate-y');
-            scale = me.selectedOrchElement.attr('data-scale');
-            depth = me.selectedOrchElement.attr('data-z');
-
-            $('#rotation-knob').val(rot || 0).trigger('change');
-            $('#skew-x-knob').val(rotx || 0).trigger('change');
-            $('#skew-y-knob').val(roty || 0).trigger('change');
-            $('#scale-range').val(scale || 1);
-            $('#depth-range').val(depth || 1000);
-          });
-          panoramaViewport.append(clone);
+          panoramaViewport.appendChild(clone);
           orchestrationElements.push(clone);
 
           l += 200;
@@ -887,43 +921,46 @@ Presentation.prototype =
         me.repositionOrchestrationElements(orchestrationElements);
       },
       repositionOrchestrationElements: function(arr) {
-        let children = $('.slide-thumb-holder').children();
-
+        let children = document.querySelector('.slide-thumb-holder').children;
         for (let i = 0; i < arr.length; i++) {
-          console.log('Props', $(children[i]).attr('data-left'),
-              $(children[i]).attr('data-top'));
-          arr[i].css('left', $(children[i]).attr('data-left'));
-          arr[i].css('top', $(children[i]).attr('data-top'));
+          arr[i].style.left = children[i].getAttribute('data-left');
+          arr[i].style.top = children[i].getAttribute('data-top');
         }
       },
       switchView: function(direction) {
 
         if (direction === 'left') {
-          $('#new-panorama-panel').
-              html(
-                  '<div class="sb-nav-link-icon"><i id="view-toggle-icon" class="fas fa-chevron-left"></i></div>Mode edition');
-          $('.main-grey-area').css('display', 'none');
-          $('.panorama-grey-area').css('display', 'block');
+          document.querySelector('#new-panorama-panel').innerHTML =
+              '<div class="sb-nav-link-icon">' +
+              '<i id="view-toggle-icon" class="fas fa-chevron-left"></i>' +
+              '</div>Mode edition';
+          document.querySelector('.main-grey-area').style.display = 'none';
+          document.querySelector('.panorama-grey-area').style.display = 'block';
           me.currentview = 'orchestration';
           me.assemblePanoramaCases();
         } else {
-          $('#new-panorama-panel').
-              html(
-                  '<div class="sb-nav-link-icon"><i id="view-toggle-icon" class="fas fa-th"></i></div>Panorama');
-          $('.main-grey-area').css('display', 'block');
-          $('.panorama-grey-area').css('display', 'none');
+          document.querySelector('#new-panorama-panel').innerHTML =
+              '<div class="sb-nav-link-icon">' +
+              '<i id="view-toggle-icon" class="fas fa-th"></i>' +
+              '</div>Panorama';
+          document.querySelector('.main-grey-area').style.display = 'block';
+          document.querySelector('.panorama-grey-area').style.display = 'none';
           me.currentview = 'mainarea';
           me.persistOrchestrationCoordinates();
         }
       },
       persistOrchestrationCoordinates: function() {
-        let children = $('.panorama-viewport').children();
+        let children = document.querySelector('.panorama-viewport').children;
         me.orchestrationcoords = [];
+
+        let child
+        let l
+        let t
+
         for (let i = 0; i < children.length; i++) {
-          child = $(children[i]);
-          l = child.attr('data-left');
-          t = child.attr('data-top');
-          console.log('Child', i, l, t);
+          child = children[i];
+          l = child.getAttribute('data-left');
+          t = child.getAttribute('data-top');
           me.orchestrationcoords.push({left: l, top: t});
         }
       },
@@ -933,81 +970,57 @@ Presentation.prototype =
         else
           me.switchView('right');
       },
-      changeTextFormat: function(classname) {
-        if (me.selectedforedit) {
-          me.removeTextFormatting();
-          me.selectedElement.addClass(classname);
-        }
-      },
-      removeTextFormatting: function() {
-        me.selectedElement.removeClass('slidelementh1');
-        me.selectedElement.removeClass('slidelementh3');
-      },
       openCodeExportWindow: function() {
         me.generateExport();
-        $('#export-code-modal').modal('show');
+        me.exportCodeModal.show();
       },
       attachListeners: function() {
-        let slideElement = $('.slidelement');
-        $('html').on('click', me.manageGlobalClick);
-        $('.settingsCancelBtn').on('click', me.onSettingsCancelClicked);
-        $('#new-preso-panel').on('click', me.onMenuItemClicked);
-        $('#new-panorama-panel').on('click', me.onViewToggled);
-        slideElement.on('click', me.triggerElementEdit);
-        slideElement.on('mouseup', me.createEditor);
-        $('#change-font-btn').on('click', me.openStyleSelector);
-        $('#export-preso-panel').on('click', me.openCodeExportWindow);
-        $('.previewpresobtn').on('click', function() {
-          me.fetchAndPreview($(this).attr('data-id'));
-        });
-        $('.openpresobtn').on('click', function() {
-          me.mode = 'save';
-          me.openPresentationForEdit($(this).attr('data-id'));
-        });
-        $('#create-presentation').on('click', function() {
+        let slideElement = document.querySelector('.slidelement');
+        let openPresoBtn = document.querySelector('.openpresobtn')
+        document.querySelector('html').addEventListener('click', me.manageGlobalClick);
+        document.querySelector('#new-preso-panel').addEventListener('click', me.onNewPresentationItemClicked);
+        document.querySelector('#new-panorama-panel').addEventListener('click', me.onViewToggled);
+        if(slideElement){
+          slideElement.addEventListener('click', me.triggerElementEdit);
+          slideElement.addEventListener('mouseup', me.createEditor);
+        }
+        document.querySelector('#change-font-btn').addEventListener('click', me.openStyleSelector);
+        document.querySelector('#export-preso-panel').addEventListener('click', me.openCodeExportWindow);
+        document.querySelector('#create-presentation').addEventListener('click', function() {
           if (me.mode === 'create')
             me.createNewPresentation();
           else
             me.savePresentation();
         });
-        $('#save-presentation-panel').on('click', function() {
+        document.querySelector('#save-presentation-panel').addEventListener('click', function() {
           if (me.currentPresentation) {
-            $('#title-input').val(me.currentPresentation.title);
-            $('textarea#description-input').
-                val(me.currentPresentation.description);
+            document.querySelector('#title-input').value = me.currentPresentation.title;
+            document.querySelector('textarea#description-input').value = me.currentPresentation.description;
           }
           me.mode = 'save';
           me.savePresentation();
         });
-        $('#open-preview-btn').on('click', function() {
-          $('#preview-modal').modal('hide');
+        document.querySelector('#open-preview-btn').addEventListener('click', function() {
+          me.previewModal.hide();
         });
-        $('.dropdownitem').on('click', function(e) {
-          me.changeTextFormat($(e.target).attr('data-dk-dropdown-value'));
-          $('.dropdownpopup').css('display', 'block');
-          $('.pulldownmenu').html($(e.target).html());
-          me.dropdownopen = true;
-          me.hideTransformControl();
-        });
-        $('#add-text-btn').on('click', function() {
+        document.querySelector('#add-text-btn').addEventListener('click', function() {
           me.addImpressSlideItem(me.selectedSlide);
         });
-        $('#add-image-btn').on('click', function() {
-          $('#image-modal').modal('show');
+        document.querySelector('#add-image-btn').addEventListener('click', function() {
+          me.newImageModal.show();
         });
-        $('#add-video-btn').on('click', function() {
-          $('#video-modal').modal('show');
-          $('.div-preview-video').html(video_template);
+        document.querySelector('#add-video-btn').addEventListener('click', function() {
+          document.querySelector('.div-preview-video').innerHTML = video_template;
+          me.newVideoModal.show();
         });
-        $('#add-tableau-btn').on('click', function() {
-          $('#tableau-modal').modal('show');
-          $('.div-tableau-previsualisation').html(tableau_previsualisation);
+        document.querySelector('#add-tableau-btn').addEventListener('click', function() {
+          document.querySelector('.div-tableau-previsualisation').innerHTML = tableau_previsualisation;
+          me.newTableauModal.show();
         });
-        $('#add-graphique-btn').on('click', function() {
-          $('#graphique-modal').modal('show');
-          $('.div-graphique-previsualisation').html(graphique_previsualisation);
+        document.querySelector('#add-graphique-btn').addEventListener('click', function() {
+          document.querySelector('.div-graphique-previsualisation').innerHTML = graphique_previsualisation;
 
-          me.ctxGraphique = $('#preview-graphique').get(0).getContext('2d');
+
           me.dataGraphique = {
             labels: [
               'Jaune',
@@ -1032,7 +1045,8 @@ Presentation.prototype =
                 ],
               }],
           };
-          me.monGraphique = new Chart(me.ctxGraphique, {
+
+          me.configGraphique = {
             type: 'bar',
             data: me.dataGraphique,
             options: {
@@ -1040,18 +1054,23 @@ Presentation.prototype =
                 display: true,
               },
               scales: {
-                yAxes: [
-                  {
-                    ticks: {
-                      beginAtZero: true,
-                    },
-                  }],
+                yAxes: {
+                  ticks: {
+                    beginAtZero: true,
+                  },
+                },
               },
             },
-          });
+          }
+
+          me.monGraphique = new Chart(
+            document.querySelector('#preview-graphique'),
+            me.configGraphique
+          );
+          me.newGraphiqueModal.show();
         });
 
-        $('#add-slide-btn').on('click', function() {
+        document.querySelector('#add-slide-btn').addEventListener('click', function() {
           me.addSlide();
         });
 
@@ -1060,32 +1079,32 @@ Presentation.prototype =
         /////////////
 
         //Prévisualisation d'un graphique
-        $('#preview-graphique-type').on('change', function() {
-          let typeGraphique = $('#preview-graphique-type').val();
-
+        document.querySelector('#preview-graphique-type').addEventListener('change', function() {
           me.monGraphique.destroy();
-          me.monGraphique = new Chart(me.ctxGraphique, {
-            type: typeGraphique,
-            data: me.dataGraphique,
-          });
+          me.configGraphique.type = document.querySelector('#preview-graphique-type').value;
+
+          me.monGraphique = new Chart(
+            document.querySelector('#preview-graphique'),
+            me.configGraphique
+          );
+
         });
-        $('#add-object-btn').on('click', function() {
-          $('#objet-selection-modal').modal('show');
+        document.querySelector('#add-object-btn').addEventListener('click', function() {
+          me.newObjetModal.show();
         });
 
         //Ajout d'un graphique
-        $('#append-graphique-btn').on('click', function() {
-          let graphique = $('#preview-graphique');
-
+        document.querySelector('#append-graphique-btn').addEventListener('click', function() {
+          let graphique = document.querySelector('#preview-graphique');
           me.addGraphiqueToSlide(graphique);
-          $('#graphique-modal').modal('hide');
+          me.newGraphiqueModal.hide();
         });
 
         //Ajouter une donnée
-        $('#preview-grahpique-add-donnee').on('click', function() {
+        document.querySelector('#preview-grahpique-add-donnee').addEventListener('click', function() {
           let couleur = me.graphiqueColor;
-          let valeur = $('#preview-graphique-add-donnee-val').val();
-          let nom = $('#preview-graphique-add-donnee-nom').val();
+          let valeur = document.querySelector('#preview-graphique-add-donnee-val').value
+          let nom = document.querySelector('#preview-graphique-add-donnee-nom').value
 
           me.monGraphique.data.labels.push(nom);
           me.monGraphique.data.datasets.forEach((dataset) => {
@@ -1098,7 +1117,7 @@ Presentation.prototype =
         });
 
         //Supprimer une donnée
-        $('#preview-grahpique-delete-donnee').on('click', function() {
+        document.querySelector('#preview-grahpique-delete-donnee').addEventListener('click', function() {
           me.monGraphique.data.labels.pop();
           me.monGraphique.data.datasets.forEach((dataset) => {
             dataset.data.pop();
@@ -1112,42 +1131,46 @@ Presentation.prototype =
         /////////
 
         //Ajout d'une image
-        $('#append-image-btn').on('click', function() {
-          let image = $('#preview-image').attr('src');
-          let width = $('#image-width').val();
-          let height = $('#image-height').val();
+        document.querySelector('#append-image-btn').addEventListener('click', function() {
+          let image = document.querySelector('#preview-image').src;
+          let width = document.querySelector('#image-width').value;
+          let height = document.querySelector('#image-height').value;
           me.addImageToSlide(image, width, height);
-          $('#image-modal').modal('hide');
+          me.newImageModal.hide();
         });
 
         //Prévisualiser l'image
-        $('#image-input').on('blur keyup change', function() {
-          let imageUrl = $(this).val();
+        document.querySelector('#image-input').addEventListener('keyup', function(e) {
+
+          let element = e.target;
+          let imageUrl = element.value;
           if (me.isValidUrl(imageUrl)) {
             let imageTmp = new Image();
             imageTmp.src = imageUrl;
-            $(imageTmp).on('load', function() {
-              let selector_preview_image = $('#preview-image');
-              selector_preview_image.attr('src', imageUrl);
-              $('#image-width').val(imageTmp.width);
-              $('#image-height').val(imageTmp.height);
-              selector_preview_image.css('width', imageTmp.width).
-                  css('height', imageTmp.height);
+            imageTmp.addEventListener('load', function() {
+              let selector_preview_image = document.querySelector('#preview-image');
+              selector_preview_image.setAttribute('src', imageUrl);
+              document.querySelector('#image-width').value = imageTmp.width;
+              document.querySelector('#image-height').value = imageTmp.height;
+              selector_preview_image.css('width', imageTmp.width)
+              .style.height = imageTmp.height;
             });
           } else {
-            $('#preview-image').attr('src', '');
-            $('#image-width').val(0);
-            $('#image-height').val(0);
+            document.querySelector('#preview-image').setAttribute('src', '');
+            document.querySelector('#image-width').value = 0;
+            document.querySelector('#image-height').value = 0;
           }
         });
 
         //Resize de la largeur de l'image
-        $('#image-width').on('keyup', function() {
-          $('#preview-image').css('width', $(this).val());
+        document.querySelector('#image-width').addEventListener('keyup', function(e) {
+          let element = e.target;
+          document.querySelector('#preview-image').style.width = element.value;
         });
 
-        $('#image-height').on('keyup', function() {
-          $('#preview-image').css('height', $(this).val());
+        document.querySelector('#image-height').addEventListener('keyup', function(e) {
+          let element = e.target;
+          document.querySelector('#preview-image').style.height = element.value;
         });
 
         /////////
@@ -1155,22 +1178,22 @@ Presentation.prototype =
         /////////
 
         //Prévisualiser la vidéo
-        $('#video-input').on('blur keyup', function() {
-          let video = $('#video-input').val();
+        document.querySelector('#video-input').addEventListener('keyup', function() {
+          let video = document.querySelector('#video-input').value;
           if (me.isValidUrl(video)) {
             if (video.includes('www.youtube.com/watch?v=')) {
               video = video.replace('watch?v=', 'embed/');
-              $('.preview-video').attr('src', video);
+              document.querySelector('.preview-video').src = video;
             }
           }
         });
 
         //Ajout d'une vidéo
-        $('#append-video-btn').on('click', function() {
-          let video = $('.preview-video');
-
+        document.querySelector('#append-video-btn').addEventListener('click', function() {
+          let video = document.querySelector('.preview-video');
           me.addVideoToSlide(video);
-          $('#video-modal').modal('hide');
+
+          me.newVideoModal.hide();
         });
 
         ///////////
@@ -1178,16 +1201,15 @@ Presentation.prototype =
         ///////////
 
         //Ajout d'un tableau
-        $('#append-tableau-btn').on('click', function() {
-          let contenuTableau = $('.tableau-previsualisation');
-
+        document.querySelector('#append-tableau-btn').addEventListener('click', function() {
+          let contenuTableau = document.querySelector('.tableau-previsualisation');
           me.addTableauToSlide(contenuTableau);
-          $('#tableau-modal').modal('hide');
+          me.newTableauModal.hide();
         });
 
         //Ajout d'une ligne de tableau
-        $('#tableau-ajout-ligne').on('click', function() {
-          let tableau = $('.tableau-previsualisation').get(0);
+        document.querySelector('#tableau-ajout-ligne').addEventListener('click', function() {
+          let tableau = document.querySelector('.tableau-previsualisation');
           let ligne = tableau.insertRow(tableau.rows.length);
           let i;
 
@@ -1197,26 +1219,25 @@ Presentation.prototype =
         });
 
         //Ajout d'une colonne de tableau
-        $('#tableau-ajout-colonne').on('click', function() {
-          let tableau = $('.tableau-previsualisation').get(0);
+        document.querySelector('#tableau-ajout-colonne').addEventListener('click', function() {
+          let tableau = document.querySelector('.tableau-previsualisation');
           let i;
           for (i = 0; i < tableau.rows.length; i++) {
-            me.creerCase(
-                tableau.rows[i].insertCell(tableau.rows[i].cells.length));
+            me.creerCase(tableau.rows[i].insertCell(tableau.rows[i].cells.length));
           }
         });
 
         //Suppression d'une ligne
-        $('#tableau-suppression-ligne').on('click', function() {
-          let tableau = $('.tableau-previsualisation').get(0);
+        document.querySelector('#tableau-suppression-ligne').addEventListener('click', function() {
+          let tableau = document.querySelector('.tableau-previsualisation');
           let derniereLigne = tableau.rows.length - 1;
           if (derniereLigne !== 0)
             tableau.deleteRow(derniereLigne);
         });
 
         //Suppression d'une colonne
-        $('#tableau-suppression-colonne').on('click', function() {
-          let tableau = $('.tableau-previsualisation').get(0);
+        document.querySelector('#tableau-suppression-colonne').addEventListener('click', function() {
+          let tableau = document.querySelector('.tableau-previsualisation');
           let derniereColonne = tableau.rows[0].cells.length - 1;
           let i;
           for (i = 0; i < tableau.rows.length; i++) {
@@ -1225,39 +1246,27 @@ Presentation.prototype =
           }
         });
 
-        $('#open-presentations-panel').on('click', function() {
-          $('.previewpresobtn').on('click', function() {
-            me.fetchAndPreview($(this).attr('data-id'));
-          });
-          $('.openpresobtn').on('click', function() {
-            me.mode = 'save';
-            me.openPresentationForEdit($(this).attr('data-id'));
-          });
-          $('#saved-presentations-modal').modal('show');
-        });
-        $('.style-thumbnail').on('click', function() {
-          $('.style-thumbnail').css('border-bottom', '1px dotted #DDD');
-          $(this).css('border-bottom', '2px solid #6f2232');
-          me.theme = $(this).attr('data-style');
-        });
-        $('#apply-style-btn').on('click', function() {
-          me.applyStyle();
-          $('#police-selection-modal').modal('hide');
-        });
+        document.querySelector('#open-presentations-panel').addEventListener('click', function() {
 
-        $('.objet-thumbnail').on('click', function() {
-          $('.objet-thumbnail').css('border-bottom', '1px dotted #DDD');
-          $(this).css('border-bottom', '2px solid #6f2232');
-          objet = $(this).attr('data-nom');
-        });
+          document.querySelectorAll('.deletepresobtn').forEach(element=>{
+            element.addEventListener('click', function() {
+              if (confirm('Êtes-vous sûr de vouloir supprimer cette présentation ?'))
+                me.deleteSavedPresentation(element.getAttribute('data-id'));
+            });
+          });
 
-        $('#append-object-btn').on('click', function() {
-          me.addObjectToSlide(objet);
-          $('#objet-selection-modal').modal('hide');
+          document.querySelectorAll('.openpresobtn').forEach(element=>{
+            element.addEventListener('click', function() {
+              me.mode = 'save';
+              me.openPresentationForEdit(parseInt(element.getAttribute('data-id')));
+            });
+          });
+
+          me.newAllPresentationsModal.show();
         });
 
         $('#import-objet-panel').on('click', function() {
-          $('#import-objet-modal').modal('show');
+          me.newImportObjetModal.show();
         });
 
         $('#objinput').change(function() {
@@ -1270,7 +1279,7 @@ Presentation.prototype =
           }
         });
 
-        $('#mtlinput').change(function() {
+        document.querySelector('#mtlinput').addEventListener('change',function(element) {
           if ($(this).prop('files').length > 0) {
             mtlimport = $(this).prop('files')[0];
             if (!mtlimport.name.includes('.mtl')) {
@@ -1279,278 +1288,274 @@ Presentation.prototype =
             }
           }
         });
-        $('#imginput').change(function() {
-          if ($(this).prop('files').length > 0) {
-            for (let n = 0; n < $(this).prop('files').length; n++) {
-              imgimport = $(this).prop('files')[n];
-              formdata = new FormData();
+
+
+        document.querySelector('#imginput').addEventListener('change',function(element) {
+          if (element.getAttribute('files').length > 0) {
+            for (let n = 0; n < element.getAttribute('files').length; n++) {
+              let imgimport = element.getAttribute('files')[n];
+              let formdata = new FormData();
               if (!imgimport.type.includes('image/jpeg')) {
-                document.getElementById('imginput').value = '';
+                document.querySelector('#imginput').value = '';
                 toastr.error('vous devez importer un .jpg');
               } else {
                 formdata.append('img', imgimport);
                 formdata.append('idUser', user_id_ajax);
-                $.ajax
-                ({
-                  type: 'POST',
-                  url: 'App/Ajax/texturejpg_importAjax.php',
-                  data: formdata,
-                  processData: false,
-                  contentType: false,
-                  async: false,
+
+                fetch('App/Ajax/texturejpg_importAjax.php', {
+                  method: 'POST',
+                  cache: 'no-cache',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: formdata,
+                }).then(data => {
+                  return data.json();
+                }).then(data => {
+                  me.afficheMesObj(data);
+                }).catch(error => {
+                  console.log(error);
                 });
               }
             }
           }
         });
 
-        $('#import-objet-3d').on('click', function() {
-          objinput = document.getElementById('mtlinput').value;
-          imgimput = document.getElementById('objinput').value;
-          if (objinput !== '' && imginput !== '') {
-            formdata = new FormData();
+        document.querySelector('#import-objet-3d').addEventListener('click', function() {
+          let objinput = document.querySelector('#mtlinput').value;
+
+          if (objinput !== '') {
+            let formdata = new FormData();
             formdata.append('obj', objimport);
             formdata.append('mtl', mtlimport);
             formdata.append('idUser', user_id_ajax);
-            $.ajax
-            ({
-              type: 'POST',
-              url: 'App/Ajax/objet3d_importAjax.php',
-              data: formdata,
-              processData: false,
-              contentType: false,
-              async: false,
+
+            fetch('App/Ajax/objet3d_importAjax.php', {
+              method: 'POST',
+              cache: 'no-cache',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: formdata,
+            }).then(data => {
+              return data.json();
+            }).then(data => {
+              me.afficheMesObj(data);
+            }).catch(error => {
+              console.log(error);
             });
-            objurl = objimport.name + '.html';
+
+            let objurl = objimport.name + '.html';
             me.addMyObjectToSlide(objurl);
-            $('#import-objet-modal').modal('hide');
+            me.newImportObjetModal.hide();
 
           } else {
             toastr.error('veuillez importer vos fichiers mtl et obj');
           }
         });
 
-        $('#open-mesObj-panel').on('click', function() {
-          document.getElementById('savedobjects').options.length = 0;
-          formdata = new FormData();
-          $('#saved-objects-modal').modal('show');
-          $.ajax({
-            type: 'POST',
-            datatype: 'JSON',
-            url: 'App/Ajax/mesobjet3d_affichageAjax.php',
-            data: {
-              'idUser': user_id_ajax,
+        document.querySelector('#open-mesObj-panel').addEventListener('click', function() {
+          document.querySelector('#savedobjects').options.length = 0;
+          me.newSavedObjetModal.show();
+          let data = {idUser: user_id_ajax};
+
+          fetch('App/Ajax/mesobjet3d_affichageAjax.php', {
+            method: 'POST',
+            cache: 'no-cache',
+            headers: {
+              'Content-Type': 'application/json',
             },
-            success: function(retour) {
-              objRetour = JSON.parse(retour);
-            },
-            async: false,
+            body: JSON.stringify(data),
+          }).then(data => {
+            return data.json();
+          }).then(data => {
+            me.afficheMesObj(data);
+          }).catch(error => {
+            console.log(error);
           });
-          me.afficheMesObj(objRetour);
         });
 
-        $('#savedobjects').on('change', function() {
-          urlmyobj = $(this).prop('options')[$(this).
-              prop('selectedIndex')].value;
-          document.getElementById('previewobj').src = 'uploads/' +
-              user_id_ajax + '/' + urlmyobj;
+        let urlmyobj;
+        document.querySelector('#savedobjects').addEventListener('change', function(element) {
+          urlmyobj = element.options[element.selectedIndex].value;
+          document.querySelector('#previewobj').src =
+              'uploads/' + user_id_ajax + '/' + urlmyobj;
         });
 
-        $('#append-myobject-btn').on('click', function() {
+        document.querySelector('#append-myobject-btn').addEventListener('click', function() {
           me.addMyObjectToSlide(urlmyobj);
-          $('#saved-objects-modal').modal('hide');
+          me.newSavedObjetModal.hide();
         });
 
-        $('#add-svg-btn').on('click', function() {
-          $('#svg-selection-modal').modal('show');
+        document.querySelector('#add-svg-btn').addEventListener('click', function() {
+          me.newSvgModal.show();
         });
 
-        $('.svg-thumbnail').on('click', function() {
-          $('.svg-thumbnail').css('border-bottom', '1px dotted #DDD');
-          $(this).css('border-bottom', '2px solid #6f2232');
-          forme = $(this).attr('data-nom');
+        /**
+         * Objet
+         */
+       let objet;
+        document.querySelectorAll('.objet-thumbnail').forEach(function(element){
+          element.addEventListener('click', function(e) {
+            document.querySelectorAll('.objet-thumbnail').forEach(function(subElement){
+              subElement.style.borderBottom = '1px dotted #DDD';
+            });
+            element.style.borderBottom = '2px solid #6f2232';
+            objet = element.getAttribute('data-nom');
+          });
+        })
+
+        $('#append-object-btn').on('click', function() {
+          me.addObjectToSlide(objet);
+          me.newObjetModal.hide();
         });
 
-        $('#append-svg-btn').on('click', function() {
+
+        /**
+         * Svg
+         */
+
+        let forme;
+        document.querySelectorAll('.svg-thumbnail').forEach(function(element){
+          element.addEventListener('click', function(e) {
+            document.querySelectorAll('.svg-thumbnail').forEach(function(subElement){
+              subElement.style.borderBottom = '1px dotted #DDD';
+            });
+            element.style.borderBottom = '2px solid #6f2232';
+            forme = element.getAttribute('data-nom');
+          });
+        })
+
+        document.querySelector('#append-svg-btn').addEventListener('click', function() {
+          console.log(forme);
           forme = me.pickSvg(forme);
           me.addSvgToSlide(forme);
-          $('#svg-selection-modal').modal('hide');
+          me.newSvgModal.hide();
         });
 
-        $('#night-mode').on('click', function() {
-          me.toggleNightMode();
+
+        /**
+         * Police
+         */
+        document.querySelectorAll('.style-thumbnail').forEach(function(element){
+          element.addEventListener('click', function(e) {
+            document.querySelectorAll('.style-thumbnail').forEach(function(subElement){
+              subElement.style.borderBottom = '1px dotted #DDD';
+            });
+            element.style.borderBottom = '2px solid #6f2232';
+            me.theme = element.getAttribute('data-style');
+          });
+        })
+
+        document.querySelector('#apply-style-btn').addEventListener('click', function(e) {
+          me.applyStyle();
+          me.newPoliceModal.hide();
         });
 
-        $('#configuration').on('click', function() {
-          $('#configuration-modal').modal('show');
+        document.querySelector('#night-mode').addEventListener('click', function() {
+          me.toggleDayNightMode();
         });
+
       },
       applyStyle: function() {
-        $('.slidelement').each(function() {
-          if ($(this).hasClass('slidelementh1'))
-            me.removeAllStyles($(this));
-          $(this).addClass(me.theme);
+        document.querySelectorAll('.slidelement').forEach(function(element) {
+          if (element.classList.contains('slidelementh1'))
+            me.removeAllStyles(element);
+          element.classList.add(me.theme);
         });
       },
       removeAllStyles: function(el) {
-        el.removeClass('quicksand');
-        el.removeClass('montserrat');
-        el.removeClass('sketch');
-        el.removeClass('miltonian');
+        el.classList.remove('quicksand');
+        el.classList.remove('montserrat');
+        el.classList.remove('sketch');
+        el.classList.remove('miltonian');
       },
       openStyleSelector: function() {
-        $('#police-selection-modal').modal('show');
+        me.newPoliceModal.show();
       },
       deleteSavedPresentation: function(id) {
         let data = {presentation_id: id};
-        $.ajax({
-          type: 'POST',
-          url: 'App/Ajax/presentations_suppressionAjax.php',
-          data: data,
-          async: false,
-          success: function() {
-            document.location.reload(true);
+        fetch('App/Ajax/presentations_suppressionAjax.php', {
+          method: 'POST',
+          cache: 'no-cache',
+          headers: {
+            'Content-Type': 'application/json',
           },
-          error: function(err) {
-            console.log(err);
-          },
+          body: JSON.stringify(data),
+        }).then(data => {
+          return data.json();
+        }).then(data => {
+          document.location.reload(true);
+        }).catch(error => {
+          console.log(error);
         });
       },
       generateExport: function(isPreview) {
-        let children = $('.slide-thumb-holder').children();
+        let children = document.querySelector('.slide-thumb-holder').children;
         let child;
         let coords;
         let id;
         let l;
         let t;
         let el;
-        let selector_slide_container = $('.impress-slide-container');
-        let outputcontainer = selector_slide_container.clone();
+        let selector_slide_container = document.querySelector('.impress-slide-container');
+        let outputcontainer = selector_slide_container.cloneNode(true);
 
         for (let i = 0; i < children.length; i++) {
-          child = $(children[i]);
-          id = child.attr('id').split('_')[1];
-          l = child.attr('data-left').split('px')[0];
-          t = child.attr('data-top').split('px')[0];
+          child = children[i];
+          id = child.id.split('_')[1];
+//          editor.contentEditable = 'true';
+
+          l = child.getAttribute('data-left').split('px')[0];
+          t = child.getAttribute('data-top').split('px')[0];
 
           coords = me.calculateSlideCoordinates(l, t);
-          el = $('#impress_slide_' + id);
-          el.attr('data-x', coords.x - 500);
-          el.attr('data-y', coords.y);
-          el.attr('data-rotate', child.attr('data-rotate'));
-          el.attr('data-rotate-x', child.attr('data-rotate-x'));
-          el.attr('data-rotate-y', child.attr('data-rotate-y'));
-          el.attr('data-z', child.attr('data-z'));
-          el.attr('data-scale', child.attr('data-scale'));
-          el.addClass('step');
+          el = document.querySelector('#impress_slide_' + id);
+          el.setAttribute('data-x', coords.x - 500);
+          el.setAttribute('data-y', coords.y);
+          el.setAttribute('data-rotate', child.getAttribute('data-rotate'));
+          el.setAttribute('data-rotate-x', child.getAttribute('data-rotate-x'));
+          el.setAttribute('data-rotate-y', child.getAttribute('data-rotate-y'));
+          el.setAttribute('data-z', child.getAttribute('data-z'));
+          el.setAttribute('data-scale', child.getAttribute('data-scale'));
+          el.classList.add('step');
         }
 
-        outputcontainer.find('.impress-slide').each(function() {
-          $(this).css('width', '1024px');
-          $(this).css('height', '768px');
+        outputcontainer.querySelectorAll('.impress-slide').forEach(function(element) {
+          element.style.width = '1024px';
+          element.style.height = '768px';
         });
 
         if (isPreview)
-          me.generatePreview(outputcontainer.html().toString());
+          me.generatePreview(outputcontainer.innerHTML);
 
-        $('#exported-code').text(outputcontainer.html().toString());
-
-        let codeExport = selector_slide_container.html();
+        let codeExport = selector_slide_container.innerHTML;
 
         let presentation_export = export_template;
-        presentation_export = presentation_export.split('__slidetitle__').
-            join(me.currentPresentation.title);
-        presentation_export = presentation_export.split('__contenuslide__').
-            join(codeExport);
-        presentation_export = presentation_export.replace(
-            /contenteditable="true"/g, '');
+        presentation_export = presentation_export
+        .split('__slidetitle__')
+        .join(me.currentPresentation.title);
 
-        //TODO
-        //$.ajax({
-        //  type: 'POST',
-        //  data: {presentation_export},
-        //  url: 'App/Ajax/presentations_exporterAjax.php',
-        //  success: function(response) {
-        //    console.log(response);
-        //  },
-        //  error: function(err) {
-        //    console.log(err);
-        //  },
-        //});
+        presentation_export = presentation_export
+        .split('__contenuslide__')
+        .join(codeExport);
 
-        let zip = new JSZip();
-        $.ajax({
-          type: 'GET',
-          url: 'public/lib/impressjs/js/impress.js',
-          success: function(data) {
-            let impressJs = data;
-            zip.file('presentation.html', presentation_export);
-            zip.file('impress.js', impressJs);
+        presentation_export = presentation_export
+        .replace(/contenteditable="true"/g, '');
 
-            $.ajax({
-              type: 'GET',
-              url: 'public/lib/impressjs/css/impress-common.css',
-              success: function(data) {
-                zip.file('impress-common.css', data);
-
-                $.ajax({
-                  type: 'GET',
-                  url: 'public/lib/bootstrap/css/bootstrap.min.css',
-                  success: function(data) {
-                    zip.file('bootstrap.css', data);
-
-                    $.ajax({
-                      type: 'GET',
-                      url: 'public/css/styles.css',
-                      success: function(data) {
-                        zip.file('styles.css', data);
-
-                        $.ajax({
-                          type: 'GET',
-                          url: 'public/css/presentation/custom.css',
-                          success: function(data) {
-                            zip.file('styles.css', data);
-
-                            $.ajax({
-                              type: 'GET',
-                              url: 'public/lib/chartjs/Chart.min.js',
-                              success: function(data) {
-                                zip.file('chart.js', data);
-
-                                zip.generateAsync({type: 'blob'}).
-                                    then(function(content) {
-                                      saveAs(content,
-                                          'threejs-presentation.zip');
-                                    });
-                              },
-                              error: function(err) {
-                                console.log(err);
-                              },
-                            });
-                          },
-                          error: function(err) {
-                            console.log(err);
-                          },
-                        });
-                      },
-                      error: function(err) {
-                        console.log(err);
-                      },
-                    });
-                  },
-                  error: function(err) {
-                    console.log(err);
-                  },
-                });
-              },
-              error: function(err) {
-                console.log(err);
-              },
-            });
+        fetch('App/Ajax/presentations_exporterAjax.php', {
+          method: 'POST',
+          cache: 'no-cache',
+          headers: {
+            'Content-Type': 'application/json',
           },
-          error: function(err) {
-            console.log(err);
-          },
+          body: presentation_export,
+        }).then(data => {
+          return data.json();
+        }).then(data => {
+          window.open('/ThreeJS_Presentation/presentation_telecharger?nom_ficher='+data.path, '_blank');
+        }).catch(error => {
+          console.log(error);
         });
 
       },
@@ -1559,175 +1564,154 @@ Presentation.prototype =
         $('.impress-slide-container').html();
         me.addSlide();
         me.savePresentation();
-        me.selectFirstThumb();
       },
       openPresentationForEdit: function(id) {
-        me.mycurrentpresntationid = id;
+        for (let i = 0; i < me.mypresentations.length; i++) {
+          let presentation = me.mypresentations[i];
+          if (id === presentation.id) {
+            document.querySelector('.impress-slide-container').innerHTML = presentation.contents;
+            document.querySelector('.slide-thumb-holder').innerHTML = presentation.thumbcontents;
+            me.selectedSlide = ".impress-slide-container .impress-slide-element";
+            me.currentPresentation = presentation;
+
+            document.querySelector('#presentation-metatitle').innerHTML = me.currentPresentation.title;
+          }
+          me.newAllPresentationsModal.hide();
+        }
+        document.querySelectorAll('.slidemask').forEach(function(element){
+          element.addEventListener("click", function(e){
+            e.stopPropagation();
+            id = (e.target.id).split('_')[1];
+            me.selectSlide('#impress_slide_' + id);
+            document.querySelectorAll('.slidethumb').forEach(function(element) {
+              element.classList.remove('currentselection');
+            });
+            document.querySelector('#slidethumb_' + id).classList.add('currentselection');
+            me.hideTransformControl();
+            me.switchView('right');
+          })
+        });
+
+        document.querySelectorAll('.deletebtn').forEach(function(element){
+          element.addEventListener('click',function(){
+            let selector = element.getAttribute('data-parent');
+            let p = document.querySelector('div #' + selector);
+            let slideid = element.getAttribute('data-parent').split('_')[1];
+
+            p.remove();
+            document.querySelector('#impress_slide_' + slideid).remove();
+            me.selectThumb("first")
+          })
+        })
+        me.enableDrag();
+        me.selectThumb("first");
+      },
+      fetchAndPreview: function(id) {
         for (let i = 0; i < me.mypresentations.length; i++) {
           presentation = me.mypresentations[i];
           if (id === presentation.id) {
-            $('.impress-slide-container').html(presentation.contents);
-            $('.slide-thumb-holder').html(presentation.thumbcontents);
-            $('.slide-thumb-holder').each(function() {
-              $(this).css('opacity', 1);
+            let selector_placeholder = document.querySelector('.placeholder');
+            selector_placeholder.innerHTML = presentation.contents;
+            selector_placeholder.querySelectorAll('.impress-slide').forEach(function(element) {
+              element.style.width = '1024px';
+              element.style.height = '768px';
+              element.classList.add('step');
             });
-
-            me.selectedSlide = $('.impress-slide-container').
-                find('.impress-slide-element');
-            me.currentPresentation = presentation;
-            $('#presentation-metatitle').html(me.currentPresentation.title);
-          }
-
-          $('#saved-presentations-modal').modal('hide');
-        }
-        $('.slidemask').on('click', function(e) {
-          e.stopPropagation();
-          id = (e.target.id).split('_')[1];
-          me.selectSlide('#impress_slide_' + id);
-          $('.slidethumb').removeClass('currentselection');
-          $('#slidethumb_' + id).addClass('currentselection');
-          me.hideTransformControl();
-          me.switchView('right');
-        });
-        $('.deletebtn').on('click', function() {
-          p = $('#' + $(this).attr('data-parent'));
-          slideid = $(this).attr('data-parent').split('_')[1];
-          p.animate({opacity: 0}, 200, function() {
-            $(this).remove();
-            $('#impress_slide_' + slideid).remove();
-            me.assignSlideNumbers();
-          });
-        });
-        me.enableDrag();
-        me.selectFirstThumb();
-      },
-      fetchAndPreview: function(id) {
-        for (var i = 0; i < me.mypresentations.length; i++) {
-          presentation = me.mypresentations[i];
-          if (id === presentation.id) {
-            let selector_placeholder = $('.placeholder');
-            selector_placeholder.html(presentation.contents);
-            selector_placeholder.find('.impress-slide').each(function() {
-              $(this).css('width', '1024px');
-              $(this).css('height', '768px');
-              $(this).addClass('step');
-            });
-            me.generatePreview(selector_placeholder.html().toString());
-            $('#saved-presentations-modal').modal('hide');
+            me.generatePreview(selector_placeholder.innerHTML);
+            me.newAllPresentationsModal.hide();
             break;
           }
         }
       },
-      savePresentation: function() {
-        $('#save-presentation-panel').
-            html(
-                '<div class="sb-nav-link-icon"><i class=\"fas fa-save\"></i></div>Sauvegarde en cours...');
-        let items = me.getItems();
-        let arr = [];
-        if (items) {
-          arr = JSON.parse(items);
-        }
-        if (arr) {
-          if (this.mode === 'save') {
-            if (me.currentPresentation)
-              arr = me.removeReference(arr);
-          }
-        } else {
-          arr = [];
-        }
+      savePresentation: async function() {
+        document.querySelector('#save-presentation-panel').innerHTML =
+            '<div class="sb-nav-link-icon">' +
+            '<i class=\"fas fa-save\"></i>' +
+            '</div>Sauvegarde en cours...';
+        let tempid = 0;
 
-        if (this.mode === 'save') {
+        if (me.mode === 'save') {
           if (me.currentPresentation)
             tempid = me.currentPresentation.id;
-          else
-            tempid = Math.round(Math.random() * 201020);
-        } else
+        }
+        if(tempid === 0){
           tempid = Math.round(Math.random() * 201020);
+        }
 
+        console.log(tempid);
         let o = {
           id: tempid,
-          title: $('#title-input').val(),
-          description: $('textarea#description-input').val(),
-          contents: $('.impress-slide-container').html().toString(),
-          thumbcontents: $('.slide-thumb-holder').html().toString(),
+          title: document.querySelector('#title-input').value,
+          description: document.querySelector(
+              'textarea#description-input').value,
+          contents: document.querySelector(
+              '.impress-slide-container').innerHTML,
+          thumbcontents: document.querySelector(
+              '.slide-thumb-holder').innerHTML,
           theme: me.theme,
         };
 
         me.currentPresentation = o;
-        $('#presentation-metatitle').html(me.currentPresentation.title);
 
-        me.sauvegarderBDD(o);
-
-        presentations = me.getSavedPresentations();
-        presentations.reverse();
-        me.renderPresentations(presentations);
-
-        $('.previewpresobtn').on('click', function() {
-          me.fetchAndPreview($(this).attr('data-id'));
+        let presentationIdRetour = await me.sauvegarderBDDAsync(o);
+        presentationIdRetour.json().then(function(presentationId){
+          me.currentPresentation.id = presentationId
         });
-        $('.openpresobtn').on('click', function() {
-          me.mode = 'save';
-          me.openPresentationForEdit($(this).attr('data-id'));
+
+        let presentationsAsync = await me.getSavedPresentationsAsync();
+        presentationsAsync.json().then(function(presentations) {
+          presentations.reverse();
+          me.renderPresentations(presentations);
         });
-        $('#new-presentation-modal').modal('hide');
+
+        document.querySelectorAll(".openpresobtn").forEach(function(element){
+          element.addEventListener('click', function(e){
+            me.mode = 'save';
+            me.openPresentationForEdit(parseInt($(this).attr('data-id')));
+          })
+        })
+
+        me.newAllPresentationsModal.hide();
         setTimeout(me.resetSaveButtonText, 1000);
       },
       resetSaveButtonText: function() {
-        $('#save-presentation-panel').
-            html(
-                '<div class="sb-nav-link-icon"><i class=\"fas fa-check-circle\"></i></div>Sauvegarde réussie!');
+        document.querySelector('#save-presentation-panel').innerHTML =
+            '<div class="sb-nav-link-icon">' +
+            '<i class=\"fas fa-check-circle\"></i>' +
+            '</div>Sauvegarde réussie!';
+
         setTimeout(function() {
-          $('#save-presentation-panel').
-              html(
-                  '<div class="sb-nav-link-icon"><i class=\"fas fa-save\"></i></div>Sauvegarder');
+          document.querySelector('#save-presentation-panel').innerHTML =
+              '<div class="sb-nav-link-icon">' +
+              '<i class=\"fas fa-save\"></i>' +
+              '</div>Sauvegarder';
         }, 1000);
       },
-      sauvegarderBDD: function(tableau) {
+      sauvegarderBDDAsync: function(tableau) {
         let data = {user_id: me.userId, new_presentation: tableau};
 
-        $.ajax({
-          type: 'POST',
-          url: 'App/Ajax/presentations_sauvegarderAjax.php',
-          data: data,
-          async: false,
-          success: function(retour) {
-            presentationsRetour = retour;
+        return fetch('App/Ajax/presentations_sauvegarderAjax.php', {
+          method: 'POST',
+          cache: 'no-cache',
+          headers: {
+            'Content-Type': 'application/json',
           },
-          error: function(err) {
-            console.log(err);
-          },
-        });
+          body: JSON.stringify(data),
+        })
       },
-      removeReference: function(arr) {
-        for (let i = 0; i < arr.length; i++) {
-          if (arr[i].id === me.currentPresentation.id) {
-            arr.splice(i, 1);
-            break;
-          }
-        }
-        return arr;
-      },
-      getSavedPresentations: function() {
-        let items = me.getItems();
-        let arr = [];
-
-        if (items) {
-          arr = JSON.parse(items);
-        }
-
-        return arr;
+      async getSavedPresentationsAsync() {
+        return await me.getItemsAsync();
       },
       generatePreview: function() {
-        let openPreview = $('#open-preview-btn');
+        let openPreview = document.querySelector('#open-preview-btn');
 
-        $('#preview-modal').modal('show');
-        openPreview.addClass('disabled');
-        openPreview.removeClass('btn-primary');
-        $('#progressmeter').css('display', 'block');
-        $('#previewmessage').
-            html(
-                'Veuillez patienter durant la génération de la prévisualisation.');
+        me.previewModal.show();
 
+        openPreview.classList.add('disabled');
+        openPreview.classList.remove('btn-primary');
+        document.querySelector('#progressmeter').style.display = 'block';
+        document.querySelector('#previewmessage').innerHTML =
+            'Veuillez patienter durant la génération de la prévisualisation.';
       },
       calculateSlideCoordinates: function(wx, wy) {
         let vx = Math.round(
@@ -1741,201 +1725,222 @@ Presentation.prototype =
       addImageToSlide: function(src, width, height) {
         let img = new Image();
 
-        $(img).attr('id', 'slidelement_' + me.generateUID());
-        $(img).css('position', 'absolute');
-        $(img).css('left', '345px');
-        $(img).css('top', '0px');
-        $(img).addClass('slidelement');
-        $(img).attr('src', src);
+        img.id = 'slidelement_' + me.generateUID();
+        img.style.position = 'absolute';
+        img.style.left = '345px';
+        img.style.top = '0px';
+        img.classList.add('slidelement');
+        img.src = src;
 
         if (width !== '' && height !== '') {
-          $(img).css('width', width + 'px');
-          $(img).css('height', height + 'px');
+          img.style.width = width + 'px';
+          img.style.height = height + 'px';
         }
 
-        me.selectedSlide.append($(img));
+        document.querySelector(me.selectedSlide).appendChild(img);
         me.enableDrag();
       },
       addVideoToSlide: function(video) {
-        video.attr('id', 'slidelement_' + me.generateUID());
-        video.addClass('slidelement');
-        video.attr('width', '426');
-        video.attr('height', '240');
-        video.css('width', '426');
-        video.css('height', '240');
-        video.css('border', 'solid 6px');
-        video.removeClass('preview-video');
+        video.id = 'slidelement_' + me.generateUID();
+        video.classList.add('slidelement');
+        video.width = '426';
+        video.height = '340';
+        video.style.width ='426';
+        video.style.height ='340';
+        video.style.border ='solid 6px';
+        video.classList.remove('preview-video');
 
-        me.selectedSlide.append($(video));
+        document.querySelector(me.selectedSlide).appendChild(video);
         me.enableDrag();
       },
       addTableauToSlide: function(contenuTableau) {
-        contenuTableau.attr('id', 'slidelement_' + me.generateUID());
-        contenuTableau.addClass('slidelement');
-        contenuTableau.css('position', 'absolute');
-        contenuTableau.css('top', '0px');
-        contenuTableau.css('left', '450px');
-        contenuTableau.removeClass('table-responsive');
-        contenuTableau.removeClass('tableau-previsualisation');
+        contenuTableau.id = 'slidelement_' + me.generateUID();
+        contenuTableau.classList.add('slidelement');
+        contenuTableau.style.position = 'absolute';
+        contenuTableau.style.top = '0';
+        contenuTableau.style.left = '450px';
+        contenuTableau.classList.remove('table-responsive');
+        contenuTableau.classList.remove('tableau-previsualisation');
 
-        me.selectedSlide.append($(contenuTableau));
+        document.querySelector(me.selectedSlide).appendChild(contenuTableau);
         me.enableDrag();
       },
       addGraphiqueToSlide: function(graphique) {
-        graphique.attr('id', 'slidelement_' + me.generateUID());
-        graphique.addClass('slidelement');
-        graphique.css('position', 'absolute');
-        graphique.css('top', '0px');
-        graphique.css('left', '260px');
+        graphique.id =  'slidelement_' + me.generateUID();
+        graphique.classList.add('slidelement');
+        graphique.style.position = 'absolute';
+        graphique.style.top = '0';
+        graphique.style.left= '260px';
 
-        let div = $('<div style="width: 400px; height: 400px;">').
-            html(graphique);
+        let div = document.createElement("div")
+        div.style.width = "400px";
+        div.style.height = "400px";
+        div.appendChild(graphique);
 
-        me.selectedSlide.append($(div));
+        console.log(me.selectedSlide);
+        console.log(div);
+        document.querySelector(me.selectedSlide).appendChild(div);
         me.enableDrag();
       },
       creerCase: function(cell) {
         let txt = document.createTextNode('Case');
 
+        cell.contentEditable = 'true';
         cell.appendChild(txt);
-        cell.setAttribute('contenteditable', 'true');
       },
       addObjectToSlide: function(obj) {
-        let iframe = $('<iframe>', {
-          width: 500,
-          height: 500,
-          src: 'http://' + me.obj3dUrl + 'public/lib/objets3d/' + obj + '.html',
-          id: 'slidelement_' + me.generateUID(),
-          class: 'slidelement',
-          frameborder: 5,
-          scrolling: 'no',
-          css: 'width: 200px; height: 200px;',
-        }).appendTo('.accordion');
+        let iframe = document.createElement('iframe');
+        iframe.id = 'slidelement_' + me.generateUID();
+        iframe.width = '500';
+        iframe.height = '500';
+        iframe.src =
+            'http://' + me.obj3dUrl + 'public/lib/objets3d/' + obj + '.html';
+        iframe.className = 'slidelement';
+        iframe.frameborder = '5';
+        iframe.style.width = '200px';
+        iframe.style.height = '200px';
+        document.querySelector('.accordion').appendChild(iframe);
 
-        me.selectedSlide.append($(iframe));
+        document.querySelector(me.selectedSlide).appendChild(iframe);
         me.enableDrag();
       },
       addMyObjectToSlide: function(obj) {
-        let iframe = $('<iframe>', {
-          width: 500,
-          height: 500,
-          src: 'http://' + me.obj3dUrl + 'uploads/' + user_id_ajax + '/' + obj,
-          id: 'slidelement_' + me.generateUID(),
-          class: 'slidelement',
-          frameborder: 5,
-          scrolling: 'no',
-          css: 'width: 200px; height: 200px;',
-        }).appendTo('.accordion');
+        let iframe = document.createElement('iframe');
+        iframe.id = 'slidelement_' + me.generateUID();
+        iframe.width = '500';
+        iframe.height = '500';
+        iframe.src =
+            'http://' + me.obj3dUrl + 'uploads/' + user_id_ajax + '/' + obj;
+        iframe.className = 'slidelement';
+        iframe.frameborder = '5';
+        iframe.style.width = '200px';
+        iframe.style.height = '200px';
+        document.querySelector('.accordion').appendChild(iframe);
 
-        me.selectedSlide.append($(iframe));
+        document.querySelector(me.selectedSlide).appendChild(iframe);
         me.enableDrag();
       },
       addSvgToSlide: function(forme) {
-        $(forme).attr('id', 'slidelement_' + me.generateUID());
-        $(forme).css('left', '200px');
-        $(forme).css('top', '0px');
-        $(forme).addClass('slidelement');
+        forme.id = 'slidelement_' + me.generateUID();
+        forme.style.left = '200px';
+        forme.style.top = '0px';
+        forme.classList.add('slidelement');
 
-        me.selectedSlide.append($(forme));
+        document.querySelector(me.selectedSlide).appendChild(forme);
         me.enableDrag();
       },
       pickSvg: function(forme) {
-        let svg;
+        let svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        let polygon;
+
         switch (forme) {
           case 'pentagon':
-            svg = $(`<svg viewBox="0 0 200 200"  preserveAspectRatio="none" width="100" height="100">
-                        <polygon points="156.427384220077,186.832815729997 43.5726157799226,186.832815729997 8.69857443566525,79.5015528100076 100,13.1671842700025 191.301425564335,79.5015528100076" id="pentagon"></polygon>
-                    </svg>`);
-            break;
+            svg.setAttribute('viewBox', '0 0 200 200');
+            svg.setAttribute('preserveAspectRatio', 'none');
+            svg.setAttribute('width', '100');
+            svg.setAttribute('height', '100');
 
+            polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            polygon.setAttribute('points', '156.427384220077,186.832815729997 43.5726157799226,186.832815729997 8.69857443566525,79.5015528100076 100,13.1671842700025 191.301425564335,79.5015528100076');
+            polygon.setAttribute('id', 'pentagon');
+            console.log(polygon);
+            svg.appendChild(polygon);
+            console.log(svg);
+            break;
           case 'circle':
-            svg = $(`<svg preserveAspectRatio="none" viewBox="0 0 80 80" width="100" height="100">
-                        <circle cx="40" cy="40" r="40" id="circle"></circle>
-                    </svg>`);
+            svg.setAttribute('viewBox', '0 0 80 80');
+            svg.setAttribute('preserveAspectRatio', 'none');
+            svg.setAttribute('width', '100');
+            svg.setAttribute('height', '100');
+
+            let circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            circle.setAttribute('cx', '40');
+            circle.setAttribute('cy', '40');
+            circle.setAttribute('r', '40');
+
+            svg.appendChild(circle);
             break;
           case 'rectangle':
-            svg = $(`<svg viewBox="0 0 50 50" preserveAspectRatio="none" width="100" height="100" id="rectangle">
-                        <rect width="50" height="50"></rect>
-                    </svg>`);
+            svg.setAttribute('viewBox', '0 0 50 50');
+            svg.setAttribute('preserveAspectRatio', 'none');
+            svg.setAttribute('width', '100');
+            svg.setAttribute('height', '100');
+
+            let rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            rect.setAttribute('width', '50');
+            rect.setAttribute('height', '50');
+
+            svg.appendChild(rect);
             break;
           case 'triangle':
-            svg = $(`<svg viewBox="0 0 50 50" preserveAspectRatio="none" width="100" height="100" id="triangle">
-                        <polygon points="25,0 50,50 0,50"></polygon>
-                    </svg>`);
+            svg.setAttribute('viewBox', '0 0 50 50');
+            svg.setAttribute('preserveAspectRatio', 'none');
+            svg.setAttribute('width', '100');
+            svg.setAttribute('height', '100');
+
+            polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            polygon.setAttribute('points', '25,0 50,50 0,50');
+
+            svg.appendChild(polygon);
             break;
           case 'hexagone':
-            svg = $(`<svg viewBox="0 0 726 726" preserveAspectRatio="none" width="100" height="100">
-                        <polygon points="723,314 543,625.769145 183,625.769145 3,314 183,2.230855 543,2.230855 723,314" id="hexagone"></polygon>
-                    </svg>`);
+            svg.setAttribute('viewBox', '0 0 726 726');
+            svg.setAttribute('preserveAspectRatio', 'none');
+            svg.setAttribute('width', '100');
+            svg.setAttribute('height', '100');
+
+            polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            polygon.setAttribute('points', '723,314 543,625.769145 183,625.769145 3,314 183,2.230855 543,2.230855 723,314');
+
+            svg.appendChild(polygon);
             break;
           case 'etoile':
-            svg = $(`<svg  viewBox="0 0 180 180" preserveAspectRatio="none" width="100" height="100" id="etoile">
-                        <polygon points="90,0 30,170 180,50 0,50 150,170"></polygon>
-                    </svg>`);
+            svg.setAttribute('viewBox', '0 0 180 180');
+            svg.setAttribute('preserveAspectRatio', 'none');
+            svg.setAttribute('width', '100');
+            svg.setAttribute('height', '100');
+
+            polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            polygon.setAttribute('points', '90,0 30,170 180,50 0,50 150,170');
+
+            svg.appendChild(polygon);
             break;
         }
         return svg;
-
       },
       createEditor: function(e) {
-        let editor = $(e.target).clone();
-
-        editor.attr('contentEditable', 'true');
+        let editor = e.target.cloneNode(true);
+        editor.contentEditable ='true';
       },
       triggerElementEdit: function(e) {
-        $(e.target).attr('contentEditable', true);
+        e.target.contentEditable = "true";
       },
       removeListeners: function() {
-        $('.settingsCancelBtn').off();
+        //TODO
         $('#new-panorama-panel').off();
       },
       onSettingsCancelClicked: function() {
         me.animateSettingsPanel('left');
       },
-      onMenuItemClicked: function() {
-        $('#new-presentation-modal').modal('show');
-        $('#new-preso-header').html('Créer une nouvelle présentation');
-        $('#title-input').val('Nouvelle présentation');
-        $('textarea#description-input').
-            val('Exemple de description de présentation');
+      onNewPresentationItemClicked: function() {
+        document.querySelector('#new-preso-header').innerHTML = 'Créer une nouvelle présentation';
+        document.querySelector('#title-input').value = 'Nouvelle présentation';
+        document.querySelector('textarea#description-input').value = 'Exemple de description de présentation';
         me.mode = 'create';
+
+        me.NewPresntationModal.show();
       },
-      getItems: function() {
-        let presentationsRetour;
+      getItemsAsync: function() {
         let data = {user_id: me.userId};
-        $.ajax({
-          type: 'POST',
-          url: 'App/Ajax/presentations_affichageAjax.php',
-          data: data,
-          async: false,
-          success: function(retour) {
-            presentationsRetour = retour;
+
+        return fetch('App/Ajax/presentations_affichageAjax.php', {
+          method: 'POST',
+          cache: 'no-cache',
+          headers: {
+            'Content-Type': 'application/json',
           },
-          error: function(err) {
-            console.log(err);
-          },
+          body: JSON.stringify(data)
         });
-        return presentationsRetour;
-      },
-      getLastItem: function() {
-        let presentationRetour;
-        let data = {user_id: me.userId};
-        $.ajax({
-          type: 'POST',
-          url: 'App/Ajax/presentations_last_affichageAjax.php',
-          data: data,
-          async: false,
-          success: function(retour) {
-            presentationRetour = retour;
-          },
-          error: function(err) {
-            console.log(err);
-          },
-        });
-        return presentationRetour;
-      },
-      isSupported: function() {
-        return localStorage;
       },
       isValidUrl: function(url) {
         try {
@@ -1945,58 +1950,60 @@ Presentation.prototype =
         }
         return true;
       },
-      toggleNightMode: function() {
-        let selector_sidenavAccordion = $('#sidenavAccordion');
-        let selector_navSlide = $('#navSlide');
-        let selector_visualisation = $('#visualisation');
-        let selector_panorama_navbar = $('#panorama-navbar');
-        if (me.nightMode === false) {
-          me.nightMode = true;
-          $('#night-mode').
-              html(
-                  '<div class="sb-nav-link-icon"><i class="fas fa-moon"></i></div>Activé</a>');
+      toggleDayNightMode: function() {
+        let sidenavAccordion = document.querySelector('#sidenavAccordion');
+        let navSlide = document.querySelector('#navSlide');
+        let visualisation = document.querySelector('#visualisation');
+        let panoramaNavbar = document.querySelector('#panorama-navbar');
+        let boutonNightMode = document.querySelector('#night-mode');
 
-          selector_sidenavAccordion.removeClass('sb-sidenav-light');
-          selector_sidenavAccordion.addClass('sb-sidenav-dark');
-          selector_navSlide.removeClass('mainfooter-light');
-          selector_navSlide.addClass('mainfooter');
-          selector_visualisation.removeClass('main-viewport');
-          selector_visualisation.addClass('main-viewport-dark');
-          selector_panorama_navbar.removeClass('transform-controls-holder');
-          selector_panorama_navbar.addClass('transform-controls-holder-night');
-          $('body').addClass('body-dark');
+        me.nightMode = !me.nightMode;
+
+        if (me.nightMode) {
+          boutonNightMode.innerHTML = '<div class="sb-nav-link-icon">' +
+              '<i class="fas fa-moon"></i>' +
+              '</div>Activé';
         } else {
-          me.nightMode = false;
-          $('#night-mode').
-              html(
-                  '<div class="sb-nav-link-icon"><i class="fas fa-sun"></i></div>Désactivé</a>');
-
-          selector_sidenavAccordion.removeClass('sb-sidenav-dark');
-          selector_sidenavAccordion.addClass('sb-sidenav-light');
-          selector_navSlide.removeClass('mainfooter');
-          selector_navSlide.addClass('mainfooter-light');
-          selector_visualisation.removeClass('main-viewport-dark');
-          selector_visualisation.addClass('main-viewport');
-          selector_panorama_navbar.removeClass(
-              'transform-controls-holder-night');
-          selector_panorama_navbar.addClass('transform-controls-holder');
-          $('body').removeClass('body-dark');
+          boutonNightMode.innerHTML = '<div class="sb-nav-link-icon">' +
+              '<i class="fas fa-sun"></i>' +
+              '</div>Désactivé';
         }
+        sidenavAccordion.classList.toggle('sb-sidenav-light');
+        sidenavAccordion.classList.toggle('sb-sidenav-dark');
+        navSlide.classList.toggle('mainfooter-light');
+        navSlide.classList.toggle('mainfooter');
+        visualisation.classList.toggle('main-viewport');
+        visualisation.classList.toggle('main-viewport-dark');
+        panoramaNavbar.classList.toggle('transform-controls-holder');
+        panoramaNavbar.classList.toggle('transform-controls-holder-night');
+        document.body.classList.toggle('body-dark');
       },
       afficheMesObj: function(mesObj) {
-        document.getElementById(
-            'savedobjects').innerHTML += '<option selected></option>';
+        document.querySelector('#savedobjects').innerHTML += '<option selected></option>';
         for (let i = 0; i < mesObj.length; i++) {
-          document.getElementById(
-              'savedobjects').innerHTML += '<option value=\'' +
-              mesObj[i].basename + '\'>' + mesObj[i].basename + '</option>';
+          let basename = mesObj[i].basename;
+          document.querySelector('#savedobjects').innerHTML +=
+              '<option value=\'' + basename + '\'>' +
+              basename +
+              '</option>';
         }
       },
-      selectFirstThumb: function() {
-        let firstThumb = $('div .slide-thumb-holder').html();
-        let docThumb = new DOMParser().parseFromString(firstThumb, 'text/xml');
-        let idThumb = docThumb.firstChild.id.split('_');
-        $('div #slidethumb_' + idThumb[1]).click();
-        $('div #orchestrationelement_6984').click();
+      selectThumb: function(stringPosition) {
+        let thumbs = document.querySelector('div .slide-thumb-holder').innerHTML;
+        let docThumb = new DOMParser().parseFromString(thumbs, 'text/html');
+        docThumb = docThumb.body;
+
+        let idThumb;
+        if(stringPosition === "first"){
+          idThumb = docThumb.firstChild.id.split('_');
+        }else{
+          idThumb = docThumb.lastChild.id.split('_');
+        }
+        me.selectSlide('#impress_slide_' + idThumb[1]);
+
+        document.querySelectorAll('.slidethumb').forEach(function(element){
+          element.classList.remove('currentselection');
+        });
+        document.querySelector('#slidethumb_' + idThumb[1]).classList.add('currentselection');
       },
-    };
+    }

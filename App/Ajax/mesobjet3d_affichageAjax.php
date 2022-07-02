@@ -3,8 +3,12 @@
 define('ROOT', "../..");
 define('CONFIG', ROOT . '/Config');
 define('APP', ROOT . '/App');
+
 $out = array();
-$id = $_POST["idUser"];
+
+$tabData = json_decode(file_get_contents("php://input"), true);
+$id = $tabData["idUser"];
+
 if (!is_dir(APP . "/../uploads/" . $id)) {
     mkdir(APP . "/../uploads/" . $id, 0755);
 }

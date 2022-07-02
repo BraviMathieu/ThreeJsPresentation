@@ -1,13 +1,7 @@
-var newpresotemplate = '<div id="newpreso">'+
-						   '<h4 id="presotitle" class="settingsboxheader">Title</h4><input id="presotitleinput" type="text">'+
-						   '<h4 id="presodescription" class="settingsboxheader">Description</h4><textarea id="presotitledescription"></textarea>'+
-						   '<a class="btn btn-large btn-primary btn-inline previewbtn settingsCancelBtn" id="newpresocancel">&nbsp;Cancel</a>'+
-          				   '<a class="btn btn-large btn-inline btn-info previewbtn">&nbsp;OK</a>'
-          				'</div>'
-var slidethumb = '<div id="slidethumb_^UID^" class="slidethumb thumbelement">'+
+var slidethumb = '<div id="slidethumb_^UID^" class="slidethumb">'+
 					 '<div class="thumbnailholder"></div>'+
 					 '<canvas class="slidemask" id="slidethumb_^UID^" style="z-index:1000; width:100%; height:100%; background-color:#FFF; opacity:0.1; left:0; top:0; position:absolute"></canvas>'+
-					'<a id="deletebtn" data-parent="slidethumb_^UID^" style="z-index:1001;" class="btn btn-danger btn-small deletebtn text-white"><i class="fas fa-trash-alt"></i></a>'+
+					'<a data-parent="slidethumb_^UID^" style="z-index:1001;" class="btn btn-danger btn-small deletebtn text-white"><i class="fas fa-trash-alt"></i></a>'+
 				 '</div>';
 var impress_slide = '<div class="impress-slide" id="impress_slide__slidenumber__">'+
 						'<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h2" style="width:auto; height:auto; position:absolute; left:216px; top:50px; " contentEditable="true"> Titre d\'exemple</div>'+
@@ -23,7 +17,7 @@ var text_snippet_p = '<div class="slidelement slidelementh1" id="slidelement_id"
 
 var saved_presentations = '<div class="saved-presos">' +
  								'<div class="presothumbcontent">' +
- 								'<h3 style="display:inline-block; color:#2980B9" contentEditable="true"> __presotitle__</h3>'+
+ 								'<h3 style="display:inline-block; color:#2980B9" contentEditable="true">__presotitle__</h3>'+
  								'<p style="font-size: 120%" contentEditable="true">__presodescription__</p>'+
  								'</div>'+
  								'<div class="presothumb" >'+

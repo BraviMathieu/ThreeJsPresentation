@@ -15,6 +15,9 @@ $tabFichiersToZip = [
     "/css/styles.css"
 ];
 
+$tabData = json_decode(file_get_contents("php://input"), true);
+
+
 $zip = new ZipArchive();
 $filename = tempnam(sys_get_temp_dir(), "threejs-presentation_");
 
@@ -26,9 +29,8 @@ if ($zip->open($filename, ZipArchive::OVERWRITE) !== true) {
             $zip->addFile(WEBROOT . $cheminFichier, basename($cheminFichier));
         }
     }
-    $zip->addFromString("presentation.html", $_POST['presentation_export']);
+    $zip->addFromString("presentation.html", $tabData['presentation_export']);
     $zip->close();
 
-
-    echo('{"message":"' . $filename . '"}');
+    echo('{"path":"'.basename($filename).'"}');
 }
