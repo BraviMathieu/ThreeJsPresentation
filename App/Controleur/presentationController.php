@@ -45,9 +45,9 @@ if ($path == "/presentation_creation") {
     $ficher_nom = pathinfo($_GET['nom_ficher']);
 
     header("Content-type: application/zip");
-    header("Content-Disposition: attachment; filename=".$ficher_nom['filename'].".tmp");
+    header("Content-Disposition: attachment; filename=" . $ficher_nom['filename'] . ".tmp");
     header("Pragma: no-cache");
     header("Expires: 0");
-    readfile(sys_get_temp_dir().DIRECTORY_SEPARATOR.$ficher_nom['basename']);
+    readfile(sys_get_temp_dir() . DIRECTORY_SEPARATOR . $ficher_nom['basename']);
     die();
 }

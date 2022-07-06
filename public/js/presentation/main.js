@@ -127,29 +127,24 @@ Presentation.prototype =
         document.querySelector('#spandelete').style.display =  'none';
       },
       setupKeyboardShortcuts: function() {
-        //TODO
-        key('ctrl+c', function() {
+        document.addEventListener('copy', () => {
           me.cloneElement();
         });
-        key('ctrl+v', function() {
+        document.addEventListener('paste', () => {
           me.appendClonedElement();
         });
-        key('del', function() {
-          $('#spandelete').click();
-        });
-        key.setScope('issues');
       },
       cloneElement: function() {
         if (me.selectedElement) {
-          let clone = me.selectedElement.cloneNode(true);
-          clone.id =  'slideelement_' + me.generateUID();
-          clone.left =  me.selectedElement.position().left + 20 + 'px';
-          clone.top =  me.selectedElement.position().top + 20 + 'px';
+          let clone   = me.selectedElement.cloneNode(true);
+          clone.id    = 'slideelement_' + me.generateUID();
+          clone.left  = me.selectedElement.offsetLeft + 20 + 'px';
+          clone.top   = me.selectedElement.offsetTop + 20 + 'px';
           me.clonedElement = clone;
         }
       },
       appendClonedElement: function() {
-        me.selectedSlide.appendChild(me.clonedElement);
+        document.querySelector(me.selectedSlide).appendChild(me.clonedElement);
         me.enableDrag();
       },
       setupMenuItemEvents: function() {
@@ -292,11 +287,28 @@ Presentation.prototype =
       },
       enableSort: function() {
         //TODO
-        $('.slide-thumb-holder').sortable({
+        /*Sortable.create(el, {
+          group: "localStorage-example",
+          store: {
+
+            get: function (sortable) {
+              var order = localStorage.getItem(sortable.options.group.name);
+              return order ? order.split('|') : [];
+            },
+
+            set: function (sortable) {
+              var order = sortable.toArray();
+              localStorage.setItem(sortable.options.group.name, order.join('|'));
+            }
+          }
+        })*/
+
+
+        /*$('.slide-thumb-holder').sortable({
           update: function() {
             me.reArrangeImpressSlides();
           },
-        });
+        });*/
       },
       reArrangeImpressSlides: function() {
         let children = document.querySelector('.slide-thumb-holder').children;
@@ -317,7 +329,7 @@ Presentation.prototype =
       },
       setupDials: function() {
         //TODO
-        $('#rotation-knob').knob({
+        /*$('#rotation-knob').knob({
           change: function(v) {
             me.rotateElement(v);
           },
@@ -331,7 +343,7 @@ Presentation.prototype =
           change: function(v) {
             me.rotateElementY(v);
           },
-        });
+        });*/
 
         document.querySelector('#scale-range').addEventListener('change', function(e) {
          let element = e.target;
@@ -513,188 +525,78 @@ Presentation.prototype =
         me.selectedElement = el;
       },
       setupColorpicker: function() {
-        //TODO
-        $('#colorpicker-btn').spectrum({
-          allowEmpty: true,
-          color: '#000000',
-          showInput: true,
-          containerClassName: 'full-spectrum',
-          showInitial: true,
-          showPalette: true,
-          showSelectionPalette: true,
-          showAlpha: true,
-          maxPaletteSize: 10,
-          preferredFormat: 'hex',
-          move: function(color) {
-            me.colorSelectedElement(color);
-          },
-
-          palette: [
-            [
-              'rgb(0, 0, 0)',
-              'rgb(67, 67, 67)',
-              'rgb(102, 102, 102)', /*"rgb(153, 153, 153)","rgb(183, 183, 183)",*/
-              'rgb(204, 204, 204)',
-              'rgb(217, 217, 217)', /*"rgb(239, 239, 239)", "rgb(243, 243, 243)",*/
-              'rgb(255, 255, 255)'],
-            [
-              'rgb(152, 0, 0)',
-              'rgb(255, 0, 0)',
-              'rgb(255, 153, 0)',
-              'rgb(255, 255, 0)',
-              'rgb(0, 255, 0)',
-              'rgb(0, 255, 255)',
-              'rgb(74, 134, 232)',
-              'rgb(0, 0, 255)',
-              'rgb(153, 0, 255)',
-              'rgb(255, 0, 255)'],
-            [
-              'rgb(230, 184, 175)',
-              'rgb(244, 204, 204)',
-              'rgb(252, 229, 205)',
-              'rgb(255, 242, 204)',
-              'rgb(217, 234, 211)',
-              'rgb(208, 224, 227)',
-              'rgb(201, 218, 248)',
-              'rgb(207, 226, 243)',
-              'rgb(217, 210, 233)',
-              'rgb(234, 209, 220)',
-              'rgb(221, 126, 107)',
-              'rgb(234, 153, 153)',
-              'rgb(249, 203, 156)',
-              'rgb(255, 229, 153)',
-              'rgb(182, 215, 168)',
-              'rgb(162, 196, 201)',
-              'rgb(164, 194, 244)',
-              'rgb(159, 197, 232)',
-              'rgb(180, 167, 214)',
-              'rgb(213, 166, 189)',
-              'rgb(204, 65, 37)',
-              'rgb(224, 102, 102)',
-              'rgb(246, 178, 107)',
-              'rgb(255, 217, 102)',
-              'rgb(147, 196, 125)',
-              'rgb(118, 165, 175)',
-              'rgb(109, 158, 235)',
-              'rgb(111, 168, 220)',
-              'rgb(142, 124, 195)',
-              'rgb(194, 123, 160)',
-              'rgb(166, 28, 0)',
-              'rgb(204, 0, 0)',
-              'rgb(230, 145, 56)',
-              'rgb(241, 194, 50)',
-              'rgb(106, 168, 79)',
-              'rgb(69, 129, 142)',
-              'rgb(60, 120, 216)',
-              'rgb(61, 133, 198)',
-              'rgb(103, 78, 167)',
-              'rgb(166, 77, 121)',
-              /*"rgb(133, 32, 12)", "rgb(153, 0, 0)", "rgb(180, 95, 6)", "rgb(191, 144, 0)", "rgb(56, 118, 29)",
-              "rgb(19, 79, 92)", "rgb(17, 85, 204)", "rgb(11, 83, 148)", "rgb(53, 28, 117)", "rgb(116, 27, 71)",*/
-              'rgb(91, 15, 0)',
-              'rgb(102, 0, 0)',
-              'rgb(120, 63, 4)',
-              'rgb(127, 96, 0)',
-              'rgb(39, 78, 19)',
-              'rgb(12, 52, 61)',
-              'rgb(28, 69, 135)',
-              'rgb(7, 55, 99)',
-              'rgb(32, 18, 77)',
-              'rgb(76, 17, 48)'],
+        const pickrMain = Pickr.create({
+          el: '#colorpicker-btn',
+          theme: 'nano',
+          swatches: [
+            'rgba(244, 67, 54, 1)',
+            'rgba(233, 30, 99, 1)',
+            'rgba(156, 39, 176, 1)',
+            'rgba(103, 58, 183, 1)',
+            'rgba(63, 81, 181, 1)',
+            'rgba(33, 150, 243, 1)',
+            'rgba(3, 169, 244, 1)',
+            'rgba(0, 188, 212, 1)',
+            'rgba(0, 150, 136, 1)',
+            'rgba(76, 175, 80, 1)',
+            'rgba(139, 195, 74, 1)',
+            'rgba(205, 220, 57, 1)',
+            'rgba(255, 235, 59, 1)',
+            'rgba(255, 193, 7, 1)'
           ],
+          lockOpacity: true,
+          useAsButton: true,
+          components: {
+            hue: true,
+            preview: true,
+            interaction: {
+              hex: true,
+              input: true
+            }
+          },
+        });
+        pickrMain.on('change', (color) => {
+          me.colorSelectedElement(color);
         });
 
-        $('#preview-graphique-add-donnee-color').spectrum({
-          allowEmpty: true,
-          color: '#000000',
-          flat: true,
-          showInput: true,
-          containerClassName: 'full-spectrum',
-          showInitial: true,
-          showPalette: true,
-          showSelectionPalette: true,
-          showAlpha: true,
-          maxPaletteSize: 10,
-          preferredFormat: 'hex',
-          move: function(color) {
-            me.graphiqueColor = color;
-          },
 
-          palette: [
-            [
-              'rgb(0, 0, 0)',
-              'rgb(67, 67, 67)',
-              'rgb(102, 102, 102)', /*"rgb(153, 153, 153)","rgb(183, 183, 183)",*/
-              'rgb(204, 204, 204)',
-              'rgb(217, 217, 217)', /*"rgb(239, 239, 239)", "rgb(243, 243, 243)",*/
-              'rgb(255, 255, 255)'],
-            [
-              'rgb(152, 0, 0)',
-              'rgb(255, 0, 0)',
-              'rgb(255, 153, 0)',
-              'rgb(255, 255, 0)',
-              'rgb(0, 255, 0)',
-              'rgb(0, 255, 255)',
-              'rgb(74, 134, 232)',
-              'rgb(0, 0, 255)',
-              'rgb(153, 0, 255)',
-              'rgb(255, 0, 255)'],
-            [
-              'rgb(230, 184, 175)',
-              'rgb(244, 204, 204)',
-              'rgb(252, 229, 205)',
-              'rgb(255, 242, 204)',
-              'rgb(217, 234, 211)',
-              'rgb(208, 224, 227)',
-              'rgb(201, 218, 248)',
-              'rgb(207, 226, 243)',
-              'rgb(217, 210, 233)',
-              'rgb(234, 209, 220)',
-              'rgb(221, 126, 107)',
-              'rgb(234, 153, 153)',
-              'rgb(249, 203, 156)',
-              'rgb(255, 229, 153)',
-              'rgb(182, 215, 168)',
-              'rgb(162, 196, 201)',
-              'rgb(164, 194, 244)',
-              'rgb(159, 197, 232)',
-              'rgb(180, 167, 214)',
-              'rgb(213, 166, 189)',
-              'rgb(204, 65, 37)',
-              'rgb(224, 102, 102)',
-              'rgb(246, 178, 107)',
-              'rgb(255, 217, 102)',
-              'rgb(147, 196, 125)',
-              'rgb(118, 165, 175)',
-              'rgb(109, 158, 235)',
-              'rgb(111, 168, 220)',
-              'rgb(142, 124, 195)',
-              'rgb(194, 123, 160)',
-              'rgb(166, 28, 0)',
-              'rgb(204, 0, 0)',
-              'rgb(230, 145, 56)',
-              'rgb(241, 194, 50)',
-              'rgb(106, 168, 79)',
-              'rgb(69, 129, 142)',
-              'rgb(60, 120, 216)',
-              'rgb(61, 133, 198)',
-              'rgb(103, 78, 167)',
-              'rgb(166, 77, 121)',
-              /*"rgb(133, 32, 12)", "rgb(153, 0, 0)", "rgb(180, 95, 6)", "rgb(191, 144, 0)", "rgb(56, 118, 29)",
-              "rgb(19, 79, 92)", "rgb(17, 85, 204)", "rgb(11, 83, 148)", "rgb(53, 28, 117)", "rgb(116, 27, 71)",*/
-              'rgb(91, 15, 0)',
-              'rgb(102, 0, 0)',
-              'rgb(120, 63, 4)',
-              'rgb(127, 96, 0)',
-              'rgb(39, 78, 19)',
-              'rgb(12, 52, 61)',
-              'rgb(28, 69, 135)',
-              'rgb(7, 55, 99)',
-              'rgb(32, 18, 77)',
-              'rgb(76, 17, 48)'],
+
+        const pickrGraphique = Pickr.create({
+          el: '#preview-graphique-add-donnee-color',
+          theme: 'nano',
+          appClass: 'w-100',
+          swatches: [
+            'rgba(244, 67, 54, 1)',
+            'rgba(233, 30, 99, 1)',
+            'rgba(156, 39, 176, 1)',
+            'rgba(103, 58, 183, 1)',
+            'rgba(63, 81, 181, 1)',
+            'rgba(33, 150, 243, 1)',
+            'rgba(3, 169, 244, 1)',
+            'rgba(0, 188, 212, 1)',
+            'rgba(0, 150, 136, 1)',
+            'rgba(76, 175, 80, 1)',
+            'rgba(139, 195, 74, 1)',
+            'rgba(205, 220, 57, 1)',
+            'rgba(255, 235, 59, 1)',
+            'rgba(255, 193, 7, 1)'
           ],
+          lockOpacity: true,
+          inline: true,
+          showAlways: true,
+          useAsButton: true,
+          components: {
+            hue: true,
+            preview: true,
+            interaction: {
+              hex: true,
+              input: true
+            }
+          },
         });
-
+        pickrGraphique.on('change', (color) => {
+          me.graphiqueColor = color.toRGBA().toString(0);
+        });
       },
       addSettingsPanel: function() {
         this.removeListeners();
@@ -713,11 +615,14 @@ Presentation.prototype =
         me.generateScaledSlide(me.selectedSlide);
       },
       colorSelectedElement: function(color) {
-        if (me.selectedElement)
-          me.selectedElement.style.color = 'rgb(' + color._r + ',' + color._g + ',' + color._b + ')';
-
-        if (me.selectedElement[0].localName === 'svg')
-          me.selectedElement.style.fill = 'rgb(' + color._r + ',' + color._g + ',' + color._b + ')';
+        let rgba = color.toRGBA().toString(0);
+        if (me.selectedElement){
+          if (me.selectedElement.localName === 'svg'){
+            me.selectedElement.style.fill = rgba;
+          } else {
+            me.selectedElement.style.color = rgba;
+          }
+        }
       },
       addSlide: function() {
         let thumb = slidethumb;
@@ -845,19 +750,6 @@ Presentation.prototype =
           id = Math.round(Math.random() * 10000);
         }while (document.querySelector('slidelement_' + id));
         return id;
-      },
-      animateSettingsPanel: function(direction) {
-        //TODO
-        if (direction === 'left') {
-          $('.settingsbox').
-              animate({'left': '-500px', 'opacity': 0},
-                  {duration: 300, easing: 'linear'});
-        }
-        if (direction === 'right') {
-          $('.settingsbox').
-              animate({'left': '230px', 'opacity': 1},
-                  {duration: 300, easing: 'linear'});
-        }
       },
       assemblePanoramaCases: function() {
         let panoramaViewport = document.querySelector('.panorama-viewport');
@@ -1109,9 +1001,7 @@ Presentation.prototype =
           me.monGraphique.data.labels.push(nom);
           me.monGraphique.data.datasets.forEach((dataset) => {
             dataset.data.push(valeur);
-            dataset.backgroundColor.push(
-                'rgb(' + couleur._r + ',' + couleur._g + ',' + couleur._b +
-                ')');
+            dataset.backgroundColor.push(couleur);
           });
           me.monGraphique.update();
         });
@@ -1917,10 +1807,7 @@ Presentation.prototype =
       },
       removeListeners: function() {
         //TODO
-        $('#new-panorama-panel').off();
-      },
-      onSettingsCancelClicked: function() {
-        me.animateSettingsPanel('left');
+        //$('#new-panorama-panel').off();
       },
       onNewPresentationItemClicked: function() {
         document.querySelector('#new-preso-header').innerHTML = 'Créer une nouvelle présentation';

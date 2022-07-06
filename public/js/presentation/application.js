@@ -10,9 +10,6 @@ $(document).ready(function() {
         $(this).toggleClass("todo-done");
     });
 
-    // Init tooltips
-    $("[data-toggle=tooltip]").tooltip("show");
-
     // Init tags input
     $("#tagsinput").tagsInput();
 

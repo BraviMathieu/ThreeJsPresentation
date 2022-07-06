@@ -1,18 +1,19 @@
 {
-    "autoload": {
-        "classmap": [
-            "App/Classe/"
-        ],
-        "psr-4": {
-            "App\\": "App/Classe/",
-            "Core\\": "Core/"
-        }
-    },
-    "require": {
-        "illuminate/database": "^7.5",
-        "ext-json": "*"
-    },
-    "require-dev": {
-        "symfony/var-dumper": "^5.0"
+  "autoload": {
+    "classmap": [
+      "App/Classe/"
+    ],
+    "psr-4": {
+      "App\\": "App/Classe/",
+      "Core\\": "Core/"
     }
+  },
+  "require": {
+    "illuminate/database": "^7.5",
+    "ext-json": "*",
+    "ext-zip": "*"
+  },
+  "require-dev": {
+    "symfony/var-dumper": "^5.0"
+  }
 }

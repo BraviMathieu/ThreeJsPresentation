@@ -13,7 +13,7 @@ use App\Session;
   <!-- Navbar-->
   <ul class="navbar-nav ml-auto ml-md-0">
     <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+      <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
         <a class="dropdown-item" href="main_configuration">Configuration</a>
         <div class="dropdown-divider"></div>
@@ -30,7 +30,7 @@ use App\Session;
           <div class="sb-sidenav-menu-heading">Core</div>
           <a class="nav-link" href="/public/main_dashboard"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
             Dashboard</a>
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePrésentations" aria-expanded="false" aria-controls="collapsePrésentations"
+          <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-target="#collapsePrésentations" aria-expanded="false" aria-controls="collapsePrésentations"
           ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
             Présentations
             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
@@ -41,7 +41,7 @@ use App\Session;
             </nav>
           </div>
 
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseObjets" aria-expanded="false" aria-controls="collapseObjets"
+          <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-target="#collapseObjets" aria-expanded="false" aria-controls="collapseObjets"
           ><div class="sb-nav-link-icon"><i class="fas fa-cube"></i></div>
             Objets 3D
             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div

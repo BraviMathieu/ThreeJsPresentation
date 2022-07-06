@@ -1,8 +1,5 @@
-
 <style>
-  .suppression{
-    color:white !important;
-  }
+  .suppression{color:white !important;}
 </style>
 
 <h1 class="mt-4"><i class="fa fa-angle-right titre-fa"></i> <?=$title?></h1>
