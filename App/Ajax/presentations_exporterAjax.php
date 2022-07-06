@@ -32,5 +32,5 @@ if ($zip->open($filename, ZipArchive::OVERWRITE) !== true) {
     $zip->addFromString("presentation.html", $tabData['presentation_export']);
     $zip->close();
 
-    echo('{"path":"'.basename($filename).'"}');
+    echo('{"path":"' . basename($filename) . '"}');
 }
