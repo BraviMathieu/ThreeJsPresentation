@@ -19,9 +19,8 @@ Installation du projet
 Pour cloner le projet sur votre ordinateur, il faut lancer la commande : 
 
 ```bash
-git clone https://github.com/BraviMathieu/ThreeJsPresentation.git
+git clone https://github.com/BraviMathieu/ThreeJsPresentation.git ./ThreeJS_Presentation/
 ```
-Assurez vous que le dossier du projet s'appelle : ThreeJS_Presentation
 
 Il faut installer les librairies avec Composer en effecuant la commande suivante : 
 
