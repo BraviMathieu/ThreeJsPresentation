@@ -46,11 +46,15 @@ class Alert
 
     private static function pattern($data)
     {
-        return "<script>
-      $(document).ready(function(){
-        toastr.{$data['type']}(\"{$data['message']}\")
-      });
-      </script>";
+        return <<<SCRIPT
+          <script>
+          new bs_toast.Toast({
+            body: '{$data['message']}',
+            className: 'border-0 bg-{$data['type']} text-white',
+            btnCloseWhite: true,
+            }).show()
+          </script>
+SCRIPT;
     }
 
     public function error($message)

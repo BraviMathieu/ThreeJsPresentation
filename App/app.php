@@ -16,8 +16,6 @@ if ($path != '/login' && $path != '/logout' && $path != '/presentation_creation'
     include_once APP . '/Template/inc/nav_menu.php';
 }
 
-echo Alert::display();
-
 if (startsWith($path, "/main_")) {
     include_once CONTROLLER . '/mainController.php';
 } elseif (startsWith($path, "/presentation_")) {
