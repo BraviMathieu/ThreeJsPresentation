@@ -1281,7 +1281,8 @@ Presentation.prototype =
         });
 
         let urlmyobj;
-        document.querySelector('#savedobjects').addEventListener('change', function(element) {
+        document.querySelector('#savedobjects').addEventListener('change', function(e) {
+          let element = document.querySelector('#savedobjects');
           urlmyobj = element.options[element.selectedIndex].value;
           document.querySelector('#previewobj').src =
               'uploads/' + user_id_ajax + '/' + urlmyobj;
