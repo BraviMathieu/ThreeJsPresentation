@@ -46,7 +46,7 @@ class Form extends \Core\Form
             $label = ucfirst($name);
         }
         $options['id'] = 'form-' . $name;
-        return '<div class="form-group">
+        return '<div class="mb-3">
                   <label class="col-sm-2 col-sm-2 control-label" for="' . $options['id'] . '">' . $label . ' :</label>
                   <div class="col-sm-10">
                       ' . parent::input($name, $this->option($options)) . '
@@ -62,7 +62,7 @@ class Form extends \Core\Form
     public function button(string $text = "Enregistrer"): string
     {
         $this->button = true;
-        return '<div class="form-group">
+        return '<div class="mb-3">
                   <div class="col-sm-2">
                       <button class="btn btn-primary" type="submit">' . $text . '</button>
                   </div>

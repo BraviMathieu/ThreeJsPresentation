@@ -1155,39 +1155,61 @@ Presentation.prototype =
           me.newAllPresentationsModal.show();
         });
 
-        $('#import-objet-panel').on('click', function() {
+        document.querySelector('#import-objet-panel').addEventListener('click', function() {
           me.newImportObjetModal.show();
         });
 
-        $('#objinput').change(function() {
-          if ($(this).prop('files').length > 0) {
-            objimport = $(this).prop('files')[0];
+        let objimport
+        document.querySelector('#objinput').addEventListener('change', function(e) {
+          let self = document.querySelector('#objinput');
+          if(self.files.length > 0) {
+            objimport = self.files[0];
             if (!objimport.name.includes('.obj')) {
-              document.getElementById('objinput').value = '';
-              toastr.error('vous devez importer un .obj');
+              self.value = '';
+              new bs_toast.Toast({
+                body: 'Vous devez importer un fichier <b>.obj</b>.',
+                className: 'border-0 bg-danger text-white',
+                btnCloseWhite: true,
+              }).show()
             }
           }
         });
 
+        let mtlimport
         document.querySelector('#mtlinput').addEventListener('change',function(element) {
-          if ($(this).prop('files').length > 0) {
-            mtlimport = $(this).prop('files')[0];
+          let self = document.querySelector('#mtlinput');
+          if(self.files.length > 0) {
+            mtlimport = self.files[0];
             if (!mtlimport.name.includes('.mtl')) {
-              document.getElementById('mtlinput').value = '';
-              toastr.error('vous devez importer un .mtl');
+              self.value = '';
+              new bs_toast.Toast({
+                body: 'Vous devez importer un fichier <b>.mtl</b>.',
+                className: 'border-0 bg-danger text-white',
+                btnCloseWhite: true,
+              }).show()
             }
           }
         });
 
 
-        document.querySelector('#imginput').addEventListener('change',function(element) {
-          if (element.getAttribute('files').length > 0) {
-            for (let n = 0; n < element.getAttribute('files').length; n++) {
-              let imgimport = element.getAttribute('files')[n];
-              let formdata = new FormData();
+        document.querySelector('#imginput').addEventListener('change',function(e) {
+          let element = document.querySelector('#imginput');
+          if (element.files.length > 0) {
+
+            let imgimport;
+            let formdata;
+
+            for (let n = 0; n < element.files.length; n++) {
+              imgimport = element.files[n];
+              formdata  = new FormData();
               if (!imgimport.type.includes('image/jpeg')) {
                 document.querySelector('#imginput').value = '';
-                toastr.error('vous devez importer un .jpg');
+                new bs_toast.Toast({
+                  body: 'Vous devez importer un fichier <b>.jpg</b>.',
+                  className: 'border-0 bg-danger text-white',
+                  btnCloseWhite: true,
+                }).show()
+
               } else {
                 formdata.append('img', imgimport);
                 formdata.append('idUser', user_id_ajax);
@@ -1195,12 +1217,7 @@ Presentation.prototype =
                 fetch('App/Ajax/texturejpg_importAjax.php', {
                   method: 'POST',
                   cache: 'no-cache',
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
                   body: formdata,
-                }).then(data => {
-                  return data.json();
                 }).then(data => {
                   me.afficheMesObj(data);
                 }).catch(error => {
@@ -1223,24 +1240,22 @@ Presentation.prototype =
             fetch('App/Ajax/objet3d_importAjax.php', {
               method: 'POST',
               cache: 'no-cache',
-              headers: {
-                'Content-Type': 'application/json',
-              },
               body: formdata,
             }).then(data => {
-              return data.json();
-            }).then(data => {
               me.afficheMesObj(data);
+
+              let objurl = objimport.name + '.html';
+              me.addMyObjectToSlide(objurl);
+              me.newImportObjetModal.hide();
             }).catch(error => {
               console.log(error);
             });
-
-            let objurl = objimport.name + '.html';
-            me.addMyObjectToSlide(objurl);
-            me.newImportObjetModal.hide();
-
           } else {
-            toastr.error('veuillez importer vos fichiers mtl et obj');
+            new bs_toast.Toast({
+              body: 'Veuillez importer vos fichiers <b>.mtl</b> et <b>.obj</b>.',
+              className: 'border-0 bg-danger text-white',
+              btnCloseWhite: true,
+            }).show()
           }
         });
 
@@ -1295,7 +1310,7 @@ Presentation.prototype =
           });
         })
 
-        $('#append-object-btn').on('click', function() {
+        document.querySelector('#append-object-btn').addEventListener('click', function() {
           me.addObjectToSlide(objet);
           me.newObjetModal.hide();
         });
@@ -1679,36 +1694,30 @@ Presentation.prototype =
         cell.appendChild(txt);
       },
       addObjectToSlide: function(obj) {
-        let iframe = document.createElement('iframe');
-        iframe.id = 'slidelement_' + me.generateUID();
-        iframe.width = '500';
-        iframe.height = '500';
-        iframe.src =
-            'http://' + me.obj3dUrl + 'public/lib/objets3d/' + obj + '.html';
-        iframe.className = 'slidelement';
-        iframe.frameborder = '5';
-        iframe.style.width = '200px';
-        iframe.style.height = '200px';
-        document.querySelector('.accordion').appendChild(iframe);
+        let iframe = me.addElementToSlide('http://' + me.obj3dUrl + 'public/lib/objets3d/' + obj + '.html');
 
+        document.querySelector('.accordion').appendChild(iframe);
         document.querySelector(me.selectedSlide).appendChild(iframe);
         me.enableDrag();
       },
       addMyObjectToSlide: function(obj) {
+        let iframe = me.addElementToSlide('http://' + me.obj3dUrl + 'uploads/' + user_id_ajax + '/' + obj);
+
+        document.querySelector('.accordion').appendChild(iframe);
+        document.querySelector(me.selectedSlide).appendChild(iframe);
+        me.enableDrag();
+      },
+      addElementToSlide: function(url){
         let iframe = document.createElement('iframe');
         iframe.id = 'slidelement_' + me.generateUID();
         iframe.width = '500';
         iframe.height = '500';
-        iframe.src =
-            'http://' + me.obj3dUrl + 'uploads/' + user_id_ajax + '/' + obj;
+        iframe.src = url;
         iframe.className = 'slidelement';
         iframe.frameborder = '5';
         iframe.style.width = '200px';
         iframe.style.height = '200px';
-        document.querySelector('.accordion').appendChild(iframe);
-
-        document.querySelector(me.selectedSlide).appendChild(iframe);
-        me.enableDrag();
+        return iframe;
       },
       addSvgToSlide: function(forme) {
         forme.id = 'slidelement_' + me.generateUID();

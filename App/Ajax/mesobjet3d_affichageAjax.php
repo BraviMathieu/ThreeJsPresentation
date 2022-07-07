@@ -4,14 +4,13 @@ const ROOT = "../..";
 const CONFIG = ROOT . '/Config';
 const APP = ROOT . '/App';
 
-$out = array();
-
 $tabData = json_decode(file_get_contents("php://input"), true);
-$id = $tabData["idUser"];
+$id = intval($tabData['idUser']);
 
 if (!is_dir(APP . "/../uploads/" . $id)) {
     mkdir(APP . "/../uploads/" . $id, 0755);
 }
+$out = [];
 foreach (glob(APP . "/../uploads/" . $id . "/*.html") as $filename) {
     $p = pathinfo($filename);
     $out[] = $p;

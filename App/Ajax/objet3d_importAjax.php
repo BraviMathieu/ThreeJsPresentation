@@ -6,16 +6,19 @@ const APP = ROOT . '/App';
 
 require_once CONFIG . "/config.php";
 
+$tabData = json_decode(file_get_contents("php://input"), true);
+$id = intval($tabData['idUser']);
+
 $obj = $_FILES["obj"]["name"];
 $mtl = $_FILES["mtl"]["name"];
-$id = $_POST["idUser"];
+
 if (!is_dir(APP . "/../uploads/" . $id)) {
     mkdir(APP . "/../uploads/" . $id, 0755);
 }
 move_uploaded_file($_FILES["mtl"]["tmp_name"], APP . "/../uploads/" . $id . "/" . $mtl);
 move_uploaded_file($_FILES["obj"]["tmp_name"], APP . "/../uploads/" . $id . "/" . $obj);
 $f = fopen(APP . "/../uploads/" . $id . "/" . $obj . ".html", "w");
-$html = "
+$html = <<<HTML
 <html>
 <head>
   <title>My first three.js app</title>
@@ -26,7 +29,7 @@ $html = "
 </head>
 <body>
 
-<script  type=\"module\">
+<script  type="module">
   import * as THREE from '../../public/lib/threejs/three.module.js';
   import { MTLLoader } from '../../public/lib/threejs/MTLLoader.js';
   import { OBJLoader } from '../../public/lib/threejs/OBJLoader.js';
@@ -60,11 +63,11 @@ $html = "
 
   
   new MTLLoader( manager )
-      .load( \"$mtl\", function ( materials ) {
+      .load( "{$mtl}", function ( materials ) {
         materials.preload();
         new OBJLoader( manager )
           .setMaterials( materials )
-          .load(\"$obj\", function ( object ) {
+          .load("{$obj}", function ( object ) {
             scene.add( object );
           }, onProgress, onError );
       });
@@ -80,9 +83,9 @@ $html = "
 </script>
 </body>
 </html>
-";
+HTML;
+
 fwrite($f, $html);
 fclose($f);
 
 echo $id;
-var_dump(!is_dir(APP . "/../uploads/" . $id));

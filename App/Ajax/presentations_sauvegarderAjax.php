@@ -8,10 +8,10 @@ require_once CONFIG . "/config.php";
 require_once "../Classe/Database/Bootstrap.php";
 
 $tabData = json_decode(file_get_contents("php://input"), true);
-$user_id = $tabData['user_id'];
+$user_id = intval($tabData['user_id']);
 $new_presentation = $tabData['new_presentation'];
 
-$id = $new_presentation['id'];
+$id = intval($new_presentation['id']);
 $titre = $new_presentation['title'];
 $desc = $new_presentation['description'];
 $contents = $new_presentation['contents'];

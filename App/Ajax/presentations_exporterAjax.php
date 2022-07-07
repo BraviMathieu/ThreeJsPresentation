@@ -17,7 +17,6 @@ $tabFichiersToZip = [
 
 $tabData = json_decode(file_get_contents("php://input"), true);
 
-
 $zip = new ZipArchive();
 $filename = tempnam(sys_get_temp_dir(), "threejs-presentation_");
 

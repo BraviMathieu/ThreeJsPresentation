@@ -61,7 +61,7 @@ SCRIPT;
     {
         $_SESSION['alert'][] = [
             'message' => $message,
-            'type' => 'error'
+            'type' => 'danger'
         ];
     }
 

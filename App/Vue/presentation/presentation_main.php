@@ -161,17 +161,17 @@ use App\Session;
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
       </div>
       <div class="modal-body">
-        <div class="form-group">
+        <div class="mb-3">
             <label for="image-input">Coller l'URL de l'image </label>
             <input type="text" id="image-input" class="form-control">
         </div>
         <p> La prévisualisation va apparaitre en dessous.</p>
         <img id="preview-image" alt="" src="">
-        <div class="form-group">
+        <div class="mb-3">
             <label for="image-width">Largeur de l'image (en px): </label>
             <input type="text" id="image-width" class="form-control">
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="image-height">Hauteur de l'image (en px): </label>
             <input type="text" id="image-height" class="form-control">
         </div>
@@ -193,7 +193,7 @@ use App\Session;
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
       </div>
       <div class="modal-body">
-          <div class="form-group">
+          <div class="mb-3">
               <label for="video-input">Coller l'URL de la vidéo</label>
               <input type="text" id="video-input" class="form-control">
           </div>
@@ -255,7 +255,7 @@ use App\Session;
       <div class="modal-body">
         <div class="row">
           <div class="col-lg-12">
-              <div class="form-group">
+              <div class="mb-3">
                 <label for="preview-graphique-type">Type de graphique</label>
                 <select class="form-select" name="preview-graphique-type" id="preview-graphique-type">
                   <option value="bar">Diagramme en bâtons</option>
@@ -265,10 +265,9 @@ use App\Session;
               </div>
           </div>
         </div>
-        <br>
         <div class="row">
           <div class="col-lg-12">
-              <div class="form-group">
+              <div class="mb-3">
                 <label for="preview-graphique-add-donnee-val">Valeur</label>
                 <input type="number" class="form-control" id="preview-graphique-add-donnee-val" value="1">
             </div>
@@ -276,8 +275,8 @@ use App\Session;
         </div>
 
         <div class="row">
-          <div class="col-lg-12 text-center">
-              <div class="form-group">
+          <div class="col-lg-12">
+              <div class="mb-3">
                 <label for="preview-graphique-add-donnee-color">Couleur</label>
                 <input id="preview-graphique-add-donnee-color" type="text" class="form-control"/>
               </div>
@@ -286,7 +285,7 @@ use App\Session;
 
         <div class="row">
           <div class="col-lg-12">
-              <div class="form-group">
+              <div class="mb-3">
                 <label for="preview-graphique-add-donnee-nom">Nom</label>
                 <input id="preview-graphique-add-donnee-nom" type="text" class="form-control input-lg"/>
               </div>
@@ -360,17 +359,17 @@ use App\Session;
           <li>Un fichier <b>.mtl</b> pour lier l'objet 3D à la texture</li>
           <li>Au moins un fichier <b>.jpg</b> pour la texture (vous pouvez en choisir plusieurs)</li>
         </ul>
-        <div class="form-group">
+        <div class="mb-3">
           <label for="objinput">Importer un fichier .obj</label>
           <input id="objinput" class="form-control-file" type="file" accept=".obj" >
         </div>
 
-        <div class="form-group">
+        <div class="mb-3">
           <label for="mtlinput">Importer un fichier .mtl</label>
           <input id="mtlinput" class="form-control-file" type="file" accept=".mtl" >
         </div>
 
-        <div class="form-group">
+        <div class="mb-3">
           <label for="imginput">Importer un fichier .jpg</label>
           <input id="imginput" class="form-control-file" type="file" accept=".jpg"  multiple>
         </div>
@@ -415,11 +414,11 @@ use App\Session;
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
       </div>
       <div class="modal-body">
-        <div class="form-group">
+        <div class="mb-3">
             <label for="title-input">Titre</label>
             <input type="text" id="title-input" class="form-control" value="Nouvelle présentation" maxlength="60">
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <label for="description-input">Description</label>
             <textarea id="description-input" class="form-control">Exemple de description de présentation</textarea>
         </div>
