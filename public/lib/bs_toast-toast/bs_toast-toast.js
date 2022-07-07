@@ -20,17 +20,17 @@
       #pos;
 
       constructor(param) {
-        this.#body = Toast.#setOption(param.body, "");
-        this.#animation = Toast.#setOption(param.animation, true);
-        this.#autohide = Toast.#setOption(param.autohide, true);
-        this.#btnClose = Toast.#setOption(param.btnClose, true);
-        this.#btnCloseWhite = Toast.#setOption(param.btnCloseWhite, false);
-        this.#className = Toast.#setOption(param.className, "");
-        this.#delay = Toast.#setOption(param.delay, 5e3);
-        this.#gap = Toast.#setOption(param.gap, 16);
-        this.#header = Toast.#setOption(param.header, "");
-        this.#margin = Toast.#setOption(param.margin, "1rem");
-        this.#placement = Toast.#setOption(param.placement, "top-right");
+        this.#body = this.#setOption(param.body, "");
+        this.#animation = this.#setOption(param.animation, true);
+        this.#autohide = this.#setOption(param.autohide, true);
+        this.#btnClose = this.#setOption(param.btnClose, true);
+        this.#btnCloseWhite = this.#setOption(param.btnCloseWhite, false);
+        this.#className = this.#setOption(param.className, "");
+        this.#delay = this.#setOption(param.delay, 5e3);
+        this.#gap = this.#setOption(param.gap, 16);
+        this.#header = this.#setOption(param.header, "");
+        this.#margin = this.#setOption(param.margin, "1rem");
+        this.#placement = this.#setOption(param.placement, "top-right");
         this.#pos = this.#placement.split("-");
         const closeBtn = `<button type="button" hidden class="btn-close flex-shrink-0" data-bs-dismiss="toast" aria-label="Close"></button>`;
         let style = `style="margin:${this.#margin};${this.#pos[0]}:0;${this.#pos[1]}:${this.#animation
@@ -84,7 +84,7 @@
         });
       }
 
-      static #setOption(param, defaultValue) {
+      #setOption(param, defaultValue) {
         return param !== void 0 ? param : defaultValue;
       }
 

@@ -1,9 +1,9 @@
 <?php
 
-define('ROOT', "../..");
-define('CONFIG', ROOT . '/Config');
-define('APP', ROOT . '/App');
-define('WEBROOT', ROOT . '/public');
+const ROOT = "../..";
+const CONFIG = ROOT . '/Config';
+const APP = ROOT . '/App';
+const WEBROOT = ROOT . '/public';
 
 //Récupération de tous les fichiers a zipper et exporter
 $tabFichiersToZip = [
