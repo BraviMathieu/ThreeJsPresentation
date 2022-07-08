@@ -1166,7 +1166,7 @@ Presentation.prototype =
             objimport = self.files[0];
             if (!objimport.name.includes('.obj')) {
               self.value = '';
-              new bs_toast.Toast({
+              new bootstrap_toast.Toast({
                 body: 'Vous devez importer un fichier <b>.obj</b>.',
                 className: 'border-0 bg-danger text-white',
                 btnCloseWhite: true,
@@ -1182,7 +1182,7 @@ Presentation.prototype =
             mtlimport = self.files[0];
             if (!mtlimport.name.includes('.mtl')) {
               self.value = '';
-              new bs_toast.Toast({
+              new bootstrap_toast.Toast({
                 body: 'Vous devez importer un fichier <b>.mtl</b>.',
                 className: 'border-0 bg-danger text-white',
                 btnCloseWhite: true,
@@ -1204,7 +1204,7 @@ Presentation.prototype =
               formdata  = new FormData();
               if (!imgimport.type.includes('image/jpeg')) {
                 document.querySelector('#imginput').value = '';
-                new bs_toast.Toast({
+                new bootstrap_toast.Toast({
                   body: 'Vous devez importer un fichier <b>.jpg</b>.',
                   className: 'border-0 bg-danger text-white',
                   btnCloseWhite: true,
@@ -1251,7 +1251,7 @@ Presentation.prototype =
               console.log(error);
             });
           } else {
-            new bs_toast.Toast({
+            new bootstrap_toast.Toast({
               body: 'Veuillez importer vos fichiers <b>.mtl</b> et <b>.obj</b>.',
               className: 'border-0 bg-danger text-white',
               btnCloseWhite: true,

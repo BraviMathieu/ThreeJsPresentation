@@ -2,11 +2,8 @@
 use App\Session;
 ?>
 <style>
-  .bg-vert{
-    background-color: #6f2232 !important;
-  }
+  .bg-vert{background-color: #6f2232 !important;}
 </style>
-
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-vert">
   <a class="navbar-brand" href="#">Presentation ThreeJs</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button><!-- Navbar Search-->
   <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"></div>
@@ -28,16 +25,20 @@ use App\Session;
       <div class="sb-sidenav-menu">
         <div class="nav">
           <div class="sb-sidenav-menu-heading">Core</div>
-          <a class="nav-link" href="/public/main_dashboard"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-            Dashboard</a>
-          <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-target="#collapsePrésentations" aria-expanded="false" aria-controls="collapsePrésentations"
-          ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+          <a class="nav-link" href="/public/main_dashboard">
+            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+            Dashboard
+          </a>
+          <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-target="#collapsePrésentations" aria-expanded="false" aria-controls="collapsePrésentations">
+            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
             Présentations
-            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
-            ></a>
+            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+          </a>
           <div class="collapse" id="collapsePrésentations" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-            <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="/public/presentation_creation"><div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
-                Création</a>
+            <nav class="sb-sidenav-menu-nested nav">
+              <a class="nav-link" href="/public/presentation_creation"><div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
+                Création
+              </a>
             </nav>
           </div>
 

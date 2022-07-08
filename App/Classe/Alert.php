@@ -48,7 +48,7 @@ class Alert
     {
         return <<<SCRIPT
           <script>
-          new bs_toast.Toast({
+          new bootstrap_toast.Toast({
             body: '{$data['message']}',
             className: 'border-0 bg-{$data['type']} text-white',
             btnCloseWhite: true,

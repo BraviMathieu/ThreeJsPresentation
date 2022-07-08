@@ -1,9 +1,5 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-  presentation();
+  let presentation = new Presentation();
+  presentation.initialize();
+  presentation.addSettingsPanel();
 });
-
-function presentation(){
-   let presentation = new Presentation();
-   presentation.initialize();
-   presentation.addSettingsPanel();
-}

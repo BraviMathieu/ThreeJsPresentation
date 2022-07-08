@@ -32,7 +32,7 @@ use App\Alert;
 
         <!--  JS -->
         <script src="public/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="public/lib/bs_toast-toast/bs_toast-toast.js"></script>
+        <script src="public/lib/bootstrap_toast/bootstrap_toast.js"></script>
 
         <script src="public/lib/font-awesome/js/all.min.js"></script>
 
