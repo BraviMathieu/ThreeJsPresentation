@@ -35,6 +35,8 @@ use App\Alert;
         <script src="public/lib/bootstrap_toast/bootstrap_toast.js"></script>
 
         <script src="public/lib/font-awesome/js/all.min.js"></script>
+        <script src="public/lib/movable/movable.min.js"></script>
+        <script src="public/lib/sortable/sortable.min.js"></script>
 
         <script src="public/js/presentation/startup.js"></script>
         <script src="public/js/presentation/main.js"></script>
@@ -42,7 +44,6 @@ use App\Alert;
 
         <script src="public/lib/pace/js/pace.min.js"></script>
         <script src="public/lib/chartjs/Chart.min.js"></script>
-        <script src="public/lib/movable/movable.min.js"></script>
         <script src="public/lib/pickr/pickr.min.js"></script>
 
         <script>

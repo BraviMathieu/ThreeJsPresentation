@@ -270,3 +270,7 @@ body {
 .sb-sidenav-light .sb-sidenav-footer {
   background-color: #e9ecef;
 }
+
+/*Sortable*/
+.sortable-ghost {border: 1px dashed #9ea0a2;}
+.sortable-ghost *{display: none !important;}
