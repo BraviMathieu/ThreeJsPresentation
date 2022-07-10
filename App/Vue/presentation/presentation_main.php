@@ -5,7 +5,7 @@ use App\Session;
     .bg-rouge {background-color: #6f2232 !important;}
 </style>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-rouge">
-  <a class="navbar-brand" href="#">Presentation ThreeJs</a>
+  <a class="navbar-brand" href="#">ThreeJs Présentation</a>
   <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"></div>
   <!-- Navbar-->
   <ul class="navbar-nav ms-auto me-1">

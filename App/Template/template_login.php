@@ -6,9 +6,10 @@ use App\Alert;
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Connexion / Inscription</title>
+    <title>ThreeJS Présentation - Connexion / Inscription</title>
     <link href="public/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="public/css/login.css">
+    <link rel="icon" href="./favicon.ico" />
   </head>
   <body>
     <?= $content; ?>

@@ -7,7 +7,8 @@ use App\Alert;
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Création de présentation</title>
+    <title>ThreeJS Présentation - Création de présentation</title>
+    <link rel="icon" href="./favicon.ico"/>
 
     <!-- Bootstrap -->
     <link href="public/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -35,7 +36,7 @@ use App\Alert;
         <script src="public/lib/bootstrap_toast/bootstrap_toast.js"></script>
 
         <script src="public/lib/font-awesome/js/all.min.js"></script>
-        <script src="public/lib/movable/movable.min.js"></script>
+        <script src="//daybrush.com/moveable/release/latest/dist/moveable.min.js"></script>
         <script src="public/lib/sortable/sortable.min.js"></script>
 
         <script src="public/js/presentation/startup.js"></script>
