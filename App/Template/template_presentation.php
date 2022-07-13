@@ -41,7 +41,7 @@ use App\Alert;
 
         <script src="public/js/presentation/startup.js"></script>
         <script src="public/js/presentation/main.js"></script>
-        <script src="public/js/presentation/templates/newpresotemplate.js"></script>
+        <script src="public/js/presentation/component_template.js"></script>
 
         <script src="public/lib/pace/js/pace.min.js"></script>
         <script src="public/lib/chartjs/Chart.min.js"></script>
