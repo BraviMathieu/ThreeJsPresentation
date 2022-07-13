@@ -2,7 +2,7 @@ var slidethumb = `
 <div id="slidethumb_^UID^" class="slidethumb">
 	<div class="thumbnailholder"></div>
 	<canvas class="slidemask" id="slidethumb_^UID^" style="z-index:1000; width:100%; height:100%; background-color:#FFF; opacity:0.1; left:0; top:0; position:absolute"></canvas>
-	<a data-parent="slidethumb_^UID^" style="z-index:1001;" class="btn btn-danger btn-small deletebtn text-white"><i class="fas fa-trash-alt"></i></a>
+	<a data-parent="slidethumb_^UID^" style="z-index:1001;" class="btn btn-danger btn-small deletebtn text-white"><i class="fas fa-trash"></i></a>
 </div>`;
 
 var impress_slide = `
@@ -29,7 +29,7 @@ var saved_presentations = `
 			<i class="fas fa-eye"></i>
 		</a>
 		<a href="#"  data-id="__presoid__" class="btn btn-inline btn-danger deletepresobtn" style="position:absolute; right: 60px; top: 10px">
-			<i class="fas fa-trash-alt"></i>
+			<i class="fas fa-trash"></i>
 		</a>
 		</br>
 	</div>

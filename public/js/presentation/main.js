@@ -809,7 +809,7 @@ Presentation.prototype =
         if (direction === 'left') {
           document.querySelector('#new-panorama-panel').innerHTML =
               '<div class="sb-nav-link-icon">' +
-              '<i id="view-toggle-icon" class="fas fa-chevron-left"></i>' +
+              '<i id="view-toggle-icon" class="fas fa-caret-left"></i>' +
               '</div>Mode edition';
           document.querySelector('.main-grey-area').style.display = 'none';
           document.querySelector('.panorama-grey-area').style.display = 'block';
@@ -818,7 +818,7 @@ Presentation.prototype =
         } else {
           document.querySelector('#new-panorama-panel').innerHTML =
               '<div class="sb-nav-link-icon">' +
-              '<i id="view-toggle-icon" class="fas fa-th"></i>' +
+              '<i id="view-toggle-icon" class="fas fa-panorama"></i>' +
               '</div>Panorama';
           document.querySelector('.main-grey-area').style.display = 'block';
           document.querySelector('.panorama-grey-area').style.display = 'none';

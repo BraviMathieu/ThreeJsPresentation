@@ -29,23 +29,23 @@ use App\Session;
             <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
             Nouvelle présentation</a>
           <a class="nav-link" id="new-panorama-panel">
-            <div class="sb-nav-link-icon"><i id="view-toggle-icon" class="fas fa-th"></i></div>
+            <div class="sb-nav-link-icon"><i id="view-toggle-icon" class="fas fa-panorama"></i></div>
             Panorama</a>
           <a class="nav-link" id="import-objet-panel">
-            <div class="sb-nav-link-icon"><i class="fas fa-file-download"></i></div>
+            <div class="sb-nav-link-icon"><i class="fas fa-file-arrow-up"></i></div>
             Importer un objet 3D</a>
           <a class="nav-link" id="export-preso-panel">
-            <div class="sb-nav-link-icon"><i class="fas fa-cloud"></i></div>
+            <div class="sb-nav-link-icon"><i class="fas fa-cloud-arrow-down"></i></div>
             Exporter la présentation</a>
           <a class="nav-link" id="open-presentations-panel">
             <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
             Mes présentations</a>
           <a class="nav-link" id="open-mesObj-panel">
-            <div class="sb-nav-link-icon"><i class="fas fa-save"></i></div>
+            <div class="sb-nav-link-icon"><i class="fas fa-cubes"></i></div>
             Mes objets 3D</a>
           <div class="sb-sidenav-menu-heading">Présentation</div>
           <a class="nav-link" id="save-presentation-panel">
-            <div class="sb-nav-link-icon"><i class="fas fa-save"></i></div>
+            <div class="sb-nav-link-icon"><i class="fas fa-floppy-disk"></i></div>
             Sauvegarder
           </a>
           <div class="sb-sidenav-menu-heading">Mode nuit</div>
@@ -98,15 +98,15 @@ use App\Session;
               </ul>
             </div>
             <div class="btn-group mb-1">
-              <button id="colorpicker-btn" title="Choisir une couleur" class="btn btn-secondary" data-bs-toggle="tooltip" data-placement="bottom"><i class="fas fa-tint"></i></button>
-              <button id="add-text-btn" title="Ajouter un texte" class="btn btn-secondary" data-bs-toggle="tooltip" data-placement="bottom"><i class="fas fa-font"></i></button>
-              <button id="change-font-btn" title="Changer la police d'écriture" class="btn btn-secondary" data-bs-toggle="tooltip" data-placement="bottom"><i class="fas fa-heading"></i></button>
+              <button id="colorpicker-btn" title="Choisir une couleur" class="btn btn-secondary" data-bs-toggle="tooltip" data-placement="bottom"><i class="fas fa-palette"></i></button>
+              <button id="add-text-btn" title="Ajouter un texte" class="btn btn-secondary" data-bs-toggle="tooltip" data-placement="bottom"><i class="fas fa-header"></i></button>
+              <button id="change-font-btn" title="Changer la police d'écriture" class="btn btn-secondary" data-bs-toggle="tooltip" data-placement="bottom"><i class="fas fa-font"></i></button>
               <button id="add-image-btn" title="Ajouter une image" class="btn btn-secondary" data-bs-toggle="tooltip" data-placement="bottom"><i class="fas fa-images"></i></button>
               <button id="add-video-btn" title="Ajouter une vidéo" class="btn btn-secondary" data-bs-toggle="tooltip" data-placement="bottom"><i class="fas fa-video"></i></button>
               <button id="add-tableau-btn" title="Ajouter un tableau" class="btn btn-secondary" data-bs-toggle="tooltip" data-placement="bottom"><i class="fas fa-table"></i></button>
               <button id="add-graphique-btn" title="Ajouter un graphique" class="btn btn-secondary" data-bs-toggle="tooltip" data-placement="bottom"><i class="fas fa-chart-pie"></i></button>
               <button id="add-object-btn" title="Ajouter une forme 3D" class="btn btn-secondary" data-bs-toggle="tooltip" data-placement="bottom"><i class="fas fa-cube"></i></button>
-              <button id="add-svg-btn" title="Ajouter un svg" class="btn btn-secondary" data-bs-toggle="tooltip" data-placement="bottom"><i class="fas fa-object-ungroup"></i></button>
+              <button id="add-svg-btn" title="Ajouter un svg" class="btn btn-secondary" data-bs-toggle="tooltip" data-placement="bottom"><i class="fas fa-shapes"></i></button>
             </div>
           </div>
         </div>
@@ -125,7 +125,7 @@ use App\Session;
             <span class="skewy label label-disabled btn btn-primary" id="spanskewy"><i class="fas fa-arrows-alt-v"></i></span>-->
            </span>
           <br>
-          <span class="delete-icon label label-important btn btn-danger" id="spandelete"><i class="fas fa-trash-alt"></i>&nbsp;&nbsp;Supprimer l'élément</span>
+          <span class="delete-icon label label-important btn btn-danger" id="spandelete"><i class="fas fa-trash"></i>&nbsp;&nbsp;Supprimer l'élément</span>
         </div>
       </div>
     </div>
