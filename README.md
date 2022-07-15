@@ -25,7 +25,7 @@ git clone https://github.com/BraviMathieu/ThreeJsPresentation.git ./ThreeJS_Pres
 Il faut installer les librairies avec Composer en effecuant la commande suivante : 
 
 ```bash
-composer install --ignore-platform-reqs
+composer install
 ```
 
 Ensuite, nous pouvons créer une base de données s'appellant threejs, avec un utilisateur "threejs" et un mot de passe "threejs" ayant les droits sur la table.

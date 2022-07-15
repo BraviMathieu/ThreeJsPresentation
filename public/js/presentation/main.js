@@ -73,7 +73,6 @@ Presentation.prototype =
       me.enableSort();
       me.setupDials();
       me.setupKeyboardShortcuts();
-      me.hideTransformControl();
       me.continueInitAsync();
     },
     continueInitAsync: async function() {
@@ -119,11 +118,6 @@ Presentation.prototype =
         document.querySelector('#saved-presentations').
           insertAdjacentHTML('beforeend', template);
       }
-
-    },
-    hideTransformControl: function() {
-      document.querySelector('#play').style.display = 'none';
-      document.querySelector('#spandelete').style.display = 'none';
     },
     setupKeyboardShortcuts: function() {
       document.addEventListener('copy', () => {
@@ -401,8 +395,6 @@ Presentation.prototype =
 
           me.selectElement(element);
           me.setMenuControlValues(element);
-          me.positionTransformControl();
-          //$('#play').css('transform', 'matrix(1, 0, 0, 1, 0, 0)');
         });
 
         //mousedown et mouseover
@@ -417,8 +409,6 @@ Presentation.prototype =
 
           me.selectElement(element);
           me.setMenuControlValues(element);
-          me.positionTransformControl();
-          //$('#play').css('transform', 'matrix(1, 0, 0, 1, 0, 0)');
         });
 
         element.addEventListener('mouseup', function() {
@@ -435,25 +425,7 @@ Presentation.prototype =
             $(this).removeClass('movecursor');
           });*/
     },
-    positionTransformControl: function() {
-      let play = document.querySelector('#play');
-      let _transform = me.selectedElement.style.transform;
-      let selector_spandelete = document.querySelector('#spandelete');
 
-      play.style.transform = _transform;
-      play.style.display = 'block';
-      selector_spandelete.style.display = 'block';
-      play.style.width = me.selectedElement.style.width;
-      play.style.left = me.selectedElement.offsetLeft + 'px';
-      play.style.top = me.selectedElement.offsetTop + 'px';
-
-      selector_spandelete.addEventListener('click', function(e) {
-        e.stopPropagation();
-        me.selectedElement.remove();
-        play.style.display = 'none';
-        document.querySelector('#spandelete').style.display = 'none';
-      });
-    },
     setMenuControlValues: function(el) {
       let isbold = (el.dataset.isbold === 'true');
       let isitalic = (el.dataset.isitalic === 'true');
@@ -579,8 +551,6 @@ Presentation.prototype =
         //slideElement.draggable({disabled: false});
       }
 
-      document.querySelector('#play').style.display = 'none';
-      document.querySelector('#spandelete').style.display = 'none';
       me.generateScaledSlide(me.selectedSlide);
     },
     colorSelectedElement: function(color) {
@@ -625,10 +595,7 @@ Presentation.prototype =
 
           let id = (e.target.id).split('_')[1];
           me.selectSlide('#impress_slide_' + id);
-          document.querySelector('#slidethumb_' + id).
-            classList.
-            add('currentselection');
-          me.hideTransformControl();
+          document.querySelector('#slidethumb_' + id).classList.add('currentselection');
           me.switchView('right');
         });
       });
@@ -1181,8 +1148,7 @@ Presentation.prototype =
 
           document.querySelectorAll('.deletepresobtn').forEach(element => {
             element.addEventListener('click', function() {
-              if (confirm(
-                'Êtes-vous sûr de vouloir supprimer cette présentation ?'))
+              if (confirm('Êtes-vous sûr de vouloir supprimer cette présentation ?'))
                 me.deleteSavedPresentation(parseInt(element.dataset.id));
             });
           });
@@ -1534,10 +1500,8 @@ Presentation.prototype =
       for (let i = 0; i < me.mypresentations.length; i++) {
         let presentation = me.mypresentations[i];
         if (id === presentation.id) {
-          document.querySelector(
-            '.impress-slide-container').innerHTML = presentation.contents;
-          document.querySelector(
-            '.slide-thumb-holder').innerHTML = presentation.thumbcontents;
+          document.querySelector('.impress-slide-container').innerHTML = presentation.contents;
+          document.querySelector('.slide-thumb-holder').innerHTML = presentation.thumbcontents;
           me.selectedSlide = '.impress-slide-container .impress-slide-element';
           me.currentPresentation = presentation;
 
@@ -1557,7 +1521,6 @@ Presentation.prototype =
           document.querySelector('#slidethumb_' + id).
             classList.
             add('currentselection');
-          me.hideTransformControl();
           me.switchView('right');
         });
       });

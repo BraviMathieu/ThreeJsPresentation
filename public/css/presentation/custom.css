@@ -212,6 +212,7 @@ body {
 
 .slidelement {
     white-space: nowrap;
+    cursor: default;
 }
 
 .slidelementh1 {
