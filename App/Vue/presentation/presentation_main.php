@@ -132,17 +132,26 @@ use App\Session;
     <div class="palette palette-clouds panorama-grey-area">
       <div class="row">
         <div class="col-lg-12 text-center">
-          <div class="transform-controls-holder d-flex" id="panorama-navbar">
-            <h3 class="transform-label">Rotation Z</h3>
-            <input class="" id="rotation-knob" data-width="50" data-min="-360" data-max="360" data-fgColor="#6f2232 " data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
-            <h3 class="transform-label">Rotation X</h3>
-            <input class="" id="skew-x-knob" data-width="50" data-min="-360" data-max="360" data-fgColor="#6f2232 " data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
-            <h3 class="transform-label">Rotation Y</h3>
-            <input class="" id="skew-y-knob" data-width="50" data-min="-360" data-max="360" data-fgColor="#6f2232 " data-bgColor="#FFFFFF" data-linecap="round" data-displayPrevious="true" value="0">
-            <h3 class="transform-label">Échelle</h3>
-            <input type="range" id="scale-range" class="ranges" min="1" max="6" value="1"/>
-            <h3 class="transform-label">Profondeur</h3>
-            <input type="range" id="depth-range" class="ranges" min="-3000" max="5000" value="1"/>
+          <div class="transform-controls-holder d-flex justify-content-around" id="panorama-navbar">
+            <div class="d-flex flex-column">
+              <label for="rotation-x">Rotation X</label>
+              <input type="range" class="" id="rotation-x" value="0" min="0" max="180">
+            </div>
+            <div class="d-flex flex-column">
+              <label for="rotation-y">Rotation Y</label>
+              <input type="range" class="" id="rotation-y" value="0" min="0" max="180">
+            </div>
+
+            <div class="d-flex flex-column">
+              <label for="scale">Échelle</label>
+              <input type="range" class="" id="scale" value="1">
+            </div>
+
+            <div class="d-flex flex-column">
+              <label for="depth">Profondeur</label>
+              <input type="range" class="" id="depth" value="1" min="-3000" max="5000">
+            </div>
+
           </div>
         </div>
       </div>

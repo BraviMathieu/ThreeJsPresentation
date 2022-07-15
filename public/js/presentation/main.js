@@ -68,9 +68,6 @@ Presentation.prototype =
     {
       initialize: function() {
         me = this;
-        me.continueInit();
-      },
-      continueInit: function() {
         me.setupColorpicker();
         me.setupMenuItemEvents();
         me.enableSort();
@@ -312,96 +309,71 @@ Presentation.prototype =
         me.enableDrag();
       },
       setupDials: function() {
-        //TODO
-        /*$('#rotation-knob').knob({
-          change: function(v) {
-            me.rotateElement(v);
-          },
+        document.querySelector('#rotation-x').addEventListener('input', function(e) {
+          let element = e.target;
+          me.rotateElementX(element.value);
         });
-        $('#skew-x-knob').knob({
-          change: function(v) {
-            me.rotateElementX(v);
-          },
-        });
-        $('#skew-y-knob').knob({
-          change: function(v) {
-            me.rotateElementY(v);
-          },
-        });*/
 
-        document.querySelector('#scale-range').addEventListener('change', function(e) {
+        document.querySelector('#rotation-y').addEventListener('input', function(e) {
+          let element = e.target;
+          me.rotateElementY(element.value);
+        });
+
+        document.querySelector('#scale').addEventListener('change', function(e) {
          let element = e.target;
           me.selectedOrchElement.setAttribute('data-scale', element.value);
           let id = me.selectedOrchElement.id.split('_')[1];
           document.querySelector('#slidethumb_' + id).setAttribute('data-scale', element.value);
         });
 
-        document.querySelector('#depth-range').addEventListener('change', function(e) {
+        document.querySelector('#depth').addEventListener('change', function(e) {
          let element = e.target;
           me.selectedOrchElement.setAttribute('data-z', element.value);
           let id = me.selectedOrchElement.id.split('_')[1];
           document.querySelector('#slidethumb_' + id).setAttribute('data-z', element.value);
         });
-        document.querySelector('.transform-label').style.verticalAlign = 'top';
-
-      },
-      rotateElement: function(value) {
-        let rotx = me.selectedOrchElement.getAttribute('data-rotate-x');
-        let roty = me.selectedOrchElement.getAttribute('data-rotate-y');
-        let s = '';
-        if (rotx !== undefined)
-          s += 'rotateX(' + rotx + 'deg)';
-        if (roty !== undefined)
-          s += 'rotateY(' + roty + 'deg)';
-
-        let str = s + ' rotate(' + value + 'deg)';
-        me.selectedOrchElement.style.transform= str;
-        me.selectedOrchElement.setAttribute('data-rotate', value);
-
-        let id = me.selectedOrchElement.id.split('_')[1];
-
-        let slideThumbId = document.querySelector('#slidethumb_' + id);
-        slideThumbId.setAttribute('data-rotate-x', rotx);
-        slideThumbId.setAttribute('data-rotate-y', roty);
-        slideThumbId.setAttribute('data-rotate', value);
-        slideThumbId.setAttribute('data-transform-string', str);
       },
       rotateElementX: function(value) {
-        let roty = me.selectedOrchElement.getAttribute('data-rotate-y');
         let s = '';
-        if (roty !== undefined)
+
+        let rot = me.selectedOrchElement.getAttribute('data-rotate');
+        if (rot !== null)
+          s += 'rotate(' + rot + 'deg)';
+
+        let roty = me.selectedOrchElement.getAttribute('data-rotate-y');
+        if (roty !== null)
           s += 'rotateY(' + roty + 'deg)';
 
         let str = s + ' rotateX(' + value + 'deg)';
         me.selectedOrchElement.style.transform = str;
-        me.selectedOrchElement.setAttribute('data-rotate', value);
         me.selectedOrchElement.setAttribute('data-rotate-x', value);
 
         let id = me.selectedOrchElement.id.split('_')[1];
 
         let slideThumbId = document.querySelector('#slidethumb_' + id);
         slideThumbId.setAttribute('data-rotate-x', value);
-        slideThumbId.setAttribute('data-rotate-y', roty);
-        slideThumbId.setAttribute('data-rotate', rot);
         slideThumbId.setAttribute('data-transform-string', str);
+
       },
       rotateElementY: function(value) {
-        let rotx = me.selectedOrchElement.getAttribute('data-rotate-x');
         let s = '';
-        if (rotx !== undefined)
+
+        let rot = me.selectedOrchElement.getAttribute('data-rotate');
+        if (rot !== null)
+          s += 'rotate(' + rot + 'deg)';
+
+        let rotx = me.selectedOrchElement.getAttribute('data-rotate-x');
+        if (rotx !== null)
           s += 'rotateX(' + rotx + 'deg)';
 
         let str = s + ' rotateY(' + value + 'deg)';
         me.selectedOrchElement.style.transform = str;
-        me.selectedOrchElement.setAttribute('data-rotate', value);
         me.selectedOrchElement.setAttribute('data-rotate-y', value);
 
         let id = me.selectedOrchElement.id.split('_')[1];
 
         let slideThumbId = document.querySelector('#slidethumb_' + id);
-        slideThumbId.setAttribute('data-rotate-x', rotx);
         slideThumbId.setAttribute('data-rotate-y', value);
-        slideThumbId.setAttribute('data-rotate', rot);
         slideThumbId.setAttribute('data-transform-string', str);
       },
       enableDrag: function() {
@@ -544,8 +516,6 @@ Presentation.prototype =
         pickrMain.on('change', (color) => {
           me.colorSelectedElement(color);
         });
-
-
 
         const pickrGraphique = Pickr.create({
           el: '#preview-graphique-add-donnee-color',
@@ -736,66 +706,101 @@ Presentation.prototype =
         }while (document.querySelector('slidelement_' + id));
         return id;
       },
-      assemblePanoramaCases: function() {
+      assemblePanoramaCases: function(){
         let panoramaViewport = document.querySelector('.panorama-viewport');
-        let orchestrationElements = [];
         let children = document.querySelector('.slide-thumb-holder').children;
-        let l = 10;
         panoramaViewport.innerHTML = '';
-
+        
+        let orchestrationElements = [];
+        let l = 10;
+        let moveable;
         let child;
         let clone;
+        let id;
         for (let i = 0; i < children.length; i++) {
           child = children[i];
           clone = child.cloneNode(true);
           clone.classList.remove('slidethumb');
           clone.classList.add('orchthumb');
           clone.id = 'orchestrationelement_' + child.id.split('_')[1];
-          clone.style.opacity = 1;
-          clone.style.position = 'absolute';
-          clone.style.transform = clone.getAttribute('data-transform-string');
+          clone.style.transform = clone.dataset.transformString;
 
           clone.querySelector('.deletebtn').remove();
-          //TODO
-          /*clone.draggable().on('mouseup', function() {
-            $(this).attr('data-left', $(this).css('left'));
-            $(this).attr('data-top', $(this).css('top'));
-            console.log('accessing ', $(this).attr('id'));
-            id = $(this).attr('id').split('_')[1];
+          l += 200;
+          clone.style.left = l;
 
-            let selector_slidethumb_id = $('#slidethumb_' + id);
-            selector_slidethumb_id.attr('data-left', $(this).css('left'));
-            selector_slidethumb_id.attr('data-top', $(this).css('top'));
-          });*/
-
-          clone.addEventListener('click', function(e) {
-            let element = e.target;
-            document.querySelector('.orchthumb').classList.remove('currentselection');
-            element.classList.add('currentselection');
-            me.selectedOrchElement = element;
-
-            let rot = me.selectedOrchElement.getAttribute('data-rotate');
-            let rotx = me.selectedOrchElement.getAttribute('data-rotate-x');
-            let roty = me.selectedOrchElement.getAttribute('data-rotate-y');
-            let scale = me.selectedOrchElement.getAttribute('data-scale');
-            let depth = me.selectedOrchElement.getAttribute('data-z');
-
-            document.querySelector('#rotation-knob').value = rot || 0
-            document.querySelector('#rotation-knob').dispatchEvent(new Event('change'))
-            document.querySelector('#skew-x-knob').value = rotx || 0
-            document.querySelector('#skew-x-knob').dispatchEvent(new Event('change'))
-            document.querySelector('#skew-y-knob').value = roty || 0
-            document.querySelector('#skew-y-knob').dispatchEvent(new Event('change'))
-
-            document.querySelector('#scale-range').value = scale || 1;
-            document.querySelector('#depth-range').value = depth || 1000;
-          });
           panoramaViewport.appendChild(clone);
           orchestrationElements.push(clone);
 
-          l += 200;
         }
         me.repositionOrchestrationElements(orchestrationElements);
+
+        document.querySelectorAll('.panorama-viewport .orchthumb').forEach(function(element){
+          element.addEventListener('mousedown', function(e) {
+
+            document.querySelectorAll('.orchthumb').forEach(function(subElement){
+              subElement.classList.remove('currentselection');
+            })
+
+            element.classList.add('currentselection');
+            me.selectedOrchElement = element;
+
+            rot = me.selectedOrchElement.dataset.rotate
+            rotx = me.selectedOrchElement.dataset.rotateX
+            roty = me.selectedOrchElement.dataset.rotateY
+            scale = me.selectedOrchElement.dataset.scale
+            depth = me.selectedOrchElement.dataset.z
+
+            document.querySelector('#rotation-x').value = rotx || 0
+            document.querySelector('#rotation-y').value = roty || 0
+            document.querySelector('#scale').value = scale || 1;
+            document.querySelector('#depth').value = depth || 1000;
+          });
+
+          moveable = new Moveable(document.body.querySelector(".panorama-viewport"), {
+            target: element,
+            container: document.body.querySelector(".panorama-viewport"),
+            draggable: true,
+            rotatable: true,
+            rotationPosition: 'bottom',
+            origin: false,
+          });
+
+          moveable.on("drag", ({target, left, top,}) => {
+            target.style.left = `${left}px`;
+            target.style.top = `${top}px`;
+
+          }).on("dragEnd", ({ target }) => {
+            id = target.id.split('_')[1];
+            let selector_slidethumb_id = document.querySelector('#slidethumb_' + id);
+
+            selector_slidethumb_id.dataset.left = target.style.left
+            selector_slidethumb_id.dataset.top = target.style.top
+
+          }).on("rotate", ({ target, rotation }) => {
+            id = target.id.split('_')[1];
+            let selector_slidethumb_id = document.querySelector('#slidethumb_' + id);
+
+            let angle_rotation = Math.round(rotation);
+
+
+            let s = '';
+            let rotY = me.selectedOrchElement.getAttribute('data-rotate-y');
+            if (rotY !== null)
+              s += 'rotateY(' + rotY + 'deg)';
+
+            let rotx = me.selectedOrchElement.getAttribute('data-rotate-x');
+            if (rotx !== null)
+              s += 'rotateX(' + rotx + 'deg)';
+
+            target.style.transform = s + ' rotate(' + angle_rotation + 'deg)';
+            target.dataset.rotate = angle_rotation;
+
+            selector_slidethumb_id.dataset.transformString = "rotate("+angle_rotation+"deg)";
+            selector_slidethumb_id.dataset.rotate = angle_rotation;
+          });
+
+        })
       },
       repositionOrchestrationElements: function(arr) {
         let children = document.querySelector('.slide-thumb-holder').children;
@@ -823,22 +828,6 @@ Presentation.prototype =
           document.querySelector('.main-grey-area').style.display = 'block';
           document.querySelector('.panorama-grey-area').style.display = 'none';
           me.currentview = 'mainarea';
-          me.persistOrchestrationCoordinates();
-        }
-      },
-      persistOrchestrationCoordinates: function() {
-        let children = document.querySelector('.panorama-viewport').children;
-        me.orchestrationcoords = [];
-
-        let child
-        let l
-        let t
-
-        for (let i = 0; i < children.length; i++) {
-          child = children[i];
-          l = child.getAttribute('data-left');
-          t = child.getAttribute('data-top');
-          me.orchestrationcoords.push({left: l, top: t});
         }
       },
       onViewToggled: function() {
@@ -853,7 +842,6 @@ Presentation.prototype =
       },
       attachListeners: function() {
         let slideElement = document.querySelector('.slidelement');
-        let openPresoBtn = document.querySelector('.openpresobtn')
         document.querySelector('html').addEventListener('click', me.manageGlobalClick);
         document.querySelector('#new-preso-panel').addEventListener('click', me.onNewPresentationItemClicked);
         document.querySelector('#new-panorama-panel').addEventListener('click', me.onViewToggled);
@@ -920,7 +908,8 @@ Presentation.prototype =
                   '#8634ff',
                   '#baabbb',
                 ],
-              }],
+              }
+            ],
           };
 
           me.configGraphique = {
