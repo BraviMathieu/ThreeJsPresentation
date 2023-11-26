@@ -1993,10 +1993,9 @@ Presentation.prototype =
         }
       },
       selectFirstThumb: function() {
-        let firstThumb = $('div .slide-thumb-holder').html();
-        let docThumb = new DOMParser().parseFromString(firstThumb, 'text/xml');
-        let idThumb = docThumb.firstChild.id.split('_');
-        $('div #slidethumb_' + idThumb[1]).click();
-        $('div #orchestrationelement_6984').click();
+        let allThumbs = $('div .slide-thumb-holder .slidethumb');
+        let idThumb = allThumbs.first().attr('id').split('_');
+        $('div #slidethumb_'+idThumb[1]).click();
+        $('div #orchestrationelement_'+idThumb[1]).click();
       },
     };
