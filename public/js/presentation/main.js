@@ -1906,6 +1906,10 @@ Presentation.prototype =
           '</option>';
       }
     },
+    
+    
+    
+    
     selectThumb: function(stringPosition) {
       let thumbs = document.querySelector('div .slide-thumb-holder').innerHTML;
       let docThumb = new DOMParser().parseFromString(thumbs, 'text/html');

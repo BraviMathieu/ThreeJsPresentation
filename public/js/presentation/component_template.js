@@ -7,7 +7,8 @@ var slidethumb = `
 
 var impress_slide = `
 <div class="impress-slide" id="impress_slide__slidenumber__">
-	<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h2" style="width:auto; height:auto; position:absolute; left:216px; top:50px; " contentEditable="true"> Titre d'exemple</div><div class="slidelement slidelementh3" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h3" style="position:absolute; width:auto; height:65px; left:236px; top:160px; "> Paragraphe d'exemple </div>
+	<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h2" style="width:auto; height:auto; position:absolute; left:216px; top:50px;" contentEditable="true"> Titre d'exemple</div>
+	<div class="slidelement slidelementh3" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h3" style="position:absolute; width:auto; height:65px; left:236px; top:160px;" contenteditable="true"> Paragraphe d'exemple </div>
 </div>`;
 
 var text_snippet = `<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h2" style="width:auto; height:auto; position:absolute; left:300px; top:50px; " contentEditable="true"> Titre d'exemple </div>`;
