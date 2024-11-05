@@ -343,11 +343,11 @@ Presentation.prototype =
       let s = '';
 
       let rot = me.selectedOrchElement.dataset.rotate;
-      if (rot !== null)
+      if (rot !== undefined)
         s += 'rotate(' + rot + 'deg)';
 
       let roty = me.selectedOrchElement.dataset.rotateY;
-      if (roty !== null)
+      if (roty !== undefined)
         s += 'rotateY(' + roty + 'deg)';
 
       let str = s + ' rotateX(' + value + 'deg)';
@@ -365,11 +365,11 @@ Presentation.prototype =
       let s = '';
 
       let rot = me.selectedOrchElement.dataset.rotate;
-      if (rot !== null)
+      if (rot !== undefined)
         s += 'rotate(' + rot + 'deg)';
 
       let rotx = me.selectedOrchElement.dataset.rotateX;
-      if (rotx !== null)
+      if (rotx !== undefined)
         s += 'rotateX(' + rotx + 'deg)';
 
       let str = s + ' rotateY(' + value + 'deg)';
@@ -778,18 +778,17 @@ Presentation.prototype =
 
             let s = '';
             let rotY = me.selectedOrchElement.dataset.rotateY;
-            if (rotY !== null)
+            if (rotY !== undefined)
               s += 'rotateY(' + rotY + 'deg)';
 
             let rotx = me.selectedOrchElement.dataset.rotateX;
-            if (rotx !== null)
+            if (rotx !== undefined)
               s += 'rotateX(' + rotx + 'deg)';
 
             target.style.transform = s + ' rotate(' + angle_rotation + 'deg)';
             target.dataset.rotate = angle_rotation;
 
-            selector_slidethumb_id.dataset.transformString = 'rotate(' +
-              angle_rotation + 'deg)';
+            selector_slidethumb_id.dataset.transformString = 'rotate(' + angle_rotation + 'deg)';
             selector_slidethumb_id.dataset.rotate = angle_rotation;
           });
 

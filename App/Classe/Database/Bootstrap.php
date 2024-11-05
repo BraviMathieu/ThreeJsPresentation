@@ -10,6 +10,7 @@ $capsule->addConnection([
     "driver" => MSQL_DB_DRIVER,
     "host" => MSQL_DB_HOST,
     "database" => MSQL_DB_NAME,
+	'port'     => 3307,
     "username" => MSQL_DB_USER,
     "password" => MSQL_DB_PASSWORD
 ]);

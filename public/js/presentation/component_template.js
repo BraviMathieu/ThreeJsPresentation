@@ -2,7 +2,7 @@ var slidethumb = `
 <div id="slidethumb_^UID^" class="slidethumb">
 	<div class="thumbnailholder"></div>
 	<canvas class="slidemask" id="slidethumb_^UID^" style="z-index:1000; width:100%; height:100%; background-color:#FFF; opacity:0.1; left:0; top:0; position:absolute"></canvas>
-	<a data-parent="slidethumb_^UID^" style="z-index:1001;" class="btn btn-danger btn-small deletebtn text-white"><i class="fas fa-trash"></i></a>
+<a data-parent="slidethumb_^UID^" style="z-index:1001;" class="btn btn-danger btn-small deletebtn text-white"><i class="fas fa-trash-alt"></i></a>
 </div>`;
 
 var impress_slide = `
@@ -72,7 +72,7 @@ var tableau_previsualisation = `
 </table>`;
 
 
-var video_template = `<iframe class="preview-video" width="468" height="315" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>`;
+var video_template = `<iframe class="preview-video" width="468" height="315" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" style="border:0"></iframe>`;
 
 
 var graphique_previsualisation = `<canvas id="preview-graphique" width="400" height="400" style="background-color: white;"></canvas>`;

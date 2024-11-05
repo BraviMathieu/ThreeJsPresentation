@@ -20,7 +20,7 @@
                  target="_blank"
                  title="Visualiser"><i class="fas fa-eye"></i></a>
               <a class="btn btn-danger suppression" data-code="<?=$presentation->id?>"
-                 title="Supprimer"><i class="fas fa-trash"></i></a>
+                 title="Supprimer"><i class="fas fa-trash-alt"></i></a>
             </div>
           </div>
         <hr>
